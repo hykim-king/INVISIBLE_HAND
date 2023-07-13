@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<title>보이지 않는 손 레이아웃</title>
+</head>
+<body>
+  <!-- *---header Start---* -->
+	<header class="header">
+    <div class="inner">
+			<div class="logo">
+			 <a href="#"><i class="fa fa-user-circle"></i></a>
+			</div>
+	      <nav class="gnb_wrap">
+	        <ul class="global_nav_bar">
+	            <li><a href="#">차트</a></li>
+	            <li><a href="#">솔루션</a></li>
+	            <li><a href="#">뉴스</a></li>
+	            <li><a href="#">커뮤니티</a></li>
+
+	        </ul>
+	        <ul class="local_nav_bar">
+	            <li>
+	                <ul class="sub-menu">
+	                    <li>서브메뉴1</li>
+	                    <li>서브메뉴1</li>
+	                    <li>서브메뉴1</li>
+	                    <li>서브메뉴1</li>
+	                </ul>
+	            </li>
+	            <li>
+	                <ul class="sub-menu">
+	                    <li>서브메뉴2</li>
+	                    <li>서브메뉴2</li>
+	                    <li>서브메뉴2</li>
+	                    <li>서브메뉴2</li>
+	                </ul>
+	            </li>
+	            <li>
+	                <ul class="sub-menu">
+	                    <li>서브메뉴3</li>
+	                    <li>서브메뉴3</li>
+	                    <li>서브메뉴3</li>
+	                    <li>서브메뉴3</li>
+	                </ul>
+	            </li>
+	            <li>
+	                <ul class="sub-menu">
+	                    <li>서브메뉴4</li>
+	                    <li>서브메뉴4</li>
+	                    <li>서브메뉴4</li>
+	                    <li>서브메뉴4</li>
+	                </ul>
+	            </li>
+	        </ul>
+	      </nav>
+	      
+	    <div class="login">
+	     <a href="#"><i class="fa fa-user-circle"></i></a>
+	    </div>
+    </div>
+	</header>
+	
+	<!-- **---header End---** -->
+	<!-- *---container Start---* -->
+
+	<div class="container-1200 min-100vh">
+		<div class="wrap-1000">
+		  <section class="sec01 sec-news"></section>
+		  <section class="sec02 sec-chart"></section>
+		  <section class="sec03 sec-board"></section>
+		</div><!-- **---wrap End---** -->
+	</div>
+
+	<!-- **---container End---** -->
+	<!-- *---footer Start---* -->
+
+  <footer class="footer">
+	  <div class="con-footer">
+	   <div class="left-footer">
+	   </div>
+	   <div class="middle-footer">
+	   <p>Copyright ⓒ 2023 by invisible hand. All pictures cannot be copied without permission.</p>
+	   </div>
+	   <div class="right-footer">
+	   </div>
+	  </div>
+  </footer>
+
+	<!-- **---footer End---** -->
+	
+<script>
+// 헤더
+$(".header .fa-search").click(function() {
+    $(".pop_search").fadeToggle();
+});
+$(".pop_search .fa-times-circle").click(function() {
+    $(".pop_search").fadeOut();
+});
+
+$(".menu_icon .align_justify").click(function() {
+    $(".header, header .global_nav_bar li a, .align_justify").toggleClass(
+        "active"
+    );
+});
+</script>
+</body>
+</html>
