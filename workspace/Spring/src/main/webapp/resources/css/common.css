@@ -1,0 +1,189 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	width:100vw;
+}
+
+a {
+    text-decoration: none;
+    color:#000;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+
+.container-1200{
+  border:1px solid blue;
+  background-color:lightpink;
+  width:1200px;
+  margin:0 auto;
+}
+
+
+.wrap-1000{
+  border:1px solid blue;
+  width:1000px;
+  margin:0 auto;
+}
+
+.min-100vh{
+	min-height:100vh;
+	
+}
+
+/* header------------------- */
+
+header{
+	border:1px solid blue;
+	background-color:lightpink;
+	height:60px;
+	width:100%;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  transition: 1s;
+  overflow: hidden;
+}
+
+.header:hover {
+    height: 250px;
+}
+
+
+.header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px auto;
+    width: 1400px;
+    height: 60px;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background-color: yellow;
+}
+
+.logo img {
+}
+
+.gnb_wrap {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.mobile_gnb_wrap {
+    display: none;
+}
+
+.global_nav_bar,
+.menu_icon {
+    display: flex;
+    align-items: center;
+}
+
+.global_nav_bar li a {
+    color: #000;
+    font-weight: 600;
+    transition: 1s;
+}
+
+.global_nav_bar li a:hover {
+    color: #979797;
+    font-weight: 600;
+}
+
+.global_nav_bar li {
+    width: 150px;
+    height: 60px;
+    line-height: 60px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.global_nav_bar li span {
+    color: #000;
+    font-weight: 600;
+}
+
+
+.local_nav_bar {
+    display: flex;
+}
+
+.sub-menu {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.sub-menu li {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.sub-menu li:hover {
+    color: #979797;
+}
+
+.fa-user-circle{
+	font-size: 30px;
+}
+
+
+
+
+
+
+/* section------------------- */
+
+
+section{
+	 border:1px solid blue;
+	background-color:lightpink;
+}
+
+.sec-news{
+	height:100px;
+}
+
+.sec-chart{
+	height:500px;
+}
+
+.sec-board{
+	height:150px;
+}
+
+
+/* footer------------------- */
+
+
+footer{
+	width:100%;
+	height:200px;
+	background-color:lightpink;
+}
+
+.con-footer{
+	width:80%;
+}
