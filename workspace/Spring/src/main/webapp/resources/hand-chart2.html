@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico" >
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link rel="stylesheet" href="css/chart2.css">
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
+  <div class="scroll-up"><a href="#category_wrap">위로가기</a></div>
   <!-- *---header Start---* -->
 	<header class="header">
     <div class="inner">
@@ -67,39 +68,64 @@
 	<!-- **---header End---** -->
 	<!-- *---container Start---* -->
 
-	  <div class="h60px"></div>
-	<div class="container-1200 min-100vh con-main">
+	<div class="h60px"></div>
+	<div class="container-1200 con-main">
 		<div class="wrap-1000">
-		  <section class="sec01 sec-news">뉴스 헤드라인 영역입니다</section>
-		  <section class="sec02 sec-chart">차트 영역입니다
-		    <div class="chart-login">
-		      <div class="desc">
-		        <p>인공지능이 예측한 자료 열람하기</p>
-		      </div>
-		      <div class="btn">
-		        <a href="#"><span>로그인</span></a>
-		      </div>
-		    </div>
-		  
-		  </section>
-		  <section class="sec03 sec-board">커뮤니티 영역입니다</section>
-		</div><!-- **---wrap End---** -->
-		<div class="rank-area">
-		  <ul>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		    <li>랭킹순서대로</li>
-		  </ul>
-		</div>
-	</div>
+		    <!-- *---차트 카테고리---* -->
+      <div class="category_wrap" id="category_wrap">
 
-	<!-- **---container End---** -->
+         <div class="categorybox" data-tab="tab1">
+             <div class="chart01">
+               <p><a href="#chart01">chart01</a></p>
+             </div>
+         </div>
+         <div class="categorybox" data-tab="tab2">
+             <div class="chart02">
+               <p><a href="#chart02">chart02</a></p>
+             </div>
+         </div>
+         <div class="categorybox" data-tab="tab3">
+             <div class="chart03">
+               <p><a href="#chart03">chart03</a></p>
+             </div>
+         </div>
+         <div class="categorybox" data-tab="tab4">
+             <div class="chart04">
+               <p><a href="#chart04">chart04</a></p>
+             </div>
+         </div>
+      </div><!-- **---카테고리랩 End---** -->
+      
+      <!-- 차트 영역 1234 -->
+      <div class="tab-box tab1 " id="chart01">
+        <div class="tab-item"></div>
+      </div>
+         
+      <div class="line1px width80"></div>
+      <div class="line3px width80"></div>
+         
+      <div class="tab-box tab2" id="chart02">
+        <div class="tab-item"></div>
+      </div>
+         
+      <div class="line1px width80"></div>
+      <div class="line3px width80"></div>
+         
+      <div class="tab-box tab3" id="chart03">
+        <div class="tab-item"></div>
+      </div>
+         
+      <div class="line1px width80"></div>
+      <div class="line3px width80"></div>
+          
+      <div class="tab-box tab4" id="chart04">
+        <div class="tab-item"></div>
+      </div>
+
+		</div><!-- **---wrap End---** -->
+	</div> <!-- **---container End---** -->
+
+
 	<!-- *---footer Start---* -->
 
   <footer class="footer">
@@ -115,7 +141,14 @@
   </footer>
 
 	<!-- **---footer End---** -->
-	
-
+<script src="js/jquery-3.7.0.js"></script>
+<script>
+$('a').click(function(){
+	$('html, body').animate({
+	scrollTop: $( $.attr(this, 'href') ).offset().top
+	}, 500);
+	return false;
+	});
+</script>
 </body>
 </html>

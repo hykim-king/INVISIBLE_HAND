@@ -4,7 +4,8 @@
 }
 
 body{
-	width:100vw;
+  scroll-behavior: smooth;
+	box-sizing: border-box;
 }
 
 a {
@@ -19,30 +20,41 @@ li {
 }
 
 
+.line1px{
+	width:100%;	
+	height:1px;
+	background-color: #979797;
+	margin: 5px auto;
+}
+.line3px{
+	width:100%;
+	height:3px;
+  background-color: #979797;
+  margin: 5px auto;
+}
+
 .container-1200{
-  border:1px solid blue;
-  background-color:lightpink;
-  width:1200px;
+  width:1400px;
   margin:0 auto;
+
+}
+
+.con-main{
+	display: flex;
 }
 
 
 .wrap-1000{
-  border:1px solid blue;
   width:1000px;
   margin:0 auto;
 }
 
-.min-100vh{
-	min-height:100vh;
-	
-}
+
 
 /* header------------------- */
 
 header{
-	border:1px solid blue;
-	background-color:lightpink;
+  border-bottom: 1px solid #D9D9D9;
 	height:60px;
 	width:100%;
   box-sizing: border-box;
@@ -52,6 +64,7 @@ header{
   z-index: 10000;
   transition: 1s;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .header:hover {
@@ -75,10 +88,24 @@ header{
     top: 0;
     width: 60px;
     height: 60px;
-    background-color: yellow;
 }
-
+.login {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.login a span{
+	line-height: 60px;
+	padding: 5px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 5px;
+	background-color: #979797;
+	color: #fff;
+}
 .logo img {
+	height: 60px;
+	width: auto;
 }
 
 .gnb_wrap {
@@ -147,6 +174,7 @@ header{
 
 .fa-user-circle{
 	font-size: 30px;
+	line-height: 60px;
 }
 
 
@@ -156,34 +184,118 @@ header{
 
 /* section------------------- */
 
-
+.h60px{
+	width: 100%;
+	height: 60px;
+}
 section{
-	 border:1px solid blue;
 	background-color:lightpink;
 }
 
+
+/* sec-news------------------- */
 .sec-news{
+	margin-top:30px;
 	height:100px;
 }
 
+
+/* sec-chart------------------- */
+
 .sec-chart{
+	margin-top:50px;
 	height:500px;
+	position: relative;
 }
 
+.sec-chart .chart-login{
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform:translate(-50%,-50%);
+	
+	width: 340px;
+	height: 140px;
+	background-color:#fff;
+	border: 1px solid #D9D9D9;
+	border-radius: 20px;
+	text-align: center;
+}
+
+.chart-login .desc{
+	padding: 30px 0 10px 0;
+}
+
+.chart-login .btn span{
+  line-height: 60px;
+  padding: 5px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #979797;
+  color: #fff;
+}
+
+
+/* sec-board------------------- */
 .sec-board{
+	margin-top:40px;
 	height:150px;
 }
+
+
+
+/* rank-area------------------- */
+
+.rank-area{
+	margin-top:150px;
+	width:350px;
+	height:600px;
+	background-color: blue;
+}
+.rank-area ul{
+	width:300px;
+	background-color: #fff;
+}
+.rank-area ul li{
+  border:1px solid #ddd;
+}
+
+
 
 
 /* footer------------------- */
 
 
 footer{
+	margin-top:100px;
 	width:100%;
 	height:200px;
-	background-color:lightpink;
+	background-color:#C6C6C6;
+	color:#fff;
+	display: flex;
 }
 
 .con-footer{
 	width:80%;
+	margin: 0 auto;
+}
+
+.middle-footer{
+	height:200px;
+	text-align: center;
+}
+.middle-footer p{
+  line-height: 200px;
+  
+}
+  
+/* 너비설정클래스------------------- */
+.min-100vh{
+  min-height:100vh;
+  
+}
+
+.width80:{
+  width:80%;
 }
