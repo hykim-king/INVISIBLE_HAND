@@ -440,6 +440,7 @@ fabric.properties
 # Compiled class file
 *.class
 */target/*
+*.classpath
 
 # Log file
 *.log
