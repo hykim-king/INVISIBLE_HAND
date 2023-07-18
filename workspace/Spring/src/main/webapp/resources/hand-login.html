@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico" >
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/chart.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -67,58 +68,46 @@
 	<!-- **---header End---** -->
 	<!-- *---container Start---* -->
 
-	  <div class="h60px"></div>
-	<div class="container-1200 con-main">
-		<div class="wrap-1000">
-		    <!-- *---차트 카테고리---* -->
-      <div class="category_wrap">
-         <div class="categorybox active" data-tab="tab1">
-             <div class="chart01">
-               <p>chart01</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab2">
-             <div class="chart02">
-               <p>chart02</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab3">
-             <div class="chart03">
-               <p>chart03</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab4">
-             <div class="chart04">
-               <p>chart04</p>
-             </div>
-         </div>
-      </div><!-- **---카테고리랩 End---** -->
-      
-      <!-- 차트 영역 1234 -->
-      <div class="tab-box tab1 active">
-        <div class="chart-login">
-          <div class="desc">
-            <p>인공지능이 예측한 자료 열람하기</p>
+	<div class="h60px"></div>
+	<div class="container-1200 min-100vh con-login">
+		<div class="login-wrap">
+        <form action="/member/login" method="post">
+          <div class="login-logo">
+            <a href="#"><img class="login-logo-img" src="image/pngaaa.com-589654.png" alt="logo" /></a>
           </div>
-          <div class="btn">
-            <a href="#"><span>로그인</span></a>
-          </div>
-        </div>
-      </div>
 
-      <div class="tab-box tab2">
-      </div>
-      
-      <div class="tab-box tab3">
-      </div>
-      
-      <div class="tab-box tab4">
-      </div>
+      <div class="line3px"></div>
+      <div class="line1px"></div>
+      <div class="input-wrap">
+          <!-- Email -->
+          <p class="input-title">Email</p>
+          <label> 
+	          <input class="size email" type="text" id="email" name="email" 
+	          placeholder="example@mail.com">
+          </label>
 
+          <!-- Password -->
+          <p class="input-title password">Password</p>
+          <label> <input type="password" name="password"
+            placeholder="********" class="size" id="password">
+          </label>
+      </div>   
+      <div class="line1px"></div>
+      <div class="line3px"></div>
+        <p class="find">
+          <span><a href="find">비밀번호 찾기</a></span> 
+          <span><a href="save">회원가입</a></span>
+        </p>
+        <!-- <input type="submit" value="확인"> -->
+        <p>
+          <input type="submit" value="login" id ="fn_email" name="fn_email" class="btn w100 login-btn">
+        </p>
+        <span class="back-home"><a href="index">메인페이지로 돌아가기</a></span>
+        </form>
 		</div><!-- **---wrap End---** -->
-	</div> <!-- **---container End---** -->
+	</div>
 
-
+	<!-- **---container End---** -->
 	<!-- *---footer Start---* -->
 
   <footer class="footer">
@@ -135,16 +124,6 @@
 
 	<!-- **---footer End---** -->
 	
-<script src="js/jquery-3.7.0.js"></script>
-<script>
-$(".categorybox").click(function() {
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
-   // $("html, body").scrollTop($(".tab-box").height());
-    let clickTab = $(this).attr("data-tab");
-    $(".tab-box").removeClass("active");
-    $("." + clickTab).addClass("active");
-});
-</script>
+
 </body>
 </html>

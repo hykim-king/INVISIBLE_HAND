@@ -598,3 +598,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,python,django,intellij,flask,linux
+*.xml
+*.policy
+*.properties
+*.project
+*.classpath
