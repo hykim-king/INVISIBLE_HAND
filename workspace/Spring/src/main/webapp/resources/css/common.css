@@ -1,9 +1,17 @@
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 *{
 	margin:0;
 	padding:0;
 }
 
 body{
+  font-family: 'S-CoreDream-3Light';
   scroll-behavior: smooth;
 	box-sizing: border-box;
 }
@@ -33,7 +41,7 @@ li {
   margin: 5px auto;
 }
 
-.container-1200{
+.container-1400{
   width:1400px;
   margin:0 auto;
 
@@ -42,6 +50,10 @@ li {
 .con-main{
 	display: flex;
 	position: relative;
+}
+
+.con-login{
+  position: relative;
 }
 
 
@@ -177,7 +189,10 @@ header{
 
 
 /* section------------------- */
+.h30px{
 
+  height: 30px;
+}
 .h60px{
 	width: 100%;
 	height: 60px;
@@ -263,6 +278,6 @@ footer{
   
 }
 
-.width80:{
+.width80{
   width:80%;
 }

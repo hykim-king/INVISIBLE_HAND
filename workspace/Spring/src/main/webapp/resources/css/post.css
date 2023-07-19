@@ -1,0 +1,124 @@
+h1{
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.contents-wrap{
+  width: 100%;
+}
+
+.contents-area{
+  margin: 30px auto;
+	width: 70%;
+  height: 600px;
+  background-color: #fff;
+  border: 1px solid #979797;
+  border-radius:30px
+}
+
+
+.contents-title{
+  border-bottom: 1px solid #979797;
+  font-size: 20px;
+  font-weight: 600;
+}
+.contents-title p{
+  padding: 0 40px;
+  line-height: 50px;
+}
+
+.contents-area .contents{
+  padding: 20px 40px;
+}
+.contents-area .contents p{
+  line-height: 30px;
+}
+
+.btn-area{
+  margin: 0 auto;
+  display: flex;
+  justify-content: end;
+	width: 70%;
+}
+
+.button{
+  border:1px solid #979797;    
+  background-Color:#fff;    
+  font-weight:bold;   
+  color:#979797;   
+  width:80px;
+  height:30px; 
+  border-radius: 20px;
+  margin: 0 5px;
+}
+
+.btn-b{
+  border:1px solid #979797;    
+  background-Color:#979797;  
+  color:#fff;  
+}
+
+.comment-area{
+  width: 80%;
+  margin: 30px auto;
+  border-radius:30px;
+  padding: 0 30px;
+}
+.comment-area h2{
+  font-size: 20px;
+  padding: 0px 50px;
+}
+.pagination{
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.comment-box{
+  margin: 0 auto;
+  width: 80%;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #979797;
+}
+
+.comment-desc span{
+  font-size: 14px;
+  color: #979797;
+}
+.comment-desc p{
+  padding: 10px 0;
+  
+}
+
+
+.comment-icon .fas{
+  display: block;
+}
+.fa-thumbs-up{
+  margin-top: 40px;
+}
+
+.add-comment{
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px;
+  border: 1px solid #979797;
+  border-radius: 10px;
+}
+.add-comment p{
+  line-height: 24px;
+}
+
+.btn-right{
+  display: block;
+  width: 100%;
+  height: 30px;
+  position: relative;
+}
+.add-comment .btn{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}

@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico" >
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/chart.css">
-<title>보이지 않는 손 레이아웃</title>
+<link rel="stylesheet" href="css/mypage.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<title>마이페이지 입니다</title>
 </head>
 <body>
   <!-- *---header Start---* -->
@@ -57,58 +58,63 @@
 	<!-- **---header End---** -->
 	<!-- *---container Start---* -->
 
-	  <div class="h60px"></div>
-	<div class="container-1400 con-main">
-		<div class="wrap-1000">
-		    <!-- *---차트 카테고리---* -->
-      <div class="category_wrap">
-         <div class="categorybox active" data-tab="tab1">
-             <div class="chart01">
-               <p>chart01</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab2">
-             <div class="chart02">
-               <p>chart02</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab3">
-             <div class="chart03">
-               <p>chart03</p>
-             </div>
-         </div>
-         <div class="categorybox" data-tab="tab4">
-             <div class="chart04">
-               <p>chart04</p>
-             </div>
-         </div>
-      </div><!-- **---카테고리랩 End---** -->
-      
-      <!-- 차트 영역 1234 -->
-      <div class="tab-box tab1 active">
-        <div class="chart-login">
-          <div class="desc">
-            <p>인공지능이 예측한 자료 열람하기</p>
-          </div>
-          <div class="btn">
-            <a href="#"><span>로그인</span></a>
-          </div>
-        </div>
-      </div>
+	<div class="h60px"></div>
+	<div class="container-1400 min-100vh con-login">
+		<div class="mypage-wrap">
+			<div class="box-area">
 
-      <div class="tab-box tab2">
-      </div>
-      
-      <div class="tab-box tab3">
-      </div>
-      
-      <div class="tab-box tab4">
-      </div>
-
+				<div class="mybox mybox01">
+					<div class="line1px"></div>
+					<div class="line3px"></div>
+					<h2>회원정보</h2>
+					<div class="my-info">
+						<div class="my-grade">
+							<div class="myid"></div>
+							<div class="bedge"></div>
+						</div>
+						<div class="my-info-list">
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+						</div>
+					</div>
+					<div class="line3px"></div>
+					<div class="line1px"></div>
+				</div>
+				<div class="mybox mybox02">
+					<div class="line1px"></div>
+					<div class="line3px"></div>
+					<h2>나의활동</h2>
+					<div class="my-info">
+						<div class="my-info-list">
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+						</div>
+					</div>
+					<div class="line3px"></div>
+					<div class="line1px"></div>
+				</div>
+				<div class="mybox mybox03">
+					<div class="line1px"></div>
+					<div class="line3px"></div>
+					<h2>구독관리</h2>
+					<div class="my-info">
+						<div class="my-info-list">
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+							<span><a href="login">로그인페이지로 이동</a></span> 
+						</div>
+					</div>
+					<div class="line3px"></div>
+					<div class="line1px"></div>
+				</div>
+								
+			</div>
 		</div><!-- **---wrap End---** -->
-	</div> <!-- **---container End---** -->
+	</div>
 
-
+	<!-- **---container End---** -->
 	<!-- *---footer Start---* -->
 
   <footer class="footer">
@@ -125,16 +131,6 @@
 
 	<!-- **---footer End---** -->
 	
-<script src="js/jquery-3.7.0.js"></script>
-<script>
-$(".categorybox").click(function() {
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
-   // $("html, body").scrollTop($(".tab-box").height());
-    let clickTab = $(this).attr("data-tab");
-    $(".tab-box").removeClass("active");
-    $("." + clickTab).addClass("active");
-});
-</script>
+
 </body>
 </html>
