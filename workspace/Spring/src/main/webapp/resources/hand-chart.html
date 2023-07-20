@@ -13,7 +13,7 @@
     <header class="header">
     <div class="inner">
 			<div class="logo">
-			 <a href="#"><img src="image/pngaaa.com-589654.png" alt="logo" /></a>
+			 <a href="/ehr/resources/hand-chart.html"><img src="image/pngaaa.com-589654.png" alt="logo" /></a>
 			</div>
 	      <nav class="gnb_wrap">
 	        <ul class="global_nav_bar">
@@ -110,7 +110,7 @@
 							<p>인공지능이 예측한 자료 열람하기</p>
 						</div>
 						<div class="btn">
-							<a href="#"><span>로그인</span></a>
+							<a href="/ehr/resources/hand-login.html"><span>로그인</span></a>
 						</div>
 					</div>
 				</div>
@@ -180,6 +180,14 @@ $(document).ready(function(){
             }
         });
     });
+// ログインボタンがクリックされたときの動作を処理
+document.querySelector('.login a').addEventListener('click', function(event) {
+    // ボタンがクリックされたときのデフォルト動作（リンク先への遷移）を無効にする
+    event.preventDefault();
+
+    // hand-login.html にリダイレクト
+    window.location.href = 'hand-login.html';
+});
 </script>
 </body>
 </html>
