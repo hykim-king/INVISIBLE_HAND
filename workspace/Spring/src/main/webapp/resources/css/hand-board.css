@@ -1,40 +1,53 @@
-h1{
-	margin-top:100px;
-}
-.table-search{
-   margin-top:30px;
-}
-#boardTable{
-   margin-top:30px;
+h1 {
+  margin-top: 100px;
 }
 
-.board-thead{
-	padding: 3px 0;
-	border-top: 1px solid #000;
-	border-bottom: 2px solid #000;
-	
+.btn{
+	border:1px solid #979797;    
+	background-Color:#fff;     
+	color:#979797;   
+	width:80px;
+	border-radius: 20px;
+	margin: 0 5px;
+	transition: 1s;
 }
 
+.btn:hover{   
+	background-Color:#979797;     
+	color:#fff;  
+}
 
+.table-search {
+  margin-top: 30px;
+}
+#boardTable {
+  margin-top: 30px;
+}
 
+.board-thead {
+  padding: 3px 0;
+  border-top: 1px solid #000;
+  border-bottom: 2px solid #000;
+}
 
-
-
-.l-txt { /*왼쪽 정렬 */
+.l-txt {
+  /*왼쪽 정렬 */
   text-align: left;
 }
 
-.r-txt { /*오른쪽 정렬 */
+.r-txt {
+  /*오른쪽 정렬 */
   text-align: right;
 }
 
-.c-txt { /*가운데 정렬 */
+.c-txt {
+  /*가운데 정렬 */
   text-align: center;
 }
 
-
-.board-table th,.board-table td {
-	padding: 10px 0;
+.table-sm>:not(caption)>*>* {
+  padding: 10px 0;
+  transition: 1s;
 }
 
 
@@ -49,65 +62,42 @@ h1{
   */
   word-break: break-all;
   text-decoration: none;
-  
-}  
-  
+}
+
 .board-table a:hover {
-  text-decoration:underline;
-} 
-
-.pagination {
-	margin-top: 20px;
-	text-align: center;
+  text-decoration: underline;
 }
 
-.pagination a {
-	color: black;
-	padding: 10px 5px;
-	text-decoration: none;
+input,
+select {
+  padding: 6px 12px;
+  margin: 1px;
+  box-sizing: border-box;
 }
-
-
-
-input, select {
-	padding: 6px 12px;
-	margin: 1px;
-	box-sizing: border-box;
-}
-
 
 /* 등록 form */
 
 .form-group {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
 
 .form-group label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
-        
+
 .form-group input[type="text"],
-.form-group input[type="password"],    
+.form-group input[type="password"],
 .form-group input[type="email"],
 .form-group select,
 .form-group textarea {
-	width: 100%;
-	padding: 8px;
-	font-size: 16px;
-	border: 1px solid #ddd;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
 }
-
 
 .form-group textarea {
-	height: 100px;
+  height: 100px;
 }
-
-
-
-
-
-
-
