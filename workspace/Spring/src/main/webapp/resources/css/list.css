@@ -28,10 +28,10 @@ body{
   margin-bottom: 5px;
 }
 
- button {
-   background-color: #2979ff;
-   color: #fff;
- }
+button {
+  background-color: #2979ff;
+  color: #fff;
+}
   
 .container{
   width: 1100px;
