@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">       
+<tiles-definitions>
+  <definition name="base-definition" template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+    <!-- 정적인 부분: header, footer -->
+    <!-- 동적인 부분: body, title -->
+    
+    
+    <!-- 동적인 부분 -->
+    <put-attribute name="title" value=""/>
+    <put-attribute name="body"  value=""/>
+    
+    <!-- 정적인 부분 -->
+    <put-attribute name="header" value="/WEB-INF/views/tiles/template/header.jsp"/>
+    <put-attribute name="footer" value="/WEB-INF/views/tiles/template/footer.jsp"/>
+    <put-attribute name="css" value="/WEB-INF/views/tiles/template/footer.jsp"/>
+  </definition>
+    
+  <!-- boot.do -->
+  <definition name="hand/*" extends="base-definition">
+     <put-attribute name="title" value="보이지않는손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/hand/{1}.jsp"/>
+  </definition>
+  
+    
+  <!-- hello.do -->
+  <definition name="hello/*" extends="base-definition">
+     <put-attribute name="title" value="헬로"/>
+     <put-attribute name="body"  value="/WEB-INF/views/hello/{1}.jsp"/>
+  </definition> 
+  
+
+<!--   <definition name="*/*" extends="base-definition">
+     <put-attribute name="title" value="헬로"/>
+     <put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp"/>
+  </definition>   -->
+</tiles-definitions>       
