@@ -599,7 +599,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,python,django,intellij,flask,linux
 *.policy
-*.properties
 *.project
 
 */Servers/*
