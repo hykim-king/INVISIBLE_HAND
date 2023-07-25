@@ -91,28 +91,31 @@ function drawChart() {
   let data1 = originalData1.clone();
     
   let options1 = {
-    title: '차트1',
-    pointSize: 15,
-    width : 1000,
-    height : 500,
-    titleTextStyle: { color: 'black' },
-    hAxis: {
-        textStyle: { fontSize: 15, color: 'black' },
-        baselineColor: 'black'
-    },
-    vAxis: {
-        title: 'title',
-        ticks: [0, 500, 1000, 1500, 2000],
-        format: '#,###',
-    },
-    legend: {
-      textStyle: { position: 'top', fontSize: 13, color: 'black' },
-    },
-    series: {
-        0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
-        1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true }
-    }
-  };
+	  title: '차트1',
+	  pointSize: 15,
+	  width: 1000,
+	  height: 500,
+	  titleTextStyle: { color: 'black' },
+	  hAxis: {
+	    textStyle: { fontSize: 15, color: 'black' },
+	    baselineColor: 'black'
+	  },
+	  vAxis: {
+	    title: 'title',
+	    viewWindow: {
+	      min: 0,
+	      max: 2000
+	    },
+	    format: '#,###',
+	  },
+	  legend: {
+	    textStyle: { position: 'top', fontSize: 13, color: 'black' },
+	  },
+	  series: {
+	    0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
+	    1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true }
+	  }
+	};
 
   let chart1 = new google.visualization.LineChart(document.getElementById('line_chart1'));
 
@@ -159,8 +162,11 @@ function drawChart() {
     vAxis: { // 세로 
       title: 'title', // vAxis 타이틀 수정
       textStyle: { fontSize: 15, color: 'black' },
-      ticks: [0, 500, 1000, 1500, 2000],
-      format: '#,###',
+      viewWindow: {
+        min: 0,
+        max: 2000
+      },
+      format: '#,###'
     },
     legend: {
       textStyle: { position: 'top', fontSize: 13, color: 'black' },
@@ -219,7 +225,10 @@ function drawChart() {
     vAxis: { // 세로 
       title: 'title', // vAxis 타이틀 수정
       textStyle: { fontSize: 15, color: 'black' },
-      ticks: [0, 500, 1000, 1500, 2000],
+      viewWindow: {
+        min: 0,
+        max: 2000
+      },
       format: '#,###',
     },
     legend: {
@@ -281,7 +290,10 @@ function drawChart() {
       textStyle: { fontSize: 15, color: 'black' },
       gridlines: { color: '#8898A1' }, // 중간 선 색
       baselineColor: '8898A1',
-      ticks: [0, 500, 1000, 1500, 2000],
+      viewWindow: {
+        min: 0,
+        max: 2000
+      },
       format: '#,###',
     },
     hAxis: {title: 'Month'},
