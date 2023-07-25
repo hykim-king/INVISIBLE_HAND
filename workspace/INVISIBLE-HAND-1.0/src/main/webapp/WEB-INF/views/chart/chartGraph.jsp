@@ -7,14 +7,13 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/chart.css">
-<script type="text/javascript"
-  src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="../resources/css/chart2.css">
+<script src="../resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
   <!-- *---container Start---* -->
-
   <div class="h60px"></div>
   <div class="container-1200 con-main">
     <div class="wrap-1000">
@@ -66,32 +65,28 @@
   <!-- **---container End---** -->
 
 
-  <script src="js/jquery-3.7.0.js"></script>
-  <script>
-  
+<script>
 $(".categorybox").click(function() {
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
-   // $("html, body").scrollTop($(".tab-box").height());
     let clickTab = $(this).attr("data-tab");
     $(".tab-box").removeClass("active");
     $("." + clickTab).addClass("active");
 });
 
-google.load("visualization", "1", {packages:["corechart"]});
 google.charts.load('current', {'packages':['corechart']});
-google.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawChart);
 
 // 차트 생성
 function drawChart() {
   const originalData1 = new google.visualization.arrayToDataTable([
-	    ['Year', 'one', 'two','three'],
-	    ['2019', 1030, 540,600],
-	    ['2020', 980, 420,700],
-	    ['2021', 1170, 460,800],
-	    ['2022', 660, 1120,900],
-	    ['2023', 1030, 540,1000]
-	  ]);
+      ['Year', 'one', 'two','three'],
+      ['2019', 1030, 540,600],
+      ['2020', 980, 420,700],
+      ['2021', 1170, 460,800],
+      ['2022', 660, 1120,900],
+      ['2023', 1030, 540,1000]
+    ]);
 
   let data1 = originalData1.clone();
     
@@ -200,10 +195,10 @@ function drawChart() {
   chart2.draw(data2, options2);
   
   // 차트3
-	const originalData3 = new google.visualization.DataTable();
-	originalData3.addColumn('string', 'Year');
-	originalData3.addColumn('number', 'one');
-	originalData3.addColumn('number', 'two');
+  const originalData3 = new google.visualization.DataTable();
+  originalData3.addColumn('string', 'Year');
+  originalData3.addColumn('number', 'one');
+  originalData3.addColumn('number', 'two');
   
   originalData3.addRows([
     ['2019', 1000, 400],
@@ -261,20 +256,20 @@ function drawChart() {
   
   //차트 4
   const originalData4 = new google.visualization.DataTable();
-	originalData4.addColumn('string', 'Month');
-	originalData4.addColumn('number', 'A');
-	originalData4.addColumn('number', 'B');
-	
-	originalData4.addRows([
-	  ['1월', 100, 500],
-	  ['2월', 110, 510],
-	  ['3월', 120, 520],
-	  ['4월', 130, 530],
-	  ['5월', 140, 540],
-	  ['6월', 150, 550],
-	]);
-	
-	let data4 = originalData4.clone();
+  originalData4.addColumn('string', 'Month');
+  originalData4.addColumn('number', 'A');
+  originalData4.addColumn('number', 'B');
+  
+  originalData4.addRows([
+    ['1월', 1200, 1500],
+    ['2월', 910, 1710],
+    ['3월', 500, 750],
+    ['4월', 750, 1830],
+    ['5월', 1400, 1440],
+    ['6월', 1500, 1650],
+  ]);
+  
+  let data4 = originalData4.clone();
   
   let options4 = {
     title : '이중 차트 테스트',
@@ -292,27 +287,27 @@ function drawChart() {
     hAxis: {title: 'Month'},
     seriesType: 'bars',
     series: {0: {type: 'line', lineWidth: 2 }},
-    colors: ['#FFCCFF', '#ccff99']
+    colors: ['black', '#ccff99']
   };
   let chart4 = new google.visualization.ComboChart(document.getElementById('chart_div'));
 
   google.visualization.events.addListener(chart4, 'click', function(target) {
-	    if (target.targetID.match(/legendentry#\d+/)) {
-	      let index = parseInt(target.targetID.slice(12));
-	  
-	      for (let i = 0; i < data4.getNumberOfRows(); i++) {
-	        let value = data4.getValue(i, index + 1);
-	  
-	        if (value === null) {
-	          data4.setValue(i, index + 1, originalData4.getValue(i, index + 1));
-	        } else {
-	          data4.setValue(i, index + 1, null);
-	        }
-	      }
-	  
-	      chart4.draw(data4, options4);
-	    }
-	  });
+      if (target.targetID.match(/legendentry#\d+/)) {
+        let index = parseInt(target.targetID.slice(12));
+    
+        for (let i = 0; i < data4.getNumberOfRows(); i++) {
+          let value = data4.getValue(i, index + 1);
+    
+          if (value === null) {
+            data4.setValue(i, index + 1, originalData4.getValue(i, index + 1));
+          } else {
+            data4.setValue(i, index + 1, null);
+          }
+        }
+    
+        chart4.draw(data4, options4);
+      }
+    });
   
   chart4.draw(data4, options4);
 }

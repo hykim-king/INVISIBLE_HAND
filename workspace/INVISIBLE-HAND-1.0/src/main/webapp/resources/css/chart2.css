@@ -77,4 +77,19 @@
 	right: 10%;
 }
 
+.category-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
+.tab-box {
+  display: none;
+  width: 100%;
+}
+
+.tab-box.active {
+  display: block;
+}

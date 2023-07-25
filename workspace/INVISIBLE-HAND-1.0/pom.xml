@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pcwk</groupId>
 	<artifactId>ehr</artifactId>
-	<name>sw_hr15</name>
+	<name>INVISIBLE-HAND-1.0</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
   <properties>

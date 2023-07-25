@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/chart.css">
+<link rel="stylesheet" href="css/chart2.css">
 <script type="text/javascript"
   src="https://www.gstatic.com/charts/loader.js"></script>
 <title>보이지 않는 손 레이아웃</title>
@@ -361,7 +361,7 @@ function drawChart() {
     hAxis: {title: 'Month'},
     seriesType: 'bars',
     series: {0: {type: 'line', lineWidth: 2 }},
-    colors: ['#FFCCFF', '#ccff99']
+    colors: ['black', '#ccff99']
   };
   let chart4 = new google.visualization.ComboChart(document.getElementById('chart_div'));
 
@@ -385,7 +385,6 @@ function drawChart() {
   
   chart4.draw(data4, options4);
 }
-
 
 $(window).resize(function() {
  drawChart();

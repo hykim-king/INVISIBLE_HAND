@@ -189,10 +189,9 @@
     <property name="maxWait"   value="${jdbc.maxWait}"/>
     
     <!-- Connection 잘못 관리되어 버려진 연결 찾아 재활용 -->
-    <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+    <!-- <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
     
-    <!-- 버려진 연결로 인식할 기본 시간  -->
-    <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
-  
+    버려진 연결로 인식할 기본 시간 
+    <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/> -->
   </bean>
 </beans>
