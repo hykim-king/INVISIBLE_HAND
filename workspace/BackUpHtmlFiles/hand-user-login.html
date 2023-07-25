@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<title>보이지 않는 손 레이아웃</title>
+<title>로그인페이지입니다</title>
 </head>
 <body>
   <!-- *---header Start---* -->
-	<header class="header">
+    <header class="header">
     <div class="inner">
 			<div class="logo">
 			 <a href="#"><img src="image/pngaaa.com-589654.png" alt="logo" /></a>
@@ -57,11 +58,43 @@
 	<!-- **---header End---** -->
 	<!-- *---container Start---* -->
 
-	  <div class="h60px"></div>
-	<div class="container-1400 min-100vh con-main">
-		<div class="wrap-1000">
-			
-		</div>
+	<div class="h60px"></div>
+	<div class="container-1400 min-100vh con-login">
+		<div class="login-wrap">
+        <form action="/member/login" method="post">
+          <div class="login-logo">
+            <a href="#"><img class="login-logo-img" src="image/pngaaa.com-589654.png" alt="logo" /></a>
+          </div>
+
+      <div class="line3px"></div>
+      <div class="line1px"></div>
+      <div class="input-wrap">
+          <!-- Email -->
+          <p class="input-title">Email</p>
+          <label> 
+	          <input class="size email" type="text" id="email" name="email" 
+	          placeholder="example@mail.com">
+          </label>
+
+          <!-- Password -->
+          <p class="input-title password">Password</p>
+          <label> <input type="password" name="password"
+            placeholder="********" class="size" id="password">
+          </label>
+      </div>   
+      <div class="line1px"></div>
+      <div class="line3px"></div>
+        <p class="find">
+          <span><a href="find">비밀번호 찾기</a></span> 
+          <span><a href="save">회원가입</a></span>
+        </p>
+        <!-- <input type="submit" value="확인"> -->
+        <p>
+          <input type="submit" value="login" id ="fn_email" name="fn_email" class="btn w100 login-btn">
+        </p>
+        <span class="back-home"><a href="index">메인페이지로 돌아가기</a></span>
+        </form>
+		</div><!-- **---wrap End---** -->
 	</div>
 
 	<!-- **---container End---** -->
@@ -81,5 +114,6 @@
 
 	<!-- **---footer End---** -->
 	
+
 </body>
 </html>

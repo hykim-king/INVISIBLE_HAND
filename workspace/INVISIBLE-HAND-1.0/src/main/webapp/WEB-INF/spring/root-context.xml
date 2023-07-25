@@ -121,12 +121,9 @@
     <property name="dataSource" ref="dataSource"></property>
   </bean>
   
-  <!-- Advice 부가기능:logging 
-    <bean id="aroundAdvice" class="com.pcwk.ehr.aspect.PerformanceAroundAdvice">
-      <property name="jdbcTemplate" ref="jdbcTemplate"></property>
-    </bean>-->
-    
+  
     <!-- 성능측정 -->
+    <!-- 
   <aop:config>
       <aop:pointcut expression="execution(* com.pcwk.ehr..*Impl.notRun*(..))" id="allPointCut"/>
     <aop:aspect ref="aroundAdvice">
@@ -134,7 +131,7 @@
     </aop:aspect>
   
   </aop:config>
- 
+  -->
   
   <!-- 개발용  DummyMailSender
   <bean id="dummyMailSender" class="com.pcwk.ehr.user.service.DummyMailSender"></bean>-->

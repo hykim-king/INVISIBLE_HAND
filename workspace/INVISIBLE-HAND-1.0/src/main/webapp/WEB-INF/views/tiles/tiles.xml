@@ -18,22 +18,47 @@
     <put-attribute name="css" value="/WEB-INF/views/tiles/template/footer.jsp"/>
   </definition>
     
-  <!-- boot.do -->
-  <definition name="hand/*" extends="base-definition">
-     <put-attribute name="title" value="보이지않는손"/>
-     <put-attribute name="body"  value="/WEB-INF/views/hand/{1}.jsp"/>
+  <!-- chart 돌더-->
+  <definition name="chart/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/chart/{1}.jsp"/>
   </definition>
   
     
-  <!-- hello.do -->
-  <definition name="hello/*" extends="base-definition">
-     <put-attribute name="title" value="헬로"/>
-     <put-attribute name="body"  value="/WEB-INF/views/hello/{1}.jsp"/>
+  <!-- main 폴더 -->
+  <definition name="main/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/main/{1}.jsp"/>
   </definition> 
   
+  <!-- member 폴더 -->
+  <definition name="member/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/member/{1}.jsp"/>
+  </definition> 
+  
+  <!-- mypage 폴더 -->
+  <definition name="mypage/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/mypage/{1}.jsp"/>
+  </definition> 
+  
+  <!-- payment 폴더 -->
+  <definition name="payment/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/payment/{1}.jsp"/>
+  </definition> 
+  
+  <!-- post 폴더 -->
+  <definition name="post/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/post/{1}.jsp"/>
+  </definition> 
+  
+  <!-- solution 폴더 -->
+  <definition name="solution/*" extends="base-definition">
+     <put-attribute name="title" value="보이지 않는 손"/>
+     <put-attribute name="body"  value="/WEB-INF/views/solution/{1}.jsp"/>
+  </definition> 
 
-<!--   <definition name="*/*" extends="base-definition">
-     <put-attribute name="title" value="헬로"/>
-     <put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp"/>
-  </definition>   -->
 </tiles-definitions>       
