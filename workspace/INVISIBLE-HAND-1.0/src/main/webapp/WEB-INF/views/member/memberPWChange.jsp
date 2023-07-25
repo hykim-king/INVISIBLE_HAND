@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 		<div class="find-wrap">
 			<form action="/member/join" method="post" id="register-form">
 				<div class="login-logo">
-					<a href="#"><img class="login-logo-img" src="image/pngaaa.com-589654.png" alt="logo" /></a>
+					<a href="#"><img class="login-logo-img" src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
 					
 				</div>
 
@@ -82,8 +83,8 @@
 				</div>
 
 				<p class="find join">
-					<span><a href="/ehr/resources/hand-login.html">로그인페이지로 이동</a></span> 
-					<span><a href="index">메인페이지로 돌아가기</a></span>
+					<span><a href="${CP}/member/memberLogin.do">로그인페이지로 이동</a></span> 
+					<span><a href="${CP}/main/main.do">메인페이지로 돌아가기</a></span>
 				</p>
 			</form>
 		</div><!-- **---wrap End---** -->

@@ -29,13 +29,13 @@ public class PostController {
 		
 		return "post/postContents";
 	}
-	@RequestMapping(value = "/postReg.do")
-	public String postReg() {
+	@RequestMapping(value = "/postAdd.do")
+	public String postAdd() {
 		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   postReg()           │");
+		LOG.debug("│   postAdd()           │");
 		LOG.debug("└───────────────────────┘");
 		
-		return "post/postReg";
+		return "post/postAdd";
 	}
 	
 }

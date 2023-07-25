@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,14 +39,14 @@
       <div class="line1px"></div>
       <div class="line3px"></div>
         <p class="find">
-          <span><a href="${CP}/member/memberPWChange.do">비밀번호 찾기</a></span> 
-          <span><a href="${CP}/member/memberJoin.do">회원가입</a></span>
+          <span><a href="find">비밀번호 찾기</a></span> 
+          <span><a href="save">회원가입</a></span>
         </p>
         <!-- <input type="submit" value="확인"> -->
         <p>
           <input type="submit" value="login" id ="fn_email" name="fn_email" class="btn w100 login-btn">
         </p>
-        <span class="back-home"><a href="${CP}/main/main.do">메인페이지로 돌아가기</a></span>
+        <span class="back-home"><a href="index">메인페이지로 돌아가기</a></span>
         </form>
 		</div><!-- **---wrap End---** -->
 	</div>

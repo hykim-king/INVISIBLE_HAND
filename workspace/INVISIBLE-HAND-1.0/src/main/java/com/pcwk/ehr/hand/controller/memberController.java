@@ -20,6 +20,15 @@ public class memberController {
 		
 		return "member/memberLogin";
 	}
+	
+	@RequestMapping(value = "/memberJoin.do")
+	public String memberJoin() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   memberJoin()        │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "member/memberJoin";
+	}
 
 	@RequestMapping(value = "/memberPWChange.do")
 	public String memberPWChange() {

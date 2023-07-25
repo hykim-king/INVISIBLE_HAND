@@ -130,3 +130,12 @@ h1{
 #slide2>ul>li{
   height: 100px;
 }
+
+input{
+ outline: none;
+ border: none;
+}
+
+textarea.form-contents {
+	border: none;
+}
