@@ -17,7 +17,12 @@ import com.pcwk.ehr.VO.BoardVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.BoardService;
 
+import com.pcwk.ehr.cmn.PcwkLoger;
+import com.pcwk.ehr.service.AdminService;
+import com.pcwk.ehr.VO.AdminVO;
+
 @Controller
+<<<<<<< HEAD
 @RequestMapping(value = "admin") // WEB_INF아래 폴더이름을 적는곳.
 public class AdminController {
 	final Logger lg = LogManager.getLogger(getClass());
@@ -119,3 +124,32 @@ public class AdminController {
 	}
 
 }
+=======
+@RequestMapping(value = "admin")
+public class AdminController implements PcwkLoger {
+
+    private final AdminService adminService;
+
+    @Autowired
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
+    //http://localhost:8080/ehr/admin/admin.do
+    @RequestMapping(value = "/admin.do")
+    public String admin(Model model) {
+    	
+        LOG.debug("┌───────────────────────┐");
+        LOG.debug("│ admin()               │");
+        LOG.debug("└───────────────────────┘");
+
+        // 관리자 정보를 가져와서 모델에 추가
+        String adminId = "admin"; // 실제 관리자 ID를 여기에 지정
+        AdminVO adminVO = adminService.getAdminById(adminId);
+        model.addAttribute("adminVO", adminVO);
+
+        return "admin/admin";
+    }
+
+}
+>>>>>>> 4955eb8 (test)
