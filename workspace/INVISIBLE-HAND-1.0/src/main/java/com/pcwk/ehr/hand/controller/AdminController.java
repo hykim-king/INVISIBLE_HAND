@@ -15,7 +15,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
 		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│ chart()               │");
+		LOG.debug("│ admin()               │");
 		LOG.debug("└───────────────────────┘");
 		
 		return "admin/admin";

@@ -9,8 +9,10 @@
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
   
+  
 
   <typeAliases>
+ 	 <typeAlias type="com.pcwk.ehr.cmn.MyPage" alias="MyPage"/>
   	<!--  
     <typeAlias type="com.pcwk.ehr.code.domain.CodeVO"   alias="CodeVO"/>
     <typeAlias type="com.pcwk.ehr.user.domain.UserVO"   alias="UserVO"/>
@@ -18,4 +20,5 @@
     <typeAlias type="com.pcwk.ehr.user.domain.LevelPerMemberVO" alias="LevelPerMemberVO"/>
     -->
   </typeAliases>
+  
 </configuration>    
