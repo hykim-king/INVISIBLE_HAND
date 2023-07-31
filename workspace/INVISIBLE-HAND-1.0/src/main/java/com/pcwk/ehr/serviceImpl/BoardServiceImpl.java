@@ -1,4 +1,4 @@
-package com.pcwk.ehr.service.impl;
+package com.pcwk.ehr.serviceImpl;
 
 import java.sql.SQLException;
 import java.util.List;

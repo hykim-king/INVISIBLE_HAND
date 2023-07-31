@@ -1,13 +1,24 @@
 package com.pcwk.ehr.hand.controller;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.pcwk.ehr.service.NaverSearchService;
 
 @Controller
 @RequestMapping(value = "main")	//WEB_INF아래 폴더이름을 적는곳.
 public class MainController {
+	
+	@Autowired
+	NaverSearchService naverSearchService;
 	
 	final Logger LOG = LogManager.getLogger(getClass());
 
@@ -20,6 +31,20 @@ public class MainController {
 		
 		return "main/main";
 	}
-
+	
+	
+	//AJAX 통신을 위한 메서드제작
+	//검색 기본 단어 query를 ajax에서 정할 것임.
+	//일단 기본 값은 "중소기업" 이후 변경
+	@RequestMapping(value = "/doNaverSearch.do" , method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doNaverSearch(@RequestParam(value = "query", defaultValue = "중소기업") String query) throws IOException {
+		
+		
+		return naverSearchService.doNaverSearch(query);
+	}
+	
+	
 	
 }

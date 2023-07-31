@@ -52,55 +52,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
   <script>
-  
-  
- /*  $(document).ready(function() {
-	  // 최신 뉴스 데이터를 가져오는 함수
-	  function fetchLatestNews() {
-	    // 서버로부터 최신 뉴스 데이터를 가져오는 Ajax 요청
-	    $.ajax({
-	      url: 'newsAPIEndpoint', // 실제 데이터를 제공하는 API 엔드포인트
-	      type: 'GET',
-	      dataType: 'json',
-	      success: function(data) {
-	        // 가져온 데이터를 이용하여 슬라이드 헤드라인을 생성
-	        createSlideHeadlines(data);
-	      },
-	      error: function(error) {
-	        console.error('뉴스 데이터를 가져오지 못했습니다.', error);
-	      }
-	    });
-	  }
-
-	  // 슬라이드 헤드라인 생성 함수 // 이미 있음
-	  function createSlideHeadlines(newsData) {
-	    var slideContainer = $('#newsSlide');
-
-	    // newsData에서 최신 뉴스 헤드라인을 가져와서 동적으로 생성
-	    for (var i = 0; i < newsData.length; i++) {
-	      var headline = newsData[i].title;
-	      var link = newsData[i].link;
-
-	      // <a> 태그를 생성하고 헤드라인과 링크를 적용
-	      var newsLink = $('<a>', {
-	        text: headline,
-	        href: link,
-	        target: '_blank' // 새 탭에서 링크 열기
-	      });
-
-	      // 생성한 <a> 태그를 슬라이드 컨테이너에 추가
-	      slideContainer.append(newsLink);
-	    }
-	  }
-
-	  // 최신 뉴스 데이터를 가져오고 슬라이드 헤드라인 생성
-	  fetchLatestNews();
-	}); */
-	
+  	
   noticeRollingEffect();
-  
-  
-  
+   
   //함수로 변경
   function noticeRollingEffect() {
 	  var height = $(".news").height(); // 공지사항의 높이값
