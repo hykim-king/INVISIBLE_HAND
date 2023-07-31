@@ -53,6 +53,9 @@
 
   <script>
   $(document).ready(function(){
+	  noticeRollingEffect()
+	  
+	  function noticeRollingEffect(){
     var height =  $(".news").height(); //공지사항의 높이값
     var num = $(".rolling li").length; // 공지사항의 개수
     var max = height * num; //총 높이
@@ -68,7 +71,12 @@
     };
     noticeRollingOff = setInterval(noticeRolling,3000); //1000 = 1초마다 함수 실행
     $(".rolling").append($(".rolling li").first().clone()); //마지막이 안보이므로 clone을 통해 첫번째li 복사
+    
+	  }
+	  
+	  
   });
+ 
   </script>
 </body>
 </html>
