@@ -30,9 +30,9 @@
 							<div class="bedge"></div>
 						</div>
 						<div class="my-info-list">
-							<span><a href="mypageView.do">회원정보 조회</a></span>
-							<span><a href="mypageUpdate.do">회원정보 수정</a></span> 
-							<span><a href="mypageDelete.do">회원 탈퇴</a></span>  
+							<span><a href="login">회원정보 수정</a></span> 
+							<span><a href="login">회원 탈퇴</a></span> 
+							<span><a href="login">로그아웃</a></span> 
 						</div>
 					</div>
 					<div class="line3px"></div>
@@ -44,10 +44,10 @@
 					<h2>나의활동</h2>
 					<div class="my-info">
 						<div class="my-info-list">
-							<span><a href="${CP}/post/postList.do">작성한 게시글 보기</a></span> 
-							<span><a href="login">작성한 댓글 보기</a></span>
+							<span><a href="login">작성한 게시글 보기</a></span> 
+							<span><a href="login">작성한 댓글 보기</a></span> 
 							<span><a href="login">문의글 보기</a></span> 
-						</div> 
+						</div>
 					</div>
 					<div class="line3px"></div>
 					<div class="line1px"></div>
@@ -55,11 +55,11 @@
 				<div class="mybox mybox03">
 					<div class="line1px"></div>
 					<div class="line3px"></div>
-					<h2>결제 및 구독관리</h2>
+					<h2>구독관리</h2>
 					<div class="my-info">
 						<div class="my-info-list">
-							<span><a href="mypagePayment.do">결제 및 구독 정보 조회</a></span> 
-							<span><a href="mypagePayedit.do">결제 및 구독 수정</a></span> 
+							<span><a href="login">결제정보 수정</a></span> 
+							<span><a href="login">구독현황</a></span> 
 						</div>
 					</div>
 					<div class="line3px"></div>
@@ -71,7 +71,7 @@
 	</div>
 
 	<!-- **---container End---** -->
-
+	
 
 </body>
 </html>
