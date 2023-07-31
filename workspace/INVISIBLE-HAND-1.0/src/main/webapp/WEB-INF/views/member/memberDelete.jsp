@@ -29,7 +29,7 @@
 				<div class="form-h3">
 					<div class="line1px"></div>
 					<div class="line3px"></div>
-					<h3>비밀번호 변경</h3>
+					<h3>회원탈퇴</h3>
 					<div class="line3px"></div>
 					<div class="line1px"></div>
 				</div>
@@ -55,7 +55,7 @@
 
 				<!--비밀번호설정-->
 				<div class="label-margin">
-					<p class="input-title">비밀번호 재설정</p>
+					<p class="input-title">비밀번호 입력</p>
 					<label for="password"> 
 						<input placeholder="비밀번호는 8이상 12자 이하로 설정바랍니다" type="password" class="size border-bottom" id="password" name="password" required>
 						<input onclick = "fn_idChk();" type="button" value="부적합" class="btn btn-white">
@@ -79,7 +79,7 @@
 
 				<!-- 버튼 -->
 				<div class="submit">
-					<input id="register" type="submit" value="비밀번호 변경" class="btn w70">
+					<input id="register" type="submit" value="회원탈퇴" class="btn w70">
 				</div>
 
 				<p class="find join">

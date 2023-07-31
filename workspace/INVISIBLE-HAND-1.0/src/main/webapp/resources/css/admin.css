@@ -1,7 +1,3 @@
-.wrap-1000{
-	display: flex;
-}
-
 .cate{ 
   width:300px;
   position:relative;
@@ -49,13 +45,4 @@
 }
 .cate ul li:last-child{
   padding-bottom:20px;
-}
-
-.menulink { display: none; }
-
-.contents{
-	width:100%;
-  height:500px;
-	margin: 50px;
-	background-color: red;
 }

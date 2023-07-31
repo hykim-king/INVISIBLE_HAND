@@ -12,15 +12,6 @@ public class PaymentController {
 	final Logger LOG = LogManager.getLogger(getClass());
 
 	
-	@RequestMapping(value = "/kakaopay.do")
-	public String kakaoPay() {
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   kakaoPay()          │");
-		LOG.debug("└───────────────────────┘");
-		
-		return "kakaopay/kakaopay";
-	}
-	
 	@RequestMapping(value = "/payment.do")
 	public String payment() {
 		LOG.debug("┌───────────────────────┐");
