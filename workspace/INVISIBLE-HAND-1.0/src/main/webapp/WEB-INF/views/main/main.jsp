@@ -53,6 +53,7 @@
 
   <script>
   $(document).ready(function(){
+	 
 	  noticeRollingEffect()
 	  
 	  function noticeRollingEffect(){
