@@ -33,7 +33,7 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 		String apiURL = "";
 		try {
 			text = URLEncoder.encode(query, "UTF-8");
-			apiURL = BASE_URL + query + "&display=5"; // 여기서 query는 중소기업을 받을 매개변수
+			apiURL = BASE_URL + query + "&display=5"; // 여기서 query는 중소기업을 받을 매개변수 5개만
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,6 +47,20 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 		String responseBody = get(apiURL, requestHeaders);
 		
 		return responseBody;
+	}
+	
+	private static HttpURLConnection connect(String apiURL) {
+		try {
+			URL url = new URL(apiURL);
+			HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+
+			return urlCon;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	//API URL에 접속하고 요청 헤더를 설정하여 API 호출을 수행
@@ -95,17 +109,5 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 		return responseBody.toString();
 	}
 	
-	private static HttpURLConnection connect(String apiURL) {
-		try {
-			URL url = new URL(apiURL);
-			HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 
-			return urlCon;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

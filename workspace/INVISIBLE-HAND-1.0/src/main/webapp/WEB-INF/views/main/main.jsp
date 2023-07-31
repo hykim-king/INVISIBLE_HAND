@@ -54,6 +54,29 @@
   <script>
   $(document).ready(function(){
 	 
+	  $.ajax({
+		  type: "GET",
+		  url: "ehr/main/doNaverSearch.do",
+		  dataType: "json",
+		  data: {
+		    query: "중소기업"
+		  },
+		  success: function (data) {
+		     // 서버에서 반환한 JSON 데이터를 파싱하여 원하는 정보만 추출
+		    var parsedData = data.items.map(function (item) {
+		      return {
+		        title: item.title,
+		        url: item.link
+		      };
+		    });
+
+		    console.log(parsedData); // 헤드라인과 URL 정보가 담긴 배열 출력
+		  },
+		  error: function () {
+		    console.log("데이터를 불러오지 못했습니다.");
+		  }
+		});
+	  	  
 	  noticeRollingEffect()
 	  
 	  function noticeRollingEffect(){
