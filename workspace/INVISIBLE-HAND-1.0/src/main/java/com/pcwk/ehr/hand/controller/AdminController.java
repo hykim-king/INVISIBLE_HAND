@@ -19,100 +19,15 @@ import com.pcwk.ehr.service.BoardService;
 
 import com.pcwk.ehr.cmn.PcwkLoger;
 import com.pcwk.ehr.service.AdminService;
-import com.pcwk.ehr.VO.AdminVO;
+import com.pcwk.ehr.VO.MemberVO;
 
 @Controller
-<<<<<<< HEAD
 @RequestMapping(value = "admin") // WEB_INF아래 폴더이름을 적는곳.
 public class AdminController {
 	final Logger lg = LogManager.getLogger(getClass());
 	
 	@Autowired
 	BoardService boardService;
-	
-	// 게시글 삭제
-	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET
-					, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String doDelete(BoardVO inVO) throws SQLException {
-		String jsonString = "";
-		lg.debug("┌──────────┐");
-		lg.debug("│ doDelete │");
-		lg.debug("│ inVO     │" + inVO);
-		lg.debug("└──────────┘");
-
-		int flag = boardService.doDelete(inVO);
-
-		String message = "";
-		if (flag == 1) { // 삭제 성공
-			message = inVO.getPostnumber() + " 삭제되었습니다.";
-		} else { // 삭제 실패
-			message = inVO.getPostnumber() + " 삭제 실패되었습니다.";
-		}
-
-		jsonString = StringUtil.validMessageToJson(flag + "", message);
-		lg.debug("*****jsonString*****" + jsonString);
-
-		return jsonString;
-	}
-	
-	// 게시글 등록
-	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST
-					, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String doSave(BoardVO inVO) throws SQLException {
-		String jsonString = "";
-		lg.debug("┌────────┐");
-		lg.debug("│ doSave │");
-		lg.debug("│ inVO   │" + inVO);
-		lg.debug("└────────┘");
-
-		// 제목:10
-		if (inVO != null && inVO.getTitle().equals("")) {
-			return StringUtil.validMessageToJson("10", "제목을 입력해주세요.");
-		}
-
-		// 등록자:20
-		if (null != inVO && inVO.getAuthor().equals("") && null == inVO.getAuthor()) {
-			return StringUtil.validMessageToJson("20", "등록자를 입력해주세요.");
-		}
-
-		// 내용:30
-		if (null != inVO && inVO.getContent().equals("")) {
-			return StringUtil.validMessageToJson("30", "내용을 입력해주세요.");
-		}
-
-		// 서비스 호출
-		int flag = this.boardService.doSave(inVO);
-
-		String message = "";
-		if (1 == flag) {// 등록 성공
-			message = inVO.getTitle() + " 등록되었습니다.";
-		} else {// 등록실패
-			message = inVO.getTitle() + " 등록 실패하였습니다.";
-		}
-
-		jsonString = StringUtil.validMessageToJson(flag + "", message);
-		lg.debug("*****jsonString*****" + jsonString);
-		return jsonString;
-	}
-	
-	// 게시글 조회
-	@RequestMapping("/doSelectOne.do")
-	public String doSelectOne(BoardVO inVO, Model model, HttpSession httpSession) throws SQLException {
-		String view = "admin/admin";
-		
-		lg.debug("┌─────────────┐");
-		lg.debug("│ doSelectOne │");
-		lg.debug("│ inVO        │" + inVO);
-		lg.debug("└─────────────┘");
-		
-		BoardVO outVO = boardService.doSelectOne(inVO);
-		model.addAttribute("outVO", outVO);
-		model.addAttribute("inVO", inVO);
-
-		return view;
-	}
 	
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
@@ -123,33 +38,69 @@ public class AdminController {
 		return "admin/admin";
 	}
 
+	@RequestMapping(value = "/adminSearch.do")
+	public String adminSearch() {
+		lg.debug("┌────────────────┐");
+		lg.debug("│ adminSearch()  │");
+		lg.debug("└────────────────┘");
+		
+		return "admin/adminSearch";
+	}
+	
+	@RequestMapping(value = "/adminMembersUnsubscribe.do")
+	public String adminMembersUnsubscribe() {
+		lg.debug("┌───────────────────────────┐");
+		lg.debug("│ adminMembersUnsubscribe() │");
+		lg.debug("└───────────────────────────┘");
+		
+		return "admin/adminMembersUnsubscribe";
+	}
+	
+	@RequestMapping(value = "/adminPostNotice.do")
+	public String adminPostNotice() {
+		lg.debug("┌────────────────────┐");
+		lg.debug("│ adminPostNotice()  │");
+		lg.debug("└────────────────────┘");
+		
+		return "admin/adminPostNotice";
+	}
+	
+	@RequestMapping(value = "/adminModifyingAndDeletion.do")
+	public String adminModifyingAndDeletion() {
+		lg.debug("┌──────────────────────────────┐");
+		lg.debug("│ adminModifyingAndDeletion()  │");
+		lg.debug("└──────────────────────────────┘");
+		
+		return "admin/adminModifyingAndDeletion";
+	}
+	
+	@RequestMapping(value = "/adminQA.do")
+	public String adminQA() {
+		lg.debug("┌────────────┐");
+		lg.debug("│ adminQA()  │");
+		lg.debug("└────────────┘");
+		
+		return "admin/adminQA";
+	}
+	
+	@RequestMapping(value = "/adminSubChargeChange.do")
+	public String adminSubChargeChange() {
+		lg.debug("┌─────────────────────────┐");
+		lg.debug("│ adminSubChargeChange()  │");
+		lg.debug("└─────────────────────────┘");
+		
+		return "admin/adminSubChargeChange";
+	}
+	
+	@RequestMapping(value = "/adminSubBadgeManagement.do")
+	public String adminSubBadgeManagement() {
+		lg.debug("┌────────────────────────────┐");
+		lg.debug("│ adminSubBadgeManagement()  │");
+		lg.debug("└────────────────────────────┘");
+		
+		return "admin/adminSubBadgeManagement";
+	}
+	
+	
 }
-=======
-@RequestMapping(value = "admin")
-public class AdminController implements PcwkLoger {
 
-    private final AdminService adminService;
-
-    @Autowired
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
-    }
-
-    //http://localhost:8080/ehr/admin/admin.do
-    @RequestMapping(value = "/admin.do")
-    public String admin(Model model) {
-    	
-        LOG.debug("┌───────────────────────┐");
-        LOG.debug("│ admin()               │");
-        LOG.debug("└───────────────────────┘");
-
-        // 관리자 정보를 가져와서 모델에 추가
-        String adminId = "admin"; // 실제 관리자 ID를 여기에 지정
-        AdminVO adminVO = adminService.getAdminById(adminId);
-        model.addAttribute("adminVO", adminVO);
-
-        return "admin/admin";
-    }
-
-}
->>>>>>> 4955eb8 (test)

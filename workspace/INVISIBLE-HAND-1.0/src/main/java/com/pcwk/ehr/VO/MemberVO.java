@@ -1,6 +1,6 @@
 package com.pcwk.ehr.VO;
 
-public class AdminVO {
+public class MemberVO {
     private String memberId;
     private String password;
     private int memberGrade;

@@ -1,11 +1,11 @@
 package com.pcwk.ehr.dao;
 
-import com.pcwk.ehr.VO.AdminVO;
+import com.pcwk.ehr.VO.MemberVO;
 
 public interface AdminDao {
-    AdminVO getAdminById(String adminId); 
+    MemberVO getAdminById(String adminId); 
 
-    void updateAdmin(AdminVO adminVO); 
+    void updateAdmin(MemberVO adminVO); 
 
 }
 

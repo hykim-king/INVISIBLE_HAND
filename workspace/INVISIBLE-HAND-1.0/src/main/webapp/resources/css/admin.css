@@ -59,3 +59,23 @@
 	margin: 50px;
 	background-color: red;
 }
+
+#pagetop {
+  clear: both;
+  padding-top: 40px;
+  padding-right: 10px;
+}
+#pagetop a {
+  color: #fff;    /*文字色*/
+  font-size: 20px;  /*文字サイズ*/
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  float: right;
+  margin-bottom: 50px;
+  background: #222; /*背景色*/
+  color: #999;    /*文字色*/
+  width: 60px;    /*幅*/
+  line-height: 60px;  /*高さ*/
+  border-radius: 50%; /*角丸のサイズ*/
+}

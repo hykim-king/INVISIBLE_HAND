@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.VO.AdminVO;
+import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.AdminDao;
 
 @Repository
@@ -24,15 +24,15 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public AdminVO getAdminById(String adminId) {
-        AdminVO adminVO = null;
+    public MemberVO getAdminById(String adminId) {
+        MemberVO adminVO = null;
         String sql = "SELECT * FROM MEMBER WHERE MEMBERID = ?";
         try (Connection conn = dataSource.getConnection(); 
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, adminId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    adminVO = new AdminVO();
+                    adminVO = new MemberVO();
                     adminVO.setMemberId(rs.getString("MEMBERID"));
                     adminVO.setPassword(rs.getString("PASSWORD"));
                     adminVO.setMemberGrade(rs.getInt("MEMBERGRADE"));
@@ -51,7 +51,7 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public void updateAdmin(AdminVO adminVO) {
+    public void updateAdmin(MemberVO adminVO) {
         // 管理者情報を更新する実装
         // JDBCまたは他のORMフレームワークを使用して更新操作を行います
     }

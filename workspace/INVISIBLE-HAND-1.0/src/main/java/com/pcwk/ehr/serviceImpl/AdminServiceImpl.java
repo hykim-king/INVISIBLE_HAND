@@ -1,6 +1,6 @@
 package com.pcwk.ehr.serviceImpl;
 
-import com.pcwk.ehr.VO.AdminVO;
+import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.AdminDao;
 import com.pcwk.ehr.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public AdminVO getAdminById(String adminId) {
+    public MemberVO getAdminById(String adminId) {
         return adminDao.getAdminById(adminId);
     }
 
     @Override
-    public void updateAdmin(AdminVO adminVO) {
+    public void updateAdmin(MemberVO adminVO) {
         adminDao.updateAdmin(adminVO);
     }
 

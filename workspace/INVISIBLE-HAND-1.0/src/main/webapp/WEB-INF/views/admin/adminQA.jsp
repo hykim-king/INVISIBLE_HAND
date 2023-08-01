@@ -120,7 +120,7 @@
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
-  <span class="additional-text">관리자님 환영 합니다 !</span>
+  <span class="additional-text">문의사항 답변한다</span>
 
 
 	<div class="h60px"></div>
@@ -133,7 +133,8 @@
 				</span>
 				<ul>
 					<li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
-					<li><a href="${CP}/admin/adminMembersUnsubscribe.do">회원 강제로 탈퇴</a></li>
+					<li><a href="${CP}/admin/adminMembersUnsubscribe.do">회원
+							강제로 탈퇴</a></li>
 				</ul>
 			</div>
 			<div class="cate">
@@ -144,7 +145,7 @@
 				<ul>
 					<li><a href="${CP}/admin/adminPostNotice.do">공지사항</a></li>
 					<li><a href="${CP}/admin/adminModifyingAndDeletion.do">게시글 수정/삭제</a></li>
-          <li><a href="${CP}/admin/adminQA.do">문의사항 답변</a></li>
+					<li><a href="${CP}/admin/adminQA.do">문의사항 답변</a></li>
 				</ul>
 			</div>
 			<div class="cate">
