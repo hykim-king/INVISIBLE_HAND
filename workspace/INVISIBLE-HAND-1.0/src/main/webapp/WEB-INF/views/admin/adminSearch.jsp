@@ -11,17 +11,17 @@
 
 /* 新しいスタイル */
 .additional-text {
-	/* 追加テキストのスタイルを設定 */
-	position: absolute;
-	top: 0;
-	right: 0; /* 追加テキストの位置を調整 */
-	bottom: 0;
-	left: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center; /* 水平方向に中央揃え */
-	color: #000;
-	font-weight: bold;
+  /* 追加テキストのスタイルを設定 */
+  position: absolute;
+  top: 0;
+  right: 0; /* 追加テキストの位置を調整 */
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平方向に中央揃え */
+  color: #000;
+  font-weight: bold;
 }
 
 .cate {
@@ -67,14 +67,6 @@
 	transform: rotate(45deg);
 }
 
-.cate ul {
-	display: none;
-}
-
-.cate.active ul {
-	display: block;
-}
-
 .cate ul li {
 	padding: 5px 10px;
 }
@@ -95,6 +87,29 @@
 .admin-con {
 	display: flex;
 }
+
+/* 新しいスタイル */
+.search-form {
+	background-color: inherit;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 80px; /* メニュー項目と同じ高さに設定 */
+}
+
+.search-form>div {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+/* 検索区分のテキストを中央に配置 */
+#searchDiv {
+	text-align: center;
+}
+
+* /
 
 #pagetop {
 	clear: both;
@@ -117,12 +132,13 @@
 	border-radius: 50%; /*角丸のサイズ*/
 }
 </style>
-<title>보이지 않는 손 레이아웃</title>
+<title>보이지 않는 회원조회</title>
 </head>
 <body>
-  <span class="additional-text">관리자님 환영 합니다 !</span>
-
-
+	<span class="additional-text">회원조회 한다</span>
+	
+	
+	<!-- 메뉴 -->
 	<div class="h60px"></div>
 	<div class="c">
 		<div class="accordion">
@@ -133,7 +149,7 @@
 				</span>
 				<ul>
 					<li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
-					<li><a href="${CP}/admin/adminMembersUnsubscribe.do">회원 강제로 탈퇴</a></li>
+          <li><a href="${CP}/admin/adminMembersUnsubscribe.do">회원 강제로 탈퇴</a></li>
 				</ul>
 			</div>
 			<div class="cate">
@@ -153,53 +169,55 @@
 					class="subopen"></a>
 				</span>
 				<ul>
-					<li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a></li>
-					<li><a href="${CP}/admin/adminSubBadgeManagement.do">구독뱃지 관리</a></li>
+          <li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a></li>
+          <li><a href="${CP}/admin/adminSubBadgeManagement.do">구독뱃지 관리</a></li>
 				</ul>
 			</div>
 		</div>
 
 	</div>
+	<!-- ---------------------------------------------------------------------- -->
+	<!-- 검색구분 -->
 
 	<p id="pagetop" class="inner">
 		<a href="#">↑</a>
 	</p>
+
 	<script src="../resources/js/jquery-3.7.0.js"></script>
 	<script>
-		(function($) {
-			// クリックされたメニューを開く関数
-			function openMenu($menu) {
-				$menu.addClass('active');
-				$menu.find('ul').slideDown('slow');
-			}
+    (function($) {
+        // クリックされたメニューを開く関数
+        function openMenu($menu) {
+          $menu.addClass('active');
+          $menu.find('ul').slideDown('slow');
+        }
 
-			// クリックされたメニューを閉じる関数
-			function closeMenu($menu) {
-				$menu.removeClass('active');
-				$menu.find('ul').slideUp('slow');
-			}
+        // クリックされたメニューを閉じる関数
+        function closeMenu($menu) {
+          $menu.removeClass('active');
+          $menu.find('ul').slideUp('slow');
+        }
 
-			$('.cate ul').hide();
+        $('.cate ul').hide();
 
-			// すべてのメニューを開く
-			$('.accordion .cate').each(function() {
-				openMenu($(this));
-			});
+        // すべてのメニューを開く
+        $('.accordion .cate').each(function() {
+          openMenu($(this));
+        });
 
-			$('.cate .menu .subopen').click(function(event) {
-				event.stopPropagation(); // イベントが親要素に伝播しないようにする
+        $('.cate .menu .subopen').click(function(event) {
+          event.stopPropagation(); // イベントが親要素に伝播しないようにする
 
-				var $parent = $(this).parent().parent();
-				var isActive = $parent.hasClass('active');
+          var $parent = $(this).parent().parent();
+          var isActive = $parent.hasClass('active');
 
-				// クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
-				if (isActive) {
-					closeMenu($parent);
-				} else {
-					openMenu($parent);
-				}
-			});
-		})(jQuery);
-	</script>
+          // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
+          if (isActive) {
+            closeMenu($parent);
+          } else {
+            openMenu($parent);
+          }
+        });
+      })(jQuery);	</script>
 </body>
 </html>
