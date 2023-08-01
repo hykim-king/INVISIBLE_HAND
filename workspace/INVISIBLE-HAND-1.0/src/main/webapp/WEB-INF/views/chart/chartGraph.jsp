@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart2.css">
 <script src="../resources/js/jquery-3.7.0.js"></script>
@@ -81,11 +76,11 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   const originalData1 = new google.visualization.arrayToDataTable([
       ['Year', 'one', 'two','three'],
-      ['2019', 1030, 540,600],
-      ['2020', 980, 420,700],
-      ['2021', 1170, 460,800],
-      ['2022', 660, 1120,900],
-      ['2023', 1030, 540,1000]
+      ['2019', 1030, 540, 650],
+      ['2020', 980, 420, 1700],
+      ['2021', 1170, 460, 800],
+      ['2022', 660, 1120, 1900],
+      ['2023', 1030, 540, 1000]
     ]);
 
   let data1 = originalData1.clone();
@@ -113,7 +108,8 @@ function drawChart() {
 	  },
 	  series: {
 	    0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
-	    1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true }
+	    1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true },
+	    2: { color: 'brown', lineWidth: 2, visibleInLegend: true }
 	  }
 	};
 
@@ -303,23 +299,23 @@ function drawChart() {
   };
   let chart4 = new google.visualization.ComboChart(document.getElementById('chart_div'));
 
-  google.visualization.events.addListener(chart4, 'click', function(target) {
-      if (target.targetID.match(/legendentry#\d+/)) {
-        let index = parseInt(target.targetID.slice(12));
-    
-        for (let i = 0; i < data4.getNumberOfRows(); i++) {
-          let value = data4.getValue(i, index + 1);
-    
-          if (value === null) {
-            data4.setValue(i, index + 1, originalData4.getValue(i, index + 1));
-          } else {
-            data4.setValue(i, index + 1, null);
-          }
-        }
-    
-        chart4.draw(data4, options4);
-      }
-    });
+	google.visualization.events.addListener(chart4, 'click', function(target) {
+		if (target.targetID.match(/legendentry#\d+/)) {
+		  let index = parseInt(target.targetID.slice(12));
+		
+		  for (let i = 0; i < data4.getNumberOfRows(); i++) {
+		    let value = data4.getValue(i, index + 1);
+		
+		    if (value === null) {
+		      data4.setValue(i, index + 1, originalData4.getValue(i, index + 1));
+		    } else {
+		      data4.setValue(i, index + 1, null);
+		    }
+		  }
+		
+		  chart4.draw(data4, options4);
+		}
+	});
   
   chart4.draw(data4, options4);
 }
@@ -329,5 +325,3 @@ $(window).resize(function() {
  drawChart();
 });
 </script>
-</body>
-</html>
