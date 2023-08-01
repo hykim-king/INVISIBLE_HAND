@@ -51,17 +51,5 @@ public class MainController {
 	
 	
 
-	@RequestMapping(value = "/mainBoard.do", method = RequestMethod.GET, 
-			produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String doSelectOne(BoardVO inVO) throws IOException {
-		String jsonString = "";
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│ doNaverSearch()       │");
-		LOG.debug("└───────────────────────┘");
-		
-		
-		return "";
-	}
 
 }
