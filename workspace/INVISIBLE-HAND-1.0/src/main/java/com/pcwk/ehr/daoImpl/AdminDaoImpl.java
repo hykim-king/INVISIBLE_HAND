@@ -38,10 +38,10 @@ public class AdminDaoImpl implements AdminDao {
                     adminVO.setMemberGrade(rs.getInt("MEMBERGRADE"));
                     adminVO.setMemberName(rs.getString("MEMBERNAME"));
                     adminVO.setEmail(rs.getString("EMAIL"));
-                    adminVO.setNickname(rs.getString("NICKNAME"));
+                    adminVO.setNickName(rs.getString("NICKNAME"));
                     adminVO.setJoinDate(rs.getString("JOINDATE"));
                     adminVO.setUpdateDate(rs.getString("UPDATEDATE"));
-                    adminVO.setIsVerified(rs.getString("ISVERIFIED"));
+                    adminVO.setIsverified(rs.getString("ISVERIFIED"));
                 }
             }
         } catch (SQLException e) {
