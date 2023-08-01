@@ -3,6 +3,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/common.css">
+<link rel="stylesheet" href="../resources/css/payment.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <script src="/ehr/resources/js/payment.js"></script>
 <!-- *---container Start---* -->
@@ -18,9 +19,9 @@
 			 
 			<div id="kakaoContent">
 				<div id="paymentBtn">
-					<span>결제하기</span>
+					<span>더 많은 정보를 원한다면</span>
 				</div>
-				<button id="payBtn">pc 결제</button>
+				<button class="btn-hover color-11" id="payBtn">결제하기</button>
 			</div> <!-- *** kakaoContent *** -->
 			
 		</div> <!-- *** kakaoWrap *** -->
