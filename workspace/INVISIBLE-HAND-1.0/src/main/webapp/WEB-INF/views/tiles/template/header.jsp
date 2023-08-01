@@ -15,7 +15,7 @@
         <nav class="gnb_wrap">
           <ul class="global_nav_bar">
               <li><a href="${CP}/chart/chart.do">차트</a></li>
-              <li><a href="${CP}/solution/solution_A.do">솔루션</a></li>
+              <li><a href="${CP}/solution/solution_Q.do">솔루션</a></li>
               <li><a href="${CP}/post/postList.do">커뮤니티</a></li>
 
           </ul>

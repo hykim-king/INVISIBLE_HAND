@@ -9,16 +9,8 @@ import com.google.gson.Gson;
 public class StringUtil {
 
 	
-	
-	
-	/**
-	 * Backand메시지 처리 
-	 * @param msgId
-	 * @param msgContents
-	 * @return json문자
-	 */
-	public static String validMessageToJson(String msgId, String msgContents) {
-		return new Gson().toJson(new MessageVO(msgId, msgContents));
+	public static String vaildMessageToJason(String msgId, String msgContents) {
+		return new Gson().toJson(new MessageVO("10","등록완료"));
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package com.pcwk.ehr.service.impl;
+package com.pcwk.ehr.serviceImpl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -7,38 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.VO.BoardVO;
-import com.pcwk.ehr.dao.BoardDao;
-import com.pcwk.ehr.service.BoardService;
+import com.pcwk.ehr.dao.MainDao;
+import com.pcwk.ehr.service.MainService;
 
 @Service
-public class BoardServiceImpl implements BoardService {
-
-	@Autowired
-	BoardDao dao; 
+public class MainServiceImpl implements MainService {
 	
-	@Override
-	public int doSave(BoardVO inVO) throws SQLException {
-		return dao.doSave(inVO);
-	}
-
-	@Override
-	public int doDelete(BoardVO inVO) throws SQLException {
-		return dao.doDelete(inVO);
-	}
-
+	@Autowired
+	MainDao mainDao;
+	
+	//조회수 증가
 	@Override
 	public int doUpdate(BoardVO inVO) throws SQLException {
-		return 0;
+		
+		return mainDao.doUpdate(inVO);
 	}
-
+	
+	
+	//단건 조회
 	@Override
 	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
-		return null;
+		// TODO Auto-generated method stub
+		return mainDao.doSelectOne(inVO);
 	}
-
+	
+	
+	//리스트 조회
 	@Override
 	public List<BoardVO> doRetrieve(BoardVO inVO) throws SQLException {
-		return null;
+		
+		return mainDao.doRetrieve(inVO);
 	}
+	
 
 }
