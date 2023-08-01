@@ -59,6 +59,7 @@ li {
 }
 
 
+
 /* header------------------- */
 
 header{
@@ -227,20 +228,6 @@ section{
 }
 
 
-/* sec-pament------------------- */
-#kakaoWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
-  margin: 0 auto; 
-	padding: 100px;
-}
-
-#kakaoHead {
-	margin-bottom: 30px; 
-}
 
 /* sec-board------------------- */
 .sec-board{
