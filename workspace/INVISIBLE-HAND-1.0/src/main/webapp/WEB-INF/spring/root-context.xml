@@ -133,8 +133,8 @@
   </aop:config>
   -->
   
-  <!-- 개발용  DummyMailSender
-  <bean id="dummyMailSender" class="com.pcwk.ehr.user.service.DummyMailSender"></bean>-->
+  <!-- 개발용  DummyMailSender -->
+  <bean id="dummyMailSender" class="com.pcwk.ehr.service.DummyMailSender"></bean>
     
   <!-- JavaMailSenderImpl -->
   <bean id="mailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl">

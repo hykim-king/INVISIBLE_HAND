@@ -51,3 +51,10 @@ body{
 .my-info-list span a{
     color: #6c6c6c;
 }
+
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: none !important;
+    color: fieldtext !important;
+}
