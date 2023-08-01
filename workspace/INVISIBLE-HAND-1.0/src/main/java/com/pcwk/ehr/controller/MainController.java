@@ -32,12 +32,16 @@ public class MainController {
 	}
 
 	// AJAX 통신을 위한 메서드제작 //검색 기본 단어 query를 ajax에서 정할 것임. //일단 기본 값은 "중소기업" 이후 변경
-
-	@RequestMapping(value = "/doNaverSearch.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-
+	@RequestMapping(value = "/doNaverSearch.do", method = RequestMethod.GET, 
+			produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doNaverSearch(@RequestParam(value = "query", defaultValue = "중소기업") String query) throws IOException {
+		
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ doNaverSearch()       │");
+		LOG.debug("└───────────────────────┘");
 
+		
 		return naverSearchService.doNaverSearch(query);
 	}
 

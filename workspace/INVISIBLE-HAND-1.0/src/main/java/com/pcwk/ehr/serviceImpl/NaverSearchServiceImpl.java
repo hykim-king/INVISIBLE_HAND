@@ -33,7 +33,7 @@ public class NaverSearchServiceImpl implements NaverSearchService {
 		String apiURL = "";
 		try {
 			text = URLEncoder.encode(query, "UTF-8");
-			apiURL = BASE_URL + query + "&display=5"; // 여기서 query는 중소기업을 받을 매개변수 5개만
+			apiURL = BASE_URL + text + "&display=5&start=1&sort=date"; // 여기서 query는 중소기업을 받을 매개변수 5개만
 
 		} catch (Exception e) {
 			e.printStackTrace();

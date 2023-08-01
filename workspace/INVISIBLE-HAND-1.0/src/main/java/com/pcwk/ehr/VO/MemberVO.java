@@ -1,7 +1,5 @@
 package com.pcwk.ehr.VO;
 
-
-
 public class MemberVO  {
 	private String memberId; // id
 	private String password; // 비번
@@ -9,7 +7,7 @@ public class MemberVO  {
 	private String memberName; // 회원 이름
 	private String email; // 이메일
 	private String nickName; // 닉네임
-	private String JoinDate; // 가입 일시
+	private String joinDate; // 가입 일시
 	private String updateDate; // 수정 일시
 	private String isverified; // 인증 여부
 
@@ -31,7 +29,7 @@ public class MemberVO  {
 		this.memberName = memberName;
 		this.email = email;
 		this.nickName = nickName;
-		JoinDate = joinDate;
+		this.joinDate = joinDate;
 		this.updateDate = updateDate;
 		this.isverified = isverified;
 		this.idCheck = idCheck;
@@ -101,12 +99,12 @@ public class MemberVO  {
 
 
 	public String getJoinDate() {
-		return JoinDate;
+		return joinDate;
 	}
 
 
 	public void setJoinDate(String joinDate) {
-		JoinDate = joinDate;
+		joinDate = joinDate;
 	}
 
 
@@ -164,7 +162,7 @@ public class MemberVO  {
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", password=" + password + ", memberGrade=" + memberGrade
 				+ ", memberName=" + memberName + ", email=" + email + ", nickName=" + nickName + ", JoinDate="
-				+ JoinDate + ", updateDate=" + updateDate + ", isverified=" + isverified + ", idCheck=" + idCheck
+				+ joinDate + ", updateDate=" + updateDate + ", isverified=" + isverified + ", idCheck=" + idCheck
 				+ ", nickNameCheck=" + nickNameCheck + ", emailCheck=" + emailCheck + "]";
 	}
 
