@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.BoardVO;
 import com.pcwk.ehr.cmn.StringUtil;
-import com.pcwk.ehr.service.BoardService;
-
+import com.pcwk.ehr.service.PostService;
 import com.pcwk.ehr.cmn.PcwkLoger;
 import com.pcwk.ehr.service.AdminService;
 import com.pcwk.ehr.VO.MemberVO;
@@ -27,7 +26,7 @@ public class AdminController {
 	final Logger lg = LogManager.getLogger(getClass());
 	
 	@Autowired
-	BoardService boardService;
+	PostService postService;
 	
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
