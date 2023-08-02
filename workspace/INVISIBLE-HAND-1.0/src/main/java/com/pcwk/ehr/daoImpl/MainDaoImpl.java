@@ -25,7 +25,7 @@ public class MainDaoImpl implements MainDao {
 		
 	//조회수 증가 
 	@Override
-	public int doUpdate(BoardVO inVO) throws SQLException {
+	public int doUpdateViews(BoardVO inVO) throws SQLException {
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdate", inVO);
 	}

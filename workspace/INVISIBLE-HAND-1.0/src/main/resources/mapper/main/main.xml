@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.main">
   
-  <update id="doUpdate" parameterType="BoardVO">
+  <update id="doUpdateViews" parameterType="BoardVO">
       UPDATE board           
-      SET views   = #{views}    
+      SET views   = NVL(views,0)+1   
       WHERE postnumber = #{postnumber}
       AND categorynumber = #{categorynumber}
    
