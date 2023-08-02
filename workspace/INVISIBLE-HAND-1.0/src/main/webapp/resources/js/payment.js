@@ -3,7 +3,7 @@
  */
 'use strict';
 
-window.onload = function() {
+/*window.onload = function() {
     const btn = document.querySelector("#payBtn");
 
     btn.onclick = function(e) {
@@ -16,4 +16,4 @@ window.onload = function() {
         popWindow = window.open('kakaopay.do','_blank','width=600, height=600');
 
     }
-}
+}*/
