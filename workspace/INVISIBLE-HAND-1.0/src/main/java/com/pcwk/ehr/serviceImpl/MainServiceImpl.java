@@ -27,7 +27,7 @@ public class MainServiceImpl implements MainService {
 	//단건 조회
 	@Override
 	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return mainDao.doSelectOne(inVO);
 	}
 	

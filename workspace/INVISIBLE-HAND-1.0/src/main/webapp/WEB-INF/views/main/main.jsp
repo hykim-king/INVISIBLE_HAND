@@ -26,7 +26,11 @@
       </section>
       <section class="sec02 sec-chart">차트 영역입니다
       </section>
-      <section class="sec03 sec-board">커뮤니티 영역입니다</section>
+      <section class="sec03 sec-board">커뮤니티 영역입니다
+       
+      
+      
+      </section>
     </div>
     <!-- **---wrap End---** -->
     <div class="rank-area">

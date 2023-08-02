@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.main">
   
-   <update id="doUpdate" parameterType="BoardVO">
+  <update id="doUpdate" parameterType="BoardVO">
       UPDATE board           
-      SET                   
-          likes   = #{likes},
-          views   = #{views},      
-      WHERE postnumber = #{postnumber}  
+      SET views   = #{views}    
+      WHERE postnumber = #{postnumber}
+      AND categorynumber = #{categorynumber}
+   
   </update>
 
   <select id="doSelectOne" parameterType="BoardVO" resultType="BoardVO">
@@ -22,8 +22,8 @@
 			, categorynumber
 		FROM board
 		WHERE postnumber = #{postnumber}
+		  AND categorynumber = #{categorynumber}
   </select>
-
        
   <select id="doRetrieve" parameterType="DTO" resultType="BoardVO">
 		<![CDATA[
@@ -48,14 +48,14 @@
 			      ORDER BY views DESC, writtendate DESC
 			    ) t1
 			  ) TT1
-			  WHERE TT1.rnum <=  #{pageSize} * #{pageNo} 
+			  WHERE TT1.rnum <=  5
 			) A
 			CROSS JOIN (
 			  SELECT COUNT(postnumber) totalCnt
 			  FROM board
 			  WHERE categorynumber = #{categorynumber}
 			) B
-			WHERE A.rnum >=  #{pageSize} * (#{pageNo} - 1) + 1 
+			WHERE A.rnum >=  1
 			]]>
 
 </select>
