@@ -39,9 +39,9 @@ public class MainDaoImpl implements MainDao {
 	
 	//리스트 조회
 	@Override
-	public List<PostVO> doRetrieve(String categorynumber) throws SQLException {
+	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException {
 		
-		return sqlSessionTemplate.selectList(NAMESPACE + DOT + "doRetrieve", categorynumber);
+		return sqlSessionTemplate.selectList(NAMESPACE + DOT + "doRetrieve", inVO);
 	}
 	
 }
