@@ -32,8 +32,8 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 	
-	@Autowired
-	CmnCodeService cmnCodeService;
+//	@Autowired
+//	CmnCodeService cmnCodeService;
 
 	@RequestMapping(value = "main/main.do")
 	public String main() {
@@ -74,12 +74,11 @@ public class MainController {
 
 	@RequestMapping(value = "main/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException {
+	public List<PostVO> doRetrieve(@RequestParam(value ="categorynumber") String categorynumber) throws SQLException {
+
+		List<PostVO> resultList = mainService.doRetrieve(categorynumber);
 		
-		List<PostVO> resultList = mainService.doRetrieve(inVO);
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug(resultList);
-		LOG.debug("└───────────────────────┘");
+
 		return resultList;
 
 	}

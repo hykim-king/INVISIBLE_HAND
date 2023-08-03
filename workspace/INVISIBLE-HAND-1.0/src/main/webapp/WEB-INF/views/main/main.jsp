@@ -38,21 +38,9 @@
 	
 	      </div>
 	      <div>
-		       <table>
-		          <thead>
-		            <tr>
-		            <th>No.</th>
-		            <th>제목</th>
-		            <th>글쓴이</th>
-		            <th>작성일</th>
-		            <th>조회수</th>
-		            <th>추천수</th>
-		            </tr>
-		          </thead>
-		          <tbody id="tableBody">
-							<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-							</tbody>
-						</table>	
+	          <tbody id="boardTableBody">
+						<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
+						</tbody>
 	      </div>
       </section>
     </div>
@@ -142,59 +130,45 @@
     $(document).ready(function() {
         // 페이지가 로드되면 초기값 '10'으로 게시글 불러오기
         loadBoardData('10');
-  
-    function loadBoardData(categoryNumber) {
+    });
+
+    function loadBoardData(categorynumber) {
         $.ajax({
             url: '${CP}/main/doRetrieve.do',
             type: 'GET',
             data: {
-                categoryNumber: categoryNumber
+                categorynumber: categorynumber
             },
             dataType: 'json',
-            success: function(result) {            
-            	 try {
+            success: function(result) {
                 // AJAX 요청이 성공했을 때 실행되는 부분
                 // result에 받아온 데이터가 들어있습니다.
-                // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성합니다.  
-                console.log("데이터를 가져옴");
-                console.log(result);
+                // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성합니다.
                 updateTable(result); // 테이블 업데이트 함수 호출
-                
-            	 }catch (error) {
-                     console.log("JSON 파싱 오류:", error);
-                 }
-            	 
             },
             error: function(xhr, status, error) {
                 // AJAX 요청이 실패했을 때 실행되는 부분
-                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
                 console.error(error);
             }
         });
     }
     
     function updateTable(data) {
-        let tableBody = document.getElementById('tableBody');
-        let newTableBody = document.createElement('tbody'); // 새로운 tbody 엘리먼트 생성
-        
+        let tableBody = document.getElementById('boardTableBody');
+        tableBody.innerHTML = ''; // 테이블 내용 초기화
+
         // 받아온 데이터를 테이블에 추가
         data.forEach(function(item, index) {
-        	 
             let row = '<tr>' +
                       '<td>' + item.num + '</td>' +
                       '<td><a href="#">' + item.title + '</a></td>' +
                       '<td>' + item.nickname + '</td>' +
                       '<td>' + item.writtenDate + '</td>' + 
                       '<td>' + item.views + '</td>' +
-                      '<td>' + item.likes + '</td>' +
                       '</tr>';
-            newTableBody.innerHTML += row;
+            tableBody.innerHTML += row;
         });
-        
-        // 기존 tbody 엘리먼트를 새로운 tbody로 교체
-        tableBody.parentNode.replaceChild(newTableBody, tableBody);
     }
-  });
   </script>
 </body>
 </html>
