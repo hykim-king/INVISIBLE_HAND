@@ -1,28 +1,36 @@
 package com.pcwk.ehr.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pcwk.ehr.VO.BoardVO;
+import com.pcwk.ehr.service.MainService;
 import com.pcwk.ehr.service.NaverSearchService;
 
 @Controller
-@RequestMapping(value = "main") // WEB_INF아래 폴더이름을 적는곳.
+@RequestMapping
 public class MainController {
+	final Logger LOG = LogManager.getLogger(getClass());
 
 	@Autowired
 	NaverSearchService naverSearchService;
-
-	final Logger LOG = LogManager.getLogger(getClass());
-
-	@RequestMapping(value = "/main.do")
+	
+	@Autowired
+	MainService mainService;
+	
+	@RequestMapping(value = "main/main.do")
 	public String main() {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│ main()       		   │");
@@ -32,7 +40,7 @@ public class MainController {
 	}
 
 	// AJAX 통신을 위한 메서드제작 //검색 기본 단어 query를 ajax에서 정할 것임. //일단 기본 값은 "중소기업" 이후 변경
-	@RequestMapping(value = "/doNaverSearch.do", method = RequestMethod.GET, 
+	@RequestMapping(value = "main/doNaverSearch.do", method = RequestMethod.GET, 
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doNaverSearch(@RequestParam(value = "query", defaultValue = "중소기업") String query) throws IOException {
@@ -44,5 +52,23 @@ public class MainController {
 		
 		return naverSearchService.doNaverSearch(query);
 	}
+	
+	
+	
+	//단건조회 
+	@RequestMapping(value = "")
+	public String doSelectOne(BoardVO inVO, Model model) throws SQLException{
+		
+		BoardVO outVO = mainService.doSelectOne(inVO);
+		model.addAttribute("outVO",outVO);
+		model.addAttribute("inVO",inVO);
+		 
+	
+		return "main/main";
+	}
+	
+
+	
+	
 
 }

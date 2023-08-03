@@ -2,6 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
+
+<c:url value="/post/postList.do" var="freePostURL">
+  <c:param name="categoryNumber" value="10"/>
+</c:url>
+
+<c:url value="/post/postList.do" var="qnaPostURL">
+  <c:param name="categoryNumber" value="20"/>
+</c:url>
+
+<c:url value="/post/postList.do" var="postURL">
+  <c:param name="categoryNumber" value="30"/>
+</c:url>
+
 <!DOCTYPE html>
 <html>
 
@@ -38,9 +51,9 @@
               </li>
               <li>
                   <ul class="sub-menu">
-                      <li>서브메뉴3</li>
-                      <li>서브메뉴3</li>
-                      <li>서브메뉴3</li>
+                       <li><a href="${freePostURL}">자유 게시판</a></li>
+				               <li><a href="${qnaPostURL}">Q&A 게시판</a></li>
+				               <li><a href="${postURL}">공지사항</a></li>
                       <li>서브메뉴3</li>
                   </ul>
               </li>

@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<script type="text/javascript"
-  src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="../resources/js/jquery-3.7.0.js"></script>
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -66,16 +62,15 @@
   <!-- **---container End---** -->
 
 
-  <script src="js/jquery-3.7.0.js"></script>
-  <script>
-  
+    
+<script>
 $(".categorybox").click(function() {
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
+   $(this).siblings().removeClass("active");
+   $(this).addClass("active");
    // $("html, body").scrollTop($(".tab-box").height());
-    let clickTab = $(this).attr("data-tab");
-    $(".tab-box").removeClass("active");
-    $("." + clickTab).addClass("active");
+   let clickTab = $(this).attr("data-tab");
+   $(".tab-box").removeClass("active");
+   $("." + clickTab).addClass("active");
 });
 
 google.load("visualization", "1", {packages:["corechart"]});
@@ -266,12 +261,12 @@ function drawChart() {
 	originalData4.addColumn('number', 'B');
 	
 	originalData4.addRows([
-	  ['1월', 100, 500],
-	  ['2월', 110, 510],
-	  ['3월', 120, 520],
-	  ['4월', 130, 530],
-	  ['5월', 140, 540],
-	  ['6월', 150, 550],
+	  ['1월', 300, 500],
+	  ['2월', 1010, 1510],
+	  ['3월', 800, 1720],
+	  ['4월', 1300, 800],
+	  ['5월', 740, 500],
+	  ['6월', 1500, 1200],
 	]);
 	
 	let data4 = originalData4.clone();
@@ -322,5 +317,3 @@ $(window).resize(function() {
  drawChart();
 });
 </script>
-</body>
-</html>
