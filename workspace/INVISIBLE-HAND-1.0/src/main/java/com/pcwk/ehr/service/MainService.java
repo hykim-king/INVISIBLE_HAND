@@ -11,6 +11,6 @@ public interface MainService {
 	
 	PostVO doSelectOne(PostVO inVO) throws SQLException;
 	
-	List<PostVO> doRetrieve(String categorynumber) throws SQLException;
+	List<PostVO> doRetrieve(PostVO inVO) throws SQLException;
 
 }

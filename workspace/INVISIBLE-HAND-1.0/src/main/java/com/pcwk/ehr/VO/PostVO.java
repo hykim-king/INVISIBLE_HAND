@@ -18,7 +18,6 @@ public class PostVO extends DTO {
 	public PostVO() {}
 
 	
-
 	public PostVO(int postNumber, String nickname, String title, String content, String writtenDate, int likes,
 			int views, String categoryNumber) {
 		super();

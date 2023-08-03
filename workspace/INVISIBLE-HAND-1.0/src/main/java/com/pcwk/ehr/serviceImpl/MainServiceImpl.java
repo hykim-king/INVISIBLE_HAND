@@ -41,9 +41,9 @@ public class MainServiceImpl implements MainService {
 	
 	//리스트 조회 //조회수 상위 5개만
 	@Override
-	public List<PostVO> doRetrieve(String categorynumber) throws SQLException {
+	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException {
 		
-		return mainDao.doRetrieve(categorynumber);
+		return mainDao.doRetrieve(inVO);
 	}
 	
 
