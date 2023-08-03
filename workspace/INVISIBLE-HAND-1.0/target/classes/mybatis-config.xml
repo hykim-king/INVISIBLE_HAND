@@ -11,7 +11,7 @@
   
   
   <typeAliases>
-    <typeAlias type="com.pcwk.ehr.VO.BoardVO" alias="BoardVO"/>
+    <typeAlias type="com.pcwk.ehr.VO.PostVO" alias="PostVO"/>
   	<!--  
     <typeAlias type="com.pcwk.ehr.code.domain.CodeVO"   alias="CodeVO"/>
     <typeAlias type="com.pcwk.ehr.user.domain.UserVO"   alias="UserVO"/>

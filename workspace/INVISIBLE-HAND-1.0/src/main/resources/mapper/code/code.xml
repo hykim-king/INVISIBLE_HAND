@@ -8,7 +8,7 @@
 			FROM common_code_table
 			WHERE isused = 'Y'
 			  AND mastercode = #{masterCode}
-			ORDER BY codedetail
+			ORDER BY codeorder
 
 	</select>
 

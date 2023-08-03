@@ -3,15 +3,15 @@ package com.pcwk.ehr.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.ehr.VO.BoardVO;
+import com.pcwk.ehr.VO.PostVO;
 
 public interface MainDao {
 
-	int doUpdateViews(BoardVO inVO) throws SQLException;
+	int doUpdateViews(PostVO inVO) throws SQLException;
 	
-	BoardVO doSelectOne(BoardVO inVO) throws SQLException;
+	PostVO doSelectOne(PostVO inVO) throws SQLException;
 	
-	List<BoardVO> doRetrieve(BoardVO inVO) throws SQLException;
+	List<PostVO> doRetrieve(String categorynumber) throws SQLException;
 
 
 }

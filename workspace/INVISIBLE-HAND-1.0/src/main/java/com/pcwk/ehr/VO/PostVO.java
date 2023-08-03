@@ -11,7 +11,7 @@ public class PostVO extends DTO {
 	private String writtenDate; //작성일 
 	private int likes;          //추천수
 	private int views;          //조회수
-	private int categoryNumber; //카테고리 번호 (10 자유게시판, 20 QnA게시판, 30 공지게시판)
+	private String categoryNumber; //카테고리 번호 (10 자유게시판, 20 QnA게시판, 30 공지게시판)
 	
 	
 	
@@ -20,7 +20,7 @@ public class PostVO extends DTO {
 	
 
 	public PostVO(int postNumber, String nickname, String title, String content, String writtenDate, int likes,
-			int views, int categoryNumber) {
+			int views, String categoryNumber) {
 		super();
 		this.postNumber = postNumber;
 		this.nickname = nickname;
@@ -118,13 +118,13 @@ public class PostVO extends DTO {
 
 
 
-	public int getCategoryNumber() {
+	public String getCategoryNumber() {
 		return categoryNumber;
 	}
 
 
 
-	public void setCategoryNumber(int categoryNumber) {
+	public void setCategoryNumber(String categoryNumber) {
 		this.categoryNumber = categoryNumber;
 	}
 
