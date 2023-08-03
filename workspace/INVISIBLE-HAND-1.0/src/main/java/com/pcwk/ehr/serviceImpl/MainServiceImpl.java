@@ -18,21 +18,28 @@ public class MainServiceImpl implements MainService {
 	
 	//조회수 증가
 	@Override
-	public int doUpdate(BoardVO inVO) throws SQLException {
-		
-		return mainDao.doUpdate(inVO);
+	public int doUpdateViews(BoardVO inVO) throws SQLException {
+			
+		return mainDao.doUpdateViews(inVO);
 	}
 	
 	
 	//단건 조회
 	@Override
 	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return mainDao.doSelectOne(inVO);
+		
+		//조회시 조회수 증가
+		BoardVO vo = mainDao.doSelectOne(inVO);
+		
+		if(null != vo) {
+			mainDao.doUpdateViews(inVO);
+		}
+		
+		return vo;
 	}
 	
 	
-	//리스트 조회
+	//리스트 조회 //조회수 상위 5개만
 	@Override
 	public List<BoardVO> doRetrieve(BoardVO inVO) throws SQLException {
 		

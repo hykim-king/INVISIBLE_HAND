@@ -21,12 +21,11 @@ public class MainDaoImpl implements MainDao {
 	final String DOT = ".";
 	
 	@Autowired
-	SqlSessionTemplate sqlSessionTemplate; // DB 연결객체
-	
-	
-	//조회수 증가
+	SqlSessionTemplate sqlSessionTemplate;
+		
+	//조회수 증가 
 	@Override
-	public int doUpdate(BoardVO inVO) throws SQLException {
+	public int doUpdateViews(BoardVO inVO) throws SQLException {
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdate", inVO);
 	}

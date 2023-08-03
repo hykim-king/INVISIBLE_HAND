@@ -7,7 +7,7 @@ import com.pcwk.ehr.VO.BoardVO;
 
 public interface MainDao {
 
-	int doUpdate(BoardVO inVO) throws SQLException;
+	int doUpdateViews(BoardVO inVO) throws SQLException;
 	
 	BoardVO doSelectOne(BoardVO inVO) throws SQLException;
 	
