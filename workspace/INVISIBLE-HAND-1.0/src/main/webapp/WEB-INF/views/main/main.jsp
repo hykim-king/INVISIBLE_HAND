@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,19 @@
       </section>
       <section class="sec03 sec-board">커뮤니티 영역입니다
        
-      
-      
+	      <div>
+	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판</a>
+	        
+	        
+	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A</a>
+	        
+	
+	      </div>
+	      <div>
+	          <tbody id="boardTableBody">
+						<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
+						</tbody>
+	      </div>
       </section>
     </div>
     <!-- **---wrap End---** -->
@@ -53,7 +65,7 @@
     $(document).ready(function () {
       $.ajax({
         type: "GET",
-        url: "/ehr/main/doNaverSearch.do",
+        url: "${CP}/main/doNaverSearch.do",
         asyn:"true",
         dataType: "json",
         data: {
@@ -113,6 +125,50 @@
       
       
     });
+    
+    //(조회수 높은순 5개)커뮤니티 글 출력 관련 AJAX
+    $(document).ready(function() {
+        // 페이지가 로드되면 초기값 '10'으로 게시글 불러오기
+        loadBoardData('10');
+    });
+
+    function loadBoardData(categorynumber) {
+        $.ajax({
+            url: '${CP}/main/doRetrieve.do',
+            type: 'GET',
+            data: {
+                categorynumber: categorynumber
+            },
+            dataType: 'json',
+            success: function(result) {
+                // AJAX 요청이 성공했을 때 실행되는 부분
+                // result에 받아온 데이터가 들어있습니다.
+                // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성합니다.
+                updateTable(result); // 테이블 업데이트 함수 호출
+            },
+            error: function(xhr, status, error) {
+                // AJAX 요청이 실패했을 때 실행되는 부분
+                console.error(error);
+            }
+        });
+    }
+    
+    function updateTable(data) {
+        let tableBody = document.getElementById('boardTableBody');
+        tableBody.innerHTML = ''; // 테이블 내용 초기화
+
+        // 받아온 데이터를 테이블에 추가
+        data.forEach(function(item, index) {
+            let row = '<tr>' +
+                      '<td>' + item.num + '</td>' +
+                      '<td><a href="#">' + item.title + '</a></td>' +
+                      '<td>' + item.nickname + '</td>' +
+                      '<td>' + item.writtenDate + '</td>' + 
+                      '<td>' + item.views + '</td>' +
+                      '</tr>';
+            tableBody.innerHTML += row;
+        });
+    }
   </script>
 </body>
 </html>

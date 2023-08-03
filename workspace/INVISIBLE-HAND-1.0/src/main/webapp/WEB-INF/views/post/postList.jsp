@@ -5,7 +5,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%       
          PostVO vo = (PostVO)request.getAttribute("inVO");
-         int ctgNumValue = vo.getCategoryNumber();
+         String ctgNumValue = vo.getCategoryNumber();
          String title    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
          
          if ("20".equals(ctgNumValue)) {

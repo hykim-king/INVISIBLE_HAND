@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.VO.BoardVO;
+import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.dao.MainDao;
 import com.pcwk.ehr.service.MainService;
 
@@ -18,7 +18,7 @@ public class MainServiceImpl implements MainService {
 	
 	//조회수 증가
 	@Override
-	public int doUpdateViews(BoardVO inVO) throws SQLException {
+	public int doUpdateViews(PostVO inVO) throws SQLException {
 			
 		return mainDao.doUpdateViews(inVO);
 	}
@@ -26,10 +26,10 @@ public class MainServiceImpl implements MainService {
 	
 	//단건 조회
 	@Override
-	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
+	public PostVO doSelectOne(PostVO inVO) throws SQLException {
 		
 		//조회시 조회수 증가
-		BoardVO vo = mainDao.doSelectOne(inVO);
+		PostVO vo = mainDao.doSelectOne(inVO);
 		
 		if(null != vo) {
 			mainDao.doUpdateViews(inVO);
@@ -41,9 +41,9 @@ public class MainServiceImpl implements MainService {
 	
 	//리스트 조회 //조회수 상위 5개만
 	@Override
-	public List<BoardVO> doRetrieve(BoardVO inVO) throws SQLException {
+	public List<PostVO> doRetrieve(String categorynumber) throws SQLException {
 		
-		return mainDao.doRetrieve(inVO);
+		return mainDao.doRetrieve(categorynumber);
 	}
 	
 
