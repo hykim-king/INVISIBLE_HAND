@@ -2,63 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.main">
   
-   <update id="doUpdate" parameterType="BoardVO">
+  <update id="doUpdateViews" parameterType="PostVO">
       UPDATE board           
-      SET                   
-          likes   = #{likes},
-          views   = #{views},      
-      WHERE postnumber = #{postnumber}  
+      SET views   = NVL(views,0)+1   
+      WHERE postNumber = #{postNumber}
+      AND categoryNumber = #{categoryNumber}
+   
   </update>
 
-  <select id="doSelectOne" parameterType="BoardVO" resultType="BoardVO">
+  <select id="doSelectOne" parameterType="PostVO" resultType="PostVO">
     SELECT
-      postnumber
-			, author
+      postNumber
+			, nickname
 			, title
 			, content
-			, TO_CHAR(reg_dt,'YYYY-MM-DD HH24:MI:SS') writtendate
+			, TO_CHAR(writtenDate,'YYYY-MM-DD HH24:MI:SS') writtenDate
 			, likes
 			, views
-			, categorynumber
+			, categoryNumber
 		FROM board
-		WHERE postnumber = #{postnumber}
+		WHERE postNumber = #{postNumber}
+		  AND categoryNumber = #{categoryNumber}
   </select>
-
        
-  <select id="doRetrieve" parameterType="DTO" resultType="BoardVO">
+  <select id="doRetrieve" parameterType="PostVO" resultType="PostVO">
 		<![CDATA[
-			SELECT A.*,B.*
-			FROM (
-			  SELECT TT1.rnum as num,
-			         TT1.title,
-			         TT1.categorynumber,
-			         TT1.views,
-			         CASE
-			           WHEN TRUNC(TT1.writtendate) = TRUNC(SYSDATE) THEN TO_CHAR(TT1.writtendate, 'HH24:MI')
-			           ELSE TO_CHAR(TT1.writtendate, 'YYYY/MM/DD')
-			         END AS writtendate,
-			         TT1.author,
-			         TT1.postnumber
-			  FROM (
-			    SELECT ROWNUM as rnum, t1.*
-			    FROM (
-			      SELECT *
-			      FROM board
-			      WHERE categorynumber = #{categorynumber}
-			      ORDER BY views DESC, writtendate DESC
-			    ) t1
-			  ) TT1
-			  WHERE TT1.rnum <=  #{pageSize} * #{pageNo} 
-			) A
-			CROSS JOIN (
-			  SELECT COUNT(postnumber) totalCnt
-			  FROM board
-			  WHERE categorynumber = #{categorynumber}
-			) B
-			WHERE A.rnum >=  #{pageSize} * (#{pageNo} - 1) + 1 
+		SELECT A.*, B.*
+		FROM (
+		  SELECT TT1.rnum as num,
+		         TT1.title,
+		         TT1.categoryNumber,
+		         TT1.views,
+		         CASE
+		           WHEN TRUNC(TT1.writtenDate) = TRUNC(SYSDATE) THEN TO_CHAR(TT1.writtenDate, 'HH24:MI')
+		           ELSE TO_CHAR(TT1.writtenDate, 'YYYY/MM/DD')
+		         END AS writtenDate,
+		         TT1.nickname,
+		         TT1.postNumber
+		  FROM (
+		    SELECT ROWNUM as rnum, t1.*
+		    FROM (
+		      SELECT *
+		      FROM board
+		      WHERE categoryNumber = #{categoryNumber}
+		      ORDER BY views DESC, writtenDate DESC
+		    ) t1
+		  ) TT1  
+		  WHERE TT1.rnum >= 1
+		) A
+		CROSS JOIN (
+		  SELECT COUNT(postNumber) totalCnt
+		  FROM board
+		  WHERE categoryNumber = #{categoryNumber}
+		) B		
+		WHERE A.num <=5
 			]]>
-
-</select>
+  </select>
 
 
 </mapper>
