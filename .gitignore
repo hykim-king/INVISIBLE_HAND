@@ -26,6 +26,7 @@ media
 # Distribution / packaging
 .Python
 build/
+workspace/INVISIBLE-HAND-1.0/target/ 
 develop-eggs/
 dist/
 downloads/

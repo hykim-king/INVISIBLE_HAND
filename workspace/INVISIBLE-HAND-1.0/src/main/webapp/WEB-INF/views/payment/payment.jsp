@@ -5,7 +5,13 @@
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/payment.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 포트원 결제 -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- 포트원 결제 -->
 <script src="../resources/js/payment.js"></script>
 <!-- *---container Start---* -->
 <div class="h60px"></div>
@@ -22,7 +28,7 @@
         <div id="paymentBtn">
           <span>더 많은 정보를 원한다면</span>
         </div>
-        <button class="btn-hover color-11" id="payBtn">결제하기</button>
+        <button class="btn-hover color-11" id="payBtn" onclick="requestPay()">결제하기</button>
       </div> <!-- *** kakaoContent *** -->
       
     </div> <!-- *** kakaoWrap *** -->
@@ -30,19 +36,11 @@
   </div>
 </div>
 <!-- **---container End---** -->
+
+
+
+
+
 <script>
-$(function(){
-  $('#payBtn').click(function() {
-    $.ajax({
-      url:'payment/kakaopay.do',
-      dataType: 'json',
-      success:function(data) {
-        alert(data.tid);
-      },
-      error:function(error){
-        alert(error);
-      }
-    });
-  });
-});
+
 </script>
