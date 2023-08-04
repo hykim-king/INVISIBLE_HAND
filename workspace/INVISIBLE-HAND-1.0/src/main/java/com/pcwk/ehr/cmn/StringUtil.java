@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.VO.PaymentInfoVO;
 
 public class StringUtil {
 
@@ -14,8 +15,8 @@ public class StringUtil {
 	 * @param msgContents
 	 * @return json문자
 	 */
-	public static String validMessageToJson(String msgId, String msgContents) {
-		return new Gson().toJson(new MessageVO(msgId, msgContents));
+	public static String validMessageToJson(PaymentInfoVO savedVO, String msgId, String msgContents) {
+		return new Gson().toJson(new MessageVO(infoVO, msgId, msgContents));
 	}
 	
 	/**
