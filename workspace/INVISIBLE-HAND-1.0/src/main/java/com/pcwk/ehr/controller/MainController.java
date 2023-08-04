@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pcwk.ehr.VO.CmnCodeVO;
 import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.MainService;
@@ -40,6 +41,9 @@ public class MainController {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│ main()       		   │");
 		LOG.debug("└───────────────────────┘");
+		
+		//차트 기능 구현
+		
 
 		return "main/main";
 	}
@@ -71,17 +75,22 @@ public class MainController {
 		//model.addAttribute("inVO",inVO);
 		return "post/postContents";
 	}
-
+	
+	//게시글 자유게시판('10' 좋아요 순으로 5개 조회)
 	@RequestMapping(value = "main/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException {
 		
 		List<PostVO> resultList = mainService.doRetrieve(inVO);
+			
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug(resultList);
 		LOG.debug("└───────────────────────┘");
+		
 		return resultList;
-
 	}
+	
+	
+	//랭킹 기능
 
 }
