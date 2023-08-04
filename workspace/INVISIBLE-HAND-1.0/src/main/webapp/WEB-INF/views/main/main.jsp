@@ -85,7 +85,6 @@
         },
         success: function (data) {
             console.log("success data:", data); // 서버에서 반환한 JSON 데이터를 그대로 출력
-            try {
               // 서버에서 반환한 JSON 데이터를 그대로 사용
               let newsHeadlines = $("#newsHeadlines");
               let newItems = data.items;
@@ -100,14 +99,10 @@
                 console.log("newsUrl"+newsUrl);
             	   
                 // 생성한 HTML을 동적으로 추가합니다.
-                newsHeadlines.append("<li><a href='"+<c:out value='newsUrl'/>+"' target='_blank' class=link>'"+<c:out value='newsTitle'/>+"'</a></li>");
-                  
+                newsHeadlines.append("<li><a href='"+<c:out value='newsUrl'/>+"' target='_blank' class=link>'"+<c:out value='newsTitle'/>+"'</a></li>");                 
             	});
 
-        	  } catch (error) {
-        	    console.log("JSON 파싱 오류:", error);
-        	  }
-        	  noticeRollingEffect();
+             	  noticeRollingEffect();
 
         },
         error: function (xhr, status, error) {
@@ -152,18 +147,15 @@
             },
             dataType: 'json',
             success: function(result) {            
-            	 try {
+         
                 // AJAX 요청이 성공했을 때 실행되는 부분
-                // result에 받아온 데이터가 들어있습니다.
-                // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성합니다.  
+                // result에 받아온 데이터가 들어있음
+                // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성  
                 console.log("데이터를 가져옴");
                 console.log(result);
                 updateTable(result); // 테이블 업데이트 함수 호출
                 
-            	 }catch (error) {
-                     console.log("JSON 파싱 오류:", error);
-                 }
-            	 
+    
             },
             error: function(xhr, status, error) {
                 // AJAX 요청이 실패했을 때 실행되는 부분

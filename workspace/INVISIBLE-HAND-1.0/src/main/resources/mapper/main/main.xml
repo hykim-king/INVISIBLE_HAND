@@ -33,6 +33,7 @@
 		         TT1.title,
 		         TT1.categoryNumber,
 		         TT1.views,
+		         TT1.likes,
 		         CASE
 		           WHEN TRUNC(TT1.writtenDate) = TRUNC(SYSDATE) THEN TO_CHAR(TT1.writtenDate, 'HH24:MI')
 		           ELSE TO_CHAR(TT1.writtenDate, 'YYYY/MM/DD')
@@ -45,18 +46,19 @@
 		      SELECT *
 		      FROM board
 		      WHERE categoryNumber = #{categoryNumber}
-		      ORDER BY views DESC, writtenDate DESC
+		      ORDER BY likes DESC
 		    ) t1
+		       WHERE ROWNUM >= 1
 		  ) TT1  
-		  WHERE TT1.rnum >= 1
+		 WHERE rnum <=5
 		) A
 		CROSS JOIN (
 		  SELECT COUNT(postNumber) totalCnt
 		  FROM board
 		  WHERE categoryNumber = #{categoryNumber}
-		) B		
-		WHERE A.num <=5
-			]]>
+		) B	]]>
+		
+		
   </select>
 
 
