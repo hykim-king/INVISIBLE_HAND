@@ -5,8 +5,13 @@
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/payment.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- 포트원 결제 -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- 포트원 결제 -->
 <script src="../resources/js/payment.js"></script>
 <!-- *---container Start---* -->
 <div class="h60px"></div>
@@ -32,22 +37,10 @@
 </div>
 <!-- **---container End---** -->
 
-<script>
-IMP.init("impXXXXXXXXX");
 
-IMP.request_pay({
-    pg : 'kakaopay',
-    pay_method : 'card', //생략 가능
-    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
-    name : '주문명:결제테스트',
-    amount : 10000,
-    buyer_email : 'kjbv0070@gmail.com',
-    buyer_name : '강정빈',
-    buyer_tel : '010-1234-5678',
-    buyer_addr : '서울특별시 마포구 양화대로',
-    buyer_postcode : '123-456'
-}, function(rsp) { // callback 로직
-	
-  //* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
-});
+
+
+
+<script>
+
 </script>
