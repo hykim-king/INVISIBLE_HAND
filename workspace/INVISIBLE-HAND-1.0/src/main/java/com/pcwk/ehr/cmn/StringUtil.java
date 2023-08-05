@@ -15,8 +15,8 @@ public class StringUtil {
 	 * @param msgContents
 	 * @return json문자
 	 */
-	public static String validMessageToJson(PaymentInfoVO savedVO, String msgId, String msgContents) {
-		return new Gson().toJson(new MessageVO(infoVO, msgId, msgContents));
+	public static String validMessageToJson(String msgId, String msgContents) {
+		return new Gson().toJson(new MessageVO(msgId, msgContents));
 	}
 	
 	/**
