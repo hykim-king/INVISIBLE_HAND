@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pcwk.ehr">
+<mapper namespace="com.pcwk.ehr.post">
 
   <!-- 검색조건 -->
   <!-- 제목10 내용20 -->
@@ -10,7 +10,7 @@
          AND title  LIKE #{searchWord} || '%'
       </when>
       <when test=" '' != searchWord  and '20' == searchDiv  ">
-         AND contents  LIKE #{searchWord} || '%'
+         AND content  LIKE #{searchWord} || '%'
       </when>
      </choose>
   </sql> 
@@ -70,38 +70,50 @@
 
 <insert id="doSave" parameterType="PostVO">
   INSERT INTO board(
-	  postnumber, 
-	  nickname, 
-	  title, 
-	  content, 
-	  writtendate, 
-	  likes, 
-	  views, 
-	  categoryNumber
-	)VALUES(
-	  #{postNumber}, 
-	  #{nickname}, 
-	  #{title}, 
-	  #{content}, 
-	  #{writtenDate}, 
-	  #{likes}, 
-	  #{views}, 
-	  #{categoryNumber}
-	); 
+    postnumber, 
+    nickname, 
+    title, 
+    content, 
+    writtendate, 
+    likes, 
+    views, 
+    categoryNumber
+  )VALUES(
+    #{postNumber}, 
+    #{nickname}, 
+    #{title}, 
+    #{content}, 
+    #{writtenDate}, 
+    #{likes}, 
+    #{views}, 
+    #{categoryNumber}
+  ); 
 
 </insert>
 
-
+<select id="doSelectOne" parameterType="PostVO" resultType="PostVO">
+  SELECT
+    postnumber
+    , nickname
+    , title
+    , content
+    , TO_CHAR(writtendate,'YYYY-MM-DD HH24:MI:SS') writtendate
+    , likes
+    , views
+    , categorynumber
+  FROM board
+  WHERE postnumber = #{postNumber}
+</select>
 
 <!--  
 <select id="doRetrieve" parameterType="" resultType="CodeVO">
-		SELECT t2.code,
-		       t2.code_nm
-		FROM cmn_code t1, cmn_code_detail t2
-		WHERE t1.code_id = t2.code_id
-		AND   T2.use_yn  = 'Y'
-		AND   t2.code_id = #{codeId}
-		ORDER BY t2.code
+    SELECT t2.code,
+           t2.code_nm
+    FROM cmn_code t1, cmn_code_detail t2
+    WHERE t1.code_id = t2.code_id
+    AND   T2.use_yn  = 'Y'
+    AND   t2.code_id = #{codeId}
+    ORDER BY t2.code
 </select>
 -->
 </mapper>

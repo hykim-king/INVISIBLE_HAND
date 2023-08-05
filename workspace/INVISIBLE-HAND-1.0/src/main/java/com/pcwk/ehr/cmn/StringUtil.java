@@ -20,6 +20,16 @@ public class StringUtil {
 	}
 	
 	/**
+	 * Backand메시지 처리 
+	 * @param msgId
+	 * @param msgContents
+	 * @return json문자
+	 */
+	public static String validMessageToJson(String msgId, String msgContents) {
+		return new Gson().toJson(new MessageVO(msgId, msgContents));
+	}
+	
+	/**
 	 * 
 	 * @param maxNum :  총글수
 	 * @param currPageNo : 현제페이지

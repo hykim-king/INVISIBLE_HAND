@@ -14,7 +14,7 @@ import com.pcwk.ehr.dao.PostDao;
 
 @Repository
 public class PostDAOImpl implements PostDao, PcwkLoger {
-	final String NAMESPACE = "com.pcwk.ehr";
+	final String NAMESPACE = "com.pcwk.ehr.post";
 	final String DOT       = ".";
 
 	@Autowired
