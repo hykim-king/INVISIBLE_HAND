@@ -60,21 +60,21 @@ public class MainController {
 		return naverSearchService.doNaverSearch(query);
 	}
 
-	// 단건조회
-	@RequestMapping(value = {"/post/doSelectOne.do", "/main/doSelectOne.do"})
-	public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
-
-		// 세션에 nickname을 "MJ"로 설정합니다.
-        httpSession.setAttribute("nickname", "MJ");
-		
-        PostVO outVO = mainService.doSelectOne(inVO);
-		
-		mainService.doUpdateViews(inVO);
-		model.addAttribute("outVO",outVO);
-		
-		//model.addAttribute("inVO",inVO);
-		return "post/postContents";
-	}
+	/*
+	 * // 단건조회
+	 * 
+	 * @RequestMapping(value = {"/post/doSelectOne.do", "/main/doSelectOne.do"})
+	 * public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession)
+	 * throws SQLException {
+	 * 
+	 * // 세션에 nickname을 "MJ"로 설정합니다. httpSession.setAttribute("nickname", "MJ");
+	 * 
+	 * PostVO outVO = mainService.doSelectOne(inVO);
+	 * 
+	 * mainService.doUpdateViews(inVO); model.addAttribute("outVO",outVO);
+	 * 
+	 * //model.addAttribute("inVO",inVO); return "post/postContents"; }
+	 */
 	
 	//게시글 자유게시판('10' 좋아요 순으로 5개 조회)
 	@RequestMapping(value = "main/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
