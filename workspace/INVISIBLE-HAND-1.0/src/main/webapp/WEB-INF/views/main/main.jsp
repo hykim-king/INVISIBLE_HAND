@@ -23,12 +23,11 @@
   <div class="container-1400 min-100vh con-main">
     <div class="wrap-1000">
       <section class="sec01 sec-news">
-        뉴스 헤드라인 영역입니다
+                     뉴스 헤드라인 영역입니다
         <div class="news-slide">
           <div class="news">
             <ul class="rolling" id="newsHeadlines">
               <!-- 여기에 동적으로 헤드라인이 추가됩니다. -->
-
             </ul>
           </div>
         </div>
@@ -36,20 +35,18 @@
       
       <section class="sec02 sec-chart">차트 영역입니다
 	      <div class="tab-box tab1 active">
-	        <div id="line_chart1"></div>
+	        <div id="line_chart1" >
+	        </div>
 	      </div>
       </section>
       
       <section class="sec03 sec-board">커뮤니티 영역입니다
        
 	      <div>
-	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판</a>
-	        
-	        
-	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A</a>
-	        
-	
+	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판</a>	        	        
+	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A</a>	     
 	      </div>
+	      
 	      <div>
 		       <table>
 		          <thead>
@@ -64,7 +61,7 @@
 		          </thead>
 		          <tbody id="tableBody">
 							<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-							</tbody>
+							</tbody>							
 						</table>	
 	      </div>
       </section>
@@ -87,6 +84,8 @@
   <!-- **---container End---** -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script>
+  
+    //뉴스 관련
     $(document).ready(function () {
       $.ajax({
         type: "GET",
@@ -146,7 +145,7 @@
       
     });
     
-    //(조회수 높은순 5개)커뮤니티 글 출력 관련 AJAX
+    //(좋아요 높은순 5개)커뮤니티 글 출력 관련
     $(document).ready(function() {
         // 페이지가 로드되면 초기값 '10'으로 게시글 불러오기
         loadBoardData('10');
@@ -176,7 +175,7 @@
                 console.error(error);
             }
         });
-    }
+    };
     
     function updateTable(data) {
         let tableBody = document.getElementById('tableBody');
@@ -199,25 +198,51 @@
         // 기존 tbody 엘리먼트를 새로운 tbody로 교체
         tableBody.parentNode.replaceChild(newTableBody, tableBody);
     }
+   }); 
     
+    //차트 관련
+    $(document).ready(function () {
+    function loadChartData() {
+        $.ajax({
+            url: '${CP}/main/chartGraph.do',
+            type: 'GET',
+            //data: {                      },
+            dataType: 'json',
+            success: function(data) {            
+                console.log("데이터를 가져옴");
+                console.log(data);
+                let chartData = [];
+                chartData.push(["Year", "one", "two", "three"]);
+                for (let i = 0; i < data.length; i++) {
+                    let row = [];
+                    row.push(data[i][1]); // Year
+                    row.push(data[i][2]); // one
+                    row.push(data[i][3]); // two
+                    row.push(data[i][4]); // three
+                    chartData.push(row);
+                }
+                console.log(chartData);
+                drawChart(chartData);
+                                
     
-    //구글 차트 api?
-    google.load("visualization", "1", {packages:["corechart"]});
+            },
+            error: function(xhr, status, error) {
+                // AJAX 요청이 실패했을 때 실행되는 부분
+                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                console.error(error);
+            }
+        });
+    }
+    
+    //구글 차트 api
     google.charts.load('current', {'packages':['corechart']});
-    google.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(loadChartData);
     
-    //차트(나중에 삭제함)
-    function drawChart() {
-    	  const originalData1 = new google.visualization.arrayToDataTable([
-    	      ['Year', 'one', 'two','three'],
-    	      ['2019', 1030, 540,600],
-    	      ['2020', 980, 420,700],
-    	      ['2021', 1170, 460,800],
-    	      ['2022', 660, 1120,900],
-    	      ['2023', 1030, 540,1000]
-    	    ]);
+    
+    function drawChart(data) {
+    	  const originalData1 = new google.visualization.arrayToDataTable(data);
 
-    	  let data1 = originalData1.clone();
+    	  let chartData1 = originalData1.clone();
     	    
     	  let options1 = {
     	    title: '차트1',
@@ -250,24 +275,33 @@
     	    if (target.targetID.match(/legendentry#\d+/)) {
     	      let index = parseInt(target.targetID.slice(12));
     	  
-    	      for (let i = 0; i < data1.getNumberOfRows(); i++) {
-    	        let value = data1.getValue(i, index + 1);
+    	      for (let i = 0; i < chartData1.getNumberOfRows(); i++) {
+    	        let value = chartData1.getValue(i, index + 1);
     	  
     	        if (value === null) {
-    	          data1.setValue(i, index + 1, originalData1.getValue(i, index + 1));
+    	          chartData1.setValue(i, index + 1, originalData1.getValue(i, index + 1));
     	        } else {
-    	          data1.setValue(i, index + 1, null);
+    	          chartData1.setValue(i, index + 1, null);
     	        }
     	      }
     	  
-    	      chart1.draw(data1, options1);
+    	      chart1.draw(chartData1, options1);
     	    }
     	  });
     	  
-    	  chart1.draw(data1, options1);
+    	  // 이벤트 리스너 추가
+          google.visualization.events.addListener(chart1, 'click', function(event) {
+              if (!event.targetID.match(/legendentry#\d+/)) {
+                  var newUrl = '/ehr/chart/chart.do';
+                  window.location.href = newUrl;
+              }
+
+          });
+    	  
+    	  chart1.draw(chartData1, options1);
     
     }
-  });
+    });
     
     
 

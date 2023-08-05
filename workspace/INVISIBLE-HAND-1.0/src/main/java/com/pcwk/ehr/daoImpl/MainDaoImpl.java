@@ -44,5 +44,6 @@ public class MainDaoImpl implements MainDao {
 		return sqlSessionTemplate.selectList(NAMESPACE + DOT + "doRetrieve", inVO);
 	}
 	
+	
 }
 

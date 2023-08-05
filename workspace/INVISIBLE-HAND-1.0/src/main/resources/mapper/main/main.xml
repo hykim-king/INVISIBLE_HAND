@@ -10,19 +10,17 @@
    
   </update>
 
-  <select id="doSelectOne" parameterType="PostVO" resultType="PostVO">
-    SELECT
-      postNumber
-			, nickname
-			, title
-			, content
-			, TO_CHAR(writtenDate,'YYYY-MM-DD HH24:MI:SS') writtenDate
-			, likes
-			, views
-			, categoryNumber
-		FROM board
-		WHERE postNumber = #{postNumber}
-		  AND categoryNumber = #{categoryNumber}
+  <select id="chartGraph" parameterType="ChartVO" resultType="ChartVO">
+			SELECT
+			    chartseq,
+			    year,
+			    one,
+			    two,
+			    three
+			FROM
+			    chart
+			ORDER BY chartseq
+
   </select>
        
   <select id="doRetrieve" parameterType="PostVO" resultType="PostVO">
