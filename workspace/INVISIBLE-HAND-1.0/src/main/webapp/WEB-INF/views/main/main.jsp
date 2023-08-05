@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- 추가 나중에 필요 없을 때 삭제 -->
+<link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
+<link rel="stylesheet" href="../resources/css/common.css">
+<link rel="stylesheet" href="../resources/css/chart.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="../resources/js/jquery-3.7.0.js"></script>
+<!--  -->
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
@@ -25,8 +33,13 @@
           </div>
         </div>
       </section>
+      
       <section class="sec02 sec-chart">차트 영역입니다
+	      <div class="tab-box tab1 active">
+	        <div id="line_chart1"></div>
+	      </div>
       </section>
+      
       <section class="sec03 sec-board">커뮤니티 영역입니다
        
 	      <div>
@@ -171,10 +184,10 @@
         
         // 받아온 데이터를 테이블에 추가
         data.forEach(function(item, index) {
-        	 
+        	      	       	 
             let row = '<tr>' +
                       '<td>' + item.num + '</td>' +
-                      '<td><a href="#">' + item.title + '</a></td>' +
+                      '<td><a href="${CP}/post/doSelectOne.do?categoryNumber=' + item.categoryNumber + '&postNumber=' + item.postNumber + '">' + item.title + '</a></td>' +                     
                       '<td>' + item.nickname + '</td>' +
                       '<td>' + item.writtenDate + '</td>' + 
                       '<td>' + item.views + '</td>' +
@@ -186,7 +199,78 @@
         // 기존 tbody 엘리먼트를 새로운 tbody로 교체
         tableBody.parentNode.replaceChild(newTableBody, tableBody);
     }
+    
+    
+    //구글 차트 api?
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.charts.load('current', {'packages':['corechart']});
+    google.setOnLoadCallback(drawChart);
+    
+    //차트(나중에 삭제함)
+    function drawChart() {
+    	  const originalData1 = new google.visualization.arrayToDataTable([
+    	      ['Year', 'one', 'two','three'],
+    	      ['2019', 1030, 540,600],
+    	      ['2020', 980, 420,700],
+    	      ['2021', 1170, 460,800],
+    	      ['2022', 660, 1120,900],
+    	      ['2023', 1030, 540,1000]
+    	    ]);
+
+    	  let data1 = originalData1.clone();
+    	    
+    	  let options1 = {
+    	    title: '차트1',
+    	    pointSize: 15,
+    	    width : 1000,
+    	    height : 500,
+    	    titleTextStyle: { color: 'black' },
+    	    hAxis: {
+    	        textStyle: { fontSize: 15, color: 'black' },
+    	        baselineColor: 'black'
+    	    },
+    	    vAxis: {
+    	        title: 'title',
+    	        ticks: [0, 500, 1000, 1500, 2000],
+    	        format: '#,###',
+    	    },
+    	    legend: {
+    	      textStyle: { position: 'top', fontSize: 13, color: 'black' },
+    	    },
+    	    series: {
+    	        0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
+    	        1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true }
+    	    }
+    	  };
+
+    	  let chart1 = new google.visualization.LineChart(document.getElementById('line_chart1'));
+
+    	  // 이벤트 리스너 추가
+    	  google.visualization.events.addListener(chart1, 'click', function(target) {
+    	    if (target.targetID.match(/legendentry#\d+/)) {
+    	      let index = parseInt(target.targetID.slice(12));
+    	  
+    	      for (let i = 0; i < data1.getNumberOfRows(); i++) {
+    	        let value = data1.getValue(i, index + 1);
+    	  
+    	        if (value === null) {
+    	          data1.setValue(i, index + 1, originalData1.getValue(i, index + 1));
+    	        } else {
+    	          data1.setValue(i, index + 1, null);
+    	        }
+    	      }
+    	  
+    	      chart1.draw(data1, options1);
+    	    }
+    	  });
+    	  
+    	  chart1.draw(data1, options1);
+    
+    }
   });
+    
+    
+
   </script>
 </body>
 </html>
