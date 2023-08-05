@@ -118,19 +118,18 @@ public class PostController {
 	public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
 		//MemberVO어떻게 작성하셨는지 보기
 	    //닉네임을 Session에서 추출 
-//		MemberVO memberVO = (MemberVO) httpSession.getAttribute("nickname");
+//		MemberVO memberVO = (MemberVO) httpSession.getAttribute("nickName");
 //		LOG.debug("│memberVO                          │" + memberVO);
-//		inVO.setNickname(memberVO.getNickname());
+//		inVO.setNickname(memberVO.getNickName());
 		
 		// 세션에 nickname을 "MJ"로 설정합니다.
-        httpSession.setAttribute("nickname", "MJ");
+		//inVO.setNickname("MJ");
 		
 		PostVO outVO = postService.doSelectOne(inVO);
 		
-		postService.doUpdateViews(outVO);
+		//postService.doUpdateViews(outVO);
 		model.addAttribute("outVO",outVO);
-		
-		//model.addAttribute("inVO",inVO);
+		model.addAttribute("inVO",inVO);
 
 		return "post/postContents";
 	}
@@ -170,10 +169,11 @@ public class PostController {
 		List<CmnCodeVO> searchList = cmnCodeService.doSearch(cmnCodeVO);
 		model.addAttribute("searchList", searchList);
 	
-		// 코드조회: 페이지 사이즈
-		cmnCodeVO.setMasterCode("CMN_PAGE_SIZE");
-		List<CmnCodeVO> pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
-		model.addAttribute("pageSizeList", pageSizeList);
+		/*
+		 * // 코드조회: 페이지 사이즈 cmnCodeVO.setMasterCode("CMN_PAGE_SIZE"); List<CmnCodeVO>
+		 * pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
+		 * model.addAttribute("pageSizeList", pageSizeList);
+		 */
 	
 		List<PostVO> list = postService.doRetrieve(inVO);
 		model.addAttribute("list", list);
@@ -207,6 +207,7 @@ public class PostController {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   postContents()      │");
 		LOG.debug("└───────────────────────┘");
+		
 		
 		return "post/postContents";
 	}
