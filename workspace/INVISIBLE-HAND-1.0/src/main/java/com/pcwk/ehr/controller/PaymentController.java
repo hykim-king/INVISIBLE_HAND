@@ -1,5 +1,7 @@
 package com.pcwk.ehr.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.service.MemberService;
 import com.pcwk.ehr.service.PaymentInfoService;
 
@@ -26,11 +29,16 @@ public class PaymentController {
 	
 
 	@RequestMapping(value = "/payment_view.do")
-	public String payment(Model model, HttpSession session) {
+	public String payment(Model model, MemberVO inVO
+			, HttpSession session) throws ClassNotFoundException, SQLException {
 		lg.debug("┌───────────────────────┐");
 		lg.debug("│   payment()           │");
 		lg.debug("└───────────────────────┘");
-
+		
+		MemberVO users = memberService.get(inVO);
+		
+		model.addAttribute("users", users);
+		
 		return "payment/payment_view";
 	}
 
