@@ -49,7 +49,7 @@
   <!-- payment 폴더 -->
   <definition name="payment/*" extends="base-definition">
      <put-attribute name="title" value="보이지 않는 손"/>
-     <put-attribute name="body"  value="/WEB-INF/views/payment/{1}.jsp"/>
+     <put-attribute name="body" value="/WEB-INF/views/payment/{1}.jsp"/>
   </definition> 
   
   <!-- post 폴더 -->

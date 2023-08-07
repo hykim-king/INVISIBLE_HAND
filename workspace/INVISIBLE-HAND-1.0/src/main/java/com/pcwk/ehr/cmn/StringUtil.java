@@ -5,19 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.VO.PaymentInfoVO;
 
 public class StringUtil {
 
-	/**
-	 * Backand메시지 처리 
-	 * @param msgId
-	 * @param msgContents
-	 * @return json문자
-	 */
-	public static String validMessageToJson(PaymentInfoVO savedVO, String msgId, String msgContents) {
-		return new Gson().toJson(new MessageVO(infoVO, msgId, msgContents));
-	}
 	
 	/**
 	 * Backand메시지 처리 
