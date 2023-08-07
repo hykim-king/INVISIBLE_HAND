@@ -29,8 +29,8 @@ public class PaymentController {
 	
 
 	@RequestMapping(value = "/payment_view.do")
-	public String payment(Model model, MemberVO inVO
-			, HttpSession session) throws ClassNotFoundException, SQLException {
+	public String payment(Model model, MemberVO inVO,
+			HttpSession session) throws ClassNotFoundException, SQLException {
 		lg.debug("┌───────────────────────┐");
 		lg.debug("│   payment()           │");
 		lg.debug("└───────────────────────┘");
