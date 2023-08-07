@@ -41,10 +41,10 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 		PostVO vo = dao.doSelectOne(inVO);
 		
 		if(null != vo) {
-			dao.doUpdateViews(inVO);
+			dao.doUpdateViews(vo);
 		}
-		
 		return vo;
+
 	}
 
 	@Override
