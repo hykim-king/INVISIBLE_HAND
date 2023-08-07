@@ -1,21 +1,3 @@
-//$.ajax({
-//	type : "POST",
-//	url : "/payment/payment_info.do",
-//	dataType : "json",
-//	success : function(data) {
-//		// DB에서 가져온 데이터를 활용하여 IMP.request_pay 함수 호출
-//		console.log(data); // 가져온 데이터 확인
-//		var email = data.email;
-//		var name = data.memberName;
-//		var tel = data.tel;
-//		
-//		requestPay(email, name, tel); // 변수로 저장된 데이터를 인자로 전달
-//	},
-//	error : function(xhr, status, error) {
-//		console.log("API Error occurred: ", error);
-//	}
-//});
-
 var IMP = window.IMP;
 IMP.init("imp77248336"); // 가맹점 식별코드
 
@@ -27,16 +9,16 @@ var milliseconds = today.getMilliseconds();
 var makeMerchantUid = hours + minutes + seconds + milliseconds;
 
 //model.attribute("vo",memberVO);
-function requestPay(email, name, tel) {
+function requestPay() {
 	IMP.request_pay({
 		pg : 'kakaopay.TC0ONETIME', // 결제할 지점 이름(kcp)
 		pay_method : 'card', // 결제 방법
 		merchant_uid : "IMP" + makeMerchantUid, // 주문번호
 		name : '구독(1개월)', // 구매할 상품명
 		amount : 100, // 구매할 가격
-		buyer_email : email,// 소비자 이메일
-		buyer_name : name, // 소비자 이름
-		buyer_tel : tel // 소비자 전화번호
+		buyer_email : "email",// 소비자 이메일
+		buyer_name : "name", // 소비자 이름
+		buyer_tel : "010-0000-0000" // 소비자 전화번호
 	}, function(data) {
 		if (data.success) {
 			var msg = "결제가 완료되었습니다!";
@@ -48,7 +30,7 @@ function requestPay(email, name, tel) {
 
 			console.log("성공!");
 			
-			$.ajax({
+			/*$.ajax({
 			 type : "POST"
 			 , url : "/payment/payment_info.do"
 			 , data : {
@@ -56,7 +38,7 @@ function requestPay(email, name, tel) {
 			 	, "email" : data.buyer_email
 			 	, "memberName" : data.buyer_name
 					, "phoneNum" : data.buyer_tel} 
-			 });
+			 });*/
 			
 			document.location.href = "/ehr/main/main.do";
 		} else {

@@ -35,9 +35,9 @@ public class PaymentController {
 		lg.debug("│   payment()           │");
 		lg.debug("└───────────────────────┘");
 		
-		MemberVO users = memberService.get(inVO);
-		
-		model.addAttribute("users", users);
+//		MemberVO users = memberService.get(inVO);
+//		
+//		model.addAttribute("users", users);
 		
 		return "payment/payment_view";
 	}
