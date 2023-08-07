@@ -7,7 +7,8 @@
 <title>Redirect URI</title>
 </head>
 <body>
-	<a href="#0" id="kakaoLogout">로그아웃</a> |
+	<a href="#0" id="kakaoLogout">로그아웃</a>
+	<span> | </span>
 	<a href="#0" id="secession">탈퇴</a>
 
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -21,10 +22,11 @@
 				console.log('Not logged in.');
 				return;
 			}
-			Kakao.Auth.logout(function(response) {
-				alert(response + ' logout');
-				window.location.href = 'http://localhost:8080/ehr/resources/kakaoLogin/kakao_login_view.html'
-			});
+			Kakao.Auth
+					.logout(function(response) {
+						alert(response + ' 로그아웃 되었습니다.');
+						window.location.href = 'http://localhost:8080/ehr/resources/kakaoLogin/kakao_login_view.html'
+					});
 		};
 
 		function secession() {
