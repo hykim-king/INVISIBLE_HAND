@@ -102,7 +102,7 @@
               let newItems = data.items;
               
               
-              // data를 배열로 가정하고 forEach 메서드를 이용하여 각 뉴스 아이템에서 헤드라인과 URL을 추출하여 HTML로 구성합니다.
+              // data를 배열로 가정하고 forEach 메서드를 이용하여 각 뉴스 아이템에서 헤드라인과 URL을 추출하여 HTML로 구성
               newItems.forEach(function (item) {
                   let newsTitle = (item.title).replace(/<\/?b>/g, ''); //볼드체 제거                    
                   let newsUrl = item.link;
@@ -110,7 +110,7 @@
                 console.log("newsTitle"+newsTitle);
                 console.log("newsUrl"+newsUrl);
             	   
-                // 생성한 HTML을 동적으로 추가합니다.
+                // 생성한 HTML을 동적으로 추가
                 newsHeadlines.append("<li><a href='"+<c:out value='newsUrl'/>+"' target='_blank' class=link>'"+<c:out value='newsTitle'/>+"'</a></li>");                 
             	});
 
