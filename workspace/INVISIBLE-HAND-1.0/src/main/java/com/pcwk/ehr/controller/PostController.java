@@ -3,6 +3,7 @@ package com.pcwk.ehr.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSessionException;
@@ -22,6 +23,7 @@ import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
+import com.pcwk.ehr.service.MemberService;
 import com.pcwk.ehr.service.PostService;
 
 @Controller("postController")
@@ -33,6 +35,9 @@ public class PostController {
 	
 	@Autowired
 	CmnCodeService cmnCodeService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	public PostController() {}
 	
@@ -132,11 +137,20 @@ public class PostController {
 	}
 	
 	@RequestMapping(value = "/postList.do")
-	public String postList(PostVO inVO, Model model) throws SQLException {
+	public String postList(PostVO inVO, Model model, HttpServletRequest request) throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   postList()          │");
 		LOG.debug("└───────────────────────┘");
 		
+		 HttpSession session = request.getSession();
+	     //PostVO user = (PostVO) session.getAttribute("user");
+	     //if (user != null) {
+	         // 닉네임 세션에 저장
+	     session.setAttribute("nickname", "mj"); //mj->user.getNickName
+	     //}
+	        LOG.debug("┌───────────────────────┐");
+	 		LOG.debug("│   nickname:           │"+session.getAttribute("nickname"));
+	 		LOG.debug("└───────────────────────┘");
 		
 		// page번호 초기값 1
 		if (null != inVO && inVO.getPageNo() == 0) {
@@ -195,6 +209,8 @@ public class PostController {
 		LOG.debug("│inVO                          │" + inVO);
 		LOG.debug("└──────────────────────────────┘");
 		model.addAttribute("inVO", inVO);
+		
+		
 		
 		return "post/postReg";
 	}
