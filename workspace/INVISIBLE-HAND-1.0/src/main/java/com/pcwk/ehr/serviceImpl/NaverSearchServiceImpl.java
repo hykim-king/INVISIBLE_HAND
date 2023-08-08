@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.service.NaverSearchService;
 
-@Service("naverSearchServiceImpl")
+@Service
 public class NaverSearchServiceImpl implements NaverSearchService {
 
 //	final Logger LOG = LogManager.getLogger(getClass());

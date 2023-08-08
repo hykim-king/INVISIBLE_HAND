@@ -13,12 +13,15 @@
   
   <typeAliases>
     <typeAlias type="com.pcwk.ehr.VO.PostVO" alias="PostVO"/>
-  	<!--  
+    <typeAlias alias="PaymentInfoVO" type="com.pcwk.ehr.VO.PaymentInfoVO"/>
+  	<typeAlias type="com.pcwk.ehr.VO.CmnCodeVO"   alias="CmnCodeVO"/>
+  	<!--
     <typeAlias type="com.pcwk.ehr.code.domain.CodeVO"   alias="CodeVO"/>
     <typeAlias type="com.pcwk.ehr.user.domain.UserVO"   alias="UserVO"/>
     <typeAlias type="com.pcwk.ehr.user.domain.LevelPerMemberVO" alias="LevelPerMemberVO"/>
     -->   
      <typeAlias type="com.pcwk.ehr.VO.MemberVO" alias="MemberVO"/>
+     <typeAlias type="com.pcwk.ehr.VO.ChartVO" alias="ChartVO"/>
      <typeAlias type="com.pcwk.ehr.cmn.DTO" alias="DTO"/>
   </typeAliases>
 

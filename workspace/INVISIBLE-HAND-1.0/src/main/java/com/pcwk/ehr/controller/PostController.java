@@ -116,22 +116,18 @@ public class PostController {
 	
 	@RequestMapping("/doSelectOne.do")
 	public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
-		//MemberVO어떻게 작성하셨는지 보기
-	    //닉네임을 Session에서 추출 
-//		MemberVO memberVO = (MemberVO) httpSession.getAttribute("nickname");
-//		LOG.debug("│memberVO                          │" + memberVO);
-//		inVO.setNickname(memberVO.getNickname());
-		
-		// 세션에 nickname을 "MJ"로 설정합니다.
-        httpSession.setAttribute("nickname", "MJ");
-		
+
 		PostVO outVO = postService.doSelectOne(inVO);
 		
-		postService.doUpdateViews(outVO);
 		model.addAttribute("outVO",outVO);
+		model.addAttribute("inVO",inVO);
 		
-		//model.addAttribute("inVO",inVO);
-
+		postService.doUpdateViews(outVO);
+		
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   doSelectOne()       │");
+		LOG.debug("│   outVO()             │"+outVO);
+		LOG.debug("└───────────────────────┘");
 		return "post/postContents";
 	}
 	
@@ -170,10 +166,11 @@ public class PostController {
 		List<CmnCodeVO> searchList = cmnCodeService.doSearch(cmnCodeVO);
 		model.addAttribute("searchList", searchList);
 	
-		// 코드조회: 페이지 사이즈
-		cmnCodeVO.setMasterCode("CMN_PAGE_SIZE");
-		List<CmnCodeVO> pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
-		model.addAttribute("pageSizeList", pageSizeList);
+		/*
+		 * // 코드조회: 페이지 사이즈 cmnCodeVO.setMasterCode("CMN_PAGE_SIZE"); List<CmnCodeVO>
+		 * pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
+		 * model.addAttribute("pageSizeList", pageSizeList);
+		 */
 	
 		List<PostVO> list = postService.doRetrieve(inVO);
 		model.addAttribute("list", list);
@@ -202,11 +199,13 @@ public class PostController {
 		return "post/postReg";
 	}
 	
+	
 	@RequestMapping(value = "/postContents.do")
 	public String postContents() {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   postContents()      │");
 		LOG.debug("└───────────────────────┘");
+		
 		
 		return "post/postContents";
 	}

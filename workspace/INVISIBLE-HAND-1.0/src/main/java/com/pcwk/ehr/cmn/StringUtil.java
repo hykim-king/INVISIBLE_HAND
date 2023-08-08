@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 public class StringUtil {
 
+	
 	/**
 	 * Backand메시지 처리 
 	 * @param msgId
