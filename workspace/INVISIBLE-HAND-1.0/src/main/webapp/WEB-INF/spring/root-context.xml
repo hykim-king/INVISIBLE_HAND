@@ -18,6 +18,8 @@
 	  </bean>
   </mvc:interceptors>
   
+
+  
   <!-- LocaleResolver 등록, id="localeResolver" 고정 -->
   <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
   

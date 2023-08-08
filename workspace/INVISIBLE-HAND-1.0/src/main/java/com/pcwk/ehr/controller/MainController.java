@@ -3,11 +3,13 @@ package com.pcwk.ehr.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.JsonArray;
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.PostVO;
+import com.pcwk.ehr.VO.RankVO;
 import com.pcwk.ehr.service.ChartService;
-import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.MainService;
 import com.pcwk.ehr.service.NaverSearchService;
 
@@ -30,22 +32,16 @@ public class MainController {
 	NaverSearchService naverSearchService;
 
 	@Autowired
-	MainService mainService;
-	
-	@Autowired
-	CmnCodeService cmnCodeService;
+	MainService mainService;	
 	
 	@Autowired
 	ChartService chartService;
-
+	
 	@RequestMapping(value = "main/main.do")
-	public String main() {
+	public String main() throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│ main()       		   │");
 		LOG.debug("└───────────────────────┘");
-		
-		
-		
 
 		return "main/main";
 	}
@@ -107,7 +103,15 @@ public class MainController {
 		return jsonString;
 	}
 	
-	//랭킹 구현
 	
+	//랭킹
+	@RequestMapping(value="main/Rank.do",method = RequestMethod.POST
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Integer> Rank(RankVO inVO) {
+		return null;
+		
+	}
+	//랭킹 목록 score 증가 구현(my 기업 솔루션에서 업종 선택하여 분석시 +1 하도록 로직 작성)
 
 }
