@@ -40,6 +40,10 @@
 </div>
 <script>
 function paymentReady() {
+    var email = '${session.getAttribute("email")}';
+    const name = '${session.getAttribute("memberName")}';
+    const phoneNum = '<%=session.getAttribute("phoneNum")%>';
+
     var today = new Date();
     var hours = today.getHours(); // 시
     var minutes = today.getMinutes(); // 분
@@ -55,8 +59,8 @@ function paymentReady() {
       merchant_uid : "IMP" + makeMerchantUid, // 주문번호
       name : '구독(1개월)', // 구매할 상품명
       amount : 100, // 구매할 가격
-      buyer_email : "kkk@gmail.com",// 소비자 이메일
-      buyer_name : "kkk", // 소비자 이름
+      buyer_email : email,// 소비자 이메일
+      buyer_name : name, // 소비자 이름
       // buyer_tel : phoneNum // 소비자 전화번호
     }, function(data) {
       if (data.success) {

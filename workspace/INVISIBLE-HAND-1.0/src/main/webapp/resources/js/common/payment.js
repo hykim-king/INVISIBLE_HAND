@@ -1,6 +1,6 @@
 function paymentReady() {
-    var email = '<%=(String) session.getAttribute("email")%>';
-    const name = '<%=session.getAttribute("memberName")%>';
+    var email = '${session.getAttribute("email")}';
+    const name = '${session.getAttribute("memberName")}';
     const phoneNum = '<%=session.getAttribute("phoneNum")%>';
 
     var today = new Date();
