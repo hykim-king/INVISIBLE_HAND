@@ -29,7 +29,7 @@
 					<span>더 많은 정보를 원한다면</span>
 				</div>
 				<button class="btn-hover color-11" id="payBtn"
-					onclick="requestPay()">결제하기</button>
+					onclick="paymentReady()">결제하기</button>
 			</div>
 			<!-- *** kakaoContent *** -->
 
