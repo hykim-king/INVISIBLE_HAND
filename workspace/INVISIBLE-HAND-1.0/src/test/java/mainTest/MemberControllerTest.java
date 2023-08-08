@@ -61,11 +61,11 @@ public class MemberControllerTest {
 		LOG.debug("└──────────────────────────────┘");
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
-//		users = Arrays.asList(new MemberVO("k01", "1234", 1, "one", "test01@gmail.com", "k01", "날짜X", "날짜X")
-//				, new MemberVO("k02", "1234", 1, "two", "test01@gmail.com", "k02", "날짜X", "날짜X")
-//				, new MemberVO("k03", "1234", 1, "three", "test01@gmail.com", "k03", "날짜X", "날짜X")
-//				, new MemberVO("k04", "1234", 1, "four", "test01@gmail.com", "k04", "날짜X", "날짜X")
-//				, new MemberVO("k05", "1234", 1, "five", "test01@gmail.com", "k05", "날짜X", "날짜X"));
+		users = Arrays.asList(new MemberVO("k01", "1234", 1, "one", "test01@gmail.com", "k01", "날짜X", "날짜X")
+				, new MemberVO("k02", "1234", 1, "two", "test01@gmail.com", "k02", "날짜X", "날짜X")
+				, new MemberVO("k03", "1234", 1, "three", "test01@gmail.com", "k03", "날짜X", "날짜X")
+				, new MemberVO("k04", "1234", 1, "four", "test01@gmail.com", "k04", "날짜X", "날짜X")
+				, new MemberVO("k05", "1234", 1, "five", "test01@gmail.com", "k05", "날짜X", "날짜X"));
 
 		search = new MemberVO();
 
