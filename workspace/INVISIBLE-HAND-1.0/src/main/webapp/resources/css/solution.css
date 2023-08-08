@@ -1,15 +1,150 @@
 
 
-body{
+/* Q_00 */
 
-    font-family: "Roboto", sans-serif;
+.Q_00{
+    position: relative;
+    height: 100vh;
+}
+.pop-que{
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    box-shadow: 1px 2px 3px 2px #dbdbdb6c;
+
+    padding: 30px;
 }
 
+h5{
+    text-align: center;
+    margin: 35px 0;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #979797;
+    font-weight: 400;
+}
+
+.btn{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+button{
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: 1px solid #fff;
+    box-shadow: 2px 2px 4px #c2c2c26c;
+    font-weight: 600;
+    color: #505050;
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #979797;
+    border: 1px solid #979797;
+    color: #fff;
+}
+
+/* Q_01~02 */
+
+h2{
+    margin: 70px 0 0 90px;
+}
+h4{
+    color: #505050;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 25px 0;
+}
+p{
+    margin: 15px 0 15px 120px;
+    color: #505050;
+    font-size: 12px;
+    
+}
 .radio{
     position: relative;
     cursor: pointer;
     line-height: 20px;
-    font-size: 14px;
+    font-size: 15px;
     margin: 15px;
 
+}
+
+.cntr{
+    display: flex;
+    justify-content: space-between;
+}
+
+.que-wrap{
+    width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    border: 1px solid #979797;
+    border-radius: 30px;
+
+
+}
+.que-wrqp-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.que-box{
+    width: 30%;
+}
+:root{
+
+    accent-color:#505050;
+
+}
+.line{
+    display: flex;
+    justify-content: space-between;
+}
+.line .radio{
+    width: 30%;
+}
+
+.line05{
+    justify-content:flex-start;
+}
+
+.percent{
+    line-height: 25px;
+    text-align: right;
+}
+.submit{
+    padding: 50px 0;
+    width: 100%;
+    text-align: center;
+}
+.go-result{
+    background-color: #979797;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: 1px solid #979797;
+    box-shadow: 2px 2px 4px #c2c2c26c;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+.go-result:hover{
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #afa8a8;
+    color: #505050;
 }
