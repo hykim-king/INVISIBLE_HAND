@@ -20,6 +20,7 @@
     -->
      <typeAlias type="com.pcwk.ehr.VO.MemberVO" alias="MemberVO"/>
      <typeAlias type="com.pcwk.ehr.VO.ChartVO" alias="ChartVO"/>
+     <typeAlias type="com.pcwk.ehr.VO.RankVO" alias="RankVO"/>
      <typeAlias type="com.pcwk.ehr.cmn.DTO" alias="DTO"/>
   </typeAliases>
 </configuration>
