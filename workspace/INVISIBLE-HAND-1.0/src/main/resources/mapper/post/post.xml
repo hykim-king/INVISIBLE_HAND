@@ -23,7 +23,7 @@
             TT1.title,
             TT1.categoryNumber,
             TT1.views,
-            --당일 등록이면 : 03:45 아닐 경우 2023/07/29
+            --당일 등록이면 : 03:45 그렇치 않으면 2023/07/29
             DECODE( TO_CHAR(TT1.writtendate,'YYYYMMDD'),TO_CHAR(sysdate,'YYYYMMDD')
                 ,TO_CHAR(TT1.writtendate,'HH24:MI')
                 ,TO_CHAR(TT1.writtendate,'YYYY/MM/DD') )writtendate,
@@ -69,30 +69,27 @@
 
 
 <insert id="doSave" parameterType="PostVO">
-  <selectKey keyProperty="postNumber" resultType="int" order="BEFORE">
-    SELECT INVISIBLEHAND.POSTNUMBER.NEXTVAL FROM DUAL
-  </selectKey>
   INSERT INTO board(
     postnumber, 
     nickname, 
     title, 
     content, 
+    writtendate, 
     likes, 
     views, 
     categoryNumber
-  ) VALUES (
+  )VALUES(
     #{postNumber}, 
     #{nickname}, 
     #{title}, 
-    #{content},  
+    #{content}, 
+    #{writtenDate}, 
     #{likes}, 
     #{views}, 
     #{categoryNumber}
-  )
+  ); 
+
 </insert>
-
-
-
 
 <select id="doSelectOne" parameterType="PostVO" resultType="PostVO">
   SELECT
