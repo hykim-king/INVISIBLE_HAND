@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr">
+
+	<insert id="InsertInfo" parameterType="PaymentInfoVO">
+		INSERT INTO payment_information(
+			paymentinfoseq
+      , paymentmethod
+      , paymentamount
+      , paymentstatus
+      , paymentdate
+      , memberid
+		)VALUES(
+			#{paymentinfoseq}
+			, #{paymentmethod}
+			, #{paymentamount}
+			, #{paymentstatus}
+			, SYSDATE
+			, #{memberid}
+		)
+
+	</insert>
+
+	<select id="selectPaymentInfoBySEQ" parameterType="com.pcwk.ehr.VO.PaymentInfoVO"
+		resultType="com.pcwk.ehr.VO.PaymentInfoVO">
+		SELECT
+			paymentinfoseq
+			, paymentmethod
+			, paymentamount
+			, paymentstatus
+			, TO_CHAR(paymentdate, 'yyyy-mm-dd') as paymentdate
+			, memberid
+		FROM payment_information
+		WHERE paymentinfoseq = #{paymentinfoseq}
+	</select>
+</mapper>

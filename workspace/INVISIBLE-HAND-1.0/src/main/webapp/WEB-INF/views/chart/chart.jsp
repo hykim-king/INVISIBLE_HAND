@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/chart2.css">
-<script src="../resources/js/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="../resources/css/chart.css">
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -82,15 +81,12 @@
       </div>
 
       <div class="tab-box tab2">
-        box2, 박스2
       </div>
       
       <div class="tab-box tab3">
-        box3, 박스3
       </div>
       
       <div class="tab-box tab4">
-        box4, 박스4
       </div>
 
     </div><!-- **---wrap End---** -->
@@ -99,10 +95,12 @@
 
 
 
+<script src="js/jquery-3.7.0.js"></script>
 <script>
 $(".categorybox").click(function() {
     $(this).siblings().removeClass("active");
     $(this).addClass("active");
+   // $("html, body").scrollTop($(".tab-box").height());
     let clickTab = $(this).attr("data-tab");
     $(".tab-box").removeClass("active");
     $("." + clickTab).addClass("active");

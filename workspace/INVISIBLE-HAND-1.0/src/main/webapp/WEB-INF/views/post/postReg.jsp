@@ -1,6 +1,20 @@
+<%@page import="com.pcwk.ehr.VO.PostVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+    PostVO vo = (PostVO)request.getAttribute("inVO");
+    String ctgNumValue = vo.getCategoryNumber();
+    String title    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
+    
+    if ("20".equals(ctgNumValue)) {
+         title = "Q&A게시판";
+     } else if ("30".equals(ctgNumValue)) {
+         title = "공지사항";
+     }
+    request.setAttribute("title", title);
+%>
+<c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,33 +29,35 @@
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
-	<!-- *---container Start---* -->
+  <!-- *---container Start---* -->
 
-	<div class="h60px"></div>
-	<div class="container-1200 con-main min-100vh">
-	
-		<div class="wrap-1000 ">
-		  <h1>게시판</h1>
-		  
+  <div class="h60px"></div>
+  <div class="container-1200 con-main min-100vh">
+  
+    <div class="wrap-1000 ">
+      <h1><c:out value="${title}" /> 글쓰기</h1>
+      
 
 
-		      <!-- 버튼 -->
+          <!-- 버튼 -->
     <div class="row g-1 d-flex justify-content-end">
       <div class="col-auto">
-        <input type="button" class="btn" value="목록" id="moveToList">
+        <input type="button" class="btn" value="목록" id="moveToList" onclick="doMoveToList()">
         <input type="button" class="btn" value="등록" id="doSave">
       </div>
     </div>
     <!--// 버튼 ----------------------------------------------------------------->
-    <form action="#"  name="reg_frm" id="reg_frm">
-       <input type="hidden" name="div" id="div" value="${inVO.getDiv()}">
+    <form action="${CP}/post/postReg.do" method="get" name="regFrm" id="regFrm">
+    <input type="hidden" name="pageNo" id="pageNo">
+        <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
+        <input type="hidden" name="categoryNumber" id="categoryNumber" value="${inVO.getCategoryNumber()}">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">제목</label>
           <input type="text" class="form-control title_cls" id="title"  name="title"
              placeholder="제목을 입력 하세요." required="required" maxlength="66">
         </div>
         
-        <div class="mb-3">
+        <div clascategoryNumbermb-3">
           <label for="exampleFormControlInput1" class="form-label">등록자ID</label>
           <input type="text" class="form-control" id="regId" name="regId" value="${sessionScope.user.userId }"
           placeholder="아이디를 입력 하세요." readonly="readonly">
@@ -53,9 +69,9 @@
         </div>
                 
     </form>
-		</div><!-- **---wrap End---** -->
-	</div> <!-- **---container End---** -->
-	
+    </div><!-- **---wrap End---** -->
+  </div> <!-- **---container End---** -->
+  
 <script src="js/jquery-3.7.0.js"></script>
 <script src="js/util.js"></script>
 <script>
@@ -69,9 +85,19 @@ $(".categorybox").click(function() {
 });
 </script>
 <script>
+
+      function doMoveToList() {
+          console.log("doMoveToList");
+          let frm = document.regFrm;
+          console.log("frm.categoryNumber.value:" + frm.categoryNumber.value);
+          frm.pageNo.value = 1;
+          frm.action = "${CP}/post/postList.do?categoryNumber=" + frm.categoryNumber.value;
+      
+          frm.submit();
+      }
   
-      function moveToListView(){
-        window.location.href ="${CP}/board/boardView.do?div="+$("#div").val();
+     /*  function moveToListView(){
+        window.location.href ="${CP}/board/boardView.do?categoryNumber="+$("#categoryNumber").val();
       }
       
   
@@ -79,7 +105,7 @@ $(".categorybox").click(function() {
           if(confirm('목록 화면으로 이동 하시겠습니까?')==false)return;
           
           moveToListView();
-      });//--moveToList
+      });//--moveToList */
       
       $("#doSave").on("click",function(){
           console.log("doSave");
@@ -133,7 +159,7 @@ $(".categorybox").click(function() {
                 asyn:"true",
                 dataType:"html",
                 data:{
-                  div: $("#div").val(),       
+                  categoryNumber: $("#categoryNumber").val(),       
                   title: $("#title").val(),
                   regId: $("#regId").val(),
                   contents: $("#contents").val()  
@@ -166,7 +192,7 @@ $(".categorybox").click(function() {
                      if("1" == parsedJson.msgId ){
                        alert(parsedJson.msgContents);
                        //javascript
-                       //window.location.href ="${CP}/board/boardView.do?div="+$("#div").val();
+                       //window.location.href ="${CP}/board/boardView.do?categoryNumber="+$("#categoryNumber").val();
                        moveToListView();
                      }else{
                        alert(parsedJson.msgContents);

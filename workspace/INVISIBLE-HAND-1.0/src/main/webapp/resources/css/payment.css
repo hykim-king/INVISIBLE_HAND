@@ -1,6 +1,24 @@
 @charset "UTF-8";
-#kakaoWrap {
-	height: 700px;
+
+.wrap_demo {
+  position: absolute; /* 부모 요소 안에서 절대 위치 설정이 가능하도록 지정합니다. */
+  top: 40%; /* 수직 방향으로 50% 이동 */
+  left: 50%; /* 수평 방향으로 50% 이동 */
+  transform: translate(-50%, -50%);
+}
+
+#kakaoHead {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#paymentBtn {
+	display: flex;
+  justify-content: center;
+	align-items: center;
+  margin-bottom: 30px;
 }
 
 * {
