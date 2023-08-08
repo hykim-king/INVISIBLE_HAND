@@ -81,7 +81,7 @@ public class PostDAOImpl implements PostDao, PcwkLoger {
 	@Override
 	public int doUpdateLikes(PostVO inVO) throws SQLException {
 		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│doUpdateLikes                        │");
+		LOG.debug("│doUpdateLikes                 │");
 		LOG.debug("│inVO                          │"+inVO);
 		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdateLikes");
 		LOG.debug("└──────────────────────────────┘");			
@@ -91,12 +91,12 @@ public class PostDAOImpl implements PostDao, PcwkLoger {
 
 	@Override
 	public int doUpdateViews(PostVO inVO) throws SQLException {
-		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│doUpdateViews                        │");
-		LOG.debug("│inVO                          │"+inVO);
-		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdateViews");
-		LOG.debug("└──────────────────────────────┘");			
-		return  sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateViews", inVO);
+	    LOG.debug("┌──────────────────────────────┐");
+	    LOG.debug("│doUpdateViews                 │");
+	    LOG.debug("│inVO                          │"+inVO);
+	    LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdateViews");
+	    LOG.debug("└──────────────────────────────┘");            
+	    return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateViews", inVO);
 	}
 
 	

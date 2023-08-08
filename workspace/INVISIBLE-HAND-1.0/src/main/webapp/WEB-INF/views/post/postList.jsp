@@ -9,11 +9,10 @@
          String title    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
          
          if ("20".equals(ctgNumValue)) {
-              title = "QnA게시판";
+              title = "Q&A게시판";
           } else if ("30".equals(ctgNumValue)) {
               title = "공지사항";
           }
-
          
          request.setAttribute("title", title);
          
@@ -38,8 +37,13 @@
          
          String cPath  = request.getContextPath();
          
+         String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? ctgNumValue : searchDiv;
+      
+         
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
+<c:set var="defaultSearchDiv" value="${defaultSearchDiv}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +66,9 @@
   <div class="container-1200 con-main min-100vh">
   
     <div class="wrap-1000 ">
-      <h1>게시판</h1>
+      <h1>
+        <c:out value="${title}" />
+      </h1>
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
@@ -71,14 +77,24 @@
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
           <div class="row g-1 d-flex justify-content-end ">
             <div class="col-auto">
-              <select class="form-select" name="searchDiv" id="searchDiv"> <!-- code table -->
-                <option value="">게시판선택</option>
-              <c:forEach var="vo" items="${searchList }">
-                  <option <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail }'/>"  >
-                     <c:out value='${vo.codeDetailName }'/>
-                  </option>
-                </c:forEach>  
-              </select>
+              <%-- <select class="form-select" name="searchDiv" id="searchDiv">
+                  <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
+                  <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
+                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
+              </select> --%>
+               <select class="form-select" name="searchDiv" id="searchDiv">
+                  <option value="none">=게시판을 선택하세요</option>
+                  <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
+                  <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
+                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
+                  <%--  <c:forEach var="vo" items="${searchList}">
+                       <option <c:if test="${vo.codeDetail == defaultSearchDiv}">selected</c:if> value="<c:out value='${vo.codeDetail }' />">
+                           <c:out value='${vo.codeDetailName }' />
+                       </option>
+                   </c:forEach> --%>
+               </select>
+
+
             </div>  
             <div class="col-auto">
                <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
@@ -203,8 +219,8 @@
       console.log("frm.categoryNumber.value:"+frm.categoryNumber.value);
       frm.pageNo.value=1;
       
-      frm.searchDiv.value = "all";   // Set searchDiv to "all"
-      frm.searchWord.value = "";     // Set searchWord to an empty string
+      /* frm.searchDiv.value = "all";   // Set searchDiv to "all"
+      frm.searchWord.value = "";     // Set searchWord to an empty string */
       frm.action = "${CP}/post/doMoveToPostReg.do"
       
       frm.submit();

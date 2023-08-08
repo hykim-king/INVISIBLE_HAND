@@ -34,11 +34,6 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
-	@Override
-	public int emailCheck(MemberVO member) throws SQLException {
-
-		return memberDao.emailCheck(member);
-	}
 
 	//아이디 중복체크
 	@Override
@@ -54,6 +49,23 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	//이메일 중복체크
+	@Override
+	public int emailCheck(MemberVO member) throws SQLException {
+
+		return memberDao.emailCheck(member);
+	}
+	
+
+	
+	//로그인시 아이디 체크
+	@Override
+	public int loginIdCheck(MemberVO member) throws SQLException {
+
+		return memberDao.loginIdCheck(member);
+	}
+	
+	//로그인시 비밀번호
 	@Override
 	public int passCheck(MemberVO member) throws SQLException {
 
@@ -70,30 +82,14 @@ public class MemberServiceImpl implements MemberService {
 		this.memberDao = memberDao;
 	}
 	
-	// 처음 가입 시 메일 보내기
-	private void sendJoinEmail(MemberVO member) {
-		LOG.debug("┌────────────────────────┐");
-		LOG.debug("│      sendJoinEmail     │");
-		LOG.debug("└────────────────────────┘");
-
-		LOG.debug("mailSender: " + this.mailSender);
-
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("calmate77@naver.com");
-		message.setTo(member.getEmail());
-		message.setSubject("CalMate 회원 가입 안내");
-		message.setText("CalMate에서 " + member.getMemberName() + "님을 환영합니다~~!!");
-
-		this.mailSender.send(message);
-
-	}
+	
 	
 	// 회원 가입
 	@Override
-	public int add(MemberVO inVO) throws SQLException, ClassNotFoundException {
+	public int add(MemberVO member) throws ClassNotFoundException, SQLException {
 
-		sendJoinEmail(inVO);
-		return this.memberDao.add(inVO);
+		
+		return memberDao.add(member);
 		
 	}
 
@@ -116,27 +112,31 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteOne(MemberVO member) throws SQLException {
 		return memberDao.deleteOne(member);
 	}
-	
+
+
 	@Override
-	public int doLogin(MemberVO member) throws SQLException {
+	public int login(MemberVO member) throws SQLException {
 		// 1. 아이디 Check
 		// 2. 비번 Check
 		
 		int checkStatus = 0; // 10(id 없음), 20(비번오류), 30(성공)
 		
-		int status = this.memberDao.idCheck(member);
+		int status = this.memberDao.loginIdCheck(member);
 		
 		if(1==status) {
 			status = memberDao.passCheck(member);
 
 			if(1==status) {
 				checkStatus = 30; // 로그인 성공
+				LOG.debug(checkStatus);
 			}else {
 				checkStatus = 20; // 비번 오류, id 있음
+				LOG.debug(checkStatus);
 			}
 			
 		}else {
 			checkStatus = 10; // id 없음
+			LOG.debug(checkStatus);
 		}
 
 		LOG.debug("==================");
@@ -144,6 +144,7 @@ public class MemberServiceImpl implements MemberService {
 		LOG.debug("==================");
 		return checkStatus;
 	}
+	
 
 
 	

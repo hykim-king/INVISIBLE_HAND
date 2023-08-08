@@ -116,21 +116,18 @@ public class PostController {
 	
 	@RequestMapping("/doSelectOne.do")
 	public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
-		//MemberVO어떻게 작성하셨는지 보기
-	    //닉네임을 Session에서 추출 
-//		MemberVO memberVO = (MemberVO) httpSession.getAttribute("nickName");
-//		LOG.debug("│memberVO                          │" + memberVO);
-//		inVO.setNickname(memberVO.getNickName());
-		
-		// 세션에 nickname을 "MJ"로 설정합니다.
-		//inVO.setNickname("MJ");
-		
+
 		PostVO outVO = postService.doSelectOne(inVO);
 		
-		//postService.doUpdateViews(outVO);
 		model.addAttribute("outVO",outVO);
 		model.addAttribute("inVO",inVO);
-
+		
+		postService.doUpdateViews(outVO);
+		
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   doSelectOne()       │");
+		LOG.debug("│   outVO()             │"+outVO);
+		LOG.debug("└───────────────────────┘");
 		return "post/postContents";
 	}
 	
@@ -201,6 +198,7 @@ public class PostController {
 		
 		return "post/postReg";
 	}
+	
 	
 	@RequestMapping(value = "/postContents.do")
 	public String postContents() {
