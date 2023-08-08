@@ -130,13 +130,15 @@ body{
   width: 70%;
 }
 
-.btn-white{
+.btn-white, 
+.newClass{
   width: 120px;
   height: 45px;
   font-size: 16px;
   background-color: #ffffff;
   color:#979797;
   border: 1px solid #979797;
+  border-radius: 5px;
   margin-left: 10px;
   box-sizing: border-box;
   transition:0.5s;
@@ -191,5 +193,65 @@ p.find.join a{
 
 .label-margin{
   margin: 20px 0;
+}
 
+.name-phone-wrap{
+	display: flex;
+	width:100%;
+	justify-content: space-between;
+}
+.name-phone{
+	width:48%;
+}
+.border-bottom.w48{
+	width:100%;
+}
+
+input#name.size.border-bottom {
+
+    background: #fff !important;
+
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  -webkit-text-fill-color: #000;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px #000 inset;
+}
+
+
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0 1000px white inset;
+box-shadow: 0 0 0 1000px white inset;
+}
+
+input:focus {outline: none;}
+
+:root{
+
+  accent-color:#505050;
+
+}
+
+#m_n{
+	margin-left:15px;
 }

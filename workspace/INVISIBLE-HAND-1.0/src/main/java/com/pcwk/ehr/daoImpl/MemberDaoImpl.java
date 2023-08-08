@@ -17,6 +17,7 @@ public class MemberDaoImpl implements MemberDao {
 	final String NAMESPACE = "mapper.member.memberMapper";
 	final String DOT = ".";
 
+	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate; // DB 연결객체
 	
@@ -25,30 +26,12 @@ public class MemberDaoImpl implements MemberDao {
 	//private DataSource dataSource;
 
 	// *****Default 생성자 필수*****
-	public MemberDaoImpl() {
-		
+    private final SqlSessionTemplate sql;
+	public MemberDaoImpl(SqlSessionTemplate sql) {
+		this.sql = sql;
 	}
-	
-    // 이메일 체크
-	@Override
-	public int emailCheck(MemberVO member) throws SQLException{
-		int flag = 0;
 
-		String statement = NAMESPACE + DOT + "emailCheck";
-		LOG.debug("----------------------------------------");
-		LOG.debug("1. statement = " + statement);
-		LOG.debug("----------------------------------------");
-		LOG.debug("2. param =\n" + member.toString());
-		LOG.debug("----------------------------------------");
-		LOG.debug("3. sql =\n" + sqlSessionTemplate);
-
-		flag = sqlSessionTemplate.selectOne(statement, member);
-		
-		LOG.debug("3. flag = " + flag);
-
-		return flag;
-	}
-	
+	// 회원가입관련
 	// id 체크
 	@Override
 	public int idCheck(MemberVO member) {
@@ -63,8 +46,8 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 	
-	
-	//닉네임체크
+	// 회원가입관련
+	// 닉네임체크
 	@Override
 	public int nickNameCheck(MemberVO member) {
 		String statement = NAMESPACE + DOT + "nickNameCheck";
@@ -78,6 +61,45 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 	
+	
+	// 회원가입관련
+    // 이메일 체크
+	@Override
+	public int emailCheck(MemberVO member) throws SQLException{
+		String statement = NAMESPACE + DOT + "emailCheck";
+		LOG.debug("----------------------------------------");
+		LOG.debug("1. statement = " + statement);
+		LOG.debug("----------------------------------------");
+		LOG.debug("2. param =\n" + member.toString());
+		int result = sqlSessionTemplate.selectOne(statement, member);
+		LOG.debug("3. result =" + result);
+		return result;
+	}
+//--------------------------------------------------------------
+	
+	
+	
+	// 로그인관련
+	// 아이디 체크
+	@Override
+	public int loginIdCheck(MemberVO member) throws SQLException {
+		int flag = 0;
+
+		String statement = NAMESPACE + DOT + "loginIdCheck";
+		LOG.debug("----------------------------------------");
+		LOG.debug("1. statement = " + statement);
+		LOG.debug("----------------------------------------");
+		LOG.debug("2. param =\n" + member.toString());
+
+		flag = sqlSessionTemplate.selectOne(statement, member);
+		
+		LOG.debug("3. flag = " + flag);
+
+		return flag;
+	}
+	
+	
+	// 로그인관련
 	// 비번 체크
 	@Override
 	public int passCheck(MemberVO member) throws SQLException {
@@ -96,80 +118,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	
-	// 건수 조회
-	@Override
-	@SuppressWarnings("deprecation") // queryForObject에 대한 메시지 제거
-	public int getCount(MemberVO member) throws SQLException {
-		int cnt = 0;
 
-		String statement = this.NAMESPACE + DOT + "getCount";
-		LOG.debug("------------------------------");
-		LOG.debug("1. statement = " + statement);
-		LOG.debug("------------------------------");
-		LOG.debug("2. param =\n" + member.toString());  // member = param
-		LOG.debug("------------------------------");
-		
-		cnt = this.sqlSessionTemplate.selectOne(statement, member);
-		LOG.debug("3. cnt = " + cnt);
-
-		return cnt;
-	} // getCount()
-	
-
-	// 회원정보 조회
-	@Override
-	public MemberVO get(MemberVO member) throws SQLException {
-		MemberVO outVO = null;
-		
-		String statement = this.NAMESPACE + DOT + "get";
-		LOG.debug("----------------------------");
-		LOG.debug("1. statement- " + statement);
-		LOG.debug("----------------------------");
-		LOG.debug("2. param = \n" + member.toString());
-		
-		outVO = this.sqlSessionTemplate.selectOne(statement, member);
-		LOG.debug("3.outVO = " + outVO);
-	
-		return outVO;
-	}  // get()
-
-
-	// 회원 정보 수정
-	@Override
-	public int update(MemberVO member) throws SQLException {
-		int flag = 0;  // 수정 건수
-
-		String statement = this.NAMESPACE + DOT + "update";
-		LOG.debug("------------------------------");
-		LOG.debug("1. statement = " + statement);
-		LOG.debug("------------------------------");
-		LOG.debug("2. param =\n" + member.toString());
-		LOG.debug("------------------------------");
-
-		flag = this.sqlSessionTemplate.update(statement, member);
-
-		return flag;
-		
-	} // update()
-
-	
-	// 회원 탈퇴
-	@Override
-	public int deleteOne(final MemberVO member) throws SQLException {
-		int flag = 0;
-
-		String statement = this.NAMESPACE + DOT + "deleteOne";
-		LOG.debug("------------------------------");
-		LOG.debug("1. statement = " + statement);
-		LOG.debug("------------------------------");
-		LOG.debug("2. param = \n" + member.toString());
-		LOG.debug("------------------------------");
-		
-		flag = this.sqlSessionTemplate.delete(statement, member);
-		LOG.debug("3. flag = " + flag);
-		
-		return flag;
-	} // deleteOne()
 
 	// 회원 가입
 	@Override
@@ -188,8 +137,35 @@ public class MemberDaoImpl implements MemberDao {
 		LOG.debug("3. flag = " + flag);
 
 		return flag;
-	} // add()
+	}
 
+
+	
+	
+
+	@Override
+	public int getCount(MemberVO member) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public MemberVO get(MemberVO member) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int update(MemberVO member) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteOne(MemberVO member) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 
