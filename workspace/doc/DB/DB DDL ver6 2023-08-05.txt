@@ -458,8 +458,8 @@ ALTER TABLE Agreement_History
 		REFERENCES Member (
 			MemberID
 		);
-		
-		DROP INDEX PK_Payment_Information;
+
+DROP INDEX PK_Payment_Information;
 
 /* 결제 정보 */
 DROP TABLE Payment_Information 
@@ -468,26 +468,38 @@ DROP TABLE Payment_Information
 /* 결제 정보 */
 CREATE TABLE Payment_Information (
 	PaymentInfoSEQ NUMBER(10) NOT NULL, /* 결제 정보 SEQ */
-	PaymentMethod VARCHAR2(24 BYTE) NOT NULL, /* 결제 수단 정보 */
-	PaymentAmount NUMBER(7) NOT NULL, /* 결제 금액 */
-	PaymentStatus VARCHAR2(1 BYTE) NOT NULL, /* 결제 상태 */
-	PaymentDate DATE DEFAULT SYSDATE, /* 결제 일시 */
-	MemberID VARCHAR2(24 BYTE) NOT NULL /* 회원ID */
+	PG VARCHAR2(70 BYTE) NOT NULL, /* 결제할 지점 이름 */
+	Pay_Method VARCHAR2(24 BYTE) NOT NULL, /* 결제 방법 */
+	Merchant_Uid VARCHAR2(30 BYTE) NOT NULL, /* 주문번호 */
+	Name VARCHAR2(30 BYTE) DEFAULT SYSDATE NOT NULL, /* 구매할 상품명 */
+	Amount NUMBER(7) NOT NULL, /* 구매할 가격 */
+	Buyer_Email VARCHAR2(50 BYTE) NOT NULL, /* 소비자 이메일 */
+	Buyer_Name VARCHAR2(60 BYTE) NOT NULL, /* 소비자 이름 */
+	Buyer_Tel VARCHAR2(20 BYTE) NOT NULL, /* 소비자 전화번호 */
+	M_Redirect_Url VARCHAR2(100 BYTE) NOT NULL /* URL */
 );
 
 COMMENT ON TABLE Payment_Information IS '결제 정보';
 
 COMMENT ON COLUMN Payment_Information.PaymentInfoSEQ IS '결제 정보 SEQ';
 
-COMMENT ON COLUMN Payment_Information.PaymentMethod IS '결제 수단 정보';
+COMMENT ON COLUMN Payment_Information.PG IS '결제할 지점 이름';
 
-COMMENT ON COLUMN Payment_Information.PaymentAmount IS '결제 금액';
+COMMENT ON COLUMN Payment_Information.Pay_Method IS '결제 방법';
 
-COMMENT ON COLUMN Payment_Information.PaymentStatus IS '결제 상태';
+COMMENT ON COLUMN Payment_Information.Merchant_Uid IS '주문번호';
 
-COMMENT ON COLUMN Payment_Information.PaymentDate IS '결제 일시';
+COMMENT ON COLUMN Payment_Information.Name IS '구매할 상품명';
 
-COMMENT ON COLUMN Payment_Information.MemberID IS '회원ID';
+COMMENT ON COLUMN Payment_Information.Amount IS '구매할 가격';
+
+COMMENT ON COLUMN Payment_Information.Buyer_Email IS '소비자 이메일';
+
+COMMENT ON COLUMN Payment_Information.Buyer_Name IS '소비자 이름';
+
+COMMENT ON COLUMN Payment_Information.Buyer_Tel IS '소비자 전화번호';
+
+COMMENT ON COLUMN Payment_Information.M_Redirect_Url IS 'URL';
 
 CREATE UNIQUE INDEX PK_Payment_Information
 	ON Payment_Information (
@@ -500,8 +512,8 @@ ALTER TABLE Payment_Information
 		PRIMARY KEY (
 			PaymentInfoSEQ
 		);
-		
-		DROP INDEX PK_Payment_Logs;
+
+DROP INDEX PK_Payment_Logs;
 
 /* 결제 관련 로그 */
 DROP TABLE Payment_Logs 
@@ -549,6 +561,7 @@ ALTER TABLE Payment_Logs
 		REFERENCES Payment_Information (
 			PaymentInfoSEQ
 		);
+
 
 
 
