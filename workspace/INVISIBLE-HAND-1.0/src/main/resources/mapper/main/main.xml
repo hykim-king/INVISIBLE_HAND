@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.main">
+  
+  <update id="doUpdateViews" parameterType="PostVO">
+      UPDATE board           
+      SET views   = NVL(views,0)+1   
+      WHERE postNumber = #{postNumber}
+      AND categoryNumber = #{categoryNumber}
+   
+  </update>
+
+  <select id="chartGraph" parameterType="ChartVO" resultType="ChartVO">
+			SELECT
+			    chartseq,
+			    year,
+			    one,
+			    two,
+			    three
+			FROM
+			    chart
+			ORDER BY chartseq
+
+  </select>
+       
+  <select id="doRetrieve" parameterType="PostVO" resultType="PostVO">
+		<![CDATA[
+		SELECT A.*, B.*
+		FROM (
+		  SELECT TT1.rnum as num,
+		         TT1.title,
+		         TT1.categoryNumber,
+		         TT1.views,
+		         TT1.likes,
+		         CASE
+		           WHEN TRUNC(TT1.writtenDate) = TRUNC(SYSDATE) THEN TO_CHAR(TT1.writtenDate, 'HH24:MI')
+		           ELSE TO_CHAR(TT1.writtenDate, 'YYYY/MM/DD')
+		         END AS writtenDate,
+		         TT1.nickname,
+		         TT1.postNumber
+		  FROM (
+		    SELECT ROWNUM as rnum, t1.*
+		    FROM (
+		      SELECT *
+		      FROM board
+		      WHERE categoryNumber = #{categoryNumber}
+		      ORDER BY likes DESC
+		    ) t1
+		       WHERE ROWNUM >= 1
+		  ) TT1  
+		 WHERE rnum <=5
+		) A
+		CROSS JOIN (
+		  SELECT COUNT(postNumber) totalCnt
+		  FROM board
+		  WHERE categoryNumber = #{categoryNumber}
+		) B	]]>
+		
+		
+  </select>
+
+
+</mapper>
