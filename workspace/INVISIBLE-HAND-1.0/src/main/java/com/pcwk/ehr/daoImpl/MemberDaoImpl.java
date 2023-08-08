@@ -151,8 +151,19 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public MemberVO get(MemberVO member) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO outVO = null;
+		
+        String statement = this.NAMESPACE+DOT+"get";
+		LOG.debug("----------------------------");
+		LOG.debug("1. statement-"+statement);
+		LOG.debug("----------------------------");
+		LOG.debug("2. param=\n"+member.toString());
+		
+		outVO = this.sqlSessionTemplate.selectOne(statement,member);
+		LOG.debug("3.outVO:"+outVO);
+		
+	
+		return outVO;
 	}
 
 	@Override

@@ -140,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		LOG.debug("==================");
-		LOG.debug("=doLogin()=");
+		LOG.debug("=doLogin()=" + checkStatus);
 		LOG.debug("==================");
 		return checkStatus;
 	}

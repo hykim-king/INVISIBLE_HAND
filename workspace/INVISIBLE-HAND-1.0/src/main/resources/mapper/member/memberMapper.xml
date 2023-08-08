@@ -80,7 +80,23 @@
         SELECT * FROM MEMBER
     </select>
     
-
+     <select id="get" parameterType="MemberVO" resultType="MemberVO">
+		   SELECT
+			  memberId
+			  , password
+			  , membergrade
+			  , membername
+			  , email
+			  , nickname
+			  , TO_CHAR(joindate,'yyyy-mm-dd HH24MISS') JoinDate
+			  , TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updatedate
+			  , isverified
+			  , phoneNumber
+			FROM
+			 member
+			WHERE  memberId = #{memberId}
+ 
+ </select>
 
 
     

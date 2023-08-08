@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.util.CookieGenerator;
 
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
@@ -148,7 +149,9 @@ public class MemberController {
 	    // 20 : 비번 오류
 	    // 30 : 성공
 	    int status = memberService.login(member);
-
+	    
+	    LOG.debug("status---------" + status);
+	    
 	    if (10 == status) {
 	        message.setMsgId("10");
 	        message.setMsgContents("아이디를 확인하세요-controller-");
@@ -160,7 +163,21 @@ public class MemberController {
 	    } else if (30 == status) {
 	        message.setMsgId("30");
 	        message.setMsgContents(member.getMemberId() + "님 환영합니다");
-
+	        
+	        MemberVO memberInfo = memberService.get(member);
+	        LOG.debug("memberInfo---------" + memberInfo);
+	        if (memberInfo != null) {
+				//session설정
+				httpSession.setAttribute("member", memberInfo);
+				
+				LOG.debug("999member" + member);
+				//쿠키 생성: memberId
+				CookieGenerator cg=new CookieGenerator(); // Spring Cookie helper 클래스 
+				cg.setCookieName("loginId");
+				cg.setCookieMaxAge(-1);  
+				cg.addCookie(response, memberInfo.getMemberId());				
+			}
+	        
 	        // 리다이렉트 처리
 	        response.setHeader("Location", "/ehr/main/main.do");
 	        return message;

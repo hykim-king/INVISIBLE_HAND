@@ -27,6 +27,7 @@
 			<div id="kakaoContent">
 				<div id="paymentBtn">
 					<span>더 많은 정보를 원한다면</span>
+					<div>999-  ${sessionScope.member.memberId}</div>
 				</div>
 				<button class="btn-hover color-11" id="payBtn"
 					onclick="paymentReady()">결제하기</button>
@@ -40,9 +41,8 @@
 </div>
 <script>
 function paymentReady() {
-    var email = '${session.getAttribute("email")}';
-    const name = '${session.getAttribute("memberName")}';
-    const phoneNum = '${session.getAttribute("phoneNum")}';
+    var email = '${sessionScope.member.memberId}';
+    /* var name = '${sessionScope.member.memberId}'; */
 
 		var today = new Date();
 		var hours = today.getHours(); // 시
