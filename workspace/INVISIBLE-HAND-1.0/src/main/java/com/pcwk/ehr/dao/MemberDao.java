@@ -6,19 +6,37 @@ import com.pcwk.ehr.VO.MemberVO;
 
 public interface MemberDao {
 	// 아이디 체크
-	public int idCheck(MemberVO member) throws SQLException;
-	
+	public int idCheck(MemberVO member) throws SQLException;	
 	// 닉네임 체크
 	public int nickNameCheck(MemberVO member) throws SQLException;
+	// 이메일 체크
+	public int emailCheck(MemberVO member) throws SQLException;
+
+
 	
+	//로그인에 필요
+	
+	/**
+	 * 로그인 아이디 체크
+	 * @param member
+	 * @return 1 (있음) / 0(없음)
+	 * @throws SQLException
+	 */
+	// 로그인 아이디 체크
+	public int loginIdCheck(MemberVO member) throws SQLException;
+	
+	
+	/**
+	 * 로그인 비밀번호 체크
+	 * @param member
+	 * @return 1(비밀번호 있음) / 0(비밀번호 없음)
+	 * @throws SQLException
+	 */
 	// 비번 체크
 	public int passCheck(MemberVO member) throws SQLException;
 	
     
-    // 이메일 체크
-    public int emailCheck(MemberVO member) throws SQLException;
-	
-	
+
 	// 건수 조회
 	int getCount(MemberVO member) throws SQLException;
 
@@ -33,6 +51,8 @@ public interface MemberDao {
 
 	// 회원가입
 	int add(MemberVO member) throws ClassNotFoundException, SQLException;
+
+
 
 
 }

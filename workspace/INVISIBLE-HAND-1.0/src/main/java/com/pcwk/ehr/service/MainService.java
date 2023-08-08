@@ -7,10 +7,12 @@ import com.pcwk.ehr.VO.PostVO;
 
 public interface MainService {
 	
-	int doUpdateViews(PostVO inVO) throws SQLException;
+//	int doUpdateViews(PostVO inVO) throws SQLException;
 	
-	PostVO doSelectOne(PostVO inVO) throws SQLException;
+//	PostVO doSelectOne(PostVO inVO) throws SQLException;E
 	
 	List<PostVO> doRetrieve(PostVO inVO) throws SQLException;
+	
+
 
 }
