@@ -3,12 +3,12 @@ package com.pcwk.ehr.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +46,7 @@ public class MainController {
 		LOG.debug("│ main()       		   │");
 		LOG.debug("└───────────────────────┘");
 
+		
 		return "main/main";
 	}
 
@@ -70,7 +71,7 @@ public class MainController {
 		List<PostVO> resultList = mainService.doRetrieve(inVO);
 			
 		LOG.debug("┌───────────────────────┐");
-		LOG.debug(resultList);
+		LOG.debug("resultList"+resultList);
 		LOG.debug("└───────────────────────┘");
 		
 		return resultList;
@@ -113,7 +114,9 @@ public class MainController {
 	@ResponseBody
 	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException {
 		List<RankVO> rankData = rankService.doGetRanking(inVO);
-		
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("rankData"+rankData);
+		LOG.debug("└───────────────────────┘");
 		
 		return rankData;
 	}

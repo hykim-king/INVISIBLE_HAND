@@ -10,5 +10,6 @@ public interface RankService {
 	
 	//1. 랭킹 정보 main 화면에 출력할 로직
 	List<RankVO> doGetRanking(RankVO inVO) throws SQLException;
-
+	
+	
 }

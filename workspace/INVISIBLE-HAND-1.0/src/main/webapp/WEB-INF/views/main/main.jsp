@@ -69,10 +69,18 @@
     </div>
     <!-- **---wrap End---** -->
     <div class="rank-area">
-      <h1>Main Page</h1>
-				    <p>RankVO data:</p>
-				    <p>Rank: ${inVO.rank}</p>
-				    <p>Name: ${inVO.name}</p>   
+        <table>
+            <thead>
+                <tr>
+                <th>등수</th>
+                <th>업종명</th>                
+                <th>등수변동</th>
+                </tr>
+           </thead>
+           <tbody id="rankBody">
+            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
+           </tbody>
+        </table>   
     </div>
   </div>
   <!-- **---container End---** -->
@@ -80,27 +88,44 @@
   <script src="../resources/js/mainChart.js"></script> 
   <script src="../resources/js/mainBoard.js"></script>
   <script src="../resources/js/mainNews.js"></script>
-  <script>
-  $(document).ready(function() { 
-	  function loadRankData() {
-	        $.ajax({
-	            url: '/ehr/main/Rank.do',
-	            type: 'GET',
-	            //data: {                      },
-	            dataType: 'json',
-	            success: function(data) {            
-	                console.log("데이터를 가져옴");
-	                console.log(data);
-	    
-	            },  //success
-	            error: function(xhr, status, error) {
-	                // AJAX 요청이 실패했을 때 실행되는 부분
-	                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
-	                console.error(error);
-	            } //error
-	        }); //ajax
-	    } //loadRankData()  
-  });  
-  </script>
+ <!--  <script src="../resources/js/mainRank.js"></script> -->
+ 
+ <script>
+ $(document).ready(function() { 
+	    updateTable()
+	      function updateTable(data) {
+	          let tableBody = document.getElementById('rankBody');
+	          let newTableBody = document.createElement('tbody'); // 새로운 tbody 엘리먼트 생성
+	          $.ajax({
+	              url: '/ehr/main/Rank.do',
+	              type: 'GET',
+	              //data: {                      },
+	              dataType: 'json',
+	              success: function(data) {            
+	                  console.log("데이터를 가져옴");
+	                  console.log(data);
+	                  data.forEach(function(item,index){
+	                      let row = '<tr>' + 
+                          '<td>' + item.currentRank + '</td>' +
+	                        '<td>' + item.name + '</td>' +  
+	                        '<td>' + item.changeRank + '</td>' +
+	                        '</tr>';
+	              newTableBody.innerHTML += row;
+
+	          });
+	          
+	          // 기존 tbody 엘리먼트를 새로운 tbody로 교체
+	          tableBody.parentNode.replaceChild(newTableBody, tableBody);
+	      
+	              },  //success
+	              error: function(xhr, status, error) {
+	                  // AJAX 요청이 실패했을 때 실행되는 부분
+	                  console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+	                  console.error(error);
+	              } //error
+	          }); //ajax
+	        }
+	  });  
+ </script>
 </body>
 </html>
