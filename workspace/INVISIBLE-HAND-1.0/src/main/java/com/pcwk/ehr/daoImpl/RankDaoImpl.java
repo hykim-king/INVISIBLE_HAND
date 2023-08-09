@@ -29,10 +29,10 @@ public class RankDaoImpl implements RankDao{
 
 		Map<String, Integer> resultMap = new HashMap<>();
 		for (RankVO rankVO : rankList) {
-		    resultMap.put(rankVO.getName(), rankVO.get());
+		    resultMap.put(rankVO.getName(), rankVO.getScore());
 		}
 
-		return sqlSessionTemplate.selectList(NAMESPACE + DOT + "getRank", inVO);
+		return (Map<String, Integer>) sqlSessionTemplate.selectList(NAMESPACE + DOT + "getRank", inVO);
 	}
 
 }

@@ -11,7 +11,7 @@ import com.pcwk.ehr.dao.PaymentInfoDao;
 
 @Repository
 public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
-	final String NAMESPACE = "com.pcwk.ehr";
+	final String NAMESPACE = "com.pcwk.ehr.paymentInfo";
 	final String DOT = ".";
 
 	@Autowired
@@ -19,13 +19,13 @@ public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
 	
 	// 결제 정보 조회
 	@Override
-	public PaymentInfoVO selectPaymentInfoBySEQ(PaymentInfoVO inVO) {
+	public PaymentInfoVO selectPaymentInfoByEmail(PaymentInfoVO inVO) {
 		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│ selectPaymentInfoBySEQ       │");
+		LOG.debug("│ selectPaymentInfoByEmail     │");
 		LOG.debug("│ inVO                         │" + inVO);
-		LOG.debug("│ statement                    │" + NAMESPACE + DOT + "selectPaymentInfoBySEQ");
+		LOG.debug("│ statement                    │" + NAMESPACE + DOT + "selectPaymentInfoByEmail");
 		LOG.debug("└──────────────────────────────┘");
-		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "selectPaymentInfoBySEQ", inVO);
+		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "selectPaymentInfoByEmail", inVO);
 	}
 	
 	// 결제 정보 입력
@@ -41,6 +41,23 @@ public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
 		String query = boundSql.getSql();
 		LOG.debug("│ query                        │" + query);
 		return sqlSessionTemplate.insert(NAMESPACE + DOT + "InsertInfo", inVO);
+	}
+	
+	// 구독했는지 여부 확인
+	@Override
+	public int checkPayment(PaymentInfoVO inVO) {
+		String statement = NAMESPACE + DOT + "checkPayment";
+		LOG.debug("┌──────────────────┐");
+		LOG.debug("│ statement        │ " + statement);
+		LOG.debug("│ param            │ " + inVO.toString());
+		
+		int result = sqlSessionTemplate.selectOne(statement, inVO);
+		
+		LOG.debug("result---------------" + result);
+		
+		LOG.debug("│ result           │ " + result);
+		LOG.debug("└──────────────────┘");
+		return result;
 	}
 
 }

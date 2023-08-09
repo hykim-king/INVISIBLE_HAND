@@ -1,20 +1,37 @@
 package com.pcwk.ehr.controller;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.pcwk.ehr.VO.PaymentInfoVO;
+import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.service.PaymentInfoService;
+
 @Controller
-@RequestMapping(value = "payment")	//WEB_INF아래 폴더이름을 적는곳.
+@RequestMapping(value = "payment") // WEB_INF아래 폴더이름을 적는곳.
 public class PaymentController {
-	
-	final Logger LOG = LogManager.getLogger(getClass());
-	
+
+	final Logger lg = LogManager.getLogger(getClass());
+
+	@Autowired
+	PaymentInfoService payService;
+
 //	@RequestMapping(value = "/kakaopay.do")
 //	@ResponseBody
 //	public String kakaoPay() {
-//		LOG.debug("┌───────────────────────┐");
-//		LOG.debug("│   kakaoPay()          │");
-//		LOG.debug("└───────────────────────┘");
+//		lg.debug("┌───────────────────────┐");
+//		lg.debug("│   kakaoPay()          │");
+//		lg.debug("└───────────────────────┘");
 //		
 //		try {
 //			URL address = new URL("https://kapi.kakao.com/v1/payment/ready"); // url주소
@@ -50,14 +67,44 @@ public class PaymentController {
 //		
 //		return "kakaopay/kakaopay";
 //	}
-	
+
+	// 구독
+	@RequestMapping(value = "/payment_info.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
+	public String add(PaymentInfoVO inVO, HttpServletRequest req) throws SQLException, ClassNotFoundException {
+		String id = req.getParameter("merchantUid");
+		lg.debug("id-----------------" + id);
+		
+		String jsonString = "";
+		lg.debug("┌──────────────────────────────┐");
+		lg.debug("│ inVO : " + inVO);
+		String memberId = req.getParameter("memberId");
+		lg.debug("│ memberId : " + memberId);
+		int flag = this.payService.addInfo(inVO);
+		// jsonString에 담을 메시지
+		String message = "";
+		if (1 == flag) {
+			message = inVO.getbuyerEmail() + "가 구독되었습니다.";
+		} else {
+			message = inVO.getbuyerEmail() + "가 구독 실패되었습니다.";
+		}
+
+		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+
+		jsonString = new Gson().toJson(messageVO);
+		lg.debug("│ jsonString : " + jsonString);
+		lg.debug("└──────────────────────────────┘");
+
+		return jsonString;
+	}
+
 	@RequestMapping(value = "/payment_view.do")
 	public String payment() {
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   payment()           │");
-		LOG.debug("└───────────────────────┘");
-		
+		lg.debug("┌───────────────────────┐");
+		lg.debug("│   payment()           │");
+		lg.debug("└───────────────────────┘");
+
 		return "payment/payment_view";
 	}
-	
+
 }

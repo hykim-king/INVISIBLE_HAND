@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pcwk.ehr">
-
+<mapper namespace="com.pcwk.ehr.paymentInfo">
+  
+  <!-- 구독 결제 -->
 	<insert id="InsertInfo" parameterType="PaymentInfoVO">
+		<selectKey keyProperty="paymentinfoseq" resultType="int" order="BEFORE">
+	    SELECT paymentinfoseq.nextval FROM DUAL
+	  </selectKey>
 		INSERT INTO payment_information(
-			paymentinfoseq
-      , paymentmethod
-      , paymentamount
-      , paymentstatus
-      , paymentdate
-      , memberid
+		  paymentinfoseq
+		  , merchant_uid
+		  , name
+		  , amount
+		  , buyer_email
+		  , buyer_name
+		  , buyer_tel
 		)VALUES(
 			#{paymentinfoseq}
-			, #{paymentmethod}
-			, #{paymentamount}
-			, #{paymentstatus}
-			, SYSDATE
-			, #{memberid}
+		  , #{merchantUid}
+		  , #{name}
+		  , #{amount}
+		  , #{buyerEmail}
+		  , #{buyerName}
+		  , #{buyerTel}
 		)
 
 	</insert>
-
-	<select id="selectPaymentInfoBySEQ" parameterType="com.pcwk.ehr.VO.PaymentInfoVO"
-		resultType="com.pcwk.ehr.VO.PaymentInfoVO">
-		SELECT
-			paymentinfoseq
-			, paymentmethod
-			, paymentamount
-			, paymentstatus
-			, TO_CHAR(paymentdate, 'yyyy-mm-dd') as paymentdate
-			, memberid
+  
+  <!-- 조회 -->
+	<select id="selectPaymentInfoByEmail" parameterType="PaymentInfoVO" resultType="PaymentInfoVO">
+		SELECT 
+	    paymentinfoseq
+	    , merchant_uid
+	    , name
+	    , amount
+	    , buyer_email
+	    , buyer_name
+	    , buyer_tel
 		FROM payment_information
-		WHERE paymentinfoseq = #{paymentinfoseq}
+		WHERE buyer_email = #{buyerEmail}
 	</select>
+	
+	<select id="checkPayment" parameterType="PaymentInfoVO" resultType="int">
+    SELECT COUNT(*)
+		FROM payment_information
+		WHERE buyer_email = #{buyerEmail}
+  </select>
 </mapper>

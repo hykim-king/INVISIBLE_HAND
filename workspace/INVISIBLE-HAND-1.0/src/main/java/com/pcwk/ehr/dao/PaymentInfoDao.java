@@ -7,5 +7,8 @@ public interface PaymentInfoDao {
 	int InsertInfo(PaymentInfoVO inVO);
 	
 	// 결제 정보 조회
-	PaymentInfoVO selectPaymentInfoBySEQ(PaymentInfoVO inVO);
+	PaymentInfoVO selectPaymentInfoByEmail(PaymentInfoVO inVO);
+	
+	// 구독했는지 여부 확인
+	public int checkPayment(PaymentInfoVO inVO);
 }

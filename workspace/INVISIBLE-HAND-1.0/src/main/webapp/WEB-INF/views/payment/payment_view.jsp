@@ -22,14 +22,14 @@
 			<div id="kakaoHead">
 				<img src="../resources/image/kakaopay_icon.jpg" alt="kakaopay_logo"
 					width="100px" />
-			</div>
+			</div>%
 
 			<div id="kakaoContent">
 				<div id="paymentBtn">
-					<span>더 많은 정보를 원한다면</span>
-					<div>999-  ${sessionScope.member.memberId}</div>
-					<div>999-  ${sessionScope.member.memberName}</div>
-					<div>999-  ${sessionScope.member.nickName}</div>
+					<span>더 많은 정보를 원한다면</span><br>
+					<div>${sessionScope.member.memberName}</div><br>
+					<div>${sessionScope.member.email}</div><br>
+					<div>${sessionScope.member.phoneNumber}</div>
 				</div>
 				<button class="btn-hover color-11" id="payBtn"
 					onclick="paymentReady()">결제하기</button>
@@ -67,21 +67,29 @@ function paymentReady() {
 			buyer_tel : phoneNum // 소비자 전화번호
 		}, function(data) {
 			if (data.success) {
-				var msg = "결제가 완료되었습니다!";
-				msg += '/t 주문 번호 : ' + data.merchant_uid;
-				msg += '/t 결제 금액 : ' + data.paid_amount;
-				msg += '/t 구매자 이름 : ' + data.buyer_name;
-				msg += '/t 구매자 이메일 : ' + data.buyer_email;
-				msg += '/t 구매자 전화번호 : ' + data.buyer_tel;
-
+				alert("결제가 완료되었습니다!");
 				console.log("성공!");
-				alert(msg);
-
-				/*
-				 * $.ajax({ type : "POST" , url : "/payment/payment_info.do" , data : {
-				 * "orderNum" : data.merchant_uid , "email" : data.buyer_email ,
-				 * "memberName" : data.buyer_name , "phoneNum" : data.buyer_tel} });
-				 */
+				
+				$.ajax({
+					type : "POST"
+					, url : "/ehr/payment/payment_info.do"
+					, async: true
+					, dataType: "json"
+					, data : {
+						  "merchantUid" : data.merchant_uid
+						  , "email" : data.buyer_email
+						  , "name" : data.name
+						  , "amount" : data.paid_amount
+						  , "buyerEmail" : data.buyer_email
+						  , "buyerName" : data.buyer_name
+						  , "buyerTel" : data.buyer_tel
+					}, success: function(data) {
+		          console.log("success data:" + data);
+          }, error: function(data) {
+        	    console.log("error:" + data);
+        	    console.log(data);
+          }
+	      });
 
 				document.location.href = "/ehr/main/main.do";
 			} else {
@@ -90,7 +98,6 @@ function paymentReady() {
 				alert(msg);
 				location.reload(); // 새로고침
 			}
-			alert(msg);
 		});
 	}
 </script>

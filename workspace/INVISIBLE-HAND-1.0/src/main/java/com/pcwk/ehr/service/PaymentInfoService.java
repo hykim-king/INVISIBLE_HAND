@@ -9,5 +9,9 @@ public interface PaymentInfoService {
 	int addInfo(PaymentInfoVO inVO) throws SQLException;
 	
 	// 주문 번호 조회(결제 번호 조회)
-	PaymentInfoVO getPaymentInfoBySEQ(PaymentInfoVO inVO);
+	PaymentInfoVO getPaymentInfoByEmail(PaymentInfoVO inVO);
+	
+	// 구독 여부 확인
+	public int checkPayment(PaymentInfoVO inVO);
+	
 }

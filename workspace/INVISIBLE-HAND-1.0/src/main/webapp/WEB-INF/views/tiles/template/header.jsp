@@ -64,7 +64,7 @@
 			<div class="login">
 				<c:choose>
 					<c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-						<span>${sessionScope.member.nickName}</span>
+						<span>${sessionScope.member.nickName}님 환영합니다! </span>
 						<a href="javascript:doLogout('${sessionScope.member.nickName}');"><span>로그아웃</span></a>
 					</c:when>
 					<c:otherwise>
