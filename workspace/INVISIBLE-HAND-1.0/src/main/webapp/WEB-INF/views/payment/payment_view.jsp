@@ -28,6 +28,8 @@
 				<div id="paymentBtn">
 					<span>더 많은 정보를 원한다면</span>
 					<div>999-  ${sessionScope.member.memberId}</div>
+					<div>999-  ${sessionScope.member.memberName}</div>
+					<div>999-  ${sessionScope.member.nickName}</div>
 				</div>
 				<button class="btn-hover color-11" id="payBtn"
 					onclick="paymentReady()">결제하기</button>

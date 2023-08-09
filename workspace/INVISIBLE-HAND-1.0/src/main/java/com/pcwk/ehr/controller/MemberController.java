@@ -26,7 +26,7 @@ import com.pcwk.ehr.service.MemberService;
 
 @Controller("membercontroller")
 @RequestMapping(value = "member")	//WEB_INF아래 폴더이름을 적는곳.
-public class memberController {
+public class MemberController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
 
@@ -35,7 +35,7 @@ public class memberController {
 	
 	private final MemberService memberService;
 
-	public memberController(MemberService memberService) {
+	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
@@ -186,6 +186,23 @@ public class memberController {
 	    LOG.debug("└────────────────────────────┘");
 
 	    return message;
+	}
+	
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		LOG.debug("=====================");
+		LOG.debug("=logout()=");
+		LOG.debug("=====================");		
+		
+		
+		if(null != session.getAttribute("member")) {
+			session.removeAttribute("member");
+			session.invalidate();
+			LOG.debug("=session.invalidate()=");
+		}
+		
+		return "main/main";
+		
 	}
 	
 	//----------------------------로그인/로그아웃 끝------------------------------
