@@ -12,8 +12,8 @@ public class RankVO {
 	
 	private int	   rankseq;
 	private String name;
-	private int    score;
-	
-	
-	
+	private int    score;	
+	private int current_rank;
+	private int previous_rank;
+	private String ranking_update;
 }

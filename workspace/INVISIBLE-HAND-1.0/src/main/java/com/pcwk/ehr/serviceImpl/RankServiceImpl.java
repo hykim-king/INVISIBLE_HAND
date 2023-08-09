@@ -15,10 +15,10 @@ public class RankServiceImpl implements RankService {
 	@Autowired
 	RankDao rankDao;
 	
-	@Override
-	public Map<String, Integer> getRank(RankVO inVO) throws SQLException {
-		
-		return rankDao.getRank(inVO);
+	//1. 랭킹 정보 main 화면에 출력할 로직
+	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException{
+			
+		return rankDao.doGetRanking(inVO);
 	}
 
 }

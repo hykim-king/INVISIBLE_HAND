@@ -81,11 +81,26 @@
   <script src="../resources/js/mainBoard.js"></script>
   <script src="../resources/js/mainNews.js"></script>
   <script>
-  $(document).ready(function() {
-	  
-	  
-  });
-  
+  $(document).ready(function() { 
+	  function loadRankData() {
+	        $.ajax({
+	            url: '/ehr/main/Rank.do',
+	            type: 'GET',
+	            //data: {                      },
+	            dataType: 'json',
+	            success: function(data) {            
+	                console.log("데이터를 가져옴");
+	                console.log(data);
+	    
+	            },  //success
+	            error: function(xhr, status, error) {
+	                // AJAX 요청이 실패했을 때 실행되는 부분
+	                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+	                console.error(error);
+	            } //error
+	        }); //ajax
+	    } //loadRankData()  
+  });  
   </script>
 </body>
 </html>

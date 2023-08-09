@@ -22,6 +22,7 @@ import com.pcwk.ehr.VO.RankVO;
 import com.pcwk.ehr.service.ChartService;
 import com.pcwk.ehr.service.MainService;
 import com.pcwk.ehr.service.NaverSearchService;
+import com.pcwk.ehr.service.RankService;
 
 @Controller
 @RequestMapping
@@ -36,6 +37,9 @@ public class MainController {
 	
 	@Autowired
 	ChartService chartService;
+	
+	@Autowired
+	RankService rankService;
 	
 	@RequestMapping(value = "main/main.do")
 	public String main() throws SQLException {
@@ -104,14 +108,17 @@ public class MainController {
 	}
 	
 	
-	//랭킹
-	@RequestMapping(value="main/Rank.do",method = RequestMethod.POST
+	//1. 랭킹 정보 main 화면에 출력할 로직
+	@RequestMapping(value="main/Rank.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public Map<String, Integer> Rank(RankVO inVO) {
-		return null;
+	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException {
+		List<RankVO> rankData = rankService.doGetRanking(inVO);
 		
+		
+		return rankData;
 	}
-	//랭킹 목록 score 증가 구현(my 기업 솔루션에서 업종 선택하여 분석시 +1 하도록 로직 작성)
+	
+
 
 }
