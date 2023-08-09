@@ -1,4 +1,4 @@
-package com.pcwk.ehr.hand.controller;
+package com.pcwk.ehr.controller;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "payment")	//WEB_INF아래 폴더이름을 적는곳.
-public class PaymentController {
+public class SolutionController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
 
