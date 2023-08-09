@@ -28,6 +28,8 @@
 				<div id="paymentBtn">
 					<span>더 많은 정보를 원한다면</span>
 					<div>999-  ${sessionScope.member.memberId}</div>
+					<div>999-  ${sessionScope.member.memberName}</div>
+					<div>999-  ${sessionScope.member.nickName}</div>
 				</div>
 				<button class="btn-hover color-11" id="payBtn"
 					onclick="paymentReady()">결제하기</button>
@@ -41,8 +43,9 @@
 </div>
 <script>
 function paymentReady() {
-    var email = '${sessionScope.member.memberId}';
-    /* var name = '${sessionScope.member.memberId}'; */
+    var name = '${sessionScope.member.memberName}';
+    var email = '${sessionScope.member.email}';
+    var phoneNum = '${sessionScope.member.phoneNumber}';
 
 		var today = new Date();
 		var hours = today.getHours(); // 시
@@ -61,7 +64,7 @@ function paymentReady() {
 			amount : 100, // 구매할 가격
 			buyer_email : email,// 소비자 이메일
 			buyer_name : name, // 소비자 이름
-		// buyer_tel : phoneNum // 소비자 전화번호
+			buyer_tel : phoneNum // 소비자 전화번호
 		}, function(data) {
 			if (data.success) {
 				var msg = "결제가 완료되었습니다!";
@@ -69,7 +72,7 @@ function paymentReady() {
 				msg += '/t 결제 금액 : ' + data.paid_amount;
 				msg += '/t 구매자 이름 : ' + data.buyer_name;
 				msg += '/t 구매자 이메일 : ' + data.buyer_email;
-				// msg += '/t 구매자 전화번호 : ' + data.buyer_tel;
+				msg += '/t 구매자 전화번호 : ' + data.buyer_tel;
 
 				console.log("성공!");
 				alert(msg);
