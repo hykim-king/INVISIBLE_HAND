@@ -40,7 +40,7 @@
         	      	       	 
             let row = '<tr>' +
                       '<td>' + item.num + '</td>' +
-                      '<td><a href="${CP}/post/doSelectOne.do?categoryNumber=' + item.categoryNumber + '&postNumber=' + item.postNumber + '">' + item.title + '</a></td>' +                     
+                      '<td><a href="/ehr/post/doSelectOne.do?categoryNumber=' + item.categoryNumber + '&postNumber=' + item.postNumber + '">' + item.title + '</a></td>' +                     
                       '<td>' + item.nickname + '</td>' +
                       '<td>' + item.writtenDate + '</td>' + 
                       '<td>' + item.views + '</td>' +

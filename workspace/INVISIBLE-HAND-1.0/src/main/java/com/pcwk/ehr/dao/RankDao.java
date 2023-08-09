@@ -8,8 +8,12 @@ import com.pcwk.ehr.VO.RankVO;
 
 public interface RankDao {
 	
-	Map<String, Integer> getRank(RankVO inVO) throws SQLException;
+	//1. 랭킹 정보 main 화면에 출력할 로직
+	List<RankVO> doGetRanking(RankVO inVO) throws SQLException;
 	
+
+	int doUpdatePrevious(RankVO inVO) throws SQLException;
 	
+	int doUpdateCurrent(RankVO inVO) throws SQLException;
 	
 }
