@@ -1,11 +1,17 @@
 package com.pcwk.ehr.dao;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import com.pcwk.ehr.VO.MemberVO;
 
 public interface AdminDao {
-    MemberVO getAdminById(String adminId); 
+	// 회원정보 조회
+	List<MemberVO> getAllMemberDao();
+	
+	// 
 
-    void updateAdmin(MemberVO adminVO); 
+
 
 }
 

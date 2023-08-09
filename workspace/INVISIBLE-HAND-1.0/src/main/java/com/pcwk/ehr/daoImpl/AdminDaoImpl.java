@@ -1,12 +1,11 @@
 package com.pcwk.ehr.daoImpl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-import javax.sql.DataSource;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,45 +14,25 @@ import com.pcwk.ehr.dao.AdminDao;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
+	final Logger log = LogManager.getLogger(getClass());
 
-    private final DataSource dataSource;
+	final String NAMESPACEMEMBER = "mapper.member.memberMapper"; // src/main/resources/member 폴더 까지.
+	final String NAMESPACEPOST = "com.pcwk.ehr.post"; // src/main/resources/post폴더 까지.
+	final String DOT = ".";
 
-    @Autowired
-    public AdminDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
 
-    @Override
-    public MemberVO getAdminById(String adminId) {
-        MemberVO adminVO = null;
-        String sql = "SELECT * FROM MEMBER WHERE MEMBERID = ?";
-        try (Connection conn = dataSource.getConnection(); 
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, adminId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    adminVO = new MemberVO();
-                    adminVO.setMemberId(rs.getString("MEMBERID"));
-                    adminVO.setPassword(rs.getString("PASSWORD"));
-                    adminVO.setMemberGrade(rs.getInt("MEMBERGRADE"));
-                    adminVO.setMemberName(rs.getString("MEMBERNAME"));
-                    adminVO.setEmail(rs.getString("EMAIL"));
-                    adminVO.setNickName(rs.getString("NICKNAME"));
-                    adminVO.setJoinDate(rs.getString("JOINDATE"));
-                    adminVO.setUpdateDate(rs.getString("UPDATEDATE"));
-                    adminVO.setIsverified(rs.getString("ISVERIFIED"));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return adminVO;
-    }
+	@Override
+	public List<MemberVO> getAllMemberDao() {
+		String statement = NAMESPACEMEMBER + DOT + "findAll"; //mapper에 있는 id가 findall인 xml을 쓰고싶어요!
+		log.debug("1. statement: " + statement);
+		List<MemberVO> memberlist = sqlSessionTemplate.selectList(statement); //statement, param << 여기서는 param이 없어서 안줌.
+		for (MemberVO memberone : memberlist) {
+			log.debug("2. memberone: " + memberone);
+		}
 
-    @Override
-    public void updateAdmin(MemberVO adminVO) {
-        // 管理者情報を更新する実装
-        // JDBCまたは他のORMフレームワークを使用して更新操作を行います
-    }
+		return memberlist;
+	}
+
 }
-

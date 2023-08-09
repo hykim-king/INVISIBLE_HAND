@@ -3,28 +3,26 @@ package com.pcwk.ehr.serviceImpl;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.AdminDao;
 import com.pcwk.ehr.service.AdminService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    private final AdminDao adminDao;
+	@Autowired
+    public AdminDao adminDao;
 
-    @Autowired
-    public AdminServiceImpl(AdminDao adminDao) {
-        this.adminDao = adminDao;
-    }
 
-    @Override
-    public MemberVO getAdminById(String adminId) {
-        return adminDao.getAdminById(adminId);
-    }
-
-    @Override
-    public void updateAdmin(MemberVO adminVO) {
-        adminDao.updateAdmin(adminVO);
-    }
+	@Override
+	public List<MemberVO> getAllMemberService() {
+		//여기에 기능을 추가하세요.
+		return adminDao.getAllMemberDao(); //Dao호출
+	}
+	
+	
 
 }
 

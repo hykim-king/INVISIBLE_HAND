@@ -26,7 +26,7 @@ import com.pcwk.ehr.service.MemberService;
 
 @Controller("membercontroller")
 @RequestMapping(value = "member")	//WEB_INF아래 폴더이름을 적는곳.
-public class MemberController {
+public class memberController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
 
@@ -35,7 +35,7 @@ public class MemberController {
 	
 	private final MemberService memberService;
 
-	public MemberController(MemberService memberService) {
+	public memberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
