@@ -29,17 +29,6 @@ public class RankDaoImpl implements RankDao{
 	
 	//1. 랭킹 정보 main 화면에 출력할 로직
 	@Override
-
-	public Map<String, Integer> getRank(RankVO inVO) throws SQLException {
-		List<RankVO> rankList = sqlSessionTemplate.selectList(NAMESPACE + DOT + "getRank", inVO);
-
-		Map<String, Integer> resultMap = new HashMap<>();
-		for (RankVO rankVO : rankList) {
-		    resultMap.put(rankVO.getName(), rankVO.getScore());
-		}
-
-		return (Map<String, Integer>) sqlSessionTemplate.selectList(NAMESPACE + DOT + "getRank", inVO);
-
 	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException {
 		
 		
