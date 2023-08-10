@@ -22,7 +22,7 @@
 			<div id="kakaoHead">
 				<img src="../resources/image/kakaopay_icon.jpg" alt="kakaopay_logo"
 					width="100px" />
-			</div>%
+			</div>
 
 			<div id="kakaoContent">
 				<div id="paymentBtn">
