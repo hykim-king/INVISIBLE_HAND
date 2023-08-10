@@ -14,10 +14,6 @@ public class PaymentInfoVO {
 	private String buyerName; // 소비자 이름
 	private String buyerTel; // 소비자 전화번호
 	
-	// 구독 여부
-	private boolean paymentSuccess;
-	
 	public PaymentInfoVO() {}
-
 
 }

@@ -28,7 +28,7 @@ public class PaymentController {
 
 	@Autowired
 	PaymentInfoService payService;
-	
+
 	@Autowired
 	MemberService memberService;
 
@@ -73,25 +73,7 @@ public class PaymentController {
 //		
 //		return "kakaopay/kakaopay";
 //	}
-	
-	// 구독 정보
-//	@RequestMapping(value = "/payment_detail.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public String paymentDetail(PaymentInfoVO payInfo, HttpServletRequest req) {
-//		String jsonString = "";
-//		lg.debug("┌──────────────────────────────┐");
-//		lg.debug("│inVO:" + payInfo);
-//		String memberId = req.getParameter("memberId");
-//		lg.debug("│memberId:" + memberId);
-//		PaymentInfoVO outVO = this.payService.getPaymentInfoByEmail(payInfo);
-//
-//		jsonString = new Gson().toJson(outVO);
-//		lg.debug("│jsonString:" + jsonString);
-//		lg.debug("└──────────────────────────────┘");
-//
-//		return jsonString;
-//	}
-	
+
 	// 구독 정보
 	@RequestMapping("/payment_detail.do")
 	public String paymentDetail(Model model, HttpServletRequest request) {
@@ -107,34 +89,36 @@ public class PaymentController {
 	    return "payment/payment_detail";
 	}
 
-	// 구독
 	@RequestMapping(value = "/payment_info.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
-	public String add(PaymentInfoVO inVO, HttpServletRequest req) throws SQLException, ClassNotFoundException {
-		String id = req.getParameter("merchantUid");
-		lg.debug("id-----------------" + id);
-		
-		String jsonString = "";
-		lg.debug("┌──────────────────────────────┐");
-		lg.debug("│ inVO : " + inVO);
-		String memberId = req.getParameter("memberId");
-		lg.debug("│ memberId : " + memberId);
-		int flag = this.payService.addInfo(inVO);
-		// jsonString에 담을 메시지
-		String message = "";
-		if (1 == flag) {
-			message = inVO.getBuyerEmail() + "가 구독되었습니다.";
-		} else {
-			message = inVO.getBuyerEmail() + "가 구독 실패되었습니다.";
-		}
+	@ResponseBody
+	public String paymentInfoAddOrUpdate(PaymentInfoVO inVO, HttpSession session) throws SQLException, ClassNotFoundException {
+	    String email = (String) session.getAttribute("email");
 
-		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+	    int rowCount = payService.checkPaymentInfo(email);
 
-		jsonString = new Gson().toJson(messageVO);
-		lg.debug("│ jsonString : " + jsonString);
-		lg.debug("└──────────────────────────────┘");
-
-		return jsonString;
+	    if (rowCount == 0) { // 결제 정보가 없으면 추가
+	        int result = payService.addInfo(inVO);
+	        if (result == 1) {
+	            String msg = inVO.getBuyerEmail() + "가 구독되었습니다.";
+	            MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
+	            return new Gson().toJson(messageVO);
+	        } else {
+	            String msg = inVO.getBuyerEmail() + "가 구독 실패되었습니다.";
+	            MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
+	            return new Gson().toJson(messageVO);
+	        }
+	    } else { // 있으면 업데이트
+	        int result = payService.updatePaymentInfo(inVO);
+	        if (result == 1) {
+	            String msg = inVO.getBuyerEmail() + "구독 정보가 업데이트되었습니다.";
+	            MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
+	            return new Gson().toJson(messageVO);
+	        } else {
+	            String msg = inVO.getBuyerEmail() + "가 구독 정보 업데이트가 실패되었습니다.";
+	            MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
+	            return new Gson().toJson(messageVO);
+	        }
+	    }
 	}
 
 	@RequestMapping(value = "/payment_view.do")
