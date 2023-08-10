@@ -38,49 +38,36 @@ h5{
     
 }
 
-button{
-    background-color: #fff;
-    border-radius: 30px;
-    padding: 10px 25px;
-    border: 1px solid #fff;
-    box-shadow: 2px 2px 4px #c2c2c26c;
-    font-weight: 600;
-    color: #505050;
-    font-size: 18px;
-    transition: 0.5s;
-}
 
-button:hover{
-    cursor: pointer;
-    background-color: #979797;
-    border: 1px solid #979797;
-    color: #fff;
-}
 
 /* Q_01~02 */
 
 h2{
+    color:#00FFF0;
     margin: 70px 0 0 90px;
 }
 h4{
-    color: #505050;
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 400;
     font-size: 14px;
     margin: 25px 0;
 }
 p{
     margin: 15px 0 15px 120px;
-    color: #505050;
+    color: #979797;
     font-size: 12px;
     
+}
+
+label{
+    color: #fff;
 }
 .radio{
     position: relative;
     cursor: pointer;
     line-height: 20px;
     font-size: 15px;
-    margin: 15px;
-
+    margin: 15px 10px;
 }
 
 .cntr{
@@ -92,7 +79,7 @@ p{
     width: 800px;
     margin: 0 auto;
     padding: 50px;
-    border: 1px solid #979797;
+    border: 1px solid #00FFF0;
     border-radius: 30px;
 
 
@@ -103,11 +90,10 @@ p{
 }
 .que-box{
     width: 30%;
+    color:#fff;
 }
 :root{
-
-    accent-color:#505050;
-
+    accent-color:#00FFF0;
 }
 .line{
     display: flex;
@@ -117,34 +103,52 @@ p{
     width: 30%;
 }
 
-.line05{
+.line06{
     justify-content:flex-start;
+}
+.radio16{
+    margin-right: 20px;
 }
 
 .percent{
     line-height: 25px;
     text-align: right;
+
 }
 .submit{
     padding: 50px 0;
-    width: 100%;
-    text-align: center;
+    width: 800px;
+    margin: 0 auto;
+    text-align: end;
 }
 .go-result{
-    background-color: #979797;
-    border-radius: 30px;
+    height: 60px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #00FFF0;
     padding: 10px 25px;
-    border: 1px solid #979797;
-    box-shadow: 2px 2px 4px #c2c2c26c;
+    border: 1px solid #00FFF0;
     font-weight: 600;
-    color: #ffffff;
+    color: #121212;
     font-size: 18px;
     transition: 0.5s;
 }
 
 .go-result:hover{
     cursor: pointer;
-    background-color: #ffffff;
-    border: 1px solid #afa8a8;
-    color: #505050;
+    background-color: #121212;
+    border: 1px solid #00FFF0;
+    color: #00FFF0;
+}
+
+input{
+    background-color: #121212;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+input.hidden{
+    margin-right: 5px;
 }

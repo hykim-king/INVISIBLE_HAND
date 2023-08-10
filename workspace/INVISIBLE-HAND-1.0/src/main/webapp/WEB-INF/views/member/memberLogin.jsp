@@ -46,6 +46,9 @@
         <p>
           <input type="submit" value="login" id ="goLogin" name="goLogin" class="btn w100 login-btn">
         </p>
+                <p>
+          <input type="submit" value="카카오로 로그인" id ="goLogin" name="goLogin" class="btn w100 login-btn">
+        </p>
         <span class="back-home"><a href="${CP}/main/main.do">메인페이지로 돌아가기</a></span>
         </form>
 		</div><!-- **---wrap End---** -->
