@@ -169,6 +169,7 @@ public class MemberController {
 	        if (memberInfo != null) {
 				//session설정
 				httpSession.setAttribute("member", memberInfo);
+				httpSession.setAttribute("email", memberInfo.getEmail());
 				
 				LOG.debug("999member" + member);
 				//쿠키 생성: memberId

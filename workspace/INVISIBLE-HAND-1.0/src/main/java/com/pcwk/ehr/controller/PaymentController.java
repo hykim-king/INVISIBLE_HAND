@@ -3,11 +3,13 @@ package com.pcwk.ehr.controller;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.VO.PaymentInfoVO;
 import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.service.MemberService;
 import com.pcwk.ehr.service.PaymentInfoService;
 
 @Controller
@@ -25,6 +28,9 @@ public class PaymentController {
 
 	@Autowired
 	PaymentInfoService payService;
+	
+	@Autowired
+	MemberService memberService;
 
 //	@RequestMapping(value = "/kakaopay.do")
 //	@ResponseBody
@@ -67,6 +73,39 @@ public class PaymentController {
 //		
 //		return "kakaopay/kakaopay";
 //	}
+	
+	// 구독 정보
+//	@RequestMapping(value = "/payment_detail.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+//	@ResponseBody
+//	public String paymentDetail(PaymentInfoVO payInfo, HttpServletRequest req) {
+//		String jsonString = "";
+//		lg.debug("┌──────────────────────────────┐");
+//		lg.debug("│inVO:" + payInfo);
+//		String memberId = req.getParameter("memberId");
+//		lg.debug("│memberId:" + memberId);
+//		PaymentInfoVO outVO = this.payService.getPaymentInfoByEmail(payInfo);
+//
+//		jsonString = new Gson().toJson(outVO);
+//		lg.debug("│jsonString:" + jsonString);
+//		lg.debug("└──────────────────────────────┘");
+//
+//		return jsonString;
+//	}
+	
+	// 구독 정보
+	@RequestMapping("/payment_detail.do")
+	public String paymentDetail(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String buyerEmail = (String)session.getAttribute("email"); // session으로 email정보 넘기기
+		
+		// PaymentInfoVO 객체 생성
+		PaymentInfoVO paymentInfo = new PaymentInfoVO();
+		paymentInfo = payService.getPaymentInfoByEmail(buyerEmail); // 객체에 정보 담기
+		
+		model.addAttribute("paymentInfo", paymentInfo);
+		
+	    return "payment/payment_detail";
+	}
 
 	// 구독
 	@RequestMapping(value = "/payment_info.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -84,9 +123,9 @@ public class PaymentController {
 		// jsonString에 담을 메시지
 		String message = "";
 		if (1 == flag) {
-			message = inVO.getbuyerEmail() + "가 구독되었습니다.";
+			message = inVO.getBuyerEmail() + "가 구독되었습니다.";
 		} else {
-			message = inVO.getbuyerEmail() + "가 구독 실패되었습니다.";
+			message = inVO.getBuyerEmail() + "가 구독 실패되었습니다.";
 		}
 
 		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);

@@ -1,5 +1,10 @@
 package com.pcwk.ehr.VO;
 
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString
 public class PaymentInfoVO {
 	private int paymentinfoseq; // 결제 시퀀스
 	private String merchantUid; // 주문번호
@@ -14,87 +19,5 @@ public class PaymentInfoVO {
 	
 	public PaymentInfoVO() {}
 
-	public PaymentInfoVO(int paymentinfoseq, String merchantUid, String name, int amount, String buyerEmail,
-			String buyerName, String buyerTel) {
-		super();
-		this.paymentinfoseq = paymentinfoseq;
-		this.merchantUid = merchantUid;
-		this.name = name;
-		this.amount = amount;
-		this.buyerEmail = buyerEmail;
-		this.buyerName = buyerName;
-		this.buyerTel = buyerTel;
-	}
-
-	public int getPaymentinfoseq() {
-		return paymentinfoseq;
-	}
-
-	public void setPaymentinfoseq(int paymentinfoseq) {
-		this.paymentinfoseq = paymentinfoseq;
-	}
-
-	public String getmerchantUid() {
-		return merchantUid;
-	}
-
-	public void setmerchantUid(String merchantUid) {
-		this.merchantUid = merchantUid;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public String getbuyerEmail() {
-		return buyerEmail;
-	}
-
-	public void setbuyerEmail(String buyerEmail) {
-		this.buyerEmail = buyerEmail;
-	}
-
-	public String getbuyerName() {
-		return buyerName;
-	}
-
-	public void setbuyerName(String buyerName) {
-		this.buyerName = buyerName;
-	}
-
-	public String getbuyerTel() {
-		return buyerTel;
-	}
-
-	public void setbuyerTel(String buyerTel) {
-		this.buyerTel = buyerTel;
-	}
-
-	public boolean isPaymentSuccess() {
-		return paymentSuccess;
-	}
-
-	public void setPaymentSuccess(boolean paymentSuccess) {
-		this.paymentSuccess = paymentSuccess;
-	}
-
-	@Override
-	public String toString() {
-		return "PaymentInfoVO [paymentinfoseq=" + paymentinfoseq + ", merchantUid=" + merchantUid + ", name=" + name
-				+ ", amount=" + amount + ", buyerEmail=" + buyerEmail + ", buyerName=" + buyerName + ", buyerTel="
-				+ buyerTel + ", paymentSuccess=" + paymentSuccess + "]";
-	}
 
 }

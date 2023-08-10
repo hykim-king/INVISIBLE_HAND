@@ -126,6 +126,14 @@ body{
   text-align: center;
   margin-top: 50px;
 }
+
+#kakaoLogo {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
 .btn.w70 {
   width: 70%;
 }

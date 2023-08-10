@@ -17,8 +17,8 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
 
 	// 결제 정보 조회
 	@Override
-	public PaymentInfoVO getPaymentInfoByEmail(PaymentInfoVO inVO) {
-		return dao.selectPaymentInfoByEmail(inVO);
+	public PaymentInfoVO getPaymentInfoByEmail(String buyerEmail) {
+		return dao.selectPaymentInfoByEmail(buyerEmail);
 	}
 	
 	// 결제 정보 입력

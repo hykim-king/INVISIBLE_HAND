@@ -7,7 +7,7 @@
 		<selectKey keyProperty="paymentinfoseq" resultType="int" order="BEFORE">
 	    SELECT paymentinfoseq.nextval FROM DUAL
 	  </selectKey>
-		INSERT INTO payment_information(
+		INSERT INTO payment_information (
 		  paymentinfoseq
 		  , merchant_uid
 		  , name
@@ -15,7 +15,7 @@
 		  , buyer_email
 		  , buyer_name
 		  , buyer_tel
-		)VALUES(
+		) VALUES (
 			#{paymentinfoseq}
 		  , #{merchantUid}
 		  , #{name}
@@ -26,21 +26,36 @@
 		)
 
 	</insert>
+	
+	<!-- 구독 정보 전체 조회 -->
+	<select id="selectAll" parameterType="PaymentInfoVO" resultType="PaymentInfoVO" >
+	  SELECT 
+			paymentinfoseq
+			 , merchant_uid
+			 , name
+			 , amount
+			 , buyer_email
+			 , buyer_name
+			 , buyer_tel
+	  FROM payment_information
+	  WHERE buyer_email = #{buyerEmail}
+  </select>
   
-  <!-- 조회 -->
+  <!-- 구독 조회 -->
 	<select id="selectPaymentInfoByEmail" parameterType="PaymentInfoVO" resultType="PaymentInfoVO">
 		SELECT 
 	    paymentinfoseq
-	    , merchant_uid
-	    , name
-	    , amount
-	    , buyer_email
-	    , buyer_name
-	    , buyer_tel
+      , merchant_uid
+      , name
+      , amount
+      , buyer_email
+      , buyer_name
+      , buyer_tel
 		FROM payment_information
 		WHERE buyer_email = #{buyerEmail}
 	</select>
 	
+	<!-- 구독 여부 확인 -->
 	<select id="checkPayment" parameterType="PaymentInfoVO" resultType="int">
     SELECT COUNT(*)
 		FROM payment_information
