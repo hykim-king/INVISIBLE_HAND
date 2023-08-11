@@ -49,7 +49,7 @@ public class PostController {
 		LOG.debug("┌────────────────────────────────┐");
 		LOG.debug("│post : " + inVO);
 
-		int flag = this.postService.doSave(inVO);
+		int flag = this.postService.doSave(inVO	);
 
 		String message = "";
 
