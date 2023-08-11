@@ -12,11 +12,9 @@
     <%-- 동적으로 브라우저 제목을 처리 --%>
     <title><tiles:getAsString name="title"/></title>
     <link rel="icon" href="../resources/image/favicon-32x32.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico" >
-    
+    <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico" > 
     <link rel="stylesheet" href="../resources/css/common.css">
-    
-    <title>보이지 않는 손 레이아웃</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
   </head>
  
 <body>

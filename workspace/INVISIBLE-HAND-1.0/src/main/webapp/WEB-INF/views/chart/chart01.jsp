@@ -12,7 +12,6 @@
 <body>
   <!-- *---container Start---* -->
 
-  <div class="h60px"></div>
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart1"></div>
@@ -106,10 +105,19 @@
               width: '60%',  // 차트 영역의 너비 설정 (70%로 설정)
               height:'70%' // 차트 영역의 높이 설정 (70%로 설정)
             },
-          titleTextStyle: { color: 'black' },
+            
+            chartArea: {
+                backgroundColor: {
+                    fill: '#222',
+                },
+            },
+            backgroundColor: {
+                fill: '#222',
+            },
+          titleTextStyle: { color: '#fff' },
           hAxis: {
-              textStyle: { fontSize: 15, color: 'black' },
-              baselineColor: 'black'
+              textStyle: { fontSize: 15, color: '#fff' },
+              baselineColor: '#fff'
           },
           vAxis: {
               //title: 'title',
@@ -117,7 +125,7 @@
               format: '###',
           },
           legend: {
-            textStyle: { position: 'top', fontSize: 13, color: 'black' },
+            textStyle: { position: 'top', fontSize: 13, color: '#fff' },
           },
           series: {
               0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
