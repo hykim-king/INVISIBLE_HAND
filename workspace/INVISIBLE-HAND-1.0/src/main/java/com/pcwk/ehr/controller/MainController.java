@@ -53,7 +53,7 @@ public class MainController {
 	// AJAX 통신을 위한 메서드제작 //검색 기본 단어 query를 ajax에서 정할 것임. //일단 기본 값은 "중소기업" 이후 변경
 	@RequestMapping(value = "main/doNaverSearch.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doNaverSearch(@RequestParam(value = "query", defaultValue = "중소기업") String query) throws IOException {
+	public String doNaverSearch(@RequestParam(value = "query", required = false, defaultValue = "중소기업") String query) throws IOException {
 
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│ doNaverSearch()       │");
@@ -82,25 +82,56 @@ public class MainController {
 	@RequestMapping(value="main/chartGraph.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String chartGraph(ChartVO inVO) {
+	public String chartGraph(@RequestParam(value = "mainCategory", required = false, defaultValue = "비제조업") String mainCategory,
+            				 @RequestParam(value = "subCategory", required = false, defaultValue = "-") String subCategory) {
 		String jsonString = "";
 		
+		ChartVO inVO = new ChartVO();
+		inVO.setMaincategory(mainCategory);
+		inVO.setSubcategory(subCategory);		
 		List<ChartVO> chartData = chartService.chartGraph(inVO);
 		
 		JsonArray mainArray=new JsonArray();
-		
-		for(ChartVO outVO  :chartData) {
-			JsonArray sArray=new JsonArray();
-			sArray.add(outVO.getChartseq());
-			sArray.add(outVO.getYear());
-			sArray.add(outVO.getOne());
-			sArray.add(outVO.getTwo());
-			sArray.add(outVO.getThree());
+		if(subCategory.equals("-")) {
+			for(ChartVO outVO  :chartData) {
+				JsonArray sArray=new JsonArray();
+				sArray.add(outVO.getChartdate());
+				sArray.add(outVO.getMaincategory());
+				sArray.add(outVO.getSubcategory());
+				sArray.add(outVO.getSbhiAvg());
+				sArray.add(outVO.getSbhi2Avg());
+				sArray.add(outVO.getSbhi3Avg());
+				sArray.add(outVO.getSbhi4Avg());
+				sArray.add(outVO.getSbhi5Avg());
+				sArray.add(outVO.getSbhi6Avg());
+				sArray.add(outVO.getSbhi7Avg());
+				sArray.add(outVO.getSbhi8Avg());
+				sArray.add(outVO.getSbhi9Avg());
+				sArray.add(outVO.getSbhi10Avg());			
+				mainArray.add(sArray);
+			}
+			jsonString = mainArray.toString();
 			
-			mainArray.add(sArray);
+		}else if(!subCategory.equals("-")) {
+				for(ChartVO outVO  :chartData) {
+					JsonArray sArray=new JsonArray();
+					sArray.add(outVO.getChartdate());
+					sArray.add(outVO.getMaincategory());
+					sArray.add(outVO.getSubcategory());
+					sArray.add(outVO.getSbhi());
+					sArray.add(outVO.getSbhi2());
+					sArray.add(outVO.getSbhi3());
+					sArray.add(outVO.getSbhi4());
+					sArray.add(outVO.getSbhi5());
+					sArray.add(outVO.getSbhi6());
+					sArray.add(outVO.getSbhi7());
+					sArray.add(outVO.getSbhi8());
+					sArray.add(outVO.getSbhi9());
+					sArray.add(outVO.getSbhi10());			
+					mainArray.add(sArray);
+				}
+				jsonString = mainArray.toString();
 		}
-		jsonString = mainArray.toString();
-		
 		LOG.debug("=====================================");
 		LOG.debug("jsonString"+jsonString);
 		LOG.debug("=====================================");

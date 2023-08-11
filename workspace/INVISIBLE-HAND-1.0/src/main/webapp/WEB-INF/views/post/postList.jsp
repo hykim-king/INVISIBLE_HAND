@@ -156,7 +156,7 @@
        </table> <!-- **---table End---** -->
        <!-- 페이징 -->
        <div class="d-flex justify-content-center">
-         <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
+       <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        

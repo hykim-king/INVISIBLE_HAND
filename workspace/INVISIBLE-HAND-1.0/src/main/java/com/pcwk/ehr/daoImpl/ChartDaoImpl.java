@@ -20,7 +20,13 @@ public class ChartDaoImpl implements ChartDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	//차트 데이터 조회
+	//(변수 1개일때 maincategory)
+	public List<ChartVO> chartGraphAvg(ChartVO inVO){
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chartGraphAvg", inVO);
+	}
+	
+	
+	//차트 데이터 조회 (변수 2개일때 maincategory, subcategory)
 	public List<ChartVO> chartGraph(ChartVO inVO) {
 		
 	
