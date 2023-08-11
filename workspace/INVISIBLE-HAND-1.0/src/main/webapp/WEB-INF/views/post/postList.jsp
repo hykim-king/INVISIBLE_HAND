@@ -204,7 +204,7 @@
     let postNumber = tdArray.eq(5).text();
     console.log('postNumber:'+postNumber);
     
-    if( confirm("상세 조회.. test 짜장면 먹구싶다.") == false ) return;
+    if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
     
     //categoryNumber,postNumber
     ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393

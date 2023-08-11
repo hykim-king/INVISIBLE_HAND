@@ -18,12 +18,6 @@
     request.setAttribute("ctgNumValue", ctgNumValue);
     request.setAttribute("postNumValue", postNumValue);
     
-    String nickname = (String) session.getAttribute("nickname");
-    request.setAttribute("nickname", nickname);
-    
-    String memberId = (String) session.getAttribute("memberId");
-    request.setAttribute("memberId", memberId);
-    
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <!DOCTYPE html>
@@ -58,6 +52,7 @@
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
           <input type="hidden" name="postNumber"    id="postNumber" value="${outVO.getPostNumber()}">
+          <input type="hidden" name="postNumber"    id="nickname" value="${outVO.getNickname()}">
           <div id="title" class="contents-title">
             <!-- <p>제목이 됩니다</p> -->
             <c:out value="${outVO.title}" />
@@ -165,8 +160,10 @@
         console.log("moveToUpdateView");
         console.log("postNumber:"+"${postNumValue}");
         console.log("categoryNumber:"+"${ctgNumValue}");
+        
         var loggedInNickname = "${sessionScope.nickname}";
-        var postNickname = "${nickname}";
+        var postNickname = "${outVO.getNickname()}";
+        
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         
@@ -198,7 +195,7 @@
 
         // 게시글 작성자와 로그인한 사용자의 닉네임 비교
         var loggedInNickname = "${sessionScope.nickname}";
-        var postNickname = "${nickname}";
+        var postNickname = "${outVO.getNickname()}";
         
         
         if (loggedInNickname === postNickname) {
@@ -247,7 +244,7 @@
         console.log("postNumber: ${postNumValue}");
         console.log("categoryNumber: ${ctgNumValue}");
         var loggedInNickname = "${sessionScope.nickname}";
-        var postNickname = "${nickname}";
+        var postNickname = "${outVO.getNickname()}";
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         

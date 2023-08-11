@@ -65,7 +65,7 @@
 		
 		    <div class="mb-3">
 		        <label for="exampleFormControlInput1" class="form-label">닉네임</label>
-		        <input type="text" class="form-control" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
+		        <input type="text" class="form-control" id="nickname" name="nickname" value="${outVO.getNickname()}" readonly="readonly">
 		    </div>
 		
 		    <div class="mb-3">
@@ -117,7 +117,7 @@ $(".categorybox").click(function() {
 		             $("#content").focus();
 		             return;
 		          } 
-		          console.log("nickname:"+"${nickname}");
+		          console.log("nickname:"+"${outVO.getNickname()}");
 		          if(confirm('수정 하시겠습니까?') == false) return;
 		          
 		          //ajax로 비동기 통신 
@@ -130,7 +130,7 @@ $(".categorybox").click(function() {
 		                categoryNumber: $("#categoryNumber").val(),
 		                title: $("#title").val(),
 		                content: $("#content").val(),
-		                nickname: '${sessionScope.nickname}',
+		                nickname: $("#nickname").val(),
 		                postNumber: $("#postNumber").val()  
 		              },
 		              success:function(data){//통신 성공
