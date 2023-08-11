@@ -2,6 +2,7 @@ package com.pcwk.ehr.controller;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,14 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.CookieGenerator;
 
+import com.google.gson.Gson;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
 import com.pcwk.ehr.service.MailSendService;
@@ -97,21 +97,30 @@ public class MemberController {
 	
 	
 	//회원가입페이지에서 로그인페이지로 이동
-	@PostMapping("/join.do")
-	public String add(@ModelAttribute MemberVO member) throws ClassNotFoundException, SQLException {
-		
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   add ()              │"+member);
-		LOG.debug("└───────────────────────┘");
-		int flag = memberService.add(member);
-		String data;
-		if (flag == 1) {
-			data = "success";
+	@RequestMapping(value = "/join.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
+	public String add(MemberVO inVO, HttpServletRequest req) throws SQLException, ClassNotFoundException {
+		String jsonString = "";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO:" + inVO);
+		String memberId = req.getParameter("memberId");
+		LOG.debug("│memberId:" + memberId);
+		int flag = this.memberService.add(inVO);
+		// jsonString에 담을 메시지
+		String message = "";
+		if (1 == flag) {
+			message = inVO.getMemberId() + "가 등록 되었습니다.";
 		} else {
-			data = "fail";
+			message = inVO.getMemberId() + "등록 실패";
 		}
-		
-		return data;
+
+		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+
+		jsonString = new Gson().toJson(messageVO);
+		LOG.debug("│jsonString:" + jsonString);
+		LOG.debug("└──────────────────────────────┘");
+
+		return jsonString;
 	}
 	
 	 

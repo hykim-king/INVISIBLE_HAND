@@ -9,12 +9,11 @@ import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.MemberDao;
 import com.pcwk.ehr.service.MemberService;
-import com.pcwk.ehr.VO.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -73,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
 	}
     
     
-	
+	// 이메일 전송
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
@@ -87,33 +86,34 @@ public class MemberServiceImpl implements MemberService {
 	// 회원 가입
 	@Override
 	public int add(MemberVO member) throws ClassNotFoundException, SQLException {
-
-		
 		return memberDao.add(member);
-		
 	}
-
+	
+	// 조회수
 	@Override
 	public int getCount(MemberVO member) throws SQLException {
 		return memberDao.getCount(member);
 	}
 
+	// 조회
 	@Override
 	public MemberVO get(MemberVO member) throws ClassNotFoundException, SQLException {
 		return memberDao.get(member);
 	}
-
+	
+	// 유저 정보 변경
 	@Override
 	public int update(MemberVO member) throws SQLException {
 		return memberDao.update(member);
 	}
-
+	
+	// 유저 탈퇴
 	@Override
 	public int deleteOne(MemberVO member) throws SQLException {
 		return memberDao.deleteOne(member);
 	}
 
-
+	// 로그인
 	@Override
 	public int login(MemberVO member) throws SQLException {
 		// 1. 아이디 Check

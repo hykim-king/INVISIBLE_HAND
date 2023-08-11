@@ -62,36 +62,37 @@
 		</div>
 		<!-- **---wrap End---** -->
 	</div>
+	<!--카카오 로그인 -->
 	<script>
-function saveToDos(token) { //item을 localStorage에 저장합니다. 
-    typeof(Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token)); 
-};
-
-window.Kakao.init('8d1de5919691fb7d74636ee7c868b109');
-
-function kakaoLogin() {
-    window.Kakao.Auth.login({
-        scope: 'profile_nickname, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-        success: function(response) {
-            saveToDos(response.access_token)  // 로그인 성공하면 사용자 엑세스 토큰 sessionStorage에 저장
-            window.Kakao.API.request({ // 사용자 정보 가져오기 
-                url: '/v2/user/me',
-                success: (res) => {
-                    const kakao_account = res.kakao_account;
-                    alert('로그인 성공');
-                    window.location.href='http://localhost:8080/ehr/resources/kakaoLogin/kakao_loginout_view.html'
-                }
-            });
-        },
-        fail: function(error) {
-            console.log(error);
-        }
-    });
-};
-
-const login = document.querySelector('#kakaoLogin');
-login.addEventListener('click', kakaoLogin);
-</script>
+	function saveToDos(token) { //item을 localStorage에 저장합니다. 
+	    typeof(Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token)); 
+	};
+	
+	window.Kakao.init('8d1de5919691fb7d74636ee7c868b109');
+	
+	function kakaoLogin() {
+	    window.Kakao.Auth.login({
+	        scope: 'profile_nickname, account_email', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+	        success: function(response) {
+	            saveToDos(response.access_token)  // 로그인 성공하면 사용자 엑세스 토큰 sessionStorage에 저장
+	            window.Kakao.API.request({ // 사용자 정보 가져오기 
+	                url: '/v2/user/me',
+	                success: (res) => {
+	                    const kakao_account = res.kakao_account;
+	                    alert('로그인 성공');
+	                    window.location.href='http://localhost:8080/ehr/resources/kakaoLogin/kakao_loginout_view.html'
+	                }
+	            });
+	        },
+	        fail: function(error) {
+	            console.log(error);
+	        }
+	    });
+	};
+	
+	const login = document.querySelector('#kakaoLogin');
+	login.addEventListener('click', kakaoLogin);
+</script> <!------------카카오 로그인 END ----------->
 	<!-- **---container End---** -->
 	<script src="../resources/js/jquery-3.7.0.js"></script>
 	<script>
@@ -152,37 +153,6 @@ $(document).ready(function() {
     });
     
 });
-
-$(document).ready(function() {
-	  $('#login').on('click', function(e) {
-	    e.preventDefault();
-	    
-	    let loginId = $('input[name=loginId]').val().trim();
-	    let password = $('input[name=password]').val().trim();
-	    
-	    if (loginId == '') {
-	      alert('사용자 이름을 입력하세요.');
-	      return;
-	    }
-	    if (password == '') {
-	      alert('비밀번호를 이름을 입력하세요.');
-	      return;
-	    }
-	    
-	    // ajax
-	    let url = $('#loginForm').attr("action");
-	    let params = $('#loginForm').serialize();
-	    
-	    $.post(url, params)
-	    . done(function(data) {
-	      if (data.code == 100) { 
-	        location.href="/timeline/timeline_view";
-	      } else {
-	        alert("아이디 또는 비밀번호가 맞지 않습니다.\n다시 입력해주세요.");
-	      }
-	    });
-	  });
-	});
 </script>
 </body>
 </html>

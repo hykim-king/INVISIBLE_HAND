@@ -1,75 +1,90 @@
 body{
-	background-color: #F3F3F3;
+  background-color: #141414;
+  position: relative;
 }
 
-.login-wrap{	
-	position:absolute;
+.login-wrap a{  
+color:#979797;
+}
+
+.login-wrap{  
+  position:absolute;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-  
-	width: 300px;
-	height: 450px;
-	background-color: #fff;
-  border: 1px solid #979797;
-	border-radius:30px; 
-	
-	padding:50px;
+  width: 300px;
+  height: 400px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;  
+  padding:50px;
+  color: #fff;
 }
 
 .join-wrap{
   margin: 100px auto;
-
-	width: 526px;
-	height: 1300px;
-  background-color: #fff;
-  border: 1px solid #979797;
-	border-radius:30px;
+  width: 526px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;
   padding:50px;
 }
 
 .find-wrap{
   margin: 100px auto;
-
-	width: 526px;
-	height: 800px;
-  background-color: #fff;
-    border: 1px solid #979797;
-	border-radius:30px;
+  width: 526px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;
   padding:50px;
 }
 
 .login-wrap .login-logo{
-	text-align: center;
-	
+  text-align: center;
+  
+}
+
+
+.lines-box{
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .login-logo{
   text-align: center;
 }
+.login-logo a{
+  width: 100%;
+  height: 60px;
+}
 .login-logo-img{
-	width: 130px;
-	height: auto;
-	
+  width: 60px;
+  height: auto;
+  margin-bottom: 5px;
 }
 .input-wrap{
-	padding:20px 0;
-	
+  padding:30px 0;
+  
 }
 .input-title{
-	font-size: 14px;
-	font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
 }
 .input-title.password{
-	margin-top:5px;
+  margin-top:10px;
 }
 .input-title span a{
-	font-size: 12px;
-  color: #979797;
+  font-size: 12px;
+  color: #fff;
   margin-left: 5px;
 }
 .input-chek{
   margin-top: 10px;
+}
+
+.input-chek label{
+  color:#979797;
 }
 
 
@@ -77,32 +92,40 @@ body{
 .size {
   width: 290px;
   height: 30px;
-  background-color: #FFF;
+  background-color: #141414;
   margin:5px 0;
   padding-left: 10px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #6B53FF;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .border-bottom{
   width: 390px;
   height: 40px;
   border: none;
-  border-bottom: 1px solid #979797;
-  border-radius: 0;
+  border-bottom: 2px dashed #121212;
+  border-radius: 5px 5px 0px 0px;
   box-sizing: border-box;
+  background-color: #222;
 }
 
 #name{
   width:100%;
 }
-
+.fa-check-circle{
+  color:#6B53FF; 
+  margin-left: -20px; 
+  opacity:0; 
+  transition:0.5s;
+  
+}
 
 .btn {
   width: 110px;
   height: 40px;
   font-size: 16px;
-  background-color: #979797;
+  background-color: #6B53FF;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -113,7 +136,7 @@ body{
 }
 
 .login-btn{
-	margin-top:15px;
+  margin-top:15px;
 }
 
 .btn.w100 {
@@ -126,27 +149,17 @@ body{
   text-align: center;
   margin-top: 50px;
 }
-
-#kakaoLogo {
-  display: block;
-  width: 100%;
-  text-align: center;
-  margin-top: 50px;
-}
-
 .btn.w70 {
   width: 70%;
 }
 
-.btn-white, 
-.newClass{
+.btn-white{
   width: 120px;
   height: 45px;
   font-size: 16px;
-  background-color: #ffffff;
+  background-color: #121212;
   color:#979797;
-  border: 1px solid #979797;
-  border-radius: 5px;
+  border: 1px solid #121212;
   margin-left: 10px;
   box-sizing: border-box;
   transition:0.5s;
@@ -154,9 +167,9 @@ body{
 
 
 p.find{
-	font-size: 13px;
-	text-align: right;
-	margin-top:15px;
+  font-size: 13px;
+  text-align: right;
+  margin-top:15px;
 }
 
 p.find.join{
@@ -165,12 +178,12 @@ p.find.join{
 }
 
 p.find.join a{
-  color: #6C6C6C;
+  color: #979797;
 }
 
 .find span::before {
   content: '|';
-  color: #D9D9D9;
+  color: #979797;
   padding: 0 10px;
 }
 
@@ -180,8 +193,8 @@ p.find.join a{
 
 
 .back-home{
-	display:block;
-	font-size: 13px;
+  display:block;
+  font-size: 13px;
   color:#D9D9D9;
   text-align: center;
   margin-top: 10px;
@@ -194,7 +207,7 @@ p.find.join a{
 .form-h3 h3{
   font-size: 20px;
   text-align: center;
-  color:#979797;
+  color:#fff;
   font-weight:bolder;
 }
 
@@ -204,15 +217,15 @@ p.find.join a{
 }
 
 .name-phone-wrap{
-	display: flex;
-	width:100%;
-	justify-content: space-between;
+  display: flex;
+  width:100%;
+  justify-content: space-between;
 }
 .name-phone{
-	width:48%;
+  width:48%;
 }
 .border-bottom.w48{
-	width:100%;
+  width:100%;
 }
 
 input#name.size.border-bottom {
@@ -254,12 +267,95 @@ box-shadow: 0 0 0 1000px white inset;
 
 input:focus {outline: none;}
 
-:root{
-
-  accent-color:#505050;
-
+root:{
+  accent-color:#6B53FF;
 }
 
 #m_n{
-	margin-left:15px;
+  margin-left:15px;
+}
+
+/* 배경 */
+
+.drops{
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  margin: auto;
+  width: 90vw;
+}
+  
+.drop{
+
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+  
+.drop::after{
+
+  content: '';
+  display: block;
+  position: absolute;
+  height: 15vh;
+  width: 100%;
+  top: -50%;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+  animation: drop 10s 0s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+
+.drop:nth-child(1){
+
+  margin-left: -42%;
+}
+.drop:nth-child(1)::after{
+
+  animation-delay: -4s;
+}
+.drop:nth-child(2){
+
+  margin-left: -33%;
+}
+.drop:nth-child(2)::after{
+
+  animation-delay: 2s;
+}
+.drop:nth-child(3){
+
+  margin-left: 36%;
+}
+.drop:nth-child(3)::after{
+
+  animation-delay: 3.5s;
+}
+.drop:nth-child(4){
+
+  margin-left: 43%;
+}
+.drop:nth-child(4)::after{
+
+  animation-delay: -2.5s;
+}
+
+@keyframes drop{
+
+  0%{ 
+
+      top: -50%;
+  }
+  100%{
+
+      top: 110%;
+  }
+  
 }
