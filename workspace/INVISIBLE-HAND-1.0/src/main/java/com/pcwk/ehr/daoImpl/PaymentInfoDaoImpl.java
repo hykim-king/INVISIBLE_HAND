@@ -2,7 +2,9 @@ package com.pcwk.ehr.daoImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +34,9 @@ public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
 	// 결제 정보 조회
 	@Override
 	public PaymentInfoVO selectPaymentInfoByEmail(String buyerEmail) {
-//		List<PaymentInfoVO> paymentInfoList = 
-//				sqlSessionTemplate.selectList("selectPaymentInfoByEmail", buyerEmail);
 		PaymentInfoVO info = this.sqlSessionTemplate.selectOne
 				(this.NAMESPACE + DOT + "selectPaymentInfoByEmail", buyerEmail);
-		LOG.debug("info-----------" + info); // null?
+		LOG.debug("info-----------" + info);
 		
 		return info;
 	}
@@ -46,11 +46,17 @@ public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
 	public int InsertInfo(PaymentInfoVO inVO) {
 		return sqlSessionTemplate.insert(NAMESPACE + DOT + "InsertInfo", inVO);
 	}
-
-	// 구독했는지 여부 확인
+	
+	// 결제 정보 업데이트
 	@Override
-	public int checkPayment(PaymentInfoVO inVO) {
-		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "selectPaymentInfoByEmail", inVO);
+	public int updatePaymentInfo(PaymentInfoVO inVO) {
+		return sqlSessionTemplate.update(this.NAMESPACE + DOT + "updatePaymentInfo", inVO);
+	}
+	
+	// 결제 정보 유무 체크
+	@Override
+	public int checkPaymentInfo(String buyerEmail) {
+		return sqlSessionTemplate.selectOne(NAMESPACE + DOT + "checkPaymentInfo", buyerEmail);
 	}
 
 }

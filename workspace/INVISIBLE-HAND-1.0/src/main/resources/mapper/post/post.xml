@@ -69,26 +69,26 @@
 
 
 <insert id="doSave" parameterType="PostVO">
+  <selectKey keyProperty="postNumber" resultType="int" order="BEFORE">
+    SELECT INVISIBLEHAND.POSTNUMBER.NEXTVAL FROM DUAL
+  </selectKey>
   INSERT INTO board(
     postnumber, 
     nickname, 
     title, 
-    content, 
-    writtendate, 
+    content,  
     likes, 
     views, 
     categoryNumber
-  )VALUES(
+  ) VALUES (
     #{postNumber}, 
     #{nickname}, 
     #{title}, 
-    #{content}, 
-    #{writtenDate}, 
+    #{content},  
     #{likes}, 
     #{views}, 
     #{categoryNumber}
-  ); 
-
+  )
 </insert>
 
 <select id="doSelectOne" parameterType="PostVO" resultType="PostVO">
@@ -104,6 +104,21 @@
   FROM board
   WHERE postnumber = #{postNumber}
 </select>
+
+<delete id="doDelete" parameterType="PostVO">
+    DELETE FROM board 
+    WHERE postnumber = #{postNumber}     
+</delete>
+
+<update id="doUpdate" parameterType="PostVO">
+      UPDATE board           
+      SET title    = #{title},      
+          content = #{content},      
+          categorynumber  = #{categoryNumber}
+      WHERE postnumber = #{postNumber}  
+</update>
+
+
 
 <!--  
 <select id="doRetrieve" parameterType="" resultType="CodeVO">

@@ -30,7 +30,7 @@
 				<ul class="global_nav_bar">
 					<li><a href="${CP}/chart/chart.do">차트</a></li>
 					<li><a href="${CP}/solution/solution_Q.do">솔루션</a></li>
-					<li><a href="${CP}/post/postList.do">커뮤니티</a></li>
+					<li><a href="${freePostURL}">커뮤니티</a></li>
 
 				</ul>
 				<ul class="local_nav_bar">

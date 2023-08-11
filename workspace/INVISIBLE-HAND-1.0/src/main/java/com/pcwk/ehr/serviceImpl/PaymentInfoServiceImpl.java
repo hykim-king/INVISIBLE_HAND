@@ -27,12 +27,15 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
 		return dao.InsertInfo(inVO);
 	}
 	
-	// 구독 여부 확인
-	@Override
-	public int checkPayment(PaymentInfoVO inVO) {
-		int result = dao.checkPayment(inVO);
-		return result;
+	// 결제 정보 업데이트
+	public int updatePaymentInfo(PaymentInfoVO inVO) {
+		return dao.updatePaymentInfo(inVO);
 	}
 
+	// 결제 여부 확인
+	@Override
+	public int checkPaymentInfo(String buyerEmail) {
+		return dao.checkPaymentInfo(buyerEmail);
+	}
 
 }

@@ -15,6 +15,9 @@ public interface PaymentInfoDao {
 	// 결제 정보 조회
 	public PaymentInfoVO selectPaymentInfoByEmail(String buyerEmail);
 	
-	// 구독했는지 여부 확인
-	public int checkPayment(PaymentInfoVO inVO);
+	// 기존 결제 정보 업데이트
+	public int updatePaymentInfo(PaymentInfoVO inVO);
+	
+	// 결제 정보 여부 확인
+	public int checkPaymentInfo(String buyerEmail);
 }

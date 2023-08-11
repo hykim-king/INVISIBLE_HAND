@@ -1,8 +1,6 @@
 package com.pcwk.ehr.VO;
 
-
-
-public class MemberVO  {
+public class MemberVO {
 	private String memberId; // id
 	private String password; // 비번
 	private int memberGrade; // 회원 등급
@@ -14,15 +12,15 @@ public class MemberVO  {
 	private String isverified; // 인증 여부
 	private String phoneNumber; // 휴대폰번호
 
-	private int idCheck; //아이디 중복확인
-	private int nickNameCheck; //니네임 중복확인
-	private int emailCheck; //이메일 중복확인
+	private int idCheck; // 아이디 중복확인
+	private int nickNameCheck; // 니네임 중복확인
+	private int emailCheck; // 이메일 중복확인
 
-	private int loginIdCheck; //로그인시 아이디 확인
-	private int passCheck; //로그인시 아이디 확인
-	
+	private int loginIdCheck; // 로그인시 아이디 확인
+	private int passCheck; // 로그인시 아이디 확인
+
 	private int login; // 로그인
-	
+
 	public MemberVO() {
 	}
 
@@ -185,6 +183,4 @@ public class MemberVO  {
 				+ emailCheck + ", loginIdCheck=" + loginIdCheck + ", passCheck=" + passCheck + ", login=" + login + "]";
 	}
 
-	
-	
 }

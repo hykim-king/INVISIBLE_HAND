@@ -11,7 +11,6 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <!-- jQuery -->
 <script src="../resources/js/jquery-3.7.0.js"></script>
-<script src="../resources/js/common/payment.js"></script>
 <!-- iamport.payment.js -->
 <div class="h60px"></div>
 <div class="container-1400 min-100vh con-main">
@@ -22,7 +21,7 @@
 			<div id="kakaoHead">
 				<img src="../resources/image/kakaopay_icon.jpg" alt="kakaopay_logo"
 					width="100px" />
-			</div>%
+			</div>
 
 			<div id="kakaoContent">
 				<div id="paymentBtn">
@@ -31,8 +30,7 @@
 					<div>${sessionScope.member.email}</div><br>
 					<div>${sessionScope.member.phoneNumber}</div>
 				</div>
-				<button class="btn-hover color-11" id="payBtn"
-					onclick="paymentReady()">결제하기</button>
+				<button class="btn-hover color-11" id="payBtn" onclick="paymentReady()">결제하기</button>
 			</div>
 			<!-- *** kakaoContent *** -->
 

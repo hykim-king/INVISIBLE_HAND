@@ -6,15 +6,16 @@
 <%       
          PostVO vo = (PostVO)request.getAttribute("inVO");
          String ctgNumValue = vo.getCategoryNumber();
-         String title    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
+         String ctg    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
          
          if ("20".equals(ctgNumValue)) {
-              title = "Q&A게시판";
+              ctg = "Q&A게시판";
           } else if ("30".equals(ctgNumValue)) {
-              title = "공지사항";
+              ctg = "공지사항";
           }
          
-         request.setAttribute("title", title);
+         request.setAttribute("ctg", ctg);
+         request.setAttribute("ctgNumValue", ctgNumValue);
          
          //paging
          int bottomCount = 10;
@@ -53,6 +54,8 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/post.css">
@@ -66,9 +69,7 @@
   <div class="container-1200 con-main min-100vh">
   
     <div class="wrap-1000 ">
-      <h1>
-        <c:out value="${title}" />
-      </h1>
+      <h1><c:out value="${ctg}" /></h1>
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
@@ -183,8 +184,6 @@
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
 
-  
-<script src="js/jquery-3.7.0.js"></script>
 <script>
 
   function do_Retrieve(url, pageNo){
@@ -205,7 +204,7 @@
     let postNumber = tdArray.eq(5).text();
     console.log('postNumber:'+postNumber);
     
-    if( confirm("상세 조회.. test 짜장면 먹구싶다.") == false ) return;
+    if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
     
     //categoryNumber,postNumber
     ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393

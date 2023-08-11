@@ -25,7 +25,7 @@
           <div>로그인된 닉네임 : ${sessionScope.member.nickName}</div><br>
           <div>로그인된 이메일 : ${sessionScope.member.email}</div><br>
           <div>로그인된 핸드폰 번호 : ${sessionScope.member.phoneNumber}</div>
-          <div>paymentInfo model에 담아 출력</div>
+          <div>paymentInfo model에 담아 출력</div><br>
           <div>로그인된 유저의 seq : ${paymentInfo.paymentinfoseq}</div>
           <div>로그인된 유저의 주문번호 : ${paymentInfo.merchantUid}</div>
           <div>로그인된 유저가 결제한 상품 이름 : ${paymentInfo.name}</div>
