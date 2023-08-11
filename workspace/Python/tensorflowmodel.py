@@ -1,44 +1,75 @@
-import tensorflow as tf
-import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+import cx_Oracle
+from datetime import datetime
+def format_datetime(input_datetime):
+    try:
+        formatted_date = input_datetime.strftime('%Y%m')
+        return formatted_date
+    except AttributeError:
+        return "Invalid input. Please provide a valid datetime object."
 
-import os
+dsn = cx_Oracle.makedsn('192.168.0.123', 1521, 'xe')
+db = cx_Oracle.connect('INVISIBLEHAND', '4321', dsn)
+cursor = db.cursor()
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+cursor.execute("select * from sbhitable where subcategory = '건설업' order by chartdate")
+data = cursor.fetchall()
 
-np.random.seed(100)
-tf.random.set_seed(100)
+x_data = np.array([row[3:9] for row in data])
+modified_data = []
+for row in data:
+    modified_row = list(row)
+    modified_row[0] = format_datetime(modified_row[0])
+    modified_data.append(modified_row)
 
-# 데이터를 DataFrame 형태로 불러 옵니다.
-df = pd.read_csv("data/Advertising.csv")
+y_data = np.array([row[0] for row in modified_data])
+y_data = y_data.astype(np.int32)
+# Min-Max 정규화
 
-# DataFrame 데이터 샘플 5개를 출력합니다.
-print('원본 데이터 샘플 :')
-print(df.head(), '\n')
+scaler = MinMaxScaler()
+x_data_normalized = scaler.fit_transform(x_data)
 
-# 의미없는 변수는 삭제합니다.
-df = df.drop(columns=['Unnamed: 0'])
+# 훈련 데이터와 테스트 데이터 분리 (8:2 비율)
 
-X = df.drop(columns=['Sales'])
-Y = df['Sales']
+def split_data(x_data, y_data, train_ratio):
+    total_samples = len(x_data)
+    train_samples = int(total_samples * train_ratio)
+    x_train = x_data[:train_samples]
+    y_train = y_data[:train_samples]
+    x_test = x_data[train_samples:]
+    y_test = y_data[train_samples:]
+    return x_train, x_test, y_train, y_test
 
-# 학습용 테스트용 데이터로 분리합니다.
-train_X, test_X, train_Y, test_Y = train_test_split(X, Y, test_size=0.3)
+x_train, x_test, y_train, y_test = split_data(x_data, y_data, 0.88)
 
-# Dataset 형태로 변환합니다.
-train_ds = tf.data.Dataset.from_tensor_slices((train_X.values, train_Y))
-train_ds = train_ds.shuffle(len(train_X)).batch(batch_size=5)
+# 데이터 확인
+print("훈련 데이터 X:\n", x_train)
+print("훈련 데이터 Y:\n", y_train)
+print("테스트 데이터 X:\n", x_test)
+print("테스트 데이터 Y:\n", y_test)
 
-"""
-1. tf.keras.models.Sequential()를 활용하여 신경망 모델을 생성합니다.
-   자유롭게 layers를 쌓고 마지막 layers는 노드 수를 1개로 설정합니다.
-"""
-model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(5, input_dim=3),
-    tf.keras.layers.Dense(5),
-    tf.keras.layers.Dense(1)
+# 모델 생성
+model = Sequential()
+model.add(Dense(32, activation='relu', input_dim=x_train.shape[1]))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(1, activation='linear'))
+model.summary() #input정보 없음
 
-])
+# 모델 컴파일
+model.compile(optimizer='adam', loss='mean_squared_error')
 
-print(model.summary())
+# 모델 훈련
+model.fit(x_train, y_train, epochs=20, batch_size=4, verbose=1)
+
+# 테스트 데이터로 예측
+y_pred = model.predict(x_test)
+
+# 예측 결과 출력
+print("테스트 데이터 예측 결과:\n", y_pred)
+print("테스트 데이터 예측 결과:\n", y_pred)
+
