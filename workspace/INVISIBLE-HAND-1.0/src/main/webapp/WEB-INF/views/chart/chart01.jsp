@@ -23,15 +23,30 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
-     //차트 관련
-    $(document).ready(function () {
-    function loadChartData() {
+ //차트 관련
+ $(document).ready(function () {      
+	  let mainCategory = "비제조업";
+	  let subCategory  = "-";
+	 function submitbutton() {
+	         $("#submitButton").click(function () {
+	             // 선택된 값 가져오기
+	             let selectedMainCategory = $("#mainCategorySelect").val();
+	             let selectedSubCategory = $("#subCategorySelect").val();
+
+	             mainCategory = selectedMainCategory; // mainCategory 값을 선택한 값으로 업데이트
+
+	             loadChartData(selectedMainCategory, selectedSubCategory);
+	         });
+	     }
+	     
+    function loadChartData(selectedMainCategory, selectedSubCategory) {
+
         $.ajax({
             url: '/ehr/chart/chart01.do',
             type: 'GET',
             data: { 
-             mainCategory:"${mainCategory}",
-             subCategory : "${subCategory}"
+             mainCategory: selectedMainCategory,
+             subCategory : selectedSubCategory
             }, 
             dataType: 'json',
             success: function(data) {            
@@ -66,11 +81,13 @@
             } //error
         }); //ajax
     } //loadChartData
-    
+  
     //구글 차트 api
     google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(loadChartData);
-    
+    google.charts.setOnLoadCallback(function() {
+        loadChartData(); // 일단 loadChartData 호출
+        submitbutton(); // submitbutton 함수를 호출하여 이벤트 등록
+    });
     
     function drawChart(data) {
         const originalData1 = new google.visualization.arrayToDataTable(data);
@@ -132,7 +149,9 @@
         chart1.draw(chartData1, options1);
     
     } //funciton drawChart
-    }); //차트 관련 doucument
+
+}); //차트 관련 doucument
+
  </script>
 </body>
 </html>
