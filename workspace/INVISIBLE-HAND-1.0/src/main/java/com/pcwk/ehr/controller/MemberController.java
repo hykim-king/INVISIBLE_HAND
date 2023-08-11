@@ -104,8 +104,14 @@ public class MemberController {
 		LOG.debug("│   add ()              │"+member);
 		LOG.debug("└───────────────────────┘");
 		int flag = memberService.add(member);
-		return Integer.toString(flag);
+		String data;
+		if (flag == 1) {
+			data = "success";
+		} else {
+			data = "fail";
+		}
 		
+		return data;
 	}
 	
 	 
