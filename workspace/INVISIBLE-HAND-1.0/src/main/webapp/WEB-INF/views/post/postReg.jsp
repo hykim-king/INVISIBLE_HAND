@@ -5,14 +5,25 @@
 <% 
     PostVO vo = (PostVO)request.getAttribute("inVO");
     String ctgNumValue = vo.getCategoryNumber();
-    String title    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
+    String ctg    = "자유게시판";//10 자유게시판, 20 QnA게시판, 30 공지게시판
     
     if ("20".equals(ctgNumValue)) {
-         title = "Q&A게시판";
+         ctg = "Q&A게시판";
      } else if ("30".equals(ctgNumValue)) {
-         title = "공지사항";
+         ctg = "공지사항";
      }
-    request.setAttribute("title", title);
+    request.setAttribute("ctg", ctg);
+    request.setAttribute("ctgNumValue", ctgNumValue);
+    
+    int postNumValue  = vo.getPostNumber();
+    request.setAttribute("postNumValue", postNumValue);
+    
+    // 세션에서 닉네임 가져오기
+    String nickname = (String) session.getAttribute("nickname");
+    if (nickname == null || nickname.isEmpty()) {
+        nickname = "비회원";
+    }
+    request.setAttribute("nickname", nickname);
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <!DOCTYPE html>
@@ -24,6 +35,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/hand-board.css">
 <title>보이지 않는 손 레이아웃</title>
@@ -35,11 +50,11 @@
   <div class="container-1200 con-main min-100vh">
   
     <div class="wrap-1000 ">
-      <h1><c:out value="${title}" /> 글쓰기</h1>
+      <h1><c:out value="${ctg}" /> 글쓰기</h1>
       
 
 
-          <!-- 버튼 -->
+    <!-- 버튼 -->
     <div class="row g-1 d-flex justify-content-end">
       <div class="col-auto">
         <input type="button" class="btn" value="목록" id="moveToList" onclick="doMoveToList()">
@@ -48,32 +63,26 @@
     </div>
     <!--// 버튼 ----------------------------------------------------------------->
     <form action="${CP}/post/postReg.do" method="get" name="regFrm" id="regFrm">
-    <input type="hidden" name="pageNo" id="pageNo">
+        <input type="hidden" name="pageNo" id="pageNo">
         <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
-        <input type="hidden" name="categoryNumber" id="categoryNumber" value="${inVO.getCategoryNumber()}">
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">제목</label>
-          <input type="text" class="form-control title_cls" id="title"  name="title"
-             placeholder="제목을 입력 하세요." required="required" maxlength="66">
+          <input type="text" id="title" name="title" class="form-control title_cls" placeholder="제목을 입력하세요." required="required" maxlength="66">
         </div>
         
         <div clascategoryNumbermb-3">
-          <label for="exampleFormControlInput1" class="form-label">등록자ID</label>
-          <input type="text" class="form-control" id="regId" name="regId" value="${sessionScope.user.userId }"
-          placeholder="아이디를 입력 하세요." readonly="readonly">
+          <label for="exampleFormControlInput1" class="form-label">닉네임</label>
+          <input type="text" class="form-control" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
         </div>
         
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-          <textarea class="form-control" id="contents" name="contents" rows="3" required="required"></textarea>
+          <textarea class="form-control" id="content" name="content" rows="3" required="required"></textarea>
         </div>
                 
     </form>
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
-  
-<script src="js/jquery-3.7.0.js"></script>
-<script src="js/util.js"></script>
 <script>
 $(".categorybox").click(function() {
     $(this).siblings().removeClass("active");
@@ -86,63 +95,48 @@ $(".categorybox").click(function() {
 </script>
 <script>
 
-      function doMoveToList() {
-          console.log("doMoveToList");
-          let frm = document.regFrm;
-          console.log("frm.categoryNumber.value:" + frm.categoryNumber.value);
-          frm.pageNo.value = 1;
-          frm.action = "${CP}/post/postList.do?categoryNumber=" + frm.categoryNumber.value;
-      
-          frm.submit();
-      }
-  
-     /*  function moveToListView(){
-        window.location.href ="${CP}/board/boardView.do?categoryNumber="+$("#categoryNumber").val();
+      function moveToListView() {
+          let categoryNumber = "<c:out value='${ctgNumValue}' />";
+          window.location.href = "${CP}/post/postList.do?categoryNumber=" + categoryNumber;
       }
       
-  
-      $("#moveToList").on("click",function(){
-          if(confirm('목록 화면으로 이동 하시겠습니까?')==false)return;
-          
-          moveToListView();
-      });//--moveToList */
+      $(document).ready(function () {
+            $("#moveToList").on("click", function () {
+                //if (confirm('목록하면으로 이동합니다.') == false) return;
+      
+                moveToListView();
+            });
+        });
+     
       
       $("#doSave").on("click",function(){
           console.log("doSave");
-          
-          //필수 값: title, contents
-          
-          //JS
-          //document.폼이름.input name.value
-          let frmTitle = document.reg_frm.title.value;
-          console.log("frmTitle:"+frmTitle);
-          
-          //input id값으로 값 가지고 오기
-          //let sTitle = document.querySelector("#title").value;
-          
-          //class로 선택
-          let sTitle = document.querySelector(".title_cls").value;
-          //class값으로 값 가지고 오기
+          console.log("ctgNumValue: "+"${ctgNumValue}")
+          console.log("title: "+$("#title").val())
+          console.log("postNumValue: "+$("#postNumValue").val())
           
           
-          console.log("sTitle:"+sTitle);
           
-          //jquery
-/*          if(eUtil.ISEmpty($("#title").val()) == true){
+          //필수 값: title, content
+          
+         let titleValue = $("#title").val();
+         console.log("title: " + titleValue);
+         
+          if(eUtil.ISEmpty($("#title").val()) == true){
               alert("제목을 입력 하세요.");
               $("#title").focus();
               return;
-          } */
+          } 
           
-          if(eUtil.ISEmpty($("#regId").val()) == true){
+          if(eUtil.ISEmpty($("#nickname").val()) == true){
               alert("등록자를 입력 하세요.");
-              $("#regId").focus();
+              $("#nickname").focus();
               return;
           }         
           
-          if(eUtil.ISEmpty($("#contents").val()) == true){
+          if(eUtil.ISEmpty($("#content").val()) == true){
                 alert("내용을 입력 하세요.");
-                $("#contents").focus();
+                $("#content").focus();
                 return;             
           }
           
@@ -155,14 +149,14 @@ $(".categorybox").click(function() {
           //ajax
             $.ajax({
                 type: "POST",
-                url:"/ehr/board/doSave.do",
+                url:"/ehr/post/doSave.do",
                 asyn:"true",
                 dataType:"html",
                 data:{
-                  categoryNumber: $("#categoryNumber").val(),       
+                  categoryNumber: $("#categoryNumber").val(),
                   title: $("#title").val(),
-                  regId: $("#regId").val(),
-                  contents: $("#contents").val()  
+                  nickname: $("#nickname").val(),
+                  content: $("#content").val()
                 },
                 success:function(data){//통신 성공
                     console.log("success data:"+data);
@@ -173,18 +167,11 @@ $(".categorybox").click(function() {
                         $("#title").focus();
                         return;
                     }  
-                
+                     
                      //등록자 미 입력
                      if("20" == parsedJson.msgId ){
                          alert(parsedJson.msgContents);
-                         $("#regId").focus();
-                         return;
-                     }
-                     
-                     //등록자 미 입력
-                     if("30" == parsedJson.msgId ){
-                         alert(parsedJson.msgContents);
-                         $("#contents").focus();
+                         $("#content").focus();
                          return;
                      }           
                      
@@ -192,7 +179,6 @@ $(".categorybox").click(function() {
                      if("1" == parsedJson.msgId ){
                        alert(parsedJson.msgContents);
                        //javascript
-                       //window.location.href ="${CP}/board/boardView.do?categoryNumber="+$("#categoryNumber").val();
                        moveToListView();
                      }else{
                        alert(parsedJson.msgContents);
@@ -205,6 +191,7 @@ $(".categorybox").click(function() {
           
           
       });//--doSave
+      
   </script>  
 </body>
 </html>
