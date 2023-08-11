@@ -59,7 +59,7 @@
 					<div class="my-info">
 						<div class="my-info-list">
 							<span><a href="login">결제정보 수정</a></span> 
-							<span><a href="login">구독현황</a></span> 
+							<span><a href="../payment/payment_detail.do">구독현황</a></span> 
 						</div>
 					</div>
 					<div class="line3px"></div>

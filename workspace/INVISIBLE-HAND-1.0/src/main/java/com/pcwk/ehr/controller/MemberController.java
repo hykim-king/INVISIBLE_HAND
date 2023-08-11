@@ -104,8 +104,14 @@ public class MemberController {
 		LOG.debug("│   add ()              │"+member);
 		LOG.debug("└───────────────────────┘");
 		int flag = memberService.add(member);
-		return Integer.toString(flag);
+		String data;
+		if (flag == 1) {
+			data = "success";
+		} else {
+			data = "fail";
+		}
 		
+		return data;
 	}
 	
 	 
@@ -132,19 +138,6 @@ public class MemberController {
 	    LOG.debug("│  member: " + member);
 	    MessageVO message = new MessageVO();
 
-	    // 1. id 미입력
-	    if (null == member.getMemberId() || "".equals(member.getMemberId())) {
-	        message.setMsgId("1");
-	        message.setMsgContents("아이디를 입력하세요-controller-");
-	        return message;
-	    }
-	    // 2. pw 미입력
-	    if (null == member.getPassword() || "".equals(member.getPassword())) {
-	        message.setMsgId("2");
-	        message.setMsgContents("비밀번호를 입력하세요-controller-");
-	        return message;
-	    }
-
 	    // 10 : id 오류
 	    // 20 : 비번 오류
 	    // 30 : 성공
@@ -154,21 +147,22 @@ public class MemberController {
 	    
 	    if (10 == status) {
 	        message.setMsgId("10");
-	        message.setMsgContents("아이디를 확인하세요-controller-");
+	        message.setMsgContents("아이디를 확인해주세요.");
 	        return message;
 	    } else if (20 == status) {
 	        message.setMsgId("20");
-	        message.setMsgContents("비밀번호를 확인하세요-controller-");
+	        message.setMsgContents("비밀번호를 확인해주세요.");
 	        return message;
 	    } else if (30 == status) {
 	        message.setMsgId("30");
-	        message.setMsgContents(member.getMemberId() + "님 환영합니다");
+	        message.setMsgContents(member.getMemberId() + "님 환영합니다!");
 	        
 	        MemberVO memberInfo = memberService.get(member);
 	        LOG.debug("memberInfo---------" + memberInfo);
 	        if (memberInfo != null) {
 				//session설정
 				httpSession.setAttribute("member", memberInfo);
+				httpSession.setAttribute("email", memberInfo.getEmail());
 				
 				LOG.debug("999member" + member);
 				//쿠키 생성: memberId

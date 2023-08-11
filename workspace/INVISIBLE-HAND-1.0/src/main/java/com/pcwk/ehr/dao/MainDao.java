@@ -12,7 +12,7 @@ public interface MainDao {
 	
 //	PostVO doSelectOne(PostVO inVO) throws SQLException;
 	
-	List<PostVO> doRetrieve(PostVO inVO) throws SQLException;
+	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException;
 		
 
 

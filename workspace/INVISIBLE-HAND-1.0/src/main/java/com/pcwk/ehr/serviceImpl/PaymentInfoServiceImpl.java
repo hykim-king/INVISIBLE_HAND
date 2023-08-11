@@ -17,16 +17,25 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
 
 	// 결제 정보 조회
 	@Override
-	public PaymentInfoVO getPaymentInfoBySEQ(PaymentInfoVO inVO) {
-		PaymentInfoVO vo = dao.selectPaymentInfoBySEQ(inVO);
-		
-		return vo;
+	public PaymentInfoVO getPaymentInfoByEmail(String buyerEmail) {
+		return dao.selectPaymentInfoByEmail(buyerEmail);
 	}
 	
 	// 결제 정보 입력
 	@Override
 	public int addInfo(PaymentInfoVO inVO) throws SQLException {
 		return dao.InsertInfo(inVO);
+	}
+	
+	// 결제 정보 업데이트
+	public int updatePaymentInfo(PaymentInfoVO inVO) {
+		return dao.updatePaymentInfo(inVO);
+	}
+
+	// 결제 여부 확인
+	@Override
+	public int checkPaymentInfo(String buyerEmail) {
+		return dao.checkPaymentInfo(buyerEmail);
 	}
 
 }

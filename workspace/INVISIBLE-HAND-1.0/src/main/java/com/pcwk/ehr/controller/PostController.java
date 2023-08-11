@@ -3,6 +3,7 @@ package com.pcwk.ehr.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSessionException;
@@ -11,8 +12,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -46,7 +49,7 @@ public class PostController {
 		LOG.debug("┌────────────────────────────────┐");
 		LOG.debug("│post : " + inVO);
 
-		int flag = this.postService.doSave(inVO);
+		int flag = this.postService.doSave(inVO	);
 
 		String message = "";
 
@@ -104,7 +107,9 @@ public class PostController {
 		String message = "";
 
 		if (1 == flag) {
-			message = "게시글이 수정되었습니다.";
+			message = "<"+inVO.getTitle()+"> 수정 되었습니다.";
+			
+			
 		} else {
 			message = "게시글 수정을 실패했습니다.";
 		}
@@ -131,12 +136,39 @@ public class PostController {
 		return "post/postContents";
 	}
 	
+	/*
+	 * @RequestMapping(value = "/postMod", method = RequestMethod.GET) public String
+	 * postMod(@RequestParam("postNumber") int postNumber, Model model) throws
+	 * SQLException { LOG.debug("┌───────────────────────┐");
+	 * LOG.debug("│   postMod()           │");
+	 * LOG.debug("└───────────────────────┘");
+	 * 
+	 * PostVO inVO = new PostVO(); inVO.setPostNumber(postNumber);
+	 * 
+	 * PostVO outVO = postService.doSelectOne(inVO); model.addAttribute("outVO",
+	 * outVO);
+	 * 
+	 * return "post/postMod"; }
+	 */
+
+	
 	@RequestMapping(value = "/postList.do")
-	public String postList(PostVO inVO, Model model) throws SQLException {
+	public String postList(PostVO inVO, Model model, HttpServletRequest request) throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   postList()          │");
 		LOG.debug("└───────────────────────┘");
 		
+		HttpSession session = request.getSession();
+	    //PostVO user = (PostVO) session.getAttribute("user");
+	    //if (user != null) {
+	    // 닉네임 세션에 저장
+	    session.setAttribute("nickname", "mj"); //mj->user.getNickName
+	    
+	    //}
+	    LOG.debug("┌───────────────────────┐");
+	 	LOG.debug("│   nickname:           │"+session.getAttribute("nickname"));
+	 	LOG.debug("│   memberId:           │"+session.getAttribute("memberId"));
+	 	LOG.debug("└───────────────────────┘");
 		
 		// page번호 초기값 1
 		if (null != inVO && inVO.getPageNo() == 0) {
@@ -218,4 +250,19 @@ public class PostController {
 		return "post/postReg";
 	}
 	
+	
+	
+	
+	 @RequestMapping(value = "/postMod.do", method = RequestMethod.GET) 
+	 public String postMod(@ModelAttribute("inVO")PostVO inVO ,@RequestParam("postNumber")int postNumber, Model model) throws SQLException {
+		 LOG.debug("┌───────────────────────┐");
+		 LOG.debug("│   postMod()           │");
+		 LOG.debug("└───────────────────────┘");
+		 
+		 PostVO outVO = postService.doSelectOne(inVO); 
+		 model.addAttribute("outVO",outVO);
+	 
+	 return "post/postMod"; 
+	 }
+
 }

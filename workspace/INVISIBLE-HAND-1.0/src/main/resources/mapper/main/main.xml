@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.main">
-  
-<!--   <update id="doUpdateViews" parameterType="PostVO">
-      UPDATE board           
-      SET views   = NVL(views,0)+1   
-      WHERE postNumber = #{postNumber}
-      AND categoryNumber = #{categoryNumber}
-   
-  </update> -->
 
-  <select id="chartGraph" parameterType="ChartVO" resultType="ChartVO">
-			SELECT
-			    chartseq,
-			    year,
-			    one,
-			    two,
-			    three
-			FROM
-			    chart
-			ORDER BY chartseq
 
-  </select>
-       
-  <select id="doRetrieve" parameterType="PostVO" resultType="PostVO">
+	<select id="doRetrieve" parameterType="PostVO"
+		resultType="PostVO">
 		<![CDATA[
 		SELECT A.*, B.*
 		FROM (
@@ -55,24 +36,50 @@
 		  FROM board
 		  WHERE categoryNumber = #{categoryNumber}
 		) B	]]>
-		
-		
-  </select>
+	</select>
 
-  <!-- rank 정보 가져오기 -->
-  <select id="getRank" parameterType="RankVO" resultType="RankVO">
-    SELECT
-        name,
-        RANK() OVER (ORDER BY score ASC) AS rank    
-    FROM
-      RANK
-  </select>
-  
-  <update id="scoreUpdate" parameterType="RankVO" >
-   UPDATE  RANK
-    set score = NVL(score,0)+1 
-   WHERE name = ${name}
-  </update>
-  
-  
+	<!-- 랭킹 관련 sql -->
+
+	<!-- 1. 랭킹 정보 main 화면에 출력할 로직 -->
+	<select id="doGetRanking" resultType="RankVO">
+		SELECT
+		currentRank,
+		name,
+		previousRank-currentRank as changeRank
+		FROM RANKING
+		ORDER BY currentRank ASC
+	</select>
+
+	<!-- 2. 설문이 성공적으로 return시 선택한 업종의 score에 +1 -->
+	<update id="doUpdateScore" parameterType="RankVO">
+		UPDATE Ranking
+		SET score = NVL(score,0) + 1
+		WHERE name = #{name}
+	</update>
+
+	<!-- 3. 이전 랭킹과 현재 랭킹을 기록 -->
+	<!-- 3.1 현재 랭킹을 이전 랭킹에 기록 -->
+	<update id="doUpdatePrevious" parameterType="RankVO">
+		UPDATE Ranking
+		SET previousRank = currentRank
+	</update>
+
+	<!-- 3.2 현재 랭킹을 score에 의해 랭킹 업데이트 -->
+	<update id="doUpdateCurrent" parameterType="RankVO">
+		UPDATE Ranking
+		SET currentRank =
+		(
+		SELECT newRank
+		FROM (
+		SELECT
+		name,
+		RANK() OVER (ORDER BY score DESC) AS newRank
+		FROM Ranking
+		) source
+		WHERE source.name = Ranking.name
+		),
+		rankingUpdate = SYSDATE
+	</update>
+
+	<!-- 랭킹 관련 sql END -->
 </mapper>
