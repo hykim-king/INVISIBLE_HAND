@@ -22,10 +22,10 @@
 	<!-- *---header Start---* -->
 	<header class="header">
 		<div class="inner">
-			<div class="logo">
-				<a href="${CP}/main/main.do"><img
-					src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
-			</div>
+      <div class="logo">
+       <a href="${CP}/main/main.do"><img src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
+       <a href="${CP}/main/main.do" style="color: #fff;">INVISIBLE HAND</a>
+      </div>
 			<nav class="gnb_wrap">
 				<ul class="global_nav_bar">
 					<li><a href="${CP}/chart/chart.do">차트</a></li>

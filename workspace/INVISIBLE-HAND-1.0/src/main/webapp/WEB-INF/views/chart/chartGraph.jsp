@@ -42,11 +42,24 @@
 
       <!-- 차트 영역 1234 -->
       <div class="tab-box tab1 active">
-        <div id="line_chart1">
+      <div>
           <jsp:include page="chart01.jsp"/>
+      </div>
+       
+       <div>
+          <select id="mainCategorySelect" name="mainCategory">
+                <option value="비제조업" selected="selected">비제조업</option>
+                <option value="제조업">제조업</option>
+          </select>
+          <select id="subCategorySelect" name="subCategory">
+                <option value="-" selected="selected"></option>
+                <option value="건설업">건설업</option>
+                <option value="서비스업">서비스업</option>
+          </select>
+          <button id="submitButton">Submit</button>
         </div>
       </div>
-
+     
       <div class="tab-box tab2">
         <div id="line_chart2"></div>
       </div>

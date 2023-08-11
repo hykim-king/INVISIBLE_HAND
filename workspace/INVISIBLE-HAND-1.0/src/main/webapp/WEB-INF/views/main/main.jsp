@@ -29,7 +29,14 @@
       </section>
       
       <section class="sec02 sec-chart">차트 영역입니다
-	    
+        <div>
+				  <select id="mainCategorySelect" name="mainCategory">
+						    <option value="비제조업" selected="selected">비제조업</option>
+						    <option value="제조업">제조업</option>
+					</select>
+					<button id="submitButton">Submit</button>
+				</div>
+				
 	       <div>
 	         <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
 	       </div>
