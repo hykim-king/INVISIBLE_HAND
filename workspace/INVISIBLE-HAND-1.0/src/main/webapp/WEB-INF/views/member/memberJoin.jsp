@@ -138,7 +138,7 @@
             id="m_y" required> <label for="m_y">
               동의합니다</label>
               <input type="radio" name="agree" value="N"
-              id="m_n"> <label for="m_n">동의하지 않음</label>
+              id="m_n" checked="checked"> <label for="m_n">동의하지 않음</label>
               
           </div>
         </div>
@@ -487,6 +487,13 @@ $(document).ready(function() {
 //회원정보 전송
 	 $("#register-form").submit(function(event) {
 	        event.preventDefault(); // 폼 제출을 막음
+	        
+	        let ck = $("input[type=radio][name=agree]:checked").val();
+          
+          if (ck == "N") {
+            alert("이용약관에 동의해주세요.");
+            return;
+          }
 
 	        // Submit the form using AJAX
 	        $.ajax({
@@ -509,12 +516,6 @@ $(document).ready(function() {
 		          
 	                
 	////////////////////////////////////////////////////////////////////////
-	
-	//약관동의 하세요
-		disagreeRadio.addEventListener('click', function() {
-		    alert('회원가입에 동의해주셔야 합니다.');
-		    agreeRadio.checked = true; // 비동의 버튼 클릭 시 자동으로 동의 버튼 선택 처리
-		  });
 	
 }); // document.ready -------------------------------------------------
 
