@@ -35,9 +35,6 @@ public class MainController {
 	MainService mainService;	
 	
 	@Autowired
-	ChartService chartService;
-	
-	@Autowired
 	RankService rankService;
 	
 	@RequestMapping(value = "main/main.do")
@@ -75,67 +72,6 @@ public class MainController {
 		LOG.debug("└───────────────────────┘");
 		
 		return resultList;
-	}
-	
-	
-	//차트 기능 구현(jsonArray에 값을 저장,구글 chart에서 원하는 데이터인 이중 배열로 만듬)
-	@RequestMapping(value="main/chartGraph.do",method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String chartGraph(@RequestParam(value = "mainCategory", required = false, defaultValue = "비제조업") String mainCategory,
-            				 @RequestParam(value = "subCategory", required = false, defaultValue = "-") String subCategory) {
-		String jsonString = "";
-		
-		ChartVO inVO = new ChartVO();
-		inVO.setMaincategory(mainCategory);
-		inVO.setSubcategory(subCategory);		
-		List<ChartVO> chartData = chartService.chartGraph(inVO);
-		
-		JsonArray mainArray=new JsonArray();
-		if(subCategory.equals("-")) {
-			for(ChartVO outVO  :chartData) {
-				JsonArray sArray=new JsonArray();
-				sArray.add(outVO.getChartdate());
-				sArray.add(outVO.getMaincategory());
-				sArray.add(outVO.getSubcategory());
-				sArray.add(outVO.getSbhiAvg());
-				sArray.add(outVO.getSbhi2Avg());
-				sArray.add(outVO.getSbhi3Avg());
-				sArray.add(outVO.getSbhi4Avg());
-				sArray.add(outVO.getSbhi5Avg());
-				sArray.add(outVO.getSbhi6Avg());
-				sArray.add(outVO.getSbhi7Avg());
-				sArray.add(outVO.getSbhi8Avg());
-				sArray.add(outVO.getSbhi9Avg());
-				sArray.add(outVO.getSbhi10Avg());			
-				mainArray.add(sArray);
-			}
-			jsonString = mainArray.toString();
-			
-		}else if(!subCategory.equals("-")) {
-				for(ChartVO outVO  :chartData) {
-					JsonArray sArray=new JsonArray();
-					sArray.add(outVO.getChartdate());
-					sArray.add(outVO.getMaincategory());
-					sArray.add(outVO.getSubcategory());
-					sArray.add(outVO.getSbhi());
-					sArray.add(outVO.getSbhi2());
-					sArray.add(outVO.getSbhi3());
-					sArray.add(outVO.getSbhi4());
-					sArray.add(outVO.getSbhi5());
-					sArray.add(outVO.getSbhi6());
-					sArray.add(outVO.getSbhi7());
-					sArray.add(outVO.getSbhi8());
-					sArray.add(outVO.getSbhi9());
-					sArray.add(outVO.getSbhi10());			
-					mainArray.add(sArray);
-				}
-				jsonString = mainArray.toString();
-		}
-		LOG.debug("=====================================");
-		LOG.debug("jsonString"+jsonString);
-		LOG.debug("=====================================");
-		return jsonString;
 	}
 	
 	

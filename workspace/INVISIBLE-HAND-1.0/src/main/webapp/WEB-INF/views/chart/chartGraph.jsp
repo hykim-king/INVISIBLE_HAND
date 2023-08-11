@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="../resources/js/jquery-3.7.0.js"></script>
-<script src="../resources/js/common/chart.js"></script>
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -42,7 +42,9 @@
 
       <!-- 차트 영역 1234 -->
       <div class="tab-box tab1 active">
-        <div id="line_chart1"></div>
+        <div id="line_chart1">
+          <jsp:include page="chart01.jsp"/>
+        </div>
       </div>
 
       <div class="tab-box tab2">
@@ -63,7 +65,8 @@
   <!-- **---container End---** -->
 
 
-    
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
 $(".categorybox").click(function() {
    $(this).siblings().removeClass("active");
@@ -74,3 +77,5 @@ $(".categorybox").click(function() {
    $("." + clickTab).addClass("active");
 });
 </script>
+</body>
+</html>

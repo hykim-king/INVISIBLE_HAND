@@ -13,7 +13,7 @@ import com.pcwk.ehr.dao.ChartDao;
 @Repository
 public class ChartDaoImpl implements ChartDao {
 	
-	final String NAMESPACE = "com.pcwk.ehr.main";
+	final String NAMESPACE = "com.pcwk.ehr.chart";
 	final String DOT       = ".";
 	
 	@Autowired
