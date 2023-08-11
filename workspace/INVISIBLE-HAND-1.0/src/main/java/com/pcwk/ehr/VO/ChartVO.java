@@ -16,28 +16,28 @@ public class ChartVO {
   private String  chartdate;		
   private String  maincategory;
   private String  subcategory;
-  private int  sbhi;
-  private int sbhi2;
-  private int sbhi3;
-  private int sbhi4;
-  private int sbhi5;
-  private int sbhi6;
-  private int sbhi7;
-  private int sbhi8;
-  private int sbhi9;
-  private int sbhi10;
+  private double  sbhi;
+  private double sbhi2;
+  private double sbhi3;
+  private double sbhi4;
+  private double sbhi5;
+  private double sbhi6;
+  private double sbhi7;
+  private double sbhi8;
+  private double sbhi9;
+  private double sbhi10;
   
   //sbhi 평균값을 저장할 곳
-  private int sbhiAvg;
-  private int sbhi2Avg;  
-  private int sbhi3Avg;  
-  private int sbhi4Avg;  
-  private int sbhi5Avg;  
-  private int sbhi6Avg;  
-  private int sbhi7Avg;  
-  private int sbhi8Avg;  
-  private int sbhi9Avg;  
-  private int sbhi10Avg; 
+  private double sbhiAvg;
+  private double sbhi2Avg;  
+  private double sbhi3Avg;  
+  private double sbhi4Avg;  
+  private double sbhi5Avg;  
+  private double sbhi6Avg;  
+  private double sbhi7Avg;  
+  private double sbhi8Avg;  
+  private double sbhi9Avg;  
+  private double sbhi10Avg; 
     
   
     
