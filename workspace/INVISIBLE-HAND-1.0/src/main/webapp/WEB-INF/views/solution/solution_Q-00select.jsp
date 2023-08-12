@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +30,10 @@
   <script src="../resources/js/jquery-3.7.0.js"></script>
     <script >
         function move01(){
-            location.href = "solution_Q_01.html";
+            location.href = "${CP}/solution/solution_Q-01poduct.do";
         }
         function move02(){
-            location.href = "solution_Q_02.html";
+            location.href = "${CP}/solution/solution_Q-02noproduct.do";
         }
     </script>
 </body>
