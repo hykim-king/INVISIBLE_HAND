@@ -52,11 +52,21 @@
                 <option value="제조업">제조업</option>
           </select>
           <select id="subCategorySelect" name="subCategory">
-                <option value="-" selected="selected"></option>
-                <option value="건설업">건설업</option>
-                <option value="서비스업">서비스업</option>
+            <option value="-" selected="selected">평균</option>
+            <option value="건설업">건설업</option>
+            <option value="교육서비스업">교육서비스업</option>
+            <option value="도매 및 소매업">도매 및 소매업</option>
+            <option value="부동산업 및 임대업">부동산업 및 임대업</option>
+            <option value="사업시설관리 및 사업지원서비스업">사업시설관리 및 사업지원서비스업</option>
+            <option value="서비스업">서비스업</option>
+            <option value="수리 및 기타개인서비스업">수리 및 기타개인서비스업</option>
+            <option value="숙박 및 음식점업">숙박 및 음식점업</option>                                           
+            <option value="예술,스포츠 및 여가관련서비스업">예술,스포츠 및 여가관련서비스업</option>
+            <option value="운수업">운수업</option>
+            <option value="전문,과학 및 기술서비스업">전문,과학 및 기술서비스업</option>
+            <option value="출판,영상,방송통신 및 정보서비스업">출판,영상,방송통신 및 정보서비스업</option>
           </select>
-          <button id="submitButton">Submit</button>
+          <button id="submitButton" style="display: none;">Submit</button>
         </div>
       </div>
      
@@ -89,6 +99,55 @@ $(".categorybox").click(function() {
    $(".tab-box").removeClass("active");
    $("." + clickTab).addClass("active");
 });
+</script>
+<script>
+// mainCategorySelect 요소를 가져옴
+const mainCategorySelect = document.getElementById("mainCategorySelect");
+
+// subCategorySelect 요소옴
+const subCategorySelect = document.getElementById("subCategorySelect");
+			subCategorySelect.addEventListener("change", function() {
+			    // 서브 카테고리 선택이 변경될 때마다 submit 버튼을 누른 것처럼 처리
+			    submitButton.click();
+			});
+// mainCategorySelect 값이 변경될 때마다 실행되는 함수를 정의
+mainCategorySelect.addEventListener("change", function() {
+    // 현재 선택된 mainCategorySelect의 값 가져오기
+    const selectedMainCategory = mainCategorySelect.value;
+    
+    // subCategorySelect의 내용을 변경
+    if (selectedMainCategory === "비제조업") {
+        // 비제조업이 선택된 경우의 subCategory 목록을 설정
+        subCategorySelect.innerHTML = 
+        	` <option value="-" selected="selected">평균</option>
+            <option value="건설업">건설업</option>
+            <option value="교육서비스업">교육서비스업</option>
+            <option value="도매 및 소매업">도매 및 소매업</option>
+            <option value="부동산업 및 임대업">부동산업 및 임대업</option>
+            <option value="사업시설관리 및 사업지원서비스업">사업시설관리 및 사업지원서비스업</option>
+            <option value="서비스업">서비스업</option>
+            <option value="수리 및 기타개인서비스업">수리 및 기타개인서비스업</option>
+            <option value="숙박 및 음식점업">숙박 및 음식점업</option>                                           
+            <option value="예술,스포츠 및 여가관련서비스업">예술,스포츠 및 여가관련서비스업</option>
+            <option value="운수업">운수업</option>
+            <option value="전문,과학 및 기술서비스업">전문,과학 및 기술서비스업</option>
+            <option value="출판,영상,방송통신 및 정보서비스업">출판,영상,방송통신 및 정보서비스업</option>
+            `;
+    } else if (selectedMainCategory === "제조업") {
+        // 제조업이 선택된 경우의 subCategory 목록을 설정
+        subCategorySelect.innerHTML = `
+        	 <option value="-" >평균</option>
+        	 <option value="제조업 서브">제조업 서브</option>
+            `;
+    }
+
+    // 초기 선택값에 따라서 서브 카테고리 선택 및 submitButton을 초기화
+    subCategorySelect.value = "-";
+    submitButton.style.display = "none";
+    submitButton.click();
+});
+
+
 </script>
 </body>
 </html>
