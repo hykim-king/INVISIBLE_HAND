@@ -46,7 +46,7 @@
           <jsp:include page="chart01.jsp"/>
       </div>
        
-       <div>
+       <div class="chart-nav">
           <select id="mainCategorySelect" name="mainCategory">
                 <option value="비제조업" selected="selected">비제조업</option>
                 <option value="제조업">제조업</option>

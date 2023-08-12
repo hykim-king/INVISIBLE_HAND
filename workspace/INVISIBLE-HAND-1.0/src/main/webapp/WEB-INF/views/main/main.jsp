@@ -15,10 +15,11 @@
 
   <!-- *---container Start---* -->
   <div class="h60px"></div>
-  <div class="container-1400 min-100vh con-main">
-    <div class="wrap-1000">
+  <div class="container-1400 con-main">
+    <div class="wrap-1000 main-wrap">
+    
+      <h4>주요 뉴스 헤드라인</h4>  
       <section class="sec01 sec-news">
-                     뉴스 헤드라인 영역입니다
         <div class="news-slide">
           <div class="news">
             <ul class="rolling" id="newsHeadlines">
@@ -28,13 +29,14 @@
         </div>
       </section>
       
-      <section class="sec02 sec-chart">차트 영역입니다
-        <div>
+      <h4>어떤 차트 제목</h4>
+      <section class="sec02 sec-chart">
+        <div class="chart-nav">
 				  <select id="mainCategorySelect" name="mainCategory">
 						    <option value="비제조업" selected="selected">비제조업</option>
 						    <option value="제조업">제조업</option>
 					</select>
-					<button id="submitButton">Submit</button>
+					<button id="submitButton">선택 보기</button>
 				</div>
 				
 	       <div>
@@ -43,16 +45,17 @@
 	
       </section>
       
-      <section class="sec03 sec-board">커뮤니티 영역입니다
+      <h4>추천 게시글</h4>
+      <section class="sec03 sec-board">
        
 	      <div>
-	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판</a>	        	        
-	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A</a>	     
+	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
+	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
 	      </div>
 	      
 	      <div>
-		       <table>
-		          <thead>
+		       <table class="main-post-table">
+		          <thead class="main-post-thead">
 		            <tr>
 		            <th>No.</th>
 		            <th>제목</th>
@@ -62,7 +65,7 @@
 		            <th>추천수</th>
 		            </tr>
 		          </thead>
-		          <tbody id="tableBody">
+		          <tbody id="tableBody" class="main-post-tbody">
 							<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
 							</tbody>							
 						</table>	
@@ -71,12 +74,14 @@
     </div>
     <!-- **---wrap End---** -->
     <div class="rank-area">
-        <table>
+    <h3>업종별 변동 현황</h3>
+        <table class="main-rank-table">
             <thead>
                 <tr>
                 <th>등수</th>
                 <th>업종명</th>                
                 <th>등수변동</th>
+                <th>화살표</th>
                 </tr>
            </thead>
            <tbody id="rankBody">
