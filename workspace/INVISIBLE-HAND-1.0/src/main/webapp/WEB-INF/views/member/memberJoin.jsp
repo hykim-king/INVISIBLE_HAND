@@ -7,7 +7,12 @@
 <title>보이지 않는 손 레이아웃</title>
 <body>
   <!-- *---container Start---* -->
-
+  <div class="drops">
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+  </div>
   <div class="h60px"></div>
   <div class="container-1400 con-login">
     <div class="join-wrap">
@@ -35,8 +40,8 @@
           <p class="input-title">ID</p>
           <label>
             <input type="ID" name="memberId" id="memberId" placeholder="ID를 입력하세요" 
-                   class="size border-bottom" required="required">
-            <i style='color: #4200FF; margin-left: -20px; opacity: 0; transition: 0.5s;'></i>
+                   class="size border-bottom" requi#FF007A="requi#FF007A">
+            <i class="fas fa-check-circle fa-sm check-icon-01"></i>
             <input id="id-check-btn" type="button" value="중복확인" class="btn btn-white id-check-btn">
           </label>
         </div>
@@ -45,9 +50,8 @@
           <p class="input-title">닉네임</p>
           <label>
             <input type="nickname" name="nickName" id="nickName" placeholder="닉네임을 입력하세요"
-                   class="size border-bottom" required="required">
-            <i class='fas fa-check-circle fa-sm check-icon-02' style='color: #4200FF;
-                    margin-left: -20px; opacity: 0; transition: 0.5s;'></i>
+                   class="size border-bottom" requi#FF007A="requi#FF007A">
+            <i class="fas fa-check-circle fa-sm check-icon-02"></i>
             <input id="nick-check-btn" type="button" value="중복확인" class="btn btn-white nick-Check-btn">
           </label>
         </div>
@@ -56,9 +60,8 @@
           <p class="input-title">E-mail</p>
           <label>
             <input type="email" name="email" id="email" placeholder="E-mail을 입력하세요"
-                   class="size border-bottom" required="required">
-            <i class='fas fa-check-circle fa-sm check-icon-03' style='color: #4200FF;
-                      margin-left: -20px; opacity: 0; transition: 0.5s;'></i>
+                   class="size border-bottom" requi#FF007A="requi#FF007A">
+            <i class="fas fa-check-circle fa-sm check-icon-03"></i>           
             <input id="email-check-btn" type="button" value="중복확인" class="btn btn-white nick-Check-btn">
           </label>
         </div>
@@ -67,9 +70,8 @@
           <p class="input-title">E-mail 인증번호 확인</p>
           <label>
           <input type="text" class="size numberOnly border-bottom checkmark"
-                 name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required>
-          <i class='fas fa-check-circle fa-sm check-icon-04' style='color: #4200FF;
-             margin-left: -20px; opacity: 0; transition: 0.5s;'></i>
+                 name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" requi#FF007A>
+          <i class="fas fa-check-circle fa-sm check-icon-04"></i>
           <input id="email-send-btn" type="button" value="인증번호 전송" class="btn btn-white num-check-btn">
           <span id="mail-check-warn"></span>
           </label>
@@ -80,7 +82,7 @@
           <div class="name-phone">
             <p class="input-title">이름</p>
             <label>
-            <input type="memberName" name="memberName" id="memberName" class="size border-bottom w48" required="required">
+            <input type="memberName" name="memberName" id="memberName" class="size border-bottom w48" requi#FF007A="requi#FF007A">
               <div class="alert alert-danger" id="nameCheckDiv" style="height: 20px; color: #979797; font-size: 14px;">
                   이름을 입력해주세요.
               </div>
@@ -90,7 +92,7 @@
             <p class="input-title">휴대폰번호</p>
             <label>
               <input type="phoneNumber" name="phoneNumber" id="phoneNumber"
-                     placeholder="'-'없이 입력해주세요" class="size border-bottom w48" required="required">
+                     placeholder="'-'없이 입력해주세요" class="size border-bottom w48" requi#FF007A="requi#FF007A">
             </label>
           </div>
         </div>
@@ -108,7 +110,7 @@
           <p class="input-title">비밀번호 입력</p>
           <label for="password">
           <input placeholder="비밀번호는 8이상 12자 이하로 설정바랍니다" type="password" 
-                 class="size border-bottom" id="password" name="password" required>
+                 class="size border-bottom" id="password" name="password" requi#FF007A>
             <input type="button" value="부적합" class="btn btn-white pwbtn">
 
           </label>
@@ -118,9 +120,8 @@
           <p class="input-title">비밀번호 확인</p>
           <label for="confirm_password">
           <input type="password" class="size border-bottom checkmark" id="confirm_password"
-                 name="confirm_password" required placeholder="비밀번호를 다시 한번 입력하세요">
-            <i class='fas fa-check-circle fa-sm check-icon-05' style='color: #4200FF;
-               margin-left: -20px; opacity: 0; transition: 0.5s;'></i>
+                 name="confirm_password" requi#FF007A placeholder="비밀번호를 다시 한번 입력하세요">
+          <i class="fas fa-check-circle fa-sm check-icon-05"></i>
             <input type="button" value="불일치" class="btn btn-white pw-check-btn">
           </label>
         </div>
@@ -141,7 +142,7 @@
             이용약관동의여부 확인 <span><a href="agree">[이용약관 자세히 읽기]</a></span>
           </div>
           <div class="input-chek">
-            <input checked="checked" type="radio" name="agree" value="Y" id="m_y" required>
+            <input checked="checked" type="radio" name="agree" value="Y" id="m_y" requi#FF007A>
             <label for="m_y"> 동의합니다</label>
             <input type="radio" name="agree" value="N" id="m_n" checked="checked">
             <label for="m_n">동의하지 않음</label>
@@ -192,8 +193,8 @@
         $("#memberId").focus();
         var newValue = '부적합';
         $('#id-check-btn').val(newValue);
-        $('#id-check-btn').css('color', 'red');
-        $('#id-check-btn').css('border', '1px solid red');
+        $('#id-check-btn').css('color', '#FF007A');
+        $('#id-check-btn').css('border', '1px solid #FF007A');
         $('.check-icon-01').css('opacity', '0');
         
       } else {
@@ -213,8 +214,8 @@
               alert("중복된 아이디입니다.");
               var newValue = '중복확인';
               $('#id-check-btn').val(newValue);
-              $('#id-check-btn').css('color', 'red');
-              $('#id-check-btn').css('border', '1px solid red');
+              $('#id-check-btn').css('color', '#FF007A');
+              $('#id-check-btn').css('border', '1px solid #FF007A');
               $('.check-icon-01').css('opacity', '0');
             } else if (data == 0) {
               console.log("data : " + data);
@@ -222,8 +223,8 @@
               alert("사용가능한 아이디입니다.");
               var newValue = '사용가능';
               $('#id-check-btn').val(newValue);
-              $('#id-check-btn').css('color', 'blue');
-              $('#id-check-btn').css('border', '1px solid blue');
+              $('#id-check-btn').css('color', '#6B53FF');
+              $('#id-check-btn').css('border', '1px solid #6B53FF');
               $('.check-icon-01').css('opacity', '1');
               console.log("idCheck : " + idCheck);
             } else {
@@ -249,8 +250,8 @@
         $("#nickName").focus();
         var newValue = '부적합';
         $('#nick-check-btn').val(newValue);
-        $('#nick-check-btn').css('color', 'red');
-        $('#nick-check-btn').css('border', '1px solid red');
+        $('#nick-check-btn').css('color', '#FF007A');
+        $('#nick-check-btn').css('border', '1px solid #FF007A');
         $('.check-icon-02').css('opacity', '0');
       } else {
         $.ajax({
@@ -269,8 +270,8 @@
               alert("중복된 닉네임입니다.");
               var newValue = '중복확인';
               $('#nick-check-btn').val(newValue);
-              $('#nick-check-btn').css('color', 'red');
-              $('#nick-check-btn').css('border', '1px solid red');
+              $('#nick-check-btn').css('color', '#FF007A');
+              $('#nick-check-btn').css('border', '1px solid #FF007A');
               $('.check-icon-02').css('opacity', '0');
             } else if (data == 0) {
               console.log("data : " + data);
@@ -278,8 +279,8 @@
               alert("사용가능한 닉네임입니다.");
               var newValue = '사용가능';
               $('#nick-check-btn').val(newValue);
-              $('#nick-check-btn').css('color', 'blue');
-              $('#nick-check-btn').css('border', '1px solid blue');
+              $('#nick-check-btn').css('color', '#6B53FF');
+              $('#nick-check-btn').css('border', '1px solid #6B53FF');
               $('.check-icon-02').css('opacity', '1');
               console.log("nickCheck : " + nickCheck);
             } else {
@@ -325,8 +326,8 @@
               alert("중복된 이메일입니다.");
               var newValue = '중복확인';
               $('#email-check-btn').val(newValue);
-              $('#email-check-btn').css('color', 'red');
-              $('#email-check-btn').css('border', '1px solid red');
+              $('#email-check-btn').css('color', '#FF007A');
+              $('#email-check-btn').css('border', '1px solid #FF007A');
               $('.check-icon-03').css('opacity', '0');
             } else if (data == 0) {
               console.log("data : " + data);
@@ -334,8 +335,8 @@
               alert("사용가능한 이메일입니다.");
               var newValue = '사용가능';
               $('#email-check-btn').val(newValue);
-              $('#email-check-btn').css('color', 'blue');
-              $('#email-check-btn').css('border', '1px solid blue');
+              $('#email-check-btn').css('color', '#6B53FF');
+              $('#email-check-btn').css('border', '1px solid #6B53FF');
               $('.check-icon-03').css('opacity', '1');
               console.log("emailCheck : " + emailCheck);
             } else {
@@ -395,8 +396,8 @@
       if (inputCode == code) {
         
         $('.num-check-btn').val("일치");
-        $('.num-check-btn').css('color', 'blue');
-        $('.num-check-btn').css('border', '1px solid blue');
+        $('.num-check-btn').css('color', '#6B53FF');
+        $('.num-check-btn').css('border', '1px solid #6B53FF');
         $('.check-icon-04').css('opacity', '1');
         pwCheck = true;
         certified_Email = 'Y';
@@ -406,8 +407,8 @@
       } else {
 
          $('.num-check-btn').val("불일치");
-         $('.num-check-btn').css('color', 'red');
-         $('.num-check-btn').css('border', '1px solid red');
+         $('.num-check-btn').css('color', '#FF007A');
+         $('.num-check-btn').css('border', '1px solid #FF007A');
          $('.check-icon-04').css('opacity', '0');
          pwCheck = false;
          certified_Email = 'N';
@@ -454,15 +455,15 @@
       if (password.length < 8 || password.length > 12) {
         var newValue = '부적합';
         $('.pwbtn').val(newValue);
-        $('.pwbtn').css('color', 'red');
-        $('.pwbtn').css('border', '1px solid red');
+        $('.pwbtn').css('color', '#FF007A');
+        $('.pwbtn').css('border', '1px solid #FF007A');
         $('#register').attr('disabled', true);
     
       } else {
         var newValue = '적합';
         $('.pwbtn').val(newValue);
-        $('.pwbtn').css('color', 'blue');
-        $('.pwbtn').css('border', '1px solid blue');
+        $('.pwbtn').css('color', '#6B53FF');
+        $('.pwbtn').css('border', '1px solid #6B53FF');
         $('#register').attr('disabled', true);
     
         if (confirm_password.trim().length === 0) {
@@ -470,16 +471,16 @@
           } else if (password !== confirm_password) {
             var newPWCeheckValue = '불일치';
             $('.pw-check-btn').val(newPWCeheckValue);
-            $('.pw-check-btn').css('color', 'red');
-            $('.pw-check-btn').css('border', '1px solid red');
+            $('.pw-check-btn').css('color', '#FF007A');
+            $('.pw-check-btn').css('border', '1px solid #FF007A');
             $('.check-icon-05').css('opacity', '0');
             $('#register').attr('disabled', true);
             
           } else {
               var newPWCeheckValue = '일치';
               $('.pw-check-btn').val(newPWCeheckValue);
-              $('.pw-check-btn').css('color', 'blue');
-              $('.pw-check-btn').css('border', '1px solid blue');
+              $('.pw-check-btn').css('color', '#6B53FF');
+              $('.pw-check-btn').css('border', '1px solid #6B53FF');
               $('.check-icon-05').css('opacity', '1');
               $('#register').attr('disabled', false);
               console.log("pwCheck : " + pwCheck);

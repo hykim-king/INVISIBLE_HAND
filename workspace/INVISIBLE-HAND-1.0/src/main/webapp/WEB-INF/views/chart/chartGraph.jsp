@@ -119,7 +119,8 @@ mainCategorySelect.addEventListener("change", function() {
     if (selectedMainCategory === "비제조업") {
         // 비제조업이 선택된 경우의 subCategory 목록을 설정
         subCategorySelect.innerHTML = 
-        	` <option value="-" selected="selected">평균</option>
+        	` 
+        	  <option value="-" selected="selected">평균</option>
             <option value="건설업">건설업</option>
             <option value="교육서비스업">교육서비스업</option>
             <option value="도매 및 소매업">도매 및 소매업</option>

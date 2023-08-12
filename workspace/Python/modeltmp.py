@@ -37,13 +37,13 @@ model.add(SimpleRNN(units=16, activation='relu'))
 model.add(Dense(units=1))
 
 # 모델 컴파일
-model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error', metrics=['mae'])
+model.compile(optimizer=Adam(learning_rate=0.0008), loss='mean_squared_error', metrics=['mae'])
 
 # 모델 요약 출력
 model.summary()
 
 # 모델 훈련
-model.fit(X_train, y_train, epochs=30, batch_size=32, validation_data=(X_test, y_test))
+model.fit(X_train, y_train, epochs=20, batch_size=4, validation_data=(X_test, y_test))
 
 # 테스트 데이터로 예측
 predictions = model.predict(X_test)
@@ -51,3 +51,5 @@ predictions = model.predict(X_test)
 # 결과 출력
 for i in range(10):
     print(f"실제값: {y_test[i]}, 예측값: {predictions[i][0]}")
+
+model.save("rnn_model.h5")
