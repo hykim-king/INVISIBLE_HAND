@@ -15,6 +15,7 @@
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart1"></div>
+        <button id="restoreButton">Restore</button> <!-- Restore 버튼 추가 -->
     </div>
     <!-- **---wrap End---** -->
   </div>
@@ -24,6 +25,15 @@
 <script>
  //차트 관련
  $(document).ready(function () {      
+	 
+	 //날짜 변환 함수
+	 function formatDate(date) {
+		  let year = date.getFullYear();
+		  let month = (date.getMonth() + 1).toString().padStart(2, '0');
+		  return year + '.' + month;
+		}
+	 
+	 
 	  let mainCategory = "비제조업";
 	  let subCategory  = "-";
 	 function submitbutton() {
@@ -52,22 +62,34 @@
                 console.log("데이터를 가져옴");
                 console.log(data);
                 let chartData = [];
-                chartData.push(["Year","항목1","항목2","항목3","항목4","항목5","항목6","항목7","항목8","항목9","항목10"]);
+                chartData.push(["Year","경기전반","고용수준","내수판매","수출","영업이익","자금사정"]);
+                
+                if (selectedMainCategory === '제조업') {
+                  chartData[0].push("원자재조달사정","생산설비수준","제품제고수준","생산");
+                }
+                
                 for (let i = 0; i < data.length; i++) {
-                    let row = [];
-                    row.push(data[i][0]);
-                    row.push(data[i][3]);
-                    row.push(data[i][4])
-                    row.push(data[i][5]);
-                    row.push(data[i][6]);
-                    row.push(data[i][7]);
-                    row.push(data[i][8]);
+                  let row = [];
+                  let date = new Date(data[i][0]);
+                  let formattedDate = formatDate(date); // 날짜를 "YYYY.MM" 형식으로 변환
+                  row.push(formattedDate);
+                  row.push(data[i][3]);
+                  row.push(data[i][4]);
+                  row.push(data[i][5]);
+                  row.push(data[i][6]);
+                  row.push(data[i][7]);
+                  row.push(data[i][8]);
+
+                  if (selectedMainCategory === '제조업') {
                     row.push(data[i][9]);
                     row.push(data[i][10]);
                     row.push(data[i][11]);
                     row.push(data[i][12]);
-                    chartData.push(row);
-                } //for
+                  }
+                  
+                  chartData.push(row);
+                }
+                
                 console.log(chartData);
                 drawChart(chartData);
                                 
@@ -87,6 +109,10 @@
         loadChartData(); // 일단 loadChartData 호출
         submitbutton(); // submitbutton 함수를 호출하여 이벤트 등록
     });
+    
+    
+    let hiddenSeries = {}; // 숨겨진 시리즈를 추적하기 위한 객체
+    
     
     function drawChart(data) {
         const originalData1 = new google.visualization.arrayToDataTable(data);
@@ -134,7 +160,20 @@
         }; //options1
 
         let chart1 = new google.visualization.LineChart(document.getElementById('line_chart1'));
-
+        
+        
+        // "Restore" 버튼 클릭 이벤트 리스너
+        $('#restoreButton').click(function () {
+          for (let seriesIndex in hiddenSeries) {
+            for (let i = 0; i < chartData1.getNumberOfRows(); i++) {
+              chartData1.setValue(i, parseInt(seriesIndex) + 1, originalData1.getValue(i, parseInt(seriesIndex) + 1));
+            }
+          }
+          hiddenSeries = {}; // 숨겨진 시리즈 리스트 초기화
+          chart1.draw(chartData1, options1);
+        });
+        
+        
         // 이벤트 리스너 1 추가
         google.visualization.events.addListener(chart1, 'click', function(target) {
           if (target.targetID.match(/legendentry#\d+/)) {
@@ -145,20 +184,21 @@
         
               if (value === null) {
                 chartData1.setValue(i, index + 1, originalData1.getValue(i, index + 1));
+                delete hiddenSeries[index]; // 숨겨진 시리즈에서 제거
               } else {
                 chartData1.setValue(i, index + 1, null);
               }
-            }
-        
+            }            
             chart1.draw(chartData1, options1);
+            hiddenSeries[index] = true; // 숨겨진 시리즈로 추가
           }
         }); //이벤트 리스터 1
         
         chart1.draw(chartData1, options1);
-    
     } //funciton drawChart
 
 }); //차트 관련 doucument
+
 
  </script>
 </body>

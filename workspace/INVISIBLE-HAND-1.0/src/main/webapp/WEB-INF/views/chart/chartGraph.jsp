@@ -118,8 +118,7 @@ mainCategorySelect.addEventListener("change", function() {
     // subCategorySelect의 내용을 변경
     if (selectedMainCategory === "비제조업") {
         // 비제조업이 선택된 경우의 subCategory 목록을 설정
-        subCategorySelect.innerHTML = 
-        	` 
+        subCategorySelect.innerHTML = ` 
         	  <option value="-" selected="selected">평균</option>
             <option value="건설업">건설업</option>
             <option value="교육서비스업">교육서비스업</option>
@@ -138,7 +137,28 @@ mainCategorySelect.addEventListener("change", function() {
         // 제조업이 선택된 경우의 subCategory 목록을 설정
         subCategorySelect.innerHTML = `
         	 <option value="-" >평균</option>
-        	 <option value="제조업 서브">제조업 서브</option>
+        	 <option value="식료품">식료품</option>
+        	 <option value="음료">음료</option>
+        	 <option value="섬유제품 의복제외">섬유제품 의복제외</option>
+        	 <option value="의복 의복액세서리 및 모피제품">의복 의복액세서리 및 모피제품</option>
+        	 <option value="가죽 가방 및 신발">가죽 가방 및 신발</option>
+        	 <option value="목재 및 나무제품">목재 및 나무제품</option>
+        	 <option value="펄프 종이 및 종이제품">펄프 종이 및 종이제품</option>
+        	 <option value="인쇄 및 기록매체">인쇄 및 기록매체</option>
+        	 <option value="화학물질 및 화학제품">화학물질 및 화학제품 </option>
+        	 <option value="의료용 물질 및 의약품">의료용 물질 및 의약품</option>
+        	 <option value="고무제품 및 플라스틱제품">고무제품 및 플라스틱제품</option>
+        	 <option value="비금속 광물제품">비금속 광물제품</option>
+        	 <option value="1차 금속">1차 금속</option> 
+        	 <option value="금속가공제품">금속가공제품</option>
+        	 <option value="전자부품 컴퓨터 영상 음향 및 통신장비">전자부품 컴퓨터 영상 음향 및 통신장비</option>
+        	 <option value="의료 정밀 광학기기 및 시계">의료 정밀 광학기기 및 시계</option>
+        	 <option value="전기장비">전기장비</option> 
+        	 <option value="기타 기계 및 장비">기타 기계 및 장비</option>
+        	 <option value="자동차 및 트레일러">자동차 및 트레일러</option> 
+        	 <option value="기타 운송장비">기타 운송장비</option>
+        	 <option value="가구">가구</option>
+        	 <option value="기타 제품">기타 제품</option>
             `;
     }
 
