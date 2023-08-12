@@ -38,6 +38,10 @@ input{
   color: #C6C6C6;
 }
 
+.text-c{text-align: center;}
+.text-l{text-align: left;}
+.text-r{text-align: right;}
+
 
 .line1px{
   width:100%; 
@@ -72,6 +76,7 @@ input{
 .con-main{
   display: flex;
   position: relative;
+  align-items: center;
 }
 
 .con-login{
@@ -291,6 +296,15 @@ header{
  * --------------------------------------- */
 
 
+/* wrap------------------- */
+.main-wrap{
+	padding: 50px 30px;
+	background-color: #000;
+	border-radius: 40px;
+	margin-top: 60px;
+	border:1px solid #222;
+	margin-bottom:100px;
+}
 
 
 
@@ -306,18 +320,23 @@ header{
   height: 60px;
 }
 section{
-  background-color:lightpink;
+  background-color:#222;
+  margin-top:20px;
+  border-radius: 20px;
 }
-
+.con-main h4{
+	margin-top:50px;
+	padding-left:50px;
+}
 
 /* sec-news------------------- */
 .sec-news{
-  margin-top:30px;
   height:100px;
+  border-radius: 20px;
 }
 .news{
   width:100%; 
-  height:50px; 
+  height:100px; 
   overflow:hidden;
 }
 .rolling{
@@ -328,46 +347,66 @@ section{
 .rolling li{
   width:100%; 
   text-align: center;
-  height:50px; 
-  line-height:50px;
+  height:100px; 
+  line-height:100px;
+}
+
+.rolling li a{
+	font-size: 28px;
+	font-weight: 600px;
 }
 
 /* sec-chart------------------- */
 
 .sec-chart{
-  margin-top:50px;
-  height:500px;
+	padding:50px 0px;
   position: relative;
+  overflow: hidden;
 }
 
 
-
+ 
 /* sec-board------------------- */
 .sec-board{
-  margin-top:40px;
-  height:150px;
+  padding:50px;
 }
 
+.main-post-table{
+	width:100%;
+}
 
+.main-post-tbody tr td:nth-child(1){text-align: center;}
 
 /* rank-area------------------- */
 
 .rank-area{
-  margin-top:150px;
-  width:350px;
-  height:600px;
-  background-color: #222;
-}
-.rank-area ul{
+  margin-left:30px;
   width:300px;
-  background-color: #fff;
+  height:500px;
+  padding:25px;
+  border-radius:20px;
+
+  background-color: #000;
+  border:1px solid #222;
 }
-.rank-area ul li{
-  border:1px solid #ddd;
+
+.main-rank-table{
+	width: 100%;
+	
+	border-collapse: collapse;
+  border: none;
 }
 
-
-
+.main-rank-table tr{
+	width: 100%;
+  background-color:#222;
+  border:3px solid #000;
+  margin:5px 0;
+  border-radius: 10px;
+  height:36px;
+  text-align: center;
+   
+}
 
 .pagination{
   display: flex;
@@ -387,6 +426,7 @@ footer{
   background-color:#222;
   color:#fff;
   display: flex;
+  z-index: 200;
 }
 
 .con-footer{

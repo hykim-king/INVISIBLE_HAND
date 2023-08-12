@@ -14,7 +14,12 @@
 </head>
 <body>
 	<!-- *---container Start---* -->
-
+  <div class="drops">
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+  </div>
 	<div class="h60px"></div>
 	<div class="container-1200 min-100vh con-login">
 		<div class="login-wrap">
@@ -23,24 +28,27 @@
 					<a href="#"><img class="login-logo-img"
 						src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
 				</div>
+        
+        <div class="lines-box">
+	        <div class="line3px pur"></div>
+	        <div class="line1px pur"></div>
+	        <div class="input-wrap">
+	          <!-- Email -->
+	          <p class="input-title">ID</p>
+	          <label> <input class="size ID" type="ID" id="memberId"
+	            name="memberId" required="required">
+	          </label>
+	
+	          <!-- Password -->
+	          <p class="input-title password">Password</p>
+	          <label> <input type="password" name="password"
+	            class="size password" id="password" required="required">
+	          </label>
+	        </div>
+	        <div class="line1px pur"></div>
+	        <div class="line3px pur"></div>        
+        </div>
 
-				<div class="line3px"></div>
-				<div class="line1px"></div>
-				<div class="input-wrap">
-					<!-- Email -->
-					<p class="input-title">ID</p>
-					<label> <input class="size ID" type="ID" id="memberId"
-						name="memberId" required="required">
-					</label>
-
-					<!-- Password -->
-					<p class="input-title password">Password</p>
-					<label> <input type="password" name="password"
-						class="size password" id="password" required="required">
-					</label>
-				</div>
-				<div class="line1px"></div>
-				<div class="line3px"></div>
 				<p class="find">
 					<span><a href="${CP}/member/memberPWChange.do">비밀번호 찾기</a></span> <span><a
 						href="${CP}/member/memberJoin.do">회원가입</a></span>
@@ -50,11 +58,8 @@
 					<input type="submit" value="login" id="goLogin" name="goLogin"
 						class="btn w100 login-btn">
 				</p>
-				<p>
-					<input type="submit" value="카카오로 로그인" id="goLogin" name="goLogin"
-						class="btn w100 login-btn"> <a href="#0" id="kakaoLogin"><img
-						src="../resources/img/kakao_login.png" alt="카카오계정 로그인"
-						style="height: 100px;" /></a>
+				<p class="kakao">
+				 <a href="#0" id="kakaoLogin">카카오계정 로그인</a>
 				</p>
 				<span class="back-home"><a href="${CP}/main/main.do">메인페이지로
 						돌아가기</a></span>

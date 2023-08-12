@@ -13,8 +13,9 @@
 	                console.log(data);
 	                data.forEach(function(item,index){
 	                    let row = '<tr>' + 
-	                      '<td>' + item.name + '</td>' +                     
 	                      '<td>' + item.currentRank + '</td>' +
+	                      '<td>' + item.name + '</td>' +                     
+	                      '<td>' + item.changeRank + '</td>' +
 	                      '<td>' + item.changeRank + '</td>' +
 	                      '</tr>';
 	            newTableBody.innerHTML += row;

@@ -13,7 +13,7 @@ color:#979797;
   top:50%;
   transform:translate(-50%,-50%);
   width: 300px;
-  height: 400px;
+  height: 460px;
   background-color: #222;
   border: 1px solid #6B53FF;
   border-radius:30px;  
@@ -137,6 +137,22 @@ color:#979797;
 
 .login-btn{
   margin-top:15px;
+}
+
+/* 카톡로그인 버튼 */
+.kakao{
+	margin-top:15px;
+  height: 40px;
+  background-color: #6B53FF;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: 0.5s;
+  text-align: center;
+}
+.kakao a{
+	color: #fff;
+	line-height: 40px;
+	
 }
 
 .btn.w100 {
