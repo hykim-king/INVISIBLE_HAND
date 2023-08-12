@@ -19,7 +19,23 @@ public class SolutionController {
 		LOG.debug("│   solution_Q()        │");
 		LOG.debug("└───────────────────────┘");
 		
-		return "solution/solution_Q";
+		return "solution/solution_Q-00select";
+	}
+	@RequestMapping(value = "/solution_Q-01poduct.do")
+	public String solutionQ1() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   solution_Q()        │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "solution/solution_Q-01poduct";
+	}
+	@RequestMapping(value = "/solution_Q-02noproduct.do")
+	public String solutionQ2() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   solution_Q()        │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "solution/solution_Q-02noproduct";
 	}
 
 	@RequestMapping(value = "/solution_A.do")
