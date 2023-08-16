@@ -1,5 +1,6 @@
 <%@page import="com.pcwk.ehr.VO.PostVO"%>
 <%@page import="com.pcwk.ehr.VO.MemberVO"%>
+<%@page import="com.pcwk.ehr.VO.CommentVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,7 +14,7 @@
          ctg = "Q&A게시판";
      } else if ("30".equals(ctgNumValue)) {
          ctg = "공지사항";
-     }
+     } 
     request.setAttribute("ctg", ctg);
     request.setAttribute("ctgNumValue", ctgNumValue);
     request.setAttribute("postNumValue", postNumValue);
@@ -25,10 +26,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<script src="${CP}/resources/js/util.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
@@ -40,7 +37,10 @@
   <div class="h60px"></div>
   <div class="container-1400">
     <div class="contents-wrap">
-      <h1><c:out value="${ctg}" /></h1>
+      <h1>
+      <c:out value="${ctg}" />
+      <c:out value="${sessionNickname}" />
+      </h1>
       <div class="btn-area">
         <input type="button" class="button btn-w" value="수정" id=moveToUpdateView>
         <input type="button" class="button btn-w" value="삭제" id="doDelete">
@@ -48,64 +48,55 @@
       </div>
       <!-- *---제목+내용 Start---* -->
       <div class="contents-area">
+        <div class="yellow-box"></div>
         <form action="${CP}/post/postContents.do" method="get" name="contentsFrm">
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
           <input type="hidden" name="postNumber"    id="postNumber" value="${outVO.getPostNumber()}">
-          <input type="hidden" name="postNumber"    id="nickname" value="${outVO.getNickname()}">
+          <input type="hidden" name="memberId" id="memberId" value="${memberId}">
+          <input type="hidden" name="sessionNickname" id="sessionNickname" value="${sessionNickname}">
           <div id="title" class="contents-title">
-            <!-- <p>제목이 됩니다</p> -->
-            <c:out value="${outVO.title}" />
+            <p><c:out value="${outVO.title}" /><p>
           </div>
-          <div id="content" class="content">
-             <c:out value="${outVO.content}" />
+          <div class="contents content" id="contents content">
+            <p><c:out value="${outVO.content}" /></p>
+          <div class="writer">
+            <c:out value="${outVO.nickname}" />
           </div>
-          <div class="contents-desc"></div>
-          <div class="writer"></div>
+          </div>
         </form>
-      </div>
       <!-- *---댓글 Start---* -->
       <div class="comment-area">
         <h2>3개의 댓글</h2>
-        <div class="line3px"></div>
-        <div class="line1px"></div>
         <div class="h30px"></div>
-        <div class="comment-box">
-          <div class="comment-desc">
-            <h4>닉네임</h4>
-            <span>2023.07.19</span>
-            <p>댓글이 됩니다</p>
-          </div>
-          <div class="comment-icon">
-            <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-            <i class='fas fa-thumbs-up fa-sm' style='color:#979797'> 12</i>
-          </div>
-        </div>
-        <div class="comment-box">
-          <div class="comment-desc">
-            <h4>닉네임</h4>
-            <span>2023.07.19</span>
-            <p>댓글이 됩니다</p>
-          </div>
-          <div class="comment-icon">
-            <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-            <i class='fas fa-thumbs-up fa-sm' style='color:#979797'> 12</i>
-          </div>
-        </div>
-        <div class="comment-box">
-          <div class="comment-desc">
-            <h4>닉네임</h4>
-            <span>2023.07.19</span>
-            <p>댓글이 됩니다</p>
-          </div>
-          <div class="comment-icon">
-            <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-            <i class='fas fa-thumbs-up fa-sm' style='color:#979797'> 12</i>
-          </div>
-        </div>
-        <div class="h60px"></div>
-        <div class="line1px"></div>
-        <div class="line3px"></div>
+
+          <c:forEach var="comment" items="${list}">
+            <div class="comment-box">
+	            
+	            <div class="comment-desc">
+		            <input type="hidden" name="commentNumber"    id="commentNumber" value="${comment.commentNumber}">   
+			            <h4><c:out value="${comment.nickname}"/></h4>
+			            <span><c:out value="${comment.writtenDate}"/></span>
+			            <p><c:out value="${comment.content}"/></p>
+			         </div>
+			         
+		            <div class="comment-icon">
+		                <i class='fas fa-bars fa-sm' style='color:#979797'></i>
+		                <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i>
+			            <div class="btn-right">
+			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment" >
+			            </div>
+		            </div>
+		            
+		            
+	           
+            </div> 
+          </c:forEach>
+          
+          
+        
+        <!-- 페이징 시작 -->  
+
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Previous">
@@ -121,21 +112,102 @@
             </a>
           </li>
         </ul>
+        <!-- 페이징 끝 --> 
+        
+      <!-- 댓글 작성 -------------->
+       <form action="${CP}/post/postContents.do" method="get" name="cmtFrm" id="cmtFrm">
+        <input type="hidden" name="pageNo" id="pageNo">
+        <input type="hidden" name="postNumber"    id="postNumber" value="${inVO.getPostNumber()}"> 
+        
         <div class="add-comment">
-          <p>댓글을 작성하려면 로그인 해주세요.댓글을 작성하려면 로그인 해주세요.
-            댓글을 작성하려면 로그인 해주세요.댓글을 작성하려면 로그인 해주세요.
-          </p>
+          <label>댓글 작성자 </label>${sessionNickname}
+          <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
+          <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" required="required"></textarea></p>
+          <!-- 버튼------------------> 
           <div class="btn-right">
-            <input type="button" class="btn" value="등록" id="addComment">
+            <input type="button" class="button btn btn-p" value="등록" name="addComment" id="addComment" >
           </div>
+          <!-- //버튼---------------->
         </div>
-      </div>
+        
+       </form>
+       </div>
+       <div class="yellow-box" style="margin-top: -15px; height: 15px;"></div>
+      </div><!-- *---제목+내용 End---* -->
+      
+      
     </div><!-- contents-wrap -->
-  </div>
+
+  </div><!-- container-1400 -->
 
   <!-- **---container End---** -->
+
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 
+//댓글 등록addComment
+$("#addComment").on("click", function() {
+    var loggedInNickname = "${sessionScope.member.nickName}";
+    
+    if (loggedInNickname != null) {
+        var memberId = "${sessionScope.member.memberId}";
+        
+        console.log("comment addComment");
+        console.log("postNumber: " + "${postNumValue}");
+        console.log("loggedInNickname: " + loggedInNickname);
+        console.log("memberId: " + memberId);
+
+        // 필수값: cmtContent
+        if (eUtil.ISEmpty($("#cmtContent").val())) {
+            alert("내용을 입력하세요.");
+            $("#cmtContent").focus();
+            return;
+        }
+
+        if (confirm('등록 하시겠습니까') == false) return;
+
+        $.ajax({
+            type: "POST",
+            url: "/ehr/comment/doSave.do",
+            async: "true",
+            dataType: "html",
+            data: {
+                postNumber: $("#postNumber").val(),
+                nickname: loggedInNickname,
+                memberId: memberId,
+                content: $("#cmtContent").val()
+            },
+            success: function(data) { // 통신 성공
+                console.log("success data:" + data);
+                let parsedJson = JSON.parse(data);
+                
+                // 내용 미 입력
+                if ("10" == parsedJson.msgId) {
+                    alert(parsedJson.msgContents);
+                    $("#cmtContent").focus();
+                    return;
+                }
+
+                if ("1" == parsedJson.msgId) {
+                    alert(parsedJson.msgContents);
+                    // javascript
+                    location.reload(); // 페이지 새로고침
+                } else {
+                    alert(parsedJson.msgContents);
+                }
+            },
+            error: function(data) { // 실패시 처리
+                console.log("error:" + data);
+            }
+        });
+    } else {
+        alert("로그인한 사용자만 댓글을 작성할 수 있습니다.");
+    }
+});
+
+   
     function moveToListView() {
         window.location.href = "${CP}/post/postList.do?categoryNumber=" + $("#categoryNumber").val();
     }
@@ -161,7 +233,7 @@
         console.log("postNumber:"+"${postNumValue}");
         console.log("categoryNumber:"+"${ctgNumValue}");
         
-        var loggedInNickname = "${sessionScope.nickname}";
+        var loggedInNickname = "${sessionScope.member.nickName}"; 
         var postNickname = "${outVO.getNickname()}";
         
         console.log("loggedInNickname:", loggedInNickname);
@@ -177,73 +249,13 @@
     }); 
 
     
-    $("#doUpdate").on("click", function () {
-        console.log("doUpdate");
-        // 제목, 내용, div, mod_id(session), seq
-
-        if (eUtil.ISEmpty($("#title").val()) == true) {
-            alert("제목을 입력하세요.");
-            $("#title").focus();
-            return;
-        }
-
-        if (eUtil.ISEmpty($("#content").val()) == true) {
-            alert("내용을 입력하세요.");
-            $("#content").focus();
-            return;
-        }
-
-        // 게시글 작성자와 로그인한 사용자의 닉네임 비교
-        var loggedInNickname = "${sessionScope.nickname}";
-        var postNickname = "${outVO.getNickname()}";
-        
-        
-        if (loggedInNickname === postNickname) {
-            if (confirm('수정완료하시겠습니까?')) {
-                // ajax로 비동기 통신
-                $.ajax({
-                    type: "POST",
-                    url: "/ehr/post/doUpdate.do",
-                    async: true,
-                    dataType: "html",
-                    data: {
-                        categoryNumber: $("#categoryNumber").val(),
-                        title: $("#title").val(),
-                        content: $("#content").val(),
-                        nickname: loggedInNickname,  
-                        postNumber: $("#postNumber").val()
-                    },
-                    success: function (data) {  // 통신 성공
-                        console.log("success data:" + data);
-                        
-                        // 성공(1), 실패
-
-                        let parsedJson = JSON.parse(data);
-                        if ("1" == parsedJson.msgId) {
-                            alert(parsedJson.msgContents);
-                            moveToListView();
-                        } else {
-                            alert(parsedJson.msgContents);
-                        }
-
-                    },
-                    error: function (data) {  // 실패시 처리
-                        console.log("error:" + data);
-                    }
-                });
-            }
-        } else {
-            alert('게시글 작성자만 수정할 수 있습니다.');
-        }
-    });//doUpdate-------------------
-
-
     
+    //게시물 삭제
     $("#doDelete").on("click", function() {
         console.log("doDelete");
         console.log("postNumber: ${postNumValue}");
         console.log("categoryNumber: ${ctgNumValue}");
-        var loggedInNickname = "${sessionScope.nickname}";
+        var loggedInNickname = "${sessionScope.member.nickName}";
         var postNickname = "${outVO.getNickname()}";
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
@@ -281,7 +293,52 @@
         } else {
             alert('게시글 작성자만 삭제할 수 있습니다.');
         }
-    });
+    });//--게시물 삭제 -------------------------------
+    
+    //댓글 삭제
+    $("#deleteComment").on("click", function() {
+        console.log("deleteComment");
+        console.log("commentNumber: ${comment.commentNumber}");
+        var loggedInNickname = "${sessionScope.member.nickName}";
+        var addNickname = "${comment.getNickname()}";
+        console.log("loggedInNickname:", loggedInNickname);
+        console.log("addNickname:", addNickname);
+        
+
+        if (loggedInNickname === addNickname) {
+            if (confirm('댓글을 삭제 하시겠습니까?')) {
+                $.ajax({
+                    type: "GET",
+                    url: "/ehr/comment/doDelete.do",
+                    async: true,
+                    dataType: "html",
+                    data: {
+                        categoryNumber: '<%= ctgNumValue %>',
+                        postNumber: '<%= postNumValue %>'
+                    },
+                    success: function(data) { // 통신 성공
+                        console.log("success data:" + data);
+                        // 성공, 실패
+                        // 성공->board_list.jsp로 이동
+                        let parsedJson = JSON.parse(data);
+                        if ("1" == parsedJson.msgId) {
+                            alert(parsedJson.msgContents);
+                            moveToListView();
+                        } else {
+                            alert(parsedJson.msgContents);
+                        }
+
+                    },
+                    error: function(data) { // 실패시 처리
+                        console.log("error:" + data);
+                    }
+                });
+            }
+        } else {
+            alert('게시글 작성자만 삭제할 수 있습니다.');
+        }
+    });//--댓글 삭제----------------------------------------- 
+    
     
     
 </script>

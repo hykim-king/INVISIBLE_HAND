@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.VO.CommentVO;
@@ -14,39 +15,33 @@ import com.pcwk.ehr.service.CommentService;
 @Service
 public class CommentServiceImpl implements CommentService{
 		
-	@Inject
-	private CommentDAO dao;
-
+	@Autowired
+	CommentDAO dao;
 	@Override
-	public List<CommentVO> doRetrieve(int postNumber) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CommentVO> doRetrieve(CommentVO commentVO) throws SQLException {
+
+		return dao.doRetrieve(commentVO);
 	}
 
 	@Override
-	public void add(CommentVO vo) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int doSave(CommentVO commentVO) throws SQLException {
+		return dao.doSave(commentVO);
 	}
 
 	@Override
-	public void update(CommentVO vo) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int doUpdate(CommentVO commentVO) throws SQLException {
+		return dao.doUpdate(commentVO);
 	}
 
 	@Override
-	public void deleteOne(CommentVO vo) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int doDelete(CommentVO commentVO) throws SQLException {
+		return dao.doDelete(commentVO);
 	}
 
 	@Override
-	public int doUpdateReadCnt(CommentVO vo) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int doUpdateLikes(CommentVO commentVO) throws SQLException {
+		return dao.doUpdateLikes(commentVO);
 	}
-
-
+	
 
 }

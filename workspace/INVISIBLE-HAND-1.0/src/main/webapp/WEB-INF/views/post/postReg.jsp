@@ -31,16 +31,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<script src="${CP}/resources/js/util.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
 
 <link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/hand-board.css">
+<link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -55,7 +49,7 @@
 
 
     <!-- 버튼 -->
-    <div class="row g-1 d-flex justify-content-end">
+    <div class="btn-area">
       <div class="col-auto">
         <input type="button" class="btn" value="목록" id="moveToList" onclick="doMoveToList()">
         <input type="button" class="btn" value="등록" id="doSave">
@@ -70,7 +64,7 @@
           <input type="text" id="title" name="title" class="form-control title_cls" placeholder="제목을 입력하세요." required="required" maxlength="66">
         </div>
         
-        <div clascategoryNumbermb-3">
+        <div>
           <label for="exampleFormControlInput1" class="form-label">닉네임</label>
           <input type="text" class="form-control" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
         </div>
@@ -83,6 +77,10 @@
     </form>
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
+  
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 $(".categorybox").click(function() {
     $(this).siblings().removeClass("active");
