@@ -17,11 +17,16 @@ dsn = cx_Oracle.makedsn('192.168.0.123', 1521, 'xe')
 db = cx_Oracle.connect('INVISIBLEHAND', '4321', dsn)
 cursor = db.cursor()
 
-cursor.execute("select * from sbhitable where subcategory = '건설업' order by chartdate")
+cursor.execute("select * from sbhitable where subcategory = '인쇄 및 기록매체' order by chartdate")
 data = cursor.fetchall()
-# 주어진 데이터
-x_data = np.array([row[3:9] for row in data])
-y_data = np.array([np.mean(row[3:9]) for row in data])
+# 주어진 데이터(제조업일경우)
+if data[0][1] == "비제조업":
+    x_data = np.array([row[3:9] for row in data])
+    y_data = np.array([np.mean(row[3:9]) for row in data])
+if data[0][1] == "제조업":
+    x_data = np.array([row[3:12] for row in data])
+    y_data = np.array([np.mean(row[3:12]) for row in data])
+
 
 # 데이터 전처리
 X_data = np.array(x_data)  # 리스트를 넘파이 배열로 변환
@@ -35,7 +40,6 @@ model = Sequential()
 model.add(SimpleRNN(units=32, input_shape=(X_data.shape[1], 1), activation='relu', return_sequences=True))
 model.add(SimpleRNN(units=16, activation='relu'))
 model.add(Dense(units=1))
-
 # 모델 컴파일
 model.compile(optimizer=Adam(learning_rate=0.0008), loss='mean_squared_error', metrics=['mae'])
 

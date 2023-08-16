@@ -35,14 +35,32 @@ def get_jejo_xlsx_column(xlsxname):
             #print(file_name)
             workbook = openpyxl.load_workbook(xlsx_folder + "\\" + file_name)
             sheet = workbook.active
-            for row in sheet.iter_rows(51, 231, values_only=True):
+            for row in sheet.iter_rows(51, 183, values_only=True):
                 count = count + 1
                 if count % 6 == 0:
-                    work_arr.append(np.array(row[3:], dtype=np.float64))
+                    try:
+                        work_arr.append(np.array(row[3:], dtype=np.float64))
+                    except:
+                        work_arr.append(72.1)
     return np.array(work_arr)
-#temp = np.array([[1,2,3,4],[5,6,7,8]])
-#print(np.shape(temp))
-#print(temp[0].shape)
+
+
+def get_jejo_x_xlsx_column(start_row,xlsxname):
+    work_arr = []
+    for file_name in file_list_xlsx:
+        if file_name.find(xlsxname) != -1:
+            # 엑셀 파일 불러오기
+            workbook = openpyxl.load_workbook(xlsx_folder + "\\" + file_name)
+            sheet = workbook.active
+
+            # 행 단위로 데이터 읽기
+            for row_index in range(start_row, start_row+22):  # 행의 범위 수정 가능
+                row_data = []
+                for col_index in range(9, sheet.max_column + 1, 6):
+                    cell_value = sheet.cell(row=row_index, column=col_index).value
+                    row_data.append(cell_value)
+                work_arr.append(row_data)
+    return np.array(work_arr)
 
 
 B_jejo_upjong = ['건설업','서비스업','도매 및 소매업','운수업','숙박 및 음식점업',
@@ -64,15 +82,12 @@ monthdate = [201501, 201502, 201503, 201504, 201505, 201506, 201507, 201508, 201
              202001, 202002, 202003, 202004, 202005, 202006, 202007, 202008, 202009, 202010, 202011, 202012,
              202101, 202102, 202103, 202104, 202105, 202106, 202107, 202108, 202109, 202110, 202111, 202112,
              202201, 202202, 202203, 202204, 202205, 202206, 202207, 202208, 202209, 202210, 202211, 202212]
+monthdate2023 = [202301, 202302, 202303, 202304, 202305, 202306, 202307]
+
+
+
 
 '''
-geongijunban = get_b_jejo_xlsx_column("2015~2022경기전반 실적")      #(12,96)
-goyongsujun = get_b_jejo_xlsx_column("2015~2022고용수준 실적")
-neasupanma = get_b_jejo_xlsx_column("2015~2022내수판매 실적")
-suchul = get_b_jejo_xlsx_column("2015~2022수출실적 SBBHI.xlsx")
-yeonupiic = get_b_jejo_xlsx_column("2015~2022영업이익 실적 SBBHI.xlsx")
-jagumsajung = get_b_jejo_xlsx_column("2015~2022자금사정 실적 SBBHI.xlsx")
-
 #비제조업 삽입
 for index in range(len(monthdate)):
     for column in range(len(upjong)):
@@ -89,23 +104,28 @@ print("비제조업SBHI값 삽입완료.")
 '''
 
 
-geongijunban = get_jejo_xlsx_column("2015~2022경기전반 실적")      #(12,96)
-goyongsujun = get_jejo_xlsx_column("2015~2022고용수준 실적")
-neasupanma = get_jejo_xlsx_column("2015~2022내수판매 실적")
-suchul = get_jejo_xlsx_column("2015~2022수출실적 SBBHI.xlsx")
-yeonupiic = get_jejo_xlsx_column("2015~2022영업이익 실적 SBBHI.xlsx")
-jagumsajung = get_jejo_xlsx_column("2015~2022자금사정 실적 SBBHI.xlsx")
+#####################여기는 제조업 삽입하는 곳 입니다.
+
+
+
+geongijunban = get_jejo_x_xlsx_column(44,"2023경기전반_실적")      #(12,96)
+goyongsujun = get_jejo_x_xlsx_column(43,"2023고용수준_실적")      #(12,96)
+neasupanma = get_jejo_x_xlsx_column(43,"2023내수판매_실적")      #(12,96)
+suchul = get_jejo_x_xlsx_column(43,"2023수출실적")      #(12,96)
+yeonupiic = get_jejo_x_xlsx_column(43,"2023영업이익_실적")      #(12,96)
+jagumsajung = get_jejo_x_xlsx_column(43,"2023자금사정_실적")      #(12,96)
+
+
 
 #제조업 삽입
-for index in range(len(monthdate)):
-    for column in range(len(upjong)):
+for index in range(len(monthdate2023)):
+    for column in range(len(B_jejo_upjong)):
         print(
-            "INSERT INTO SBHITABLE VALUES(TO_DATE('{0}','YYYYMM'),'{1}','{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12})".format(
-                monthdate[index], "제조업", jejo_upjong[column],
+            "INSERT INTO SBHITABLE VALUES(TO_DATE('{0}','YYYYMM'),'{1}','{2}',{3},{4},{5},{6},{7},{8},{9},{10},{11},{12});".format(
+                monthdate2023[index], "비제조업", B_jejo_upjong[column],
                 geongijunban[column][index], goyongsujun[column][index], neasupanma[column][index],
                 suchul[column][index], yeonupiic[column][index], jagumsajung[column][index],
-                0, 0, 0, 0)
+                0,0,0,0)
         )
-
-
-#print(geongijunban)
+#cursor.execute("COMMIT")
+print("제조업SBHI값 삽입완료.")
