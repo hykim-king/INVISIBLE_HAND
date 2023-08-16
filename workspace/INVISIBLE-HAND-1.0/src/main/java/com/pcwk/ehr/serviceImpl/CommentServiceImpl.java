@@ -34,8 +34,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int doDelete(CommentVO commentVO) throws SQLException {
-		return dao.doDelete(commentVO);
+	public int doDelete(int commentNumber) throws SQLException {
+		return dao.doDelete(commentNumber);
 	}
 
 	@Override

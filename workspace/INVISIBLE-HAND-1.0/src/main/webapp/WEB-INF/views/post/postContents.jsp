@@ -84,7 +84,8 @@
 		                <i class='fas fa-bars fa-sm' style='color:#979797'></i>
 		                <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i>
 			            <div class="btn-right">
-			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment" >
+			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
+                    data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}">
 			            </div>
 		            </div>
 		            
@@ -295,16 +296,15 @@ $("#addComment").on("click", function() {
         }
     });//--게시물 삭제 -------------------------------
     
-    //댓글 삭제
-    $("#deleteComment").on("click", function() {
-        console.log("deleteComment");
-        console.log("commentNumber: ${comment.commentNumber}");
+  //댓글 삭제
+    $(".btn-delet").on("click", function() {
+        var commentNumber = $(this).data("comment-number");
         var loggedInNickname = "${sessionScope.member.nickName}";
-        var addNickname = "${comment.getNickname()}";
-        console.log("loggedInNickname:", loggedInNickname);
-        console.log("addNickname:", addNickname);
+        var addNickname = $(this).data("nickname");
+        console.log("addNickname:"+addNickname);
+        console.log("loggedInNickname:"+loggedInNickname);
+        console.log("commentNumber:"+commentNumber);
         
-
         if (loggedInNickname === addNickname) {
             if (confirm('댓글을 삭제 하시겠습니까?')) {
                 $.ajax({
@@ -313,31 +313,27 @@ $("#addComment").on("click", function() {
                     async: true,
                     dataType: "html",
                     data: {
-                        categoryNumber: '<%= ctgNumValue %>',
-                        postNumber: '<%= postNumValue %>'
+                        commentNumber: commentNumber,
                     },
-                    success: function(data) { // 통신 성공
+                    success: function(data) {
                         console.log("success data:" + data);
-                        // 성공, 실패
-                        // 성공->board_list.jsp로 이동
                         let parsedJson = JSON.parse(data);
                         if ("1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
-                            moveToListView();
+                            location.reload(); // 페이지 새로고침
                         } else {
                             alert(parsedJson.msgContents);
                         }
-
                     },
-                    error: function(data) { // 실패시 처리
+                    error: function(data) {
                         console.log("error:" + data);
                     }
                 });
             }
         } else {
-            alert('게시글 작성자만 삭제할 수 있습니다.');
+            alert('댓글 작성자만 삭제할 수 있습니다.');
         }
-    });//--댓글 삭제----------------------------------------- 
+    });//댓글삭제------------------------------
     
     
     
