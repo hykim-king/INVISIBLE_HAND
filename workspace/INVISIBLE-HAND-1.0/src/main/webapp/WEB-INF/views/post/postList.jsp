@@ -1,5 +1,6 @@
 <%@page import="com.pcwk.ehr.cmn.StringUtil"%>
 <%@page import="com.pcwk.ehr.VO.PostVO"%>
+<%@page import="com.pcwk.ehr.VO.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -84,10 +85,17 @@
                   <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
               </select> --%>
                <select class="form-select" name="searchDiv" id="searchDiv">
-                  <option value="none">=게시판을 선택하세요</option>
+                <option value="">전체</option>
+               <c:forEach var="vo" items="${searchList}">
+                   <option <c:if test="${vo.codeDetail == defaultSearchDiv}">selected</c:if> value="<c:out value='${vo.codeDetail}' />">
+                       <c:out value='${vo.codeDetailName }' />
+                   </option>
+               </c:forEach>
+               
+                  <%-- <option value="none">=게시판을 선택하세요</option>
                   <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
                   <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
-                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
+                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option> --%>
                   <%--  <c:forEach var="vo" items="${searchList}">
                        <option <c:if test="${vo.codeDetail == defaultSearchDiv}">selected</c:if> value="<c:out value='${vo.codeDetail }' />">
                            <c:out value='${vo.codeDetailName }' />
@@ -103,7 +111,7 @@
             </div>
             <div class="col-auto">  
               <select class="form-select" name="pageSize" id="pageSize">
-                <c:forEach var="vo" items="${pageSizeList }">
+                <c:forEach var="vo" items="${pageSizeList}">
                   <option <c:if test="${vo.codeDetail == inVO.pageSize }">selected</c:if> value="<c:out value='${vo.codeDetail }'/>">
                      <c:out value='${vo.codeDetailName }'/>
                   </option>
@@ -157,7 +165,7 @@
        </table> <!-- **---table End---** -->
        <!-- 페이징 -->
        <div class="d-flex justify-content-center">
-       <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
+         <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        
