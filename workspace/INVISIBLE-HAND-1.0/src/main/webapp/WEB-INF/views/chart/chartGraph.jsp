@@ -17,22 +17,22 @@
     <div class="wrap-1000">
       <!-- *---차트 카테고리---* -->
       <div class="category_wrap">
-        <div class="categorybox active" data-tab="tab1">
+        <div class="categorybox active" data-tab="tab1" id="chart01">
           <div class="chart01">
             <p>중소기업 경기전망조사(SBHI)</p>
           </div>
         </div>
-        <div class="categorybox" data-tab="tab2">
+        <div class="categorybox" data-tab="tab2" id="chart02">
           <div class="chart02">
             <p>chart02</p>
           </div>
         </div>
-        <div class="categorybox" data-tab="tab3">
+        <div class="categorybox" data-tab="tab3" id="chart03">
           <div class="chart03">
             <p>chart03</p>
           </div>
         </div>
-        <div class="categorybox" data-tab="tab4">
+        <div class="categorybox" data-tab="tab4" id="chart04">
           <div class="chart04">
             <p>chart04</p>
           </div>
@@ -41,7 +41,7 @@
       <!-- **---카테고리랩 End---** -->
 
       <!-- 차트 영역 1234 -->
-      <div class="tab-box tab1 active">
+      <div class="tab-box tab1 active" id="chart01">
       <div>
           <jsp:include page="chart01.jsp"/>
       </div>
@@ -70,15 +70,15 @@
         </div>
       </div>
      
-      <div class="tab-box tab2">
+      <div class="tab-box tab2" id="chart02">
         <div id="line_chart2"></div>
       </div>
 
-      <div class="tab-box tab3">
+      <div class="tab-box tab3" id="chart03">
         <div id="line_chart3"></div>
       </div>
 
-      <div class="tab-box tab4">
+      <div class="tab-box tab4" id="chart04">
         <div id="chart_div"></div>
       </div>
 
@@ -99,6 +99,7 @@ $(".categorybox").click(function() {
    $(".tab-box").removeClass("active");
    $("." + clickTab).addClass("active");
 });
+
 </script>
 <script>
 // mainCategorySelect 요소를 가져옴

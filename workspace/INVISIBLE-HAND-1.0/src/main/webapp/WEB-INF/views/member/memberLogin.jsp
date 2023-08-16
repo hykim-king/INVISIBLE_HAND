@@ -85,7 +85,7 @@
 	                success: (res) => {
 	                    const kakao_account = res.kakao_account;
 	                    alert('로그인 성공');
-	                    window.location.href='http://localhost:8080/ehr/resources/kakaoLogin/kakao_loginout_view.html'
+	                    window.location.href='http://localhost:8080/ehr/main/main.do'
 	                }
 	            });
 	        },
