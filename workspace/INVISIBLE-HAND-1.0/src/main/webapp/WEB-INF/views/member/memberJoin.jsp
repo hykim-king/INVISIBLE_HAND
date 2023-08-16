@@ -109,8 +109,7 @@
         <div class="label-margin">
           <p class="input-title">비밀번호 입력</p>
           <label for="password">
-          <input placeholder="비밀번호는 8이상 12자 이하로 설정바랍니다" type="password" 
-                 class="size border-bottom" id="password" name="password" requi#FF007A>
+          <input placeholder="비밀번호는 8이상 12자 이하로 설정바랍니다" type="password"  class="size border-bottom" id="password" name="password" requi#FF007A>
             <input type="button" name="pwConfirmBtn" value="부적합" class="btn btn-white pwbtn">
 
           </label>
@@ -119,9 +118,9 @@
         <div class="label-margin">
           <p class="input-title">비밀번호 확인</p>
           <label for="confirm_password">
-          <input type="password" class="size border-bottom checkmark" id="confirm_password"
+            <input type="password" class="size border-bottom checkmark" id="confirm_password"
                  name="confirm_password" requi#FF007A placeholder="비밀번호를 다시 한번 입력하세요">
-          <i class="fas fa-check-circle fa-sm check-icon-05"></i>
+            <i class="fas fa-check-circle fa-sm check-icon-05"></i>
             <input type="button" name="pwConfirmCkBtn" value="불일치" class="btn btn-white pw-check-btn">
           </label>
         </div>
@@ -463,7 +462,6 @@
       var password_error = document.getElementById("password_error");
       var confirm_password_error = document
           .getElementById("confirm_password_error");
-    
       
       if (password.length < 8 || password.length > 12) {
         var newValue = '부적합';
@@ -489,7 +487,6 @@
             $('.pw-check-btn').css('border', '1px solid #FF007A');
             $('.check-icon-05').css('opacity', '0');
             $('#register').attr('disabled', true);
-            return;
             
           } else {
               var newPWCeheckValue = '일치';
@@ -520,19 +517,10 @@
 	    let pwConfirm = $("input[type=button][name=pwConfirmBtn]").val();
 	    let pwConfirmCk = $("input[type=button][name=pwConfirmCkBtn]").val();
 	    
-	    // 이름, 전화번호 정보 확인
+	    // 정보 확인
 	    let name = $("input[id=memberName]").val().trim();
 	    let num = $("input[id=phoneNumber]").val().trim();
-	    
-	    if (name == "") {
-	    	alert("이름을 입력해주세요.");
-	    	return;
-	    }
-	    
-	    if (num == "") {
-	    	alert("전화번호를 입력해주세요.");
-	    	return;
-	    }
+	    let password = $("input[id=password]").val().trim();
 	   
 	    if (idConfirm != "사용가능") {
 	    	alert("아이디 중복 확인을 해주세요.");
@@ -550,8 +538,23 @@
 	    }
 	    
 	    if (emailConfirmCk != "일치") {
-	    	alert("이메일 인증번호를 확인해주세요.");
+	    	alert("이메일 인증 번호를 확인해주세요.");
 	    	return;
+	    }
+	    
+	    if (name == "") {
+	    	alert("이름을 입력해주세요.");
+	    	return;
+	    }
+	    
+	    if (num == "") {
+	    	alert("전화번호를 입력해주세요.");
+	    	return;
+	    }
+	    
+	    if (password == "") {
+	      alert("비밀번호를 입력해주세요.");
+	      return;
 	    }
 	    
 	    if (pwConfirm != "적합") {
@@ -560,7 +563,7 @@
 	    }
 	    
 	    if (pwConfirmCk != "일치") {
-	    	alert("비밀번호를 확인해주세요.");
+	    	alert("비밀번호가 일치하지않습니다.");
 	    	return;
 	    }
 	    
@@ -575,18 +578,18 @@
 			  asyn:"true",
 			  dataType:"html",   
 			  data: $('#register-form').serialize(),
-			  success:function(data){//통신 성공
+			  success:function(data){
 			      let parsedJson = JSON.parse(data);
 			      
 			      if ("1" == parsedJson.msgContents){
-			        alert("회원가입이 완료되었습니다.");
+			        alert("회원가입이 완료되었습니다.\n로그인해주세요.");
 			        location.href = "../member/memberLogin.do";
 			      } else{
 			        alert("회원가입이 실패되었습니다. : " + parsedJson.msgContents);
 			      }
 			    }, error: function(xhr, status, error) {
 			      // Handle form submission error
-			      alert("회원가입에 실패했습니다. 관리자에게 문의해주세요. " + parsedJson.msgContents);
+			      alert("회원가입에 실패했습니다. 관리자에게 문의해주세요. : " + parsedJson.msgContents);
 			      window.scrollTo({ top: 0, behavior: "smooth" });
 			    }
 			}); // ajax 종료
