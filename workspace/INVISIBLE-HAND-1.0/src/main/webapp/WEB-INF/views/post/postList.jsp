@@ -85,7 +85,7 @@
                <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
             </div>
  
-            <div class="col-auto">  
+            <div class="list-btn">  
               <a href="#" class="btn button btn-w" id="doRetrieve" >검색</a>
               <a href="#" class="btn button btn-b" onclick="doMoveToPostReg();" >글쓰기</a>  
             </div>      
