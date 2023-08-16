@@ -1,5 +1,7 @@
 package com.pcwk.ehr.VO;
 
+import org.springframework.stereotype.Component;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Component
 public class RankVO {
 	
 	private int	   rankseq;

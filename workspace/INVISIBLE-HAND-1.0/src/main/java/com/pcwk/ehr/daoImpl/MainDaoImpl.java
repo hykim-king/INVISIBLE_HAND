@@ -24,19 +24,6 @@ public class MainDaoImpl implements MainDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 		
-	//조회수 증가 
-//	@Override
-//	public int doUpdateViews(PostVO inVO) throws SQLException {
-//		
-//		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdate", inVO);
-//	}
-	
-//	//단건 조회
-//	@Override
-//	public PostVO doSelectOne(PostVO inVO) throws SQLException {
-//		
-//		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"doSelectOne", inVO);
-//	}
 
 	//리스트 조회
 	@Override

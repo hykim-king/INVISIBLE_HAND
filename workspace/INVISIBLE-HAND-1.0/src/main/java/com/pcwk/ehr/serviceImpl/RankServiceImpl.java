@@ -20,6 +20,7 @@ public class RankServiceImpl implements RankService {
 	RankDao rankDao;
 	
 	//1. 랭킹 정보 main 화면에 출력할 로직
+	@Override
 	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException{
 		
 
@@ -35,6 +36,13 @@ public class RankServiceImpl implements RankService {
 		
 		rankDao.doUpdateCurrent(inVO);
 		
+	}
+
+    //4. 특정 행동에 따른 Score에 +1 하는 로직  
+	@Override
+	public int doUpdateScore(RankVO inVO) throws SQLException {
+
+		return rankDao.doUpdateScore(inVO);
 	}
 	
 	

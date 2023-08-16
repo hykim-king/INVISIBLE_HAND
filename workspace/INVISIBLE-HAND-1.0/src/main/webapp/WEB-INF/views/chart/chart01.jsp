@@ -36,6 +36,7 @@
 	 
 	  let mainCategory = "비제조업";
 	  let subCategory  = "-";
+	  
 	 function submitbutton() {
 	         $("#submitButton").click(function () {
 	             // 선택된 값 가져오기
@@ -111,7 +112,7 @@
     });
     
     
-    let hiddenSeries = {}; // 숨겨진 시리즈를 추적하기 위한 객체
+   
     
     
     function drawChart(data) {
@@ -120,7 +121,7 @@
         let chartData1 = originalData1.clone();
           
         let options1 = {
-          title: '차트1',
+          /* title: '중소기업 경기전망조사(SBHI)', */
         
           width : 1000,
           height : 500,
@@ -147,6 +148,7 @@
           },
           vAxis: {
               //title: 'title',
+              textStyle: { color: '#fff' },
               ticks: [0, 20, 40, 60, 80, 100, 120, 140, 160],
               format: '###',
           },
@@ -161,18 +163,21 @@
 
         let chart1 = new google.visualization.LineChart(document.getElementById('line_chart1'));
         
-        
+        //차트 초기화//
+        let hiddenSeries = {}; // 숨겨진 시리즈를 추적하기 위한 객체
         // "Restore" 버튼 클릭 이벤트 리스너
         $('#restoreButton').click(function () {
           for (let seriesIndex in hiddenSeries) {
             for (let i = 0; i < chartData1.getNumberOfRows(); i++) {
               chartData1.setValue(i, parseInt(seriesIndex) + 1, originalData1.getValue(i, parseInt(seriesIndex) + 1));
+              console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
             }
           }
-          hiddenSeries = {}; // 숨겨진 시리즈 리스트 초기화
           chart1.draw(chartData1, options1);
+          
         });
-        
+        hiddenSeries = {}; // 숨겨진 시리즈 리스트 초기화
+        //차트 초기화 end//
         
         // 이벤트 리스너 1 추가
         google.visualization.events.addListener(chart1, 'click', function(target) {

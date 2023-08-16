@@ -1,4 +1,4 @@
-package mainTest;
+package memberTest;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

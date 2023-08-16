@@ -19,7 +19,7 @@
       <div class="category_wrap">
         <div class="categorybox active" data-tab="tab1">
           <div class="chart01">
-            <p>chart01</p>
+            <p>중소기업 경기전망조사(SBHI)</p>
           </div>
         </div>
         <div class="categorybox" data-tab="tab2">
@@ -118,7 +118,7 @@ mainCategorySelect.addEventListener("change", function() {
     // subCategorySelect의 내용을 변경
     if (selectedMainCategory === "비제조업") {
         // 비제조업이 선택된 경우의 subCategory 목록을 설정
-        subCategorySelect.innerHTML = ` 
+        subCategorySelect.innerHTML = `
         	  <option value="-" selected="selected">평균</option>
             <option value="건설업">건설업</option>
             <option value="교육서비스업">교육서비스업</option>
@@ -131,8 +131,7 @@ mainCategorySelect.addEventListener("change", function() {
             <option value="예술,스포츠 및 여가관련서비스업">예술,스포츠 및 여가관련서비스업</option>
             <option value="운수업">운수업</option>
             <option value="전문,과학 및 기술서비스업">전문,과학 및 기술서비스업</option>
-            <option value="출판,영상,방송통신 및 정보서비스업">출판,영상,방송통신 및 정보서비스업</option>
-            `;
+            <option value="출판,영상,방송통신 및 정보서비스업">출판,영상,방송통신 및 정보서비스업</option>`;
     } else if (selectedMainCategory === "제조업") {
         // 제조업이 선택된 경우의 subCategory 목록을 설정
         subCategorySelect.innerHTML = `

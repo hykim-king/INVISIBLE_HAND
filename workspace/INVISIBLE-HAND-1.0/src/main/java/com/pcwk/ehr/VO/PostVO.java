@@ -1,7 +1,10 @@
 package com.pcwk.ehr.VO;
 
+import org.springframework.stereotype.Component;
+
 import com.pcwk.ehr.cmn.DTO;
 
+@Component
 public class PostVO extends DTO {
 	//게시판 
 	private int postNumber; 	//게시글 번호(순번) 		

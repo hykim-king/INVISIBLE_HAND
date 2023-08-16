@@ -29,7 +29,7 @@
         </div>
       </section>
       
-      <h4>어떤 차트 제목</h4>
+      <h4>중소기업 경기전망조사(SBHI)</h4>
       <section class="sec02 sec-chart">
         <div class="chart-nav">
 				  <select id="mainCategorySelect" name="mainCategory">
