@@ -26,10 +26,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<script src="${CP}/resources/js/util.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
@@ -52,6 +48,7 @@
       </div>
       <!-- *---제목+내용 Start---* -->
       <div class="contents-area">
+        <div class="yellow-box"></div>
         <form action="${CP}/post/postContents.do" method="get" name="contentsFrm">
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
@@ -59,59 +56,50 @@
           <input type="hidden" name="memberId" id="memberId" value="${memberId}">
           <input type="hidden" name="sessionNickname" id="sessionNickname" value="${sessionNickname}">
           <div id="title" class="contents-title">
-            <!-- <p>제목이 됩니다</p> -->
-            <c:out value="${outVO.title}" />
+            <p><c:out value="${outVO.title}" /><p>
           </div>
-          <div class="contents-desc" id="content" class="content">
-            <c:out value="${outVO.content}" />
-          </div>
+          <div class="contents content" id="contents content">
+            <p><c:out value="${outVO.content}" /></p>
           <div class="writer">
             <c:out value="${outVO.nickname}" />
           </div>
+          </div>
         </form>
-      </div>
+      </div><!-- *---제목+내용 End---* -->
+      
+      
       <!-- *---댓글 Start---* -->
       <div class="comment-area">
         <h2>3개의 댓글</h2>
-        <div class="line3px"></div>
-        <div class="line1px"></div>
         <div class="h30px"></div>
+
           <c:forEach var="comment" items="${list}">
             <div class="comment-box">
-            <div class="comment-desc">
-            <input type="hidden" name="commentNumber"    id="commentNumber" value="${comment.commentNumber}">   
-            <h4><c:out value="${comment.nickname}"/></h4>
-            <span><c:out value="${comment.writtenDate}"/></span>
-            <p><c:out value="${comment.content}"/></p>
-            <div class="comment-icon">
-                <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-                <i class='fas fa-thumbs-up fa-sm' style='color:#979797'> <c:out value="${comment.likes}"/></i>
-            </div>
-            <div class="btn-right">
-              <input type="button" class="btn" value="삭제" name="deleteComment" id="deleteComment" >
-            </div>
-            </div> 
+	            
+	            <div class="comment-desc">
+		            <input type="hidden" name="commentNumber"    id="commentNumber" value="${comment.commentNumber}">   
+			            <h4><c:out value="${comment.nickname}"/></h4>
+			            <span><c:out value="${comment.writtenDate}"/></span>
+			            <p><c:out value="${comment.content}"/></p>
+			         </div>
+			         
+		            <div class="comment-icon">
+		                <i class='fas fa-bars fa-sm' style='color:#979797'></i>
+		                <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i>
+			            <div class="btn-right">
+			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment" >
+			            </div>
+		            </div>
+		            
+		            
+	           
             </div> 
           </c:forEach>
           
           
         
-        <!-- 스타일시트가 다 깨져서 ...  -->  
-         <div class="comment-box">
-          <div class="comment-desc">
-            <h4>닉네임</h4>
-            <span>2023.07.19</span>
-            <p>댓글이 됩니다</p>
-          </div>
-          <div class="comment-icon">
-            <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-            <i class='fas fa-thumbs-up fa-sm' style='color:#979797'> 12</i>
-          </div>
-        </div>
- 
-        <div class="h60px"></div>
-        <div class="line1px"></div>
-        <div class="line3px"></div>
+        <!-- 페이징 시작 -->  
+
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Previous">
@@ -127,9 +115,8 @@
             </a>
           </li>
         </ul>
-       </div>
-    </div><!-- contents-wrap -->
-  </div> 
+        <!-- 페이징 끝 --> 
+        
       <!-- 댓글 작성 -------------->
        <form action="${CP}/post/postContents.do" method="get" name="cmtFrm" id="cmtFrm">
         <input type="hidden" name="pageNo" id="pageNo">
@@ -141,16 +128,22 @@
           <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" required="required"></textarea></p>
           <!-- 버튼------------------> 
           <div class="btn-right">
-            <input type="button" class="btn" value="등록" name="addComment" id="addComment" >
+            <input type="button" class="button btn btn-p" value="등록" name="addComment" id="addComment" >
           </div>
           <!-- //버튼---------------->
         </div>
         
        </form>
+       </div>
+    </div><!-- contents-wrap -->
+
+  </div><!-- container-1400 -->
 
   <!-- **---container End---** -->
 
-
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
 
 //댓글 등록addComment
