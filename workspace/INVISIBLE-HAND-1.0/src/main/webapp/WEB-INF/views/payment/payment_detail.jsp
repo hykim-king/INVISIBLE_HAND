@@ -20,19 +20,23 @@
     <div class="wrap_demo" id="kakaoWrap">
 
       <div id="kakaoContent">
-          <span>session 정보</span><br>
-          <div>로그인된 이름 : ${sessionScope.member.memberName}</div><br>
-          <div>로그인된 닉네임 : ${sessionScope.member.nickName}</div><br>
-          <div>로그인된 이메일 : ${sessionScope.member.email}</div><br>
-          <div>로그인된 핸드폰 번호 : ${sessionScope.member.phoneNumber}</div>
-          <div>paymentInfo model에 담아 출력</div><br>
-          <div>로그인된 유저의 seq : ${paymentInfo.paymentinfoseq}</div>
-          <div>로그인된 유저의 주문번호 : ${paymentInfo.merchantUid}</div>
-          <div>로그인된 유저가 결제한 상품 이름 : ${paymentInfo.name}</div>
-          <div>로그인된 유저가 결제한 금액 : ${paymentInfo.amount}</div>
-          <div>로그인된 유저가 결제한 금액 : ${paymentInfo.buyerEmail}</div>
-          <div>로그인된 유저의 이름 : ${paymentInfo.buyerName}</div>
-          <div>로그인된 유저의 번호 : ${paymentInfo.buyerTel}</div>
+				<c:if test="${empty paymentInfo}">
+		      <span>구독이 되어있지 않습니다.</span>
+				</c:if>
+				<c:if test="${not empty paymentInfo}">
+			    <div>로그인된 이름 : ${sessionScope.member.memberName}</div><br>
+			    <div>로그인된 닉네임 : ${sessionScope.member.nickName}</div><br>
+			    <div>로그인된 이메일 : ${sessionScope.member.email}</div><br>
+			    <div>로그인된 핸드폰 번호 : ${sessionScope.member.phoneNumber}</div><br>
+			    <div>paymentInfo model에 담아 출력</div><br>
+			    <div>로그인된 유저의 seq : ${paymentInfo.paymentinfoseq}</div>
+			    <div>로그인된 유저의 주문번호 : ${paymentInfo.merchantUid}</div>
+			    <div>로그인된 유저가 결제한 상품 이름 : ${paymentInfo.name}</div>
+			    <div>로그인된 유저가 결제한 금액 : ${paymentInfo.amount}</div>
+			    <div>로그인된 유저의 이메일 : ${paymentInfo.buyerEmail}</div>
+			    <div>로그인된 유저의 이름 : ${paymentInfo.buyerName}</div>
+			    <div>로그인된 유저의 번호 : ${paymentInfo.buyerTel}</div>
+				</c:if>
       </div>
       <!-- *** kakaoContent *** -->
 
