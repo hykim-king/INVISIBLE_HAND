@@ -33,49 +33,71 @@
 					<li><a href="${freePostURL}">커뮤니티</a></li>
 
 				</ul>
-				<ul class="local_nav_bar">
-					<li>
-						<ul class="sub-menu">
-							<li>서브메뉴1</li>
-							<li>서브메뉴1</li>
-							<li>서브메뉴1</li>
-							<li>서브메뉴1</li>
-						</ul>
-					</li>
-					<li>
-						<ul class="sub-menu">
-							<li>서브메뉴2</li>
-							<li>서브메뉴2</li>
-							<li>서브메뉴2</li>
-							<li>서브메뉴2</li>
-						</ul>
-					</li>
-					<li>
-						<ul class="sub-menu">
-							<li><a href="${freePostURL}">자유 게시판</a></li>
-							<li><a href="${qnaPostURL}">Q&A 게시판</a></li>
-							<li><a href="${postURL}">공지사항</a></li>
-							<li>서브메뉴3</li>
-						</ul>
-					</li>
-				</ul>
+        <ul class="local_nav_bar">
+          <li>
+            <ul class="sub-menu nav-tabs">
+              <li class="tab-li"><a href="#chart01">SBHI</a></li>
+              <li class="tab-li"><a href="#chart02">기업경영분석지표</a></li>
+              <li class="tab-li"><a href="${CP}/chart/chart.do#chart03">성장성</a></li>
+              <li class="tab-li"><a href="${CP}/chart/chart.do#chart04">수익성</a></li>
+            </ul>
+          </li>
+          <li>
+            <ul class="sub-menu">
+              <li><a href="#">서브메뉴2</a></li>
+              <li><a href="#">서브메뉴2</a></li>
+              <li><a href="#">서브메뉴2</a></li>
+              <li><a href="#">서브메뉴2</a></li>
+            </ul>
+          </li>
+          <li>
+            <ul class="sub-menu">
+              <li><a href="${freePostURL}">자유 게시판</a></li>
+              <li><a href="${qnaPostURL}">Q&A 게시판</a></li>
+              <li><a href="${postURL}">공지사항</a></li>
+            </ul>
+          </li>
+        </ul>
 			</nav>
 
-			<div class="login">
-				<c:choose>
-					<c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-						<a href="/ehr/mypage/mypage.do"><span>${sessionScope.member.nickName}님 환영합니다! </span></a>
-						<a href="javascript:doLogout('${sessionScope.member.nickName}');"><span>로그아웃</span></a>
-					</c:when>
-					<c:otherwise>
-						<a href="${CP}/member/memberLogin.do"><span>로그인</span></a>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</div>
+
+      <div class="login-menu">
+        <div class="login">
+          <c:choose>
+            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+              <a href="javascript:doLogout('${sessionScope.member.nickName}');"><span>로그아웃</span></a>
+            </c:when>
+            <c:otherwise>
+              <a href="${CP}/member/memberLogin.do"><span>로그인</span></a>
+            </c:otherwise>
+          </c:choose>
+        </div>
+        <div class="munu-btn-wrap">
+         <div class="menu-btn">
+           <span></span>
+           <span></span>
+           <span></span>
+         </div>
+        </div>
+      </div>
+      
+    </div>
+      <div class="mypage-box">
+           <c:choose>
+            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+              <p>${sessionScope.member.nickName}님 환영합니다!</p> 
+              <p><a href="/ehr/mypage/mypage.do">마이페이지</a></p> 
+              <p>고객지원</p> 
+            </c:when>
+            <c:otherwise>
+              <p style="display: none;"></p>
+            </c:otherwise>
+          </c:choose>
+      </div>
 	</header>
 
 	<!-- **---header End---** -->
+	 <script src="../resources/js/jquery-3.7.0.js"></script>
 	<script>
 		function doLogout(name) {
 			if (confirm(name + '님 로그아웃하시겠습니까?') == false)
@@ -84,4 +106,11 @@
 
 			window.location.href = "${CP}/member/logout.do";
 		}
+		
+	    $(document).ready(function() {
+	        $('.menu-btn').click(function() {
+	            $('.menu-btn span').toggleClass('act'); // 클릭한 요소에 'act' 클래스를 토글
+	            $('.header').toggleClass('act'); // 클릭한 요소에 'act' 클래스를 토글
+	        });
+	    });
 	</script>
