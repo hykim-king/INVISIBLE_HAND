@@ -138,7 +138,7 @@
         <div class="label-margin">
 
           <div class="input-title">
-            이용약관동의여부 확인 <span><a href="../member/memberAgree.do">[이용약관 자세히 읽기]</a></span>
+            <span>이용약관동의여부 확인 <a href="../member/memberAgree.do">[이용약관 자세히 읽기]</a></span>
           </div>
           <div class="input-chek">
             <input checked="checked" type="radio" name="agree" value="Y" id="m_y" requi#FF007A>
