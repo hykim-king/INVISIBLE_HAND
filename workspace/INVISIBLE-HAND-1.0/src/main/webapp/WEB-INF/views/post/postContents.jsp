@@ -65,9 +65,6 @@
           </div>
           </div>
         </form>
-      </div><!-- *---제목+내용 End---* -->
-      
-      
       <!-- *---댓글 Start---* -->
       <div class="comment-area">
         <h2>3개의 댓글</h2>
@@ -135,6 +132,10 @@
         
        </form>
        </div>
+       <div class="yellow-box" style="margin-top: -15px; height: 15px;"></div>
+      </div><!-- *---제목+내용 End---* -->
+      
+      
     </div><!-- contents-wrap -->
 
   </div><!-- container-1400 -->
