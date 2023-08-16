@@ -3,8 +3,7 @@
 <mapper namespace="com.pcwk.ehr.main">
 
 
-	<select id="doRetrieve" parameterType="PostVO"
-		resultType="PostVO">
+	<select id="doRetrieve" parameterType="PostVO" resultType="PostVO">
 		<![CDATA[
 		SELECT A.*, B.*
 		FROM (
@@ -27,9 +26,9 @@
 		      WHERE categoryNumber = #{categoryNumber}
 		      ORDER BY likes DESC
 		    ) t1
-		       WHERE ROWNUM >= 1
+		        WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1)+#{pageSize}
 		  ) TT1  
-		 WHERE rnum <=5
+		 WHERE rnum >=#{pageSize} * (#{pageNo}-1)+ 1
 		) A
 		CROSS JOIN (
 		  SELECT COUNT(postNumber) totalCnt

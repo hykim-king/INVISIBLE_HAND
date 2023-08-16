@@ -63,7 +63,10 @@ public class MainController {
 	//게시글 자유게시판('10' 좋아요 순으로 5개 조회)
 	@RequestMapping(value = "main/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<PostVO> doRetrieve(PostVO inVO) throws SQLException {
+	public List<PostVO> doRetrieve(@RequestParam(value = "categoryNumber") String categoryNumber, PostVO inVO) throws SQLException {
+	    inVO.setCategoryNumber(categoryNumber); // 카테고리 번호 설정
+	    inVO.setPageSize(5); // 상위 5개 게시글 선택
+	    inVO.setPageNo(1); // 페이지 번호 설정
 		
 		List<PostVO> resultList = mainService.doRetrieve(inVO);
 			

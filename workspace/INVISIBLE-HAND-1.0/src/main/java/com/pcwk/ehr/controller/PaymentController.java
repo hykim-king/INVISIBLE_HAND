@@ -32,30 +32,30 @@ public class PaymentController {
 
 	@Autowired
 	MemberService memberService;
-
+	
 	// 구독 정보
 	@GetMapping("/payment_detail.do")
 	public String paymentDetail(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String buyerEmail = (String) session.getAttribute("email"); // session으로 email정보 넘기기
-
+	
 		// PaymentInfoVO 객체 생성
 		PaymentInfoVO paymentInfo = new PaymentInfoVO();
 		paymentInfo = payService.getPaymentInfoByEmail(buyerEmail); // 객체에 정보 담기
-
+	
 		model.addAttribute("paymentInfo", paymentInfo);
-
+	
 		return "payment/payment_detail";
 	}
-
+	
 	@PostMapping("/payment_info.do")
-	@RequestMapping(produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String paymentInfoAddOrUpdate(PaymentInfoVO inVO, HttpSession session) throws SQLException {
 		String email = (String) session.getAttribute("email"); // session으로 email정보 넘기기
 
 		int rowCount = payService.checkPaymentInfo(email); // count가 0이면 insert, 1이면 update
-
+		
+		lg.debug("rowCount----------------" + rowCount);
 		if (rowCount == 0) { // 결제 정보가 없으면 추가
 			int result = payService.addInfo(inVO);
 			if (result == 1) {

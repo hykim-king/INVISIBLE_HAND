@@ -29,14 +29,14 @@
         </div>
       </section>
       
-      <h4>어떤 차트 제목</h4>
+      <h4>중소기업 경기전망조사(SBHI)</h4>
       <section class="sec02 sec-chart">
         <div class="chart-nav">
 				  <select id="mainCategorySelect" name="mainCategory">
 						    <option value="비제조업" selected="selected">비제조업</option>
 						    <option value="제조업">제조업</option>
 					</select>
-					<button id="submitButton">선택 보기</button>
+					 <button id="submitButton" style="display: none;">Submit</button>
 				</div>
 				
 	       <div>
@@ -99,6 +99,13 @@
   <script src="../resources/js/mainNews.js"></script>  <!-- 뉴스 -->
   <script src="../resources/js/mainRank.js"></script>  <!-- 랭킹 -->
   <!-- main페이지 기능 관련 js end -->
- 
+  
+  <script>
+  const mainCategorySelect = document.getElementById("mainCategorySelect");
+  mainCategorySelect.addEventListener("change", function() {
+      submitButton.click();
+  });
+  
+  </script>
 </body>
 </html>

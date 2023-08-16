@@ -12,4 +12,7 @@ public interface RankService {
 	List<RankVO> doGetRanking(RankVO inVO) throws SQLException;
 	
 	
+	//4. 특정 행동에 따른 Score에 +1 하는 로직  
+	int doUpdateScore(RankVO inVO) throws SQLException;
+	
 }

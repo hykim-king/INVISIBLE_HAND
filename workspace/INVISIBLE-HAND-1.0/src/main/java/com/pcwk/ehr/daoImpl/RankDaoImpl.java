@@ -1,9 +1,7 @@
 package com.pcwk.ehr.daoImpl;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,34 +23,34 @@ public class RankDaoImpl implements RankDao{
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	
-	
+		
 	//1. 랭킹 정보 main 화면에 출력할 로직
 	@Override
 	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException {
-		
-		
+				
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doGetRanking", inVO);
-
-
 	}
-
-
-
+	
+	//2. 현재 스코어에 따른 등수 업데이트
 	@Override
 	public int doUpdatePrevious(RankVO inVO) throws SQLException {
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdatePrevious", inVO);
 	}
-
-
-
+	
+	//3. 저번달 등수를 이전 등수 컬럼에 복사
 	@Override
 	public int doUpdateCurrent(RankVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateCurrent", inVO);
 	}
 	
+	//4. 특정 행동에 따른 Score에 +1 하는 로직  
+	@Override
+	public int doUpdateScore(RankVO inVO) throws SQLException {
+		
+		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateScore", inVO);		
+	}
 
 	
 
