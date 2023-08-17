@@ -44,19 +44,21 @@
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <c:set var="defaultSearchDiv" value="${defaultSearchDiv}"/>
+<c:url value="/post/postList.do" var="freePostURL">
+  <c:param name="categoryNumber" value="10" />
+</c:url>
 
+<c:url value="/post/postList.do" var="qnaPostURL">
+  <c:param name="categoryNumber" value="20" />
+</c:url>
+
+<c:url value="/post/postList.do" var="postURL">
+  <c:param name="categoryNumber" value="30" />
+</c:url>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
-<script src="${CP}/resources/js/util.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 손 레이아웃</title>
@@ -67,67 +69,46 @@
 
   <div class="h60px"></div>
   <div class="container-1200 con-main min-100vh">
-  
     <div class="wrap-1000 ">
-      <h1><c:out value="${ctg}" /></h1>
+  
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
         <form action="${CP}/post/postList.do" method="get" name="postFrm">
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
-          <div class="row g-1 d-flex justify-content-end ">
-            <div class="col-auto">
-              <%-- <select class="form-select" name="searchDiv" id="searchDiv">
-                  <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
-                  <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
-                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
-              </select> --%>
-               <select class="form-select" name="searchDiv" id="searchDiv">
-                  <option value="none">=게시판을 선택하세요</option>
-                  <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
-                  <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
-                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
-                  <%--  <c:forEach var="vo" items="${searchList}">
-                       <option <c:if test="${vo.codeDetail == defaultSearchDiv}">selected</c:if> value="<c:out value='${vo.codeDetail }' />">
-                           <c:out value='${vo.codeDetailName }' />
-                       </option>
-                   </c:forEach> --%>
-               </select>
-
-
-            </div>  
-            <div class="col-auto">
+          <div class="post-nav">
+  
+            <div>
                <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
-               <!--<input type="text" name="searchWord" id="searchWord"  placeholder="검색어를 입력 하세요" class="form-control">-->
             </div>
-            <div class="col-auto">  
-              <select class="form-select" name="pageSize" id="pageSize">
-                <c:forEach var="vo" items="${pageSizeList }">
-                  <option <c:if test="${vo.codeDetail == inVO.pageSize }">selected</c:if> value="<c:out value='${vo.codeDetail }'/>">
-                     <c:out value='${vo.codeDetailName }'/>
-                  </option>
-                </c:forEach>
-              </select>
-            </div>  
-            <div class="col-auto">  
-              <a href="#" class="btn" id="doRetrieve" >검색</a>
-              <a href="#" class="btn" onclick="doMoveToPostReg();" >글쓰기</a>  
+ 
+            <div class="list-btn">  
+              <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
+              <a href="#" class="btn button btn-b" style="margin-left: 30px;" onclick="doMoveToPostReg();" >글쓰기</a>  
             </div>      
           </div>  
         </form>
       </div>
       <!-- **---form End---** -->
+
+
+
       <!-- *---Table Start---* -->
       
+      <div class="category-selecter">
+        <a class="selecter-list act" href="${freePostURL}">자유 게시판</a>
+        <a class="selecter-list" href="${qnaPostURL}">Q&A 게시판</a>
+        <a class="selecter-list" href="${postURL}">공지사항</a>
+      </div>
       <table id="postTable" class="table table-sm table-hover table-borderless">
           <thead class="post-thead">
             <tr >
-               <th class="text-center">No.</th>
-               <th class="text-center">제목</th>  
-               <th class="text-center">글쓴이</th>
-               <th class="text-center">작성일</th> 
-               <th class="text-center">조회수</th>
+               <th class="text-c">No.</th>
+               <th class="text-c">제목</th>  
+               <th class="text-c">글쓴이</th>
+               <th class="text-c">작성일</th> 
+               <th class="text-c">조회수</th>
             </tr>
           </thead>
           <tbody>
@@ -135,12 +116,12 @@
                <%-- 조회 데이터가 있는 경우--%>
                <c:when test="${not empty list }">
                   <c:forEach var="vo" items="${list}">
-                    <tr>
-                      <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out value="${vo.num}"/></td>
-                      <td class="text-left    col-sm-6  col-md-6  col-lg-7"><a href="#"><c:out value="${vo.title}"/></a></td>
-                      <td class="text-center  col-sm-2  col-md-2  col-lg-2"><c:out value="${vo.nickname}"/></td>
-                      <td class="text-center  col-sm-2  col-md-2  col-lg-1"><c:out value="${vo.writtenDate}"/></td>
-                      <td class="text-end     col-sm-0  col-md-1  col-lg-1"><c:out value="${vo.views}"/></td>
+                    <tr class="cell">
+                      <td class="text-c"><c:out value="${vo.num}"/></td>
+                      <td class="text-l"><a href="#"><c:out value="${vo.title}"/></a></td>
+                      <td class="text-c"><c:out value="${vo.nickname}"/></td>
+                      <td class="text-c"><c:out value="${vo.writtenDate}"/></td>
+                      <td class="text-c"><c:out value="${vo.views}"/></td>
                       <td style="display:none;"><c:out value="${vo.postNumber}"/></td>
                     </tr>            
                   </c:forEach>
@@ -149,7 +130,7 @@
                <%-- 조회 데이터가 없는 경우--%>
                <c:otherwise>
                  <tr>
-                    <td  class="text-center col-sm-12  col-md-12  col-lg-12" colspan="99">No data found.</td>
+                    <td  class="text-c" colspan="99">No data found.</td>
                  </tr>
                </c:otherwise>
              </c:choose>  
@@ -161,31 +142,26 @@
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        
-      <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>    
-      </div>
-       
+
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
 
-<script>
 
+<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
+<script src="${CP}/resources/js/util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script>
+/* 게시판 카테고리 선택시 노란색으로 변경 */
+
+	    $('.selecter-list').click(function() {
+	    	   $('.selecter-list').siblings().removeClass("act");
+	    	   $('.selecter-list').addClass("act");
+	    });
+
+/* 게시판 카테고리 선택시 노란색으로 변경끝 */
+	
+	
   function do_Retrieve(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);

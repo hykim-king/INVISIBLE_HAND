@@ -26,9 +26,6 @@
 			<div id="kakaoContent">
 				<div id="paymentBtn">
 					<span>더 많은 정보를 원한다면</span><br>
-					<div>${sessionScope.member.memberName}</div><br>
-					<div>${sessionScope.member.email}</div><br>
-					<div>${sessionScope.member.phoneNumber}</div>
 				</div>
 				<button class="btn-hover color-11" id="payBtn" onclick="paymentReady()">결제하기</button>
 			</div>

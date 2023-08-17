@@ -138,17 +138,6 @@
       </div>
       <div class="cate">
         <span class="menu"> <a href="${CP}/admin/admin.do"
-          class="menulink">게시판관리</a> <a href="javascript:void(0);"
-          class="subopen"></a>
-        </span>
-        <ul>
-          <li><a href="${CP}/admin/adminNotice.do">공지사항</a></li>
-          <li><a href="${CP}/admin/adminPost.do">게시글 수정/삭제</a></li>
-          <li><a href="${CP}/admin/adminQA.do">문의사항 답변</a></li>
-        </ul>
-      </div>
-      <div class="cate">
-        <span class="menu"> <a href="${CP}/admin/admin.do"
           class="menulink">서비스 관리</a> <a href="javascript:void(0);"
           class="subopen"></a>
         </span>

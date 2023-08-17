@@ -42,6 +42,7 @@
         <input type="submit" value="Submit">
     </form>
   </div> <!-- **---container End---** -->
+<<<<<<< HEAD
 	
   <script src="../resources/js/jquery-3.7.0.js"></script>
     <script >
@@ -61,5 +62,8 @@
         }
         
     </script>
+=======
+
+>>>>>>> 0cce0f36c061ad8d3419cb0b17bdcbd5f6392fd0
 </body>
 </html>

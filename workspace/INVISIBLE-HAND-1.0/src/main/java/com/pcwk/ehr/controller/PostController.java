@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.pcwk.ehr.VO.CmnCodeVO;
+import com.pcwk.ehr.VO.CommentVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PostVO;
-import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
+import com.pcwk.ehr.service.CommentService;
 import com.pcwk.ehr.service.PostService;
 
 @Controller("postController")
@@ -36,6 +36,9 @@ public class PostController {
 	
 	@Autowired
 	CmnCodeService cmnCodeService;
+	
+	@Autowired
+	CommentService commentService;
 	
 	public PostController() {}
 	
@@ -49,7 +52,7 @@ public class PostController {
 		LOG.debug("┌────────────────────────────────┐");
 		LOG.debug("│post : " + inVO);
 
-		int flag = this.postService.doSave(inVO	);
+		int flag = this.postService.doSave(inVO);
 
 		String message = "";
 
@@ -119,8 +122,9 @@ public class PostController {
 		return jsonString;
 	}
 	
+	//게시물 단건조회
 	@RequestMapping("/doSelectOne.do")
-	public String doSelectOne(PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
+	public String doSelectOne(CommentVO commentVO,PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
 
 		PostVO outVO = postService.doSelectOne(inVO);
 		
@@ -133,23 +137,31 @@ public class PostController {
 		LOG.debug("│   doSelectOne()       │");
 		LOG.debug("│   outVO()             │"+outVO);
 		LOG.debug("└───────────────────────┘");
+		
+		// page번호 초기값 1
+		if (null != commentVO && commentVO.getPageNo() == 0) {
+			commentVO.setPageNo(1);
+		}
+			
+		// pageSize 초기값 10
+		if (null != commentVO && commentVO.getPageSize() == 0) {
+			commentVO.setPageSize(10);
+		}
+		
+		
+		
+		List<CommentVO> list = this.commentService.doRetrieve(commentVO);
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   list()     		   │"+list);
+		LOG.debug("│   commentVO()         │"+commentVO);
+		LOG.debug("└───────────────────────┘");
+		model.addAttribute("list", list);
+		model.addAttribute("commentVO", commentVO);
+		
+		
+		
 		return "post/postContents";
 	}
-	
-	/*
-	 * @RequestMapping(value = "/postMod", method = RequestMethod.GET) public String
-	 * postMod(@RequestParam("postNumber") int postNumber, Model model) throws
-	 * SQLException { LOG.debug("┌───────────────────────┐");
-	 * LOG.debug("│   postMod()           │");
-	 * LOG.debug("└───────────────────────┘");
-	 * 
-	 * PostVO inVO = new PostVO(); inVO.setPostNumber(postNumber);
-	 * 
-	 * PostVO outVO = postService.doSelectOne(inVO); model.addAttribute("outVO",
-	 * outVO);
-	 * 
-	 * return "post/postMod"; }
-	 */
 
 	
 	@RequestMapping(value = "/postList.do")
@@ -159,16 +171,28 @@ public class PostController {
 		LOG.debug("└───────────────────────┘");
 		
 		HttpSession session = request.getSession();
-	    //PostVO user = (PostVO) session.getAttribute("user");
-	    //if (user != null) {
-	    // 닉네임 세션에 저장
-	    session.setAttribute("nickname", "mj"); //mj->user.getNickName
+		MemberVO memberInfo = (MemberVO) session.getAttribute("member");
+		
+		if (memberInfo != null) {
+	        String memberId = memberInfo.getMemberId();
+	        String sessionNickname = memberInfo.getNickName();
+	        
+	        model.addAttribute("memberId", memberId);
+	        model.addAttribute("sessionNickname", sessionNickname);
+	        
+	        request.setAttribute("memberId", memberId);
+	        request.setAttribute("sessionNickname", sessionNickname);
+	        
+	        LOG.debug("┌───────────────────────┐");
+		    LOG.debug("│   memberId:           │"+memberId);
+		 	LOG.debug("│   nickname:           │"+sessionNickname);
+		 	LOG.debug("└───────────────────────┘");
+	    }else {
+	    	request.setAttribute("memberId", "");
+	        request.setAttribute("sessionNickname", "");
+	        
+	    }
 	    
-	    //}
-	    LOG.debug("┌───────────────────────┐");
-	 	LOG.debug("│   nickname:           │"+session.getAttribute("nickname"));
-	 	LOG.debug("│   memberId:           │"+session.getAttribute("memberId"));
-	 	LOG.debug("└───────────────────────┘");
 		
 		// page번호 초기값 1
 		if (null != inVO && inVO.getPageNo() == 0) {
@@ -233,10 +257,12 @@ public class PostController {
 	
 	
 	@RequestMapping(value = "/postContents.do")
-	public String postContents() {
+	public String postContents(Model model) throws SQLException {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   postContents()      │");
 		LOG.debug("└───────────────────────┘");
+		
+		
 		
 		
 		return "post/postContents";

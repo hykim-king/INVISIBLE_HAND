@@ -1,17 +1,29 @@
 package com.pcwk.ehr.VO;
 
-import java.util.Date;
+import com.pcwk.ehr.cmn.DTO;
 
-public class CommentVO {
-	
-	private int commentNumber	; 		//댓글번호
-	private String nickname ; 		//닉네임
-	private String content  ; 		//내용 
-	private int likes       ; 		//추천수
-	private Date writtenDate ; 	//작성일
-	private int postNum     ; 		//글번호
-	
-	public CommentVO() {}
+public class CommentVO extends DTO {
+	private int commentNumber;
+	private String nickname;
+	private String content;
+	private int likes;
+	private String writtenDate;
+	private int postNumber;
+	private String memberId;
+
+	public CommentVO(){}
+
+	public CommentVO(int commentNumber, String nickname, String content, int likes, String writtenDate, int postNumber,
+			String memberId) {
+		super();
+		this.commentNumber = commentNumber;
+		this.nickname = nickname;
+		this.content = content;
+		this.likes = likes;
+		this.writtenDate = writtenDate;
+		this.postNumber = postNumber;
+		this.memberId = memberId;
+	}
 
 	public int getCommentNumber() {
 		return commentNumber;
@@ -45,22 +57,39 @@ public class CommentVO {
 		this.likes = likes;
 	}
 
-	public Date getWrittenDate() {
+	public String getWrittenDate() {
 		return writtenDate;
 	}
 
-	public void setWrittenDate(Date writtenDate) {
+	public void setWrittenDate(String writtenDate) {
 		this.writtenDate = writtenDate;
 	}
 
-	public int getPostNum() {
-		return postNum;
+	public int getPostNumber() {
+		return postNumber;
 	}
 
-	public void setPostNum(int postNum) {
-		this.postNum = postNum;
+	public void setPostNumber(int postNumber) {
+		this.postNumber = postNumber;
 	}
 
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentVO [commentNumber=" + commentNumber + ", nickname=" + nickname + ", content=" + content
+				+ ", likes=" + likes + ", writtenDate=" + writtenDate + ", postNumber=" + postNumber + ", memberId="
+				+ memberId + "]";
+	}
 	
 	
+	
+
+
 }
