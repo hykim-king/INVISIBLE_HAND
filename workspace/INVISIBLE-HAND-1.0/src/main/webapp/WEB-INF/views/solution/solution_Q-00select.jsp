@@ -16,14 +16,16 @@
 <body>
   <div class="h60px" style="height: 80px;"></div>
   <div class="container-1400 Q_00">
-        <div class="pop-que">
-            <h5>
-                귀사의 업체 종목을<br>"제조업 또는 비제조업" 에서 선택해 주십시오.
-            </h5>
+    <div class="pop-que">
+       <h5>
+                        귀사의 업체 종목을<br>"제조업 또는 비제조업" 에서 선택해 주십시오.
+       </h5>
             <div class="btn">
                 <button type="button" onclick="move01();">제조업</button>
                 <button type="button" onclick="move02();">비제조업</button>
                 <button type="button"">선택</button>
+                <a href="${CP}/solution/solution_Q-01product.do">제조업</a>
+                <a href="${CP}/solution/solution_Q-02noproduct.do">비제조업</a>
             </div>
         </div>
         <form action="${CP}/solution/solution_Q-01poduct.do" method="post">
@@ -42,7 +44,6 @@
         <input type="submit" value="Submit">
     </form>
   </div> <!-- **---container End---** -->
-<<<<<<< HEAD
 	
   <script src="../resources/js/jquery-3.7.0.js"></script>
     <script >
@@ -63,7 +64,5 @@
         
     </script>
 =======
-
->>>>>>> 0cce0f36c061ad8d3419cb0b17bdcbd5f6392fd0
 </body>
 </html>
