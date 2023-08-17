@@ -31,7 +31,7 @@
           <li>
           <c:choose>
             <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-              <a href="${CP}/chart/chart.do" onclick="paymentCheckIf()">차트</a>
+              <a href="#" onclick="paymentCheckIf()">차트</a>
             </c:when>
             <c:otherwise>
               <a href="#" id="loginBtn" onclick="doLogin()">차트</a>
@@ -129,6 +129,24 @@ function doLogin() {
 }
 
 function paymentCheckIf() {
-  alert("구독여부 확인");
+	let email = '${sessionScope.member.email}';
+	
+  $.ajax({
+      url: "/ehr/payment/payment_check.do",
+      type: "GET",
+      dataType: "html",
+      data: {
+    	  email : email
+      }, success: function(data) {
+    	  if (data == 1) {
+ 	        location.href = "../chart/chart.do";
+    	  } else {
+    		  alert("유료 결제 페이지입니다. 구독 후 이용해주세요.");
+    		  location.href = "../payment/payment_view.do";
+    	  }
+    	}, error: function(data) {
+    	  alert("구독 여부 확인에 실패하였습니다. 관리자에게 문의해주세요" + data);
+      }
+  });
 }
 </script>

@@ -46,8 +46,8 @@
 						</div>
 	        </c:when>
 	        <c:otherwise>
-						<div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);">
-	            <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+						<div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
+						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
 						</div>
 	        </c:otherwise>
 	      </c:choose>
@@ -109,12 +109,16 @@
   <script src="../resources/js/mainRank.js"></script>  <!-- 랭킹 -->
   <!-- main페이지 기능 관련 js end -->
   
-  <script>
-  const mainCategorySelect = document.getElementById("mainCategorySelect");
-  mainCategorySelect.addEventListener("change", function() {
-      submitButton.click();
-  });
-  
-  </script>
+<script>
+const mainCategorySelect = document.getElementById("mainCategorySelect");
+mainCategorySelect.addEventListener("change", function() {
+    submitButton.click();
+});
+
+function doLogin() {
+ alert("로그인 후 이용해주세요");
+ location.href = "../member/memberLogin.do";
+}
+</script>
 </body>
 </html>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PaymentInfoVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.service.MemberService;
@@ -32,6 +33,18 @@ public class PaymentController {
 
 	@Autowired
 	MemberService memberService;
+	
+	// 구독 여부 확인
+	@ResponseBody
+	@RequestMapping(value = "/payment_check.do")
+	public String payment_check(PaymentInfoVO info, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("email");
+		int result = payService.checkPaymentInfo(email);
+		lg.debug("result-----------!!!!!!!1" + result);
+
+		return Integer.toString(result);
+	}
 	
 	// 구독 정보
 	@GetMapping("/payment_detail.do")

@@ -38,18 +38,18 @@
 </div>
 <script>
 function paymentReady() {
-    var name = '${sessionScope.member.memberName}';
-    var email = '${sessionScope.member.email}';
-    var phoneNum = '${sessionScope.member.phoneNumber}';
+    let name = '${sessionScope.member.memberName}';
+    let email = '${sessionScope.member.email}';
+    let phoneNum = '${sessionScope.member.phoneNumber}';
 
-		var today = new Date();
-		var hours = today.getHours(); // 시
-		var minutes = today.getMinutes(); // 분
-		var seconds = today.getSeconds(); // 초
-		var milliseconds = today.getMilliseconds();
-		var makeMerchantUid = hours + minutes + seconds + milliseconds;
+    let today = new Date();
+    let hours = today.getHours(); // 시
+    let minutes = today.getMinutes(); // 분
+    let seconds = today.getSeconds(); // 초
+    let milliseconds = today.getMilliseconds();
+    let makeMerchantUid = hours + minutes + seconds + milliseconds;
 
-		var IMP = window.IMP;
+    let IMP = window.IMP;
 		IMP.init("imp77248336"); // 가맹점 식별코드
 		IMP.request_pay({
 			pg : 'kakaopay.TC0ONETIME', // 결제할 지점 이름(kcp)
@@ -88,7 +88,7 @@ function paymentReady() {
 
 				document.location.href = "/ehr/main/main.do";
 			} else {
-				var msg = data.error_msg;
+				let msg = data.error_msg;
 
 				alert(msg);
 				location.reload(); // 새로고침
