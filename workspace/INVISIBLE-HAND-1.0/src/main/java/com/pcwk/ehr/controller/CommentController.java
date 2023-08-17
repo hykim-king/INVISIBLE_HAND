@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,16 +33,6 @@ public class CommentController implements PcwkLoger{
 		LOG.debug("│   commentList()       │");
 		LOG.debug("└───────────────────────┘");
 		
-		HttpSession session = request.getSession();
-	    //PostVO user = (PostVO) session.getAttribute("user");
-	    //if (user != null) {
-	    // 닉네임 세션에 저장
-	    session.setAttribute("nickname", "test"); //test->user.getNickName
-	    //}
-	    LOG.debug("┌───────────────────────┐");
-	 	LOG.debug("│   nickname:           │"+session.getAttribute("nickname"));
-	 	LOG.debug("└───────────────────────┘");
-		
 		
 		// page번호 초기값 1
 		if (null != commentVO && commentVO.getPageNo() == 0) {
@@ -64,6 +55,7 @@ public class CommentController implements PcwkLoger{
 		 return "post/postContents";
 	}
 	
+	//댓글 등록
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doSave(CommentVO commentVO) throws SQLException {
@@ -88,7 +80,9 @@ public class CommentController implements PcwkLoger{
 		return jsonString;
 		
 	}
-
+	
+	@RequestMapping(value = "/doUpdate.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
 	public String doUpdate(CommentVO commentVO) throws SQLException {
 		String jsonString = "";
 		
@@ -110,14 +104,16 @@ public class CommentController implements PcwkLoger{
 		return jsonString;
 	}
 	
-	public String doDelete(CommentVO commentVO) throws SQLException {
+	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doDelete(int commentNumber) throws SQLException {
 		String jsonString = "";
 
 		LOG.debug("┌────────────────────────────────┐");
-		LOG.debug("│post : " + commentVO);
-		LOG.debug("│postnumber : " + commentVO.getPostNumber());
+		LOG.debug("│commentNumber : " + commentNumber);
 
-		int flag = this.commentService.doDelete(commentVO);
+		int flag = this.commentService.doDelete(commentNumber);
 		
 		String message = "";
 

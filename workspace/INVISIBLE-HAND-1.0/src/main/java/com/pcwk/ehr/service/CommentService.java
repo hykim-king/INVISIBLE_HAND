@@ -17,7 +17,7 @@ public interface CommentService {
 	int doUpdate(CommentVO commentVO)throws SQLException;
 	
 	//댓글 삭제
-	int doDelete(CommentVO commentVO) throws SQLException;
+	int doDelete(int commentNumber) throws SQLException;
 	
 	//댓글 좋아요
 	int doUpdateLikes(CommentVO commentVO) throws SQLException;

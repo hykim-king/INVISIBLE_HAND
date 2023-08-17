@@ -75,7 +75,7 @@
   </insert>
   
   <!-- 댓글 삭제 -->
-  <delete id="doDelete" parameterType="CommentVO">
+  <delete id="doDelete" parameterType="int">
       DELETE FROM board_comment 
       WHERE commentnumber = #{commentNumber}     
   </delete>

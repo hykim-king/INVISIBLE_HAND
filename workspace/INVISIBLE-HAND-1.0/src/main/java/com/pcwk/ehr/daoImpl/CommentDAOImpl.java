@@ -57,19 +57,19 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdate");
 		LOG.debug("└──────────────────────────────┘");	
 		
-		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"doUpdate", commentVO);		
+		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdate", commentVO);		
 	}
 
 
 	@Override
-	public int doDelete(CommentVO commentVO) throws SQLException {
+	public int doDelete(int commentNumber) throws SQLException {
 		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│deleteOne                     │");
-		LOG.debug("│commentVO                     │"+commentVO);
-		LOG.debug("│statement                     │"+NAMESPACE+DOT+"deleteOne");
+		LOG.debug("│doDelete                      │");
+		LOG.debug("│commentNumber                 │"+commentNumber);
+		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doDelete");
 		LOG.debug("└──────────────────────────────┘");	
 		
-		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"deleteOne", commentVO);		
+		return sqlSessionTemplate.delete(NAMESPACE+DOT+"doDelete", commentNumber);
 	}
 
 
@@ -81,7 +81,7 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdateLikes");
 		LOG.debug("└──────────────────────────────┘");	
 		
-		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"doUpdateLikes", commentVO);
+		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateLikes", commentVO);
 	
 	}
 
