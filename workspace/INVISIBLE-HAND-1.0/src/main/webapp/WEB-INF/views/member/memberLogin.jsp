@@ -152,7 +152,8 @@ $(document).ready(function() {
           if ("30" == data.msgId) {
             alert(data.msgContents);
           }
-          window.location.href = "${CP}/main/main.do"; // 변경된 부분: 리다이렉트 처리
+//          window.location.href = "${CP}/main/main.do"; // 변경된 부분: 리다이렉트 처리
+          window.location.href = document.referrer; //로그인 성공 시 이전에 머물던 페이지로 돌아가기
         },
         error: function(data) {
           console.log("error:" + data);

@@ -29,14 +29,14 @@
       <nav class="gnb_wrap">
         <ul class="global_nav_bar">
           <li>
-          <c:choose>
+<%--           <c:choose>
             <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
               <a href="#" onclick="paymentCheckIf()">차트</a>
             </c:when>
-            <c:otherwise>
-              <a href="#" id="loginBtn" onclick="doLogin()">차트</a>
-            </c:otherwise>
-          </c:choose>
+            <c:otherwise> --%>
+              <a href="${CP}/chart/chart.do">차트</a>
+<%--             </c:otherwise>
+          </c:choose> --%>
           </li>
           <li><a href="${CP}/solution/solution_Q.do">솔루션</a></li>
           <li><a href="${freePostURL}">커뮤니티</a></li>
@@ -128,7 +128,7 @@ function doLogin() {
   location.href = "../member/memberLogin.do";
 }
 
-function paymentCheckIf() {
+/* function paymentCheckIf() {
 	let email = '${sessionScope.member.email}';
 	
   $.ajax({
@@ -148,5 +148,5 @@ function paymentCheckIf() {
     	  alert("구독 여부 확인에 실패하였습니다. 관리자에게 문의해주세요" + data);
       }
   });
-}
+} */
 </script>
