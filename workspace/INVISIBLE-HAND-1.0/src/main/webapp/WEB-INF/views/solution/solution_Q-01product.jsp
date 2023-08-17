@@ -458,21 +458,5 @@
         </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
 
-<script>
-    $(document).ready(function () {
-        // 반복문을 사용하여 각 그룹의 라벨 클릭 이벤트 핸들러 설정
-        var groups = ['que04', 'que05']; // 그룹 클래스 이름들
-
-        groups.forEach(function(group) {
-        	
-            $("." + group + " .radio label").click(function () {
-                var radio = $(this).find("input[type=radio]");
-                $("." + group + " input[type=radio]").prop("checked", false);
-                radio.prop("checked", true);
-                alert("야");
-            });
-        });
-    });
-</script>
 </body>
 </html>
