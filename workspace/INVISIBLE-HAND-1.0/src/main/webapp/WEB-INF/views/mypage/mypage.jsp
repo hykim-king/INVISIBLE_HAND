@@ -24,8 +24,8 @@
 						<div class="bedge"></div>
 					</div>
 					<div class="my-info-list">
-						<span><a href="login">회원정보 수정</a></span>
-						<span><a href="login">회원 탈퇴</a></span>
+						<span><a href="../member/memberPWChange.do">회원정보 수정</a></span>
+						<span><a href="../member/memberDelete.do">회원 탈퇴</a></span>
 						<span><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></span>
 					</div>
 				</div>

@@ -21,13 +21,13 @@ public class SolutionController {
 		
 		return "solution/solution_Q-00select";
 	}
-	@RequestMapping(value = "/solution_Q-01poduct.do")
+	@RequestMapping(value = "/solution_Q-01product.do")
 	public String solutionQ1() {
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   solution_Q()        │");
 		LOG.debug("└───────────────────────┘");
 		
-		return "solution/solution_Q-01poduct";
+		return "solution/solution_Q-01product";
 	}
 	@RequestMapping(value = "/solution_Q-02noproduct.do")
 	public String solutionQ2() {

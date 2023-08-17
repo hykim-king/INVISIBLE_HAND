@@ -2,17 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/login.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-<title>비밀번호 변경,회원탈퇴페이지 입니다</title>
-</head>
-<body>
 	<!-- *---container Start---* -->
 
 	<div class="h60px"></div>
@@ -35,9 +29,9 @@
 				</div>
 				
 				<div class="label-margin">
-					<p class="input-title">E-mail</p></p>
+					<p class="input-title">E-mail</p>
 					<label> 
-						<input type="E-mail" name="E-mail" id="E-mail" placeholder="E-mail을 입력하세요" class="size border-bottom" required="required">
+						<input type="email" name="email" id="email" placeholder="E-mail을 입력하세요" class="size border-bottom" required="required">
 						<input onclick = "fn_idChk();" type="button" value="인증번호 전송" class="btn btn-white">
 					</label>
 				</div>
@@ -279,5 +273,3 @@ function clearPasswordError() {
   confirm_password_error.innerHTML = "";
 }-->
 </script>
-</body>
-</html>

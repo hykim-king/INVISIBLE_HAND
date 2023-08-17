@@ -15,7 +15,7 @@
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart1"></div>
-        <button id="restoreButton">Restore</button> <!-- Restore 버튼 추가 -->
+
     </div>
     <!-- **---wrap End---** -->
   </div>
@@ -144,7 +144,7 @@
           titleTextStyle: { color: '#fff' },
           hAxis: {
               textStyle: { fontSize: 15, color: '#fff' },
-              baselineColor: '#fff'
+              baselineColor: '#fff',
           },
           vAxis: {
               //title: 'title',

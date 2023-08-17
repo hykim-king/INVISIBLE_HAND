@@ -25,7 +25,7 @@
 			Kakao.Auth
 					.logout(function(response) {
 						alert(response + ' 로그아웃 되었습니다.');
-						window.location.href = 'http://localhost:8080/ehr/resources/kakaoLogin/kakao_login_view.html'
+						location.href = 'http://localhost:8080/ehr/member/memberLogin.do'
 					});
 		};
 
@@ -36,7 +36,7 @@
 					alert("탈퇴되었습니다.");
 					console.log(response);
 					//callback(); //연결끊기(탈퇴)성공시 서버에서 처리할 함수
-					window.location.href = 'http://localhost:8080/ehr/resources/kakaoLogin/kakao_login_view.html'
+					location.href = 'http://localhost:8080/ehr/member/memberLogin.do'
 				},
 				fail : function(error) {
 					console.log('탈퇴 미완료')

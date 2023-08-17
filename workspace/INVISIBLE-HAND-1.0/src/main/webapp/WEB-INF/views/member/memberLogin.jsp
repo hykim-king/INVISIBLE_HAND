@@ -2,17 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/login.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<title>보이지 않는 손 레이아웃</title>
-</head>
-<body>
 	<!-- *---container Start---* -->
   <div class="drops">
       <div class="drop"></div>
@@ -25,8 +18,7 @@
 		<div class="login-wrap">
 			<form action="${CP}/main/main.do" method="post">
 				<div class="login-logo">
-					<a href="#"><img class="login-logo-img"
-						src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
+					<a href="#"><img class="login-logo-img" src="../resources/image/pngaaa.com-589654.png" alt="logo" /></a>
 				</div>
         
         <div class="lines-box">
@@ -35,34 +27,33 @@
 	        <div class="input-wrap">
 	          <!-- Email -->
 	          <p class="input-title">ID</p>
-	          <label> <input class="size ID" type="ID" id="memberId"
-	            name="memberId" required="required">
+	          <label>
+	            <input class="size ID" type="ID" id="memberId" name="memberId" required="required">
 	          </label>
 	
 	          <!-- Password -->
 	          <p class="input-title password">Password</p>
-	          <label> <input type="password" name="password"
-	            class="size password" id="password" required="required">
-	          </label>
+	          <label class="pwShHi">
+		          <input type="password" name="password" class="size password" id="password" required="required">
+		          <i class="fa fa-eye fa-lg"></i>
+			      </label>
 	        </div>
 	        <div class="line1px pur"></div>
 	        <div class="line3px pur"></div>        
         </div>
 
 				<p class="find">
-					<span><a href="${CP}/member/memberPWChange.do">비밀번호 찾기</a></span> <span><a
-						href="${CP}/member/memberJoin.do">회원가입</a></span>
+					<span><a href="${CP}/member/memberPWChange.do">비밀번호 찾기</a></span>
+					<span><a href="${CP}/member/memberJoin.do">회원가입</a></span>
 				</p>
 				<!-- <input type="submit" value="확인"> -->
 				<p>
-					<input type="submit" value="login" id="goLogin" name="goLogin"
-						class="btn w100 login-btn">
+					<input type="submit" value="login" id="goLogin" name="goLogin" class="btn w100 login-btn">
 				</p>
 				<p class="kakao">
-				 <a href="#0" id="kakaoLogin">카카오계정 로그인</a>
+				  <a href="#0" id="kakaoLogin">카카오계정 로그인</a>
 				</p>
-				<span class="back-home"><a href="${CP}/main/main.do">메인페이지로
-						돌아가기</a></span>
+				<span class="back-home"><a href="${CP}/main/main.do">메인페이지로 돌아가기</a></span>
 			</form>
 		</div>
 		<!-- **---wrap End---** -->
@@ -98,10 +89,23 @@
 	const login = document.querySelector('#kakaoLogin');
 	login.addEventListener('click', kakaoLogin);
 </script> <!------------카카오 로그인 END ----------->
-	<!-- **---container End---** -->
-	<script src="../resources/js/jquery-3.7.0.js"></script>
-	<script>
+<!-- **---container End---** -->
+<script src="../resources/js/jquery-3.7.0.js"></script>
+<script>
 $(document).ready(function() {
+	
+	// 비밀번호 표시/숨기기 버튼
+	$('.pwShHi i').on('mousedown', function(){
+	    let input = $(this).prev('input');
+	    input.removeClass('active');
+	    input.attr('type', 'text');
+	    $(this).attr('class',"fa fa-eye-slash fa-lg");
+	}).on('mouseup', function(){
+		  let input = $(this).prev('input');
+	    input.addClass('active');
+	    input.attr('type','password');
+	    $(this).attr('class',"fa fa-eye fa-lg");
+	});
 
     $("#goLogin").on("click", function(e) { // 로그인 버튼을 클릭했을 때
     	e.preventDefault();
@@ -159,5 +163,3 @@ $(document).ready(function() {
     
 });
 </script>
-</body>
-</html>

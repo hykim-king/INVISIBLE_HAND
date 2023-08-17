@@ -21,7 +21,7 @@
 
       <div id="kakaoContent">
 				<c:if test="${empty paymentInfo}">
-		      <span>구독이 되어있지 않습니다.</span>
+		      <span>구독 정보가 없습니다.</span>
 				</c:if>
 				<c:if test="${not empty paymentInfo}">
 			    <div>로그인된 이름 : ${sessionScope.member.memberName}</div><br>

@@ -36,7 +36,7 @@
 						    <option value="비제조업" selected="selected">비제조업</option>
 						    <option value="제조업">제조업</option>
 					</select>
-					 <button id="submitButton" style="display: none;">Submit</button>
+					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
 	       <div>

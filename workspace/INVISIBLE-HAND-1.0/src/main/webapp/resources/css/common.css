@@ -437,7 +437,10 @@ section{
   position: relative;
   overflow: hidden;
 }
-
+.sec-chart text{
+	cursor: pointer;
+	
+}
 
  
 /* sec-board------------------- */
