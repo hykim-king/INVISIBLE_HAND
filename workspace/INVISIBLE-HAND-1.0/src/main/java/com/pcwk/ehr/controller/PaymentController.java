@@ -41,7 +41,6 @@ public class PaymentController {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("email");
 		int result = payService.checkPaymentInfo(email);
-		lg.debug("result-----------!!!!!!!1" + result);
 
 		return Integer.toString(result);
 	}
