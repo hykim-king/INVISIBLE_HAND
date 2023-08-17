@@ -203,7 +203,7 @@ public class MemberController {
 			LOG.debug("=session.invalidate()=");
 		}
 
-		return "main/main";
+		return "redirect:/main/main.do";
 
 	}
 

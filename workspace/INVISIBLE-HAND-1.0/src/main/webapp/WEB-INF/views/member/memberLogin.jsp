@@ -127,7 +127,7 @@ $(document).ready(function() {
     	
       $.ajax({
         type: "POST",
-        url: "dologin.do",//멤버 컨트롤러에 있는 주소
+        url: "/ehr/member/dologin.do",//멤버 컨트롤러에 있는 주소
         async: true,
         dataType: "json", // 변경된 부분: 응답을 JSON으로 예상
         data: {
@@ -138,7 +138,7 @@ $(document).ready(function() {
         // 1:아이디미입력 2:비밀번호 미입력
         // 10(id 오류), 20(비번오류), 30(성공)
         success: function(data) {
-          console.log("success data:" + data);
+        	console.log("success data:" + data);
           if ("1" == data.msgId || "10" == data.msgId) {//
             alert(data.msgContents);
             $("#id").focus();
@@ -151,8 +151,8 @@ $(document).ready(function() {
           }
           if ("30" == data.msgId) {
             alert(data.msgContents);
+	          window.location.href = document.referrer; //로그인 성공 시 이전에 머물던 페이지로 돌아가기
           }
-          window.location.href = "${CP}/main/main.do"; // 변경된 부분: 리다이렉트 처리
         },
         error: function(data) {
           console.log("error:" + data);

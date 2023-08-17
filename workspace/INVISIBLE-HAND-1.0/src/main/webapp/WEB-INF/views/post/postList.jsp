@@ -44,7 +44,17 @@
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <c:set var="defaultSearchDiv" value="${defaultSearchDiv}"/>
+<c:url value="/post/postList.do" var="freePostURL">
+  <c:param name="categoryNumber" value="10" />
+</c:url>
 
+<c:url value="/post/postList.do" var="qnaPostURL">
+  <c:param name="categoryNumber" value="20" />
+</c:url>
+
+<c:url value="/post/postList.do" var="postURL">
+  <c:param name="categoryNumber" value="30" />
+</c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,9 +69,8 @@
 
   <div class="h60px"></div>
   <div class="container-1200 con-main min-100vh">
-  
     <div class="wrap-1000 ">
-      <h1><c:out value="${ctg}" /></h1>
+  
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
@@ -69,25 +78,14 @@
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
           <div class="post-nav">
-            <div class="col-auto">
-
-               <select class="form-select" name="searchDiv" id="searchDiv">
-                  <option value="none">=게시판을 선택하세요</option>
-                  <option value="10" <c:if test="${defaultSearchDiv == '10'}">selected</c:if>>자유게시판</option>
-                  <option value="20" <c:if test="${defaultSearchDiv == '20'}">selected</c:if>>Q&A게시판</option>
-                  <option value="30" <c:if test="${defaultSearchDiv == '30'}">selected</c:if>>공지사항</option>
-
-               </select>
-
-
-            </div>  
-            <div class="col-auto">
+  
+            <div>
                <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
             </div>
  
             <div class="list-btn">  
-              <a href="#" class="btn button btn-w" id="doRetrieve" >검색</a>
-              <a href="#" class="btn button btn-b" onclick="doMoveToPostReg();" >글쓰기</a>  
+              <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
+              <a href="#" class="btn button btn-b" style="margin-left: 30px;" onclick="doMoveToPostReg();" >글쓰기</a>  
             </div>      
           </div>  
         </form>
@@ -98,6 +96,11 @@
 
       <!-- *---Table Start---* -->
       
+      <div class="category-selecter">
+        <a class="selecter-list act" href="${freePostURL}">자유 게시판</a>
+        <a class="selecter-list" href="${qnaPostURL}">Q&A 게시판</a>
+        <a class="selecter-list" href="${postURL}">공지사항</a>
+      </div>
       <table id="postTable" class="table table-sm table-hover table-borderless">
           <thead class="post-thead">
             <tr >
@@ -149,7 +152,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 <script>
+/* 게시판 카테고리 선택시 노란색으로 변경 */
 
+	    $('.selecter-list').click(function() {
+	    	   $('.selecter-list').siblings().removeClass("act");
+	    	   $('.selecter-list').addClass("act");
+	    });
+
+/* 게시판 카테고리 선택시 노란색으로 변경끝 */
+	
+	
   function do_Retrieve(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);

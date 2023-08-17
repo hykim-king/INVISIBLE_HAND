@@ -39,10 +39,11 @@
 					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
-	       <div>
-	         <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-	       </div>
-	
+
+				<div class="chart-wrapper" onclick='doChart()'>
+				  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+				</div>
+
       </section>
       
       <h4>추천 게시글</h4>
@@ -100,12 +101,16 @@
   <script src="../resources/js/mainRank.js"></script>  <!-- 랭킹 -->
   <!-- main페이지 기능 관련 js end -->
   
-  <script>
-  const mainCategorySelect = document.getElementById("mainCategorySelect");
-  mainCategorySelect.addEventListener("change", function() {
-      submitButton.click();
-  });
-  
-  </script>
+<script>
+const mainCategorySelect = document.getElementById("mainCategorySelect");
+mainCategorySelect.addEventListener("change", function() {
+    submitButton.click();
+});
+
+function doChart() {
+
+ location.href = "../chart/chart.do";
+}
+</script>
 </body>
 </html>

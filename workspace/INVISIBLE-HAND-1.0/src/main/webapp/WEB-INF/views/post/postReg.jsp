@@ -35,7 +35,7 @@
 
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/post.css">
-<title>보이지 않는 손 레이아웃</title>
+<title>글쓰기</title>
 </head>
 <body>
   <!-- *---container Start---* -->
@@ -44,37 +44,42 @@
   <div class="container-1200 con-main min-100vh">
   
     <div class="wrap-1000 ">
-      <h1><c:out value="${ctg}" /> 글쓰기</h1>
+      <h2><c:out value="${ctg}" /> 글쓰기</h2>
       
 
 
+    <div class="contents-area" style="margin-bottom: 20px;">
+	    <div class="yellow-box"></div>
+	    <form action="${CP}/post/postReg.do" method="get" name="regFrm" id="regFrm" class="write-form">
+	        <input type="hidden" name="pageNo" id="pageNo">
+	        <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
+	       
+	        <div class="write-box">
+	          <!-- <label for="exampleFormControlInput1" class="form-label">제목</label> -->
+	          <input type="text" id="title" name="title" class="title-write title_cls" placeholder="제목을 입력하세요." required="required" maxlength="66">
+	        </div>
+	        
+	        <div class="write-box nick">
+	          <!-- <label for="exampleFormControlInput1" class="form-label">닉네임</label> -->
+	          <input type="text" class="nick-write" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
+	        </div>
+	        
+	        <div class="write-box content">
+	          <!-- <label for="exampleFormControlTextarea1" class="form-label">내용</label> -->
+	          <textarea class="content-write" id="content" name="content" rows="3" required="required"></textarea>
+	        </div>
+	                
+	    </form>
+	    <div class="yellow-box"style="margin-top: 10px;"></div>
+    </div>
     <!-- 버튼 -->
-    <div class="btn-area">
+    <div class="btn-area"style="margin-bottom: 100px;">
       <div class="col-auto">
-        <input type="button" class="btn" value="목록" id="moveToList" onclick="doMoveToList()">
-        <input type="button" class="btn" value="등록" id="doSave">
+        <input type="button" class="button btn btn-w" value="목록" id="moveToList" onclick="doMoveToList()">
+        <input type="button" class="button btn btn-b" value="등록" id="doSave">
       </div>
     </div>
     <!--// 버튼 ----------------------------------------------------------------->
-    <form action="${CP}/post/postReg.do" method="get" name="regFrm" id="regFrm">
-        <input type="hidden" name="pageNo" id="pageNo">
-        <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">제목</label>
-          <input type="text" id="title" name="title" class="form-control title_cls" placeholder="제목을 입력하세요." required="required" maxlength="66">
-        </div>
-        
-        <div>
-          <label for="exampleFormControlInput1" class="form-label">닉네임</label>
-          <input type="text" class="form-control" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
-        </div>
-        
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-          <textarea class="form-control" id="content" name="content" rows="3" required="required"></textarea>
-        </div>
-                
-    </form>
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
   
