@@ -10,11 +10,12 @@ public class CommentVO extends DTO {
 	private String writtenDate;
 	private int postNumber;
 	private String memberId;
-
+	private int commentCnt;
+	
 	public CommentVO(){}
 
 	public CommentVO(int commentNumber, String nickname, String content, int likes, String writtenDate, int postNumber,
-			String memberId) {
+			String memberId, int commentCnt) {
 		super();
 		this.commentNumber = commentNumber;
 		this.nickname = nickname;
@@ -23,6 +24,7 @@ public class CommentVO extends DTO {
 		this.writtenDate = writtenDate;
 		this.postNumber = postNumber;
 		this.memberId = memberId;
+		this.commentCnt = commentCnt;
 	}
 
 	public int getCommentNumber() {
@@ -81,13 +83,21 @@ public class CommentVO extends DTO {
 		this.memberId = memberId;
 	}
 
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentVO [commentNumber=" + commentNumber + ", nickname=" + nickname + ", content=" + content
 				+ ", likes=" + likes + ", writtenDate=" + writtenDate + ", postNumber=" + postNumber + ", memberId="
-				+ memberId + "]";
+				+ memberId + ", commentCnt=" + commentCnt + "]";
 	}
-	
+
 	
 	
 

@@ -15,10 +15,16 @@
      </choose>
   </sql> 
   
+  <!-- 댓글수 조회 -->
+  <select id="doCommentCnt" parameterType="int" resultType="int">
+    SELECT COUNT(commentnumber) AS commentCnt  
+    FROM board_comment
+    WHERE postnumber = #{postNumber}
+  </select>
   
   <!-- 댓글 조회 -->
   <select id="doRetrieve" parameterType="DTO" resultType="CommentVO">
-    SELECT A.*,B.*  
+    SELECT A.*,B.* 
     FROM(
       SELECT  TT1.rnum as num,
             TT1.commentnumber,
@@ -45,7 +51,7 @@
       <![CDATA[    WHERE rnum >=#{pageSize} * (#{pageNo}-1)+ 1 ]]>
     )A 
     CROSS JOIN
-    (SELECT COUNT(commentnumber) views
+    (SELECT COUNT(commentnumber) commentCnt
     FROM board_comment 
     WHERE postnumber = #{postNumber}
     <include refid="searchCondition"></include>
