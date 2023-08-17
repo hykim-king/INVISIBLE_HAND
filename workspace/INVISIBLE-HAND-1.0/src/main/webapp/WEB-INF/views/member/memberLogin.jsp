@@ -2,17 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/login.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<title>보이지 않는 손 레이아웃</title>
-</head>
-<body>
 	<!-- *---container Start---* -->
   <div class="drops">
       <div class="drop"></div>
@@ -40,9 +33,10 @@
 	
 	          <!-- Password -->
 	          <p class="input-title password">Password</p>
-	          <label>
-	           <input type="password" name="password" class="size password" id="password" required="required">
-	          </label>
+	          <label class="pwShHi">
+		          <input type="password" name="password" class="size password" id="password" required="required">
+		          <i class="fa fa-eye fa-lg"></i>
+			      </label>
 	        </div>
 	        <div class="line1px pur"></div>
 	        <div class="line3px pur"></div>        
@@ -95,10 +89,23 @@
 	const login = document.querySelector('#kakaoLogin');
 	login.addEventListener('click', kakaoLogin);
 </script> <!------------카카오 로그인 END ----------->
-	<!-- **---container End---** -->
-	<script src="../resources/js/jquery-3.7.0.js"></script>
-	<script>
+<!-- **---container End---** -->
+<script src="../resources/js/jquery-3.7.0.js"></script>
+<script>
 $(document).ready(function() {
+	
+	// 비밀번호 표시/숨기기 버튼
+	$('.pwShHi i').on('mousedown', function(){
+	    let input = $(this).prev('input');
+	    input.removeClass('active');
+	    input.attr('type', 'text');
+	    $(this).attr('class',"fa fa-eye-slash fa-lg");
+	}).on('mouseup', function(){
+		  let input = $(this).prev('input');
+	    input.addClass('active');
+	    input.attr('type','password');
+	    $(this).attr('class',"fa fa-eye fa-lg");
+	});
 
     $("#goLogin").on("click", function(e) { // 로그인 버튼을 클릭했을 때
     	e.preventDefault();
@@ -156,5 +163,3 @@ $(document).ready(function() {
     
 });
 </script>
-</body>
-</html>

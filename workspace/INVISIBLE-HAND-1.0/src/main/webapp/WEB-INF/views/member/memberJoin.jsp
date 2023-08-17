@@ -4,8 +4,6 @@
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/login.css">
-<title>보이지 않는 손 레이아웃</title>
-<body>
   <!-- *---container Start---* -->
   <div class="drops">
       <div class="drop"></div>
