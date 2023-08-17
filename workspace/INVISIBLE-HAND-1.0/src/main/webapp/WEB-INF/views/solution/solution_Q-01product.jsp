@@ -206,6 +206,11 @@
                             
                         </div>
                     </div>
+                </div><!--que-wrap End-->
+
+                <h2>2. 생산설비, 제품재고, 종사자수 수준</h2>
+                <p>*시장수요 등을 감안하여 다음달 보유예정인 생산설비, 제품제고, 종사자수의 적정 수준을 판단하여 해당하는 번호를 선택 바랍니다.</p>
+                <div class="que-wrap">
                     <div class="que que07">
                         <h4>7. 원자재 조달사정에대한 지표를 체크해주십시오</h4>
                         <div class="cntr">
@@ -234,14 +239,8 @@
                                 <input type="radio" name="rdo7" id="opt5" class="hidden"/>
                                 <span class="label"></span>매우 원활
                             </label>
-                            
                         </div>
                     </div>
-                </div><!--que-wrap End-->
-
-                <h2>2. 생산설비, 제품재고, 종사자수 수준</h2>
-                <p>*시장수요 등을 감안하여 다음달 보유예정인 생산설비, 제품제고, 종사자수의 적정 수준을 판단하여 해당하는 번호를 선택 바랍니다.</p>
-                <div class="que-wrap">
                     <div class="que que08">
                         <h4>8. 생산 설비수준에대한 지표를 체크해주십시오</h4>
                         <div class="cntr">

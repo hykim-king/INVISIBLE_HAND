@@ -61,13 +61,13 @@
           <div class="contents content" id="contents content">
             <p><c:out value="${outVO.content}" /></p>
           <div class="writer">
-            <c:out value="${outVO.nickname}" />
+            <p class="text-r" style="font-size: 14px; color: #979797;">-<c:out value="${outVO.nickname}" />-<p>
           </div>
           </div>
         </form>
       <!-- *---댓글 Start---* -->
       <div class="comment-area">
-        <h2>3개의 댓글</h2>
+        <h3>3개의 댓글</h3>
         <div class="h30px"></div>
 
           <c:forEach var="comment" items="${list}">
@@ -80,14 +80,15 @@
 			            <p><c:out value="${comment.content}"/></p>
 			         </div>
 			         
-		            <div class="comment-icon">
-		                <i class='fas fa-bars fa-sm' style='color:#979797'></i>
+		           <div class="comment-icon">
+		           
+		                <i class='fas fa-ellipsis-v fa-sm text-r' style='color:#979797; cursor: pointer;'></i>
 		                <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i>
 			            <div class="btn-right">
 			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
                     data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}">
 			            </div>
-		            </div>
+		           </div>
 		            
 		            
 	           
@@ -123,7 +124,7 @@
         <div class="add-comment">
           <label>댓글 작성자 </label>${sessionNickname}
           <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
-          <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" required="required"></textarea></p>
+          <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" required="required" placeholder="댓글을 작성해 주세요."></textarea></p>
           <!-- 버튼------------------> 
           <div class="btn-right">
             <input type="button" class="button btn btn-p" value="등록" name="addComment" id="addComment" >
