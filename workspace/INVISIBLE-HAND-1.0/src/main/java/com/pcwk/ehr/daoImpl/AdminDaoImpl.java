@@ -1,5 +1,6 @@
 package com.pcwk.ehr.daoImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,5 +33,22 @@ public class AdminDaoImpl implements AdminDao {
 
 		return memberlist;
 	}
+
+	@Override
+	public int forceWithdraw(MemberVO member) throws SQLException {
+	    String statement = NAMESPACEMEMBER + DOT + "updateIsVerified"; // XMLで定義されたupdate文のidを指定
+
+	    member.setIsverified("N"); // 会員を無効化するためにisverifiedフィールドを"N"に設定
+
+	    log.debug("1. statement: " + statement);
+	    log.debug("2. param: " + member);
+
+	    int result = sqlSessionTemplate.update(statement, member); // 強制退会処理を実行
+	    log.debug("3. result: " + result);
+
+	    return result; // 更新されたレコード数を返す
+	}
+	
+	
 
 }

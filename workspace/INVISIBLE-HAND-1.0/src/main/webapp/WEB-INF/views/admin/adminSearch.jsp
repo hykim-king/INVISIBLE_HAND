@@ -65,6 +65,14 @@
 	transform: rotate(45deg);
 }
 
+.cate ul {
+	display: none;
+}
+
+.cate.active ul {
+	display: block;
+}
+
 .cate ul li {
 	padding: 5px 10px;
 }
@@ -84,17 +92,6 @@
 
 .admin-con {
 	display: flex;
-}
-
-/* 新しいスタイル */
-.search-form {
-	background-color: inherit;
-	padding: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	height: 80px; /* メニュー項目と同じ高さに設定 */
 }
 
 .search-form>div {
@@ -145,24 +142,17 @@
 					class="subopen"></a>
 				</span>
 				<ul>
-					<li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
-				</ul>
-			</div>
-			<div class="cate">
-				<span class="menu"> <a href="${CP}/admin/admin.do"
-					class="menulink">서비스 관리</a> <a href="javascript:void(0);"
-					class="subopen"></a>
-				</span>
-				<ul>
-					<li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금
-							변경</a></li>
+					<li><a href="${CP}/post/postList.do?categoryNumber=10">자유게시판</a></li>
+					<li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
+					<li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
 				</ul>
 			</div>
 		</div>
+	</div>
 
 	</div>
 	<!-- accordion 메뉴 end -->
-
+	<div class="h60px"></div>
 	<div class="container">
 		<h1>회원관리</h1>
 
@@ -261,22 +251,37 @@
 		<!--// paging --------------------------------------------------------------->
 		<!-- button -->
 		<div class="button-area ">
-			<input type="button" class="btn" value="조회" id="search" onclick="#">
-			<input type="button" class="btn" value="수정" id="update"> <input
-				type="button" class="btn" value="삭제" id="deleteOne"> <input
-				type="button" class="btn" value="탈퇴" id="Unsubscribe">
+			<input type="button" class="btn" value="초기화" id="reset"> 
+			<input type="button" class="btn" value="수정" id="update"> 
+			<input type="button" class="btn" value="탈퇴" id="forceWithdraw"> <!-- "${CP}/admin/forceWithdraw.do?memberId=${vo.memberId}" -->
 
 		</div>
 		<!-- button ----------------------------------------------------------------->
 		<!-- 관리 폼 -->
-		<div class="container">
+		<div>
 			<form action="#" name="reg_frm">
+				<div class="form-group">
+					<label for="memberId">회원ID</label> <input type="text"
+						name="memberId" id="memberId" placeholder="회원ID를 입력 하세요."
+						maxlength="320">
+				</div>
+				<div class="form-group">
+					<label for="nickName">닉네임</label> <input type="text"
+						name="nickName" id="nickName" placeholder="닉네임을 입력 하세요."
+						maxlength="20">
+				</div>
+				<div class="form-group">
+					<label for="memberName">회원이름</label> <input type="text"
+						name="memberName" id="memberName" placeholder="회원이름을 입력 하세요."
+						maxlength="320">
+				</div>
 				<div class="form-group">
 					<label for="intLevel">등급</label> <select name="intLevel"
 						id="intLevel">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
+						<option value="4">4</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -287,6 +292,8 @@
 					<label for="reg_dt">등록일</label> <input type="text" name="reg_dt"
 						id="reg_dt" placeholder="등록일을 입력 하세요." maxlength="20">
 				</div>
+
+
 			</form>
 		</div>
 
@@ -304,39 +311,39 @@
 	<script src="${CP}/resources/js/util.js"></script>
 	<script>
     (function($) {
-      // クリックされたメニューを開く関数
-      function openMenu($menu) {
-        $menu.addClass('active');
-        $menu.find('ul').slideDown('slow');
-      }
-
-      // クリックされたメニューを閉じる関数
-      function closeMenu($menu) {
-        $menu.removeClass('active');
-        $menu.find('ul').slideUp('slow');
-      }
-
-      $('.cate ul').hide();
-
-      // すべてのメニューを開く
-      $('.accordion .cate').each(function() {
-        openMenu($(this));
-      });
-
-      $('.cate .menu .subopen').click(function(event) {
-        event.stopPropagation(); // イベントが親要素に伝播しないようにする
-
-        var $parent = $(this).parent().parent();
-        var isActive = $parent.hasClass('active');
-
-        // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
-        if (isActive) {
-          closeMenu($parent);
-        } else {
-          openMenu($parent);
+        // クリックされたメニューを開く関数
+        function openMenu($menu) {
+          $menu.addClass('active');
+          $menu.find('ul').slideDown('slow');
         }
-      });
-    })(jQuery);
+
+        // クリックされたメニューを閉じる関数
+        function closeMenu($menu) {
+          $menu.removeClass('active');
+          $menu.find('ul').slideUp('slow');
+        }
+
+        $('.cate ul').hide();
+
+        // すべてのメニューを開く
+        $('.accordion .cate').each(function() {
+          openMenu($(this));
+        });
+
+        $('.cate .menu .subopen').click(function(event) {
+          event.stopPropagation(); // イベントが親要素に伝播しないようにする
+
+          var $parent = $(this).parent().parent();
+          var isActive = $parent.hasClass('active');
+
+          // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
+          if (isActive) {
+            closeMenu($parent);
+          } else {
+            openMenu($parent);
+          }
+        });
+      })(jQuery); 
   </script>
 </body>
 </html>

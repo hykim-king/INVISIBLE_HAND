@@ -178,6 +178,22 @@ public class MemberDaoImpl implements MemberDao {
 		return 0;
 	}
 
+	@Override
+	public int forceWithdraw(MemberVO member) throws SQLException {
+	    int result = 0;
+	    
+	    String statement = NAMESPACE + DOT + "forceWithdraw";
+	    LOG.debug("----------------------------------------");
+	    LOG.debug("1. statement = " + statement);
+	    LOG.debug("----------------------------------------");
+	    LOG.debug("2. member = " + member);
+	    
+	    result = sqlSessionTemplate.delete(statement, member);
+	    LOG.debug("3. result = " + result);
+	    
+	    return result;
+	}
+
 
 
 

@@ -52,6 +52,8 @@ public interface MemberDao {
 	// 회원가입
 	int add(MemberVO member) throws ClassNotFoundException, SQLException;
 
+	// 회원강제탈퇴
+    int forceWithdraw(MemberVO member) throws SQLException;
 
 
 

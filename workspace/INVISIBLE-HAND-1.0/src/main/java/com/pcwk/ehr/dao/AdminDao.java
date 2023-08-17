@@ -10,5 +10,9 @@ public interface AdminDao {
 	// 회원정보 조회
 	List<MemberVO> getAllMemberDao();
 	
+	// 회원강제탈퇴
+	int forceWithdraw(MemberVO member) throws SQLException;
+
+	
 
 }

@@ -6,4 +6,7 @@ import com.pcwk.ehr.VO.MemberVO;
 
 public interface AdminService {
 	List<MemberVO> getAllMemberService();
+
+	boolean forceWithdraw(MemberVO member);
+
 }
