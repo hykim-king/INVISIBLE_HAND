@@ -28,17 +28,17 @@
       </div>
       <nav class="gnb_wrap">
         <ul class="global_nav_bar">
+          <li><a href="${CP}/chart/chart.do">차트</a></li>
           <li>
-<%--           <c:choose>
-            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-              <a href="#" onclick="paymentCheckIf()">차트</a>
-            </c:when>
-            <c:otherwise> --%>
-              <a href="${CP}/chart/chart.do">차트</a>
-<%--             </c:otherwise>
-          </c:choose> --%>
+	          <c:choose>
+	            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+	              <a href="#" onclick="paymentCheckIf()">솔루션</a>
+	            </c:when>
+	            <c:otherwise>
+	              <a href="#" id="loginBtn" onclick="doLogin()">솔루션</a>
+	            </c:otherwise>
+	          </c:choose>
           </li>
-          <li><a href="${CP}/solution/solution_Q.do">솔루션</a></li>
           <li><a href="${freePostURL}">커뮤니티</a></li>
 
         </ul>
@@ -128,25 +128,25 @@ function doLogin() {
   location.href = "../member/memberLogin.do";
 }
 
-/* function paymentCheckIf() {
-	let email = '${sessionScope.member.email}';
-	
+function paymentCheckIf() {
+  let email = '${sessionScope.member.email}';
+  
   $.ajax({
       url: "/ehr/payment/payment_check.do",
       type: "GET",
       dataType: "html",
       data: {
-    	  email : email
+        email : email
       }, success: function(data) {
-    	  if (data == 1) {
- 	        location.href = "../chart/chart.do";
-    	  } else {
-    		  alert("유료 결제 페이지입니다. 구독 후 이용해주세요.");
-    		  location.href = "../payment/payment_view.do";
-    	  }
-    	}, error: function(data) {
-    	  alert("구독 여부 확인에 실패하였습니다. 관리자에게 문의해주세요" + data);
+        if (data == 1) {
+          location.href = "../solution/solution_Q.do";
+        } else {
+          alert("유료 결제 페이지입니다. 구독 후 이용해주세요.");
+          location.href = "../payment/payment_view.do";
+        }
+      }, error: function(data) {
+        alert("구독 여부 확인에 실패하였습니다. 관리자에게 문의해주세요" + data);
       }
   });
-} */
+}
 </script>
