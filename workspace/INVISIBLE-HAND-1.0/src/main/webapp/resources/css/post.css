@@ -5,6 +5,12 @@ h1{
   color: #fff;
 }
 
+h2{
+	width: 60%;
+  margin: 0 auto;
+}
+
+/* ----상세보기 내용+댓글----- */
 /* 내용 */
 .contents-wrap{
   width: 100%;
@@ -17,6 +23,7 @@ h1{
   background-color: #222;
   border: 1px solid #FFA000;
   border-radius:30px;
+  box-sizing:border-box;
 
   overflow: hidden;
 }
@@ -107,7 +114,30 @@ h1{
   color: #fff;
 }
 
+#sessionNickname{
+  background-color: #222;
+  color: #c0c0c0;
+  font-weight:600;
+  border:1px solid #222;
+  margin-bottom:20px;
+}
+.add-comment #cmtContent{
+  width:90%;
+  background-color: #121212;
+  color: #fff;
+  border:1px solid #121212;
+  border-radius:10px;
+  padding: 15px;
+}
 
+.add-comment label{
+   color: #979797;
+   font-size: 12px;
+  
+}
+
+
+/* ----상세보기 내용+댓글 끝----- */
 
 #slide2{
   height: 300px;
@@ -141,7 +171,7 @@ textarea.form-contents {
 }
 
 
-/*---검색,글쓰기 Start---*/
+/*---리스트-검색,글쓰기버튼부분 Start---*/
 
 .post-nav{
   display: flex;
@@ -203,7 +233,7 @@ td > a:hover{
 tbody>tr:last-child{
   border-bottom: 2px solid #000
 }
-
+/* ----리스트-내용+댓글 끝----- */
 
 /* -------버튼--------- */
 .btn-area{
@@ -279,26 +309,126 @@ tbody>tr:last-child{
 }
 
 
+/* ----글쓰기---- */
 
-/* 글상세보기/ 댓글 */
-#sessionNickname{
-	background-color: #222;
-	color: #c0c0c0;
-	font-weight:600;
-  border:1px solid #222;
-  margin-bottom:20px;
-}
-.add-comment #cmtContent{
-	width:90%;
-	background-color: #121212;
-	color: #fff;
-	border:1px solid #121212;
-	border-radius:10px;
-	padding: 15px;
+.write-box{
+	width: 100%;
+	border-bottom: 1px solid #979797;
+	padding: 0 5%;
 }
 
-.add-comment label{
-	 color: #979797;
-	 font-size: 12px;
+.write-box.content{
+	border-bottom: 1px solid #FFA000;
+}
+
+.write-form #title,
+.write-form #nickname,
+.write-form #content{
+	background: #222;
+	width: 90%;
+	color: #fff
 	
+}
+
+
+.write-form #title{
+	line-height: 40px;
+	font-size: 20px;
+	margin: 2px 0;
+	
+}
+
+.nick label{
+	display: inline-block;
+}
+.write-form #nickname{
+	 line-height: 30px;
+	 text-align: right;
+	 margin: 2px 0;
+	 color: #979797;
+}
+
+
+.write-form #content{
+	border: 1px solid #222;
+	height: 500px;
+	line-height: 20px;
+	margin: 15px 0;
+}
+
+.write-form #content:focus {outline:none;}
+
+
+/* -------버튼--------- */
+.btn-area{
+  margin: 0 auto;
+  display: flex;
+  justify-content: end;
+  width: 70%;
+}
+
+.btn-right{
+  display: block;
+  width: 100%;
+  height: 30px;
+  position: relative;
+}
+.add-comment .btn{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.button{
+  width:80px;
+  padding: 5px 0;
+  border-radius: 20px;
+  margin: 0 5px;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight:bold;
+  cursor: pointer;
+}
+
+.btn-w{
+  border:2px solid #FFA000;    
+  background-Color:#121212;    
+  color:#FFA000;   
+  padding: 5px 10px;
+  
+}
+
+.btn-b{
+  border:2px solid #8673FF;    
+  background-Color:#8673FF;  
+  color:#121212;  
+  padding: 5px 10px;
+
+}
+
+
+.btn-p{
+  border:2px solid #FF007A;    
+  background-Color:#FF007A;  
+  color:#fff;  
+  border-radius: 5px
+   
+
+}
+.list-btn a{
+  width:75px;
+  
+}
+.btn-delet{
+  border:2px solid #222;    
+  background-Color:#222;  
+  color:#979797;  
+  font-weight: 600;
+  margin-top:10px;
+  
+}
+.btn-delet:hover{
+  color:#FF007A;  
+  cursor: pointer;
+  font-weight: 600;
 }
