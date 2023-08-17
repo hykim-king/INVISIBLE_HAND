@@ -24,17 +24,17 @@
         </div>
         <div class="categorybox" data-tab="tab2" id="chart02">
           <div class="chart02">
-            <p>chart02</p>
+            <p>기업경영분석지표</p>
           </div>
         </div>
         <div class="categorybox" data-tab="tab3" id="chart03">
           <div class="chart03">
-            <p>chart03</p>
+            <p>성장성</p>
           </div>
         </div>
         <div class="categorybox" data-tab="tab4" id="chart04">
           <div class="chart04">
-            <p>chart04</p>
+            <p>수익성</p>
           </div>
         </div>
       </div>

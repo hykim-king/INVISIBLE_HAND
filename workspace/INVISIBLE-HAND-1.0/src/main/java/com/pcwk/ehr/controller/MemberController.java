@@ -24,8 +24,8 @@ import com.pcwk.ehr.VO.MessageVO;
 import com.pcwk.ehr.service.MailSendService;
 import com.pcwk.ehr.service.MemberService;
 
-@Controller("membercontroller")
-@RequestMapping(value = "member")	//WEB_INF아래 폴더이름을 적는곳.
+//@Controller()
+//@RequestMapping(value = "member")	//WEB_INF아래 폴더이름을 적는곳.
 public class MemberController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
