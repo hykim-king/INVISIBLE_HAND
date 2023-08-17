@@ -39,9 +39,18 @@
 					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
-	       <div>
-	         <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-	       </div>
+				<c:choose>
+	        <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+						<div class="chart-wrapper">
+						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+						</div>
+	        </c:when>
+	        <c:otherwise>
+						<div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);">
+	            <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+						</div>
+	        </c:otherwise>
+	      </c:choose>
 	
       </section>
       
