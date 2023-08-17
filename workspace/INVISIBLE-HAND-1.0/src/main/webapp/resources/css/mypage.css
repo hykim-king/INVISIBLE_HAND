@@ -1,17 +1,14 @@
 body{
-	background-color: #F3F3F3;
+  background-color: #121212;
 }
 
 .mypage-wrap{
     margin: 100px auto;
-
-	width: 1200px;
-	height: 500px;
-    background-color: #fff;
-    border: 1px solid #979797;
-	border-radius:30px;
-    padding:50px;
-
+    width: 1200px;
+    height: 500px;
+    background-color: #222;
+    border: 1px solid #6B53FF;
+    border-radius:30px;
     position: relative;
 }
 
@@ -26,6 +23,9 @@ body{
 }
 .mybox{
     width: 30%;
+    border-radius: 0px;
+    overflow: hidden;
+    transition:0.5s;
 }
 .mybox02{
     margin: 0 5%;
@@ -36,6 +36,8 @@ body{
     line-height: 90px;
     font-size: 20px;
     font-weight: bolder;
+    color:#979797;
+    margin-left: 10px;
 }
 .my-info{
     height: 130px;
@@ -49,7 +51,11 @@ body{
 }
 
 .my-info-list span a{
-    color: #6c6c6c;
+    color: #fff;
+    transition:0.5s
+}
+.my-info-list span a:hover{
+    color: #6B53FF;
 }
 
 input:-internal-autofill-selected {

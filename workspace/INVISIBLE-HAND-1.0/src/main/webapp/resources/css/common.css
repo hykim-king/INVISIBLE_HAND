@@ -26,7 +26,7 @@ a {
 
 
 tr{
-	color:#fff;
+  color:#fff;
 }
 
 ol,
@@ -43,28 +43,30 @@ input{
 .text-r{text-align: right;}
 
 
-.line1px{
+.line1px,
+.line3px{
   width:100%; 
   height:1px;
   background-color: #D9D9D9;
   margin: 5px auto;
+  transition:0.5s;
+}
+
+.line1px{
+  height:1px;
 }
 .line3px{
-  width:100%;
   height:3px;
-  background-color: #D9D9D9;
-  margin: 5px auto;
 }
 
-.line1px.pur{
-
-  background-color: #6B53FF;
-
-}
+.line1px.pur,
 .line3px.pur{
-
   background-color: #6B53FF;
+}
 
+.line1px.black,
+.line3px.black{
+    background-color: #000;
 }
 
 .container-1400{
@@ -194,7 +196,7 @@ header{
 
 }
 .sub-menu li a{
-	
+  
     color: #979797;
     transition:0.5s;
 }
@@ -208,49 +210,49 @@ header{
 }
 
 .login a span{
-	line-height:60px;
-	margin-right: 10px
+  line-height:60px;
+  margin-right: 10px
 }
 
 .login-menu{
-	width: 120px;
-	display:flex;
-	align-items: center;
-	
+  width: 120px;
+  display:flex;
+  align-items: center;
+  
 }
 
 .menu-btn-wrap{
-	width:60px;
-	height: 60px;
+  width:60px;
+  height: 60px;
 }
 .menu-btn{
-	width: 30px;
+  width: 30px;
   height: 24px;
-	position: relative;
-	top:30%;
-	left:50%;
+  position: relative;
+  top:30%;
+  left:50%;
   transform: translateX(-50%);
   cursor: pointer;
-	}
+  }
 
 .menu-btn span{
   position: absolute;
-	display: block;
-	width:100%;
-	height:5px;
-	border-radius:5px;
-	background-color: #fff;	
-	transition:1s;
+  display: block;
+  width:100%;
+  height:5px;
+  border-radius:5px;
+  background-color: #fff; 
+  transition:1s;
 }
 .menu-btn span:nth-child(1){
-	top:0;	
+  top:0;  
 }
 .menu-btn span:nth-child(2){
-	top:50%;
+  top:50%;
   transform: translateY(-50%);
 }
 .menu-btn span:nth-child(3){
-	bottom:0;
+  bottom:0;
 }
 
 .menu-btn span:nth-child(1).act{
@@ -271,15 +273,15 @@ header{
  * --------------------------------------- */
 
 .mypage-box{
-	width: 200px;
-	height: 150px;
+  width: 200px;
+  height: 150px;
   position: relative;
   left:73%;
   text-align: right;
 }
 
 .mypage-box p{
-	display: block;
+  display: block;
 }
 
 .mypage_pop p{
@@ -372,12 +374,12 @@ header{
 
 /* wrap------------------- */
 .main-wrap{
-	padding: 50px 30px;
-	background-color: #000;
-	border-radius: 40px;
-	margin-top: 60px;
-	border:1px solid #222;
-	margin-bottom:100px;
+  padding: 50px 30px;
+  background-color: #000;
+  border-radius: 40px;
+  margin-top: 60px;
+  border:1px solid #222;
+  margin-bottom:100px;
 }
 
 
@@ -399,8 +401,8 @@ section{
   border-radius: 20px;
 }
 .con-main h4{
-	margin-top:50px;
-	padding-left:50px;
+  margin-top:50px;
+  padding-left:50px;
 }
 
 /* sec-news------------------- */
@@ -426,20 +428,20 @@ section{
 }
 
 .rolling li a{
-	font-size: 28px;
-	font-weight: 600px;
+  font-size: 28px;
+  font-weight: 600px;
 }
 
 /* sec-chart------------------- */
 
 .sec-chart{
-	padding:50px 0px;
+  padding:50px 0px;
   position: relative;
   overflow: hidden;
 }
 .sec-chart text{
-	cursor: pointer;
-	
+  cursor: pointer;
+  
 }
 
  
@@ -449,7 +451,7 @@ section{
 }
 
 .main-post-table{
-	width:100%;
+  width:100%;
 }
 
 .main-post-tbody tr td:nth-child(1){text-align: center;}
@@ -468,14 +470,14 @@ section{
 }
 
 .main-rank-table{
-	width: 100%;
-	font-size:12px;
-	border-collapse: collapse;
+  width: 100%;
+  font-size:12px;
+  border-collapse: collapse;
   border: none;
 }
 
 .main-rank-table tr{
-	width: 100%;
+  width: 100%;
   background-color:#222;
   border:3px solid #000;
   margin:5px 0;
@@ -522,7 +524,7 @@ footer{
   
 /* 너비설정클래스------------------- */
 .min-100vh{
-  min-height:100vh;
+  min-height:80vh;
   
 }
 

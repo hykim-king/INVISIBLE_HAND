@@ -1,124 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
-  <link rel="stylesheet" href="../resources/css/common.css">
-  <link rel="stylesheet" href="../resources/css/chart.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-  <title>보이지 않는 손 레이아웃</title>
-</head>
-<body>
+<meta charset="UTF-8">
+<link rel="icon" href="image/favicon-32x32.png">
+<link rel="stylesheet" href="../resources/css/common.css">
+<link rel="stylesheet" href="../resources/css/mypage.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<!-- *---container Start---* -->
 
-  <!-- *---container Start---* -->
-  <div class="h60px"></div>
-  <div class="container-1400 con-main">
-    <div class="wrap-1000 main-wrap">
-    
-      <h4>주요 뉴스 헤드라인</h4>  
-      <section class="sec01 sec-news">
-        <div class="news-slide">
-          <div class="news">
-            <ul class="rolling" id="newsHeadlines">
-              <!-- 여기에 동적으로 헤드라인이 추가됩니다. -->
-            </ul>
+<div class="h60px"></div>
+<div class="container-1400 min-100vh con-login">
+  <div class="mypage-wrap">
+    <div class="box-area">
+
+      <div class="mybox mybox01">
+        <div class="line3px black"></div>
+        <div class="line1px black"></div>
+        <h2>회원정보</h2>
+        <div class="my-info">
+          <div class="my-grade">
+            <div class="myid"></div>
+            <div class="bedge"></div>
+          </div>
+          <div class="my-info-list">
+            <span><a href="../member/memberPWChange.do">회원정보 수정</a></span>
+            <span><a href="../member/memberDelete.do">회원 탈퇴</a></span>
+            <span><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></span>
           </div>
         </div>
-      </section>
+        <div class="line1px black"></div>
+        <div class="line3px black"></div>
+      </div>
       
-      <h4>중소기업 경기전망조사(SBHI)</h4>
-      <section class="sec02 sec-chart">
-        <div class="chart-nav">
-				  <select id="mainCategorySelect" name="mainCategory">
-						    <option value="비제조업" selected="selected">비제조업</option>
-						    <option value="제조업">제조업</option>
-					</select>
-					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
-				</div>
-				
-				<c:choose>
-	        <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-						<div class="chart-wrapper">
-						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-						</div>
-	        </c:when>
-	        <c:otherwise>
-						<div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
-						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-						</div>
-	        </c:otherwise>
-	      </c:choose>
-	
-      </section>
+      <div class="mybox mybox02">
+        <div class="line3px black"></div>
+        <div class="line1px black"></div>
+        <h2>나의활동</h2>
+        <div class="my-info">
+          <div class="my-info-list">
+            <span><a href="login">작성한 게시글 보기</a></span>
+            <span><a href="login">작성한 댓글 보기</a></span>
+            <span><a href="login">문의글 보기</a></span>
+          </div>
+        </div>
+        <div class="line1px black"></div>
+        <div class="line3px black"></div>
+      </div>
       
-      <h4>추천 게시글</h4>
-      <section class="sec03 sec-board">
-       
-	      <div>
-	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
-	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
-	      </div>
-	      
-	      <div>
-		       <table class="main-post-table">
-		          <thead class="main-post-thead">
-		            <tr>
-		            <th>No.</th>
-		            <th>제목</th>
-		            <th>글쓴이</th>
-		            <th>작성일</th>
-		            <th>조회수</th>
-		            <th>추천수</th>
-		            </tr>
-		          </thead>
-		          <tbody id="tableBody" class="main-post-tbody">
-							<!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-							</tbody>							
-						</table>	
-	      </div>
-      </section>
-    </div>
-    <!-- **---wrap End---** -->
-    <div class="rank-area">
-    <h3>업종별 변동 현황</h3>
-        <table class="main-rank-table">
-            <thead>
-                <tr>
-                <th>등수</th>
-                <th>업종명</th>                
-                <th>등수변동</th>
-                <th>화살표</th>
-                </tr>
-           </thead>
-           <tbody id="rankBody">
-            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-           </tbody>
-        </table>   
+      <div class="mybox mybox03">
+        <div class="line3px black"></div>
+        <div class="line1px black"></div>
+        <h2>구독관리</h2>
+        <div class="my-info">
+          <div class="my-info-list">
+            <span><a href="../payment/payment_view.do">결제정보 수정</a></span> <span><a
+              href="../payment/payment_detail.do">구독현황</a></span>
+          </div>
+        </div>
+        <div class="line1px black"></div>
+        <div class="line3px black"></div>
+      </div>
+
     </div>
   </div>
-  <!-- **---container End---** -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="../resources/js/jquery-3.7.0.js"></script>
-  <!-- main페이지 기능 관련 js -->
-  <script src="../resources/js/mainBoard.js"></script> <!-- 게시판 -->
-  <script src="../resources/js/mainNews.js"></script>  <!-- 뉴스 -->
-  <script src="../resources/js/mainRank.js"></script>  <!-- 랭킹 -->
-  <!-- main페이지 기능 관련 js end -->
-  
-<script>
-const mainCategorySelect = document.getElementById("mainCategorySelect");
-mainCategorySelect.addEventListener("change", function() {
-    submitButton.click();
-});
+  <!-- **---wrap End---** -->
+</div>
 
-function doLogin() {
- alert("로그인 후 이용해주세요");
- location.href = "../member/memberLogin.do";
-}
+<!-- **---container End---** -->
+
+<script>
+  function doLogout(name) {
+    if (confirm(name + '님 로그아웃하시겠습니까?') == false)
+      return;
+    console.log("doLogout");
+
+    window.location.href = "${CP}/member/logout.do";
+  }
+  
+  $('.mybox').hover(
+        function() {
+            $(this).css('border-radius', '20px');
+            $(this).find('.line1px').css('background-color', '#6B53FF');
+            $(this).find('.line3px').css('background-color', '#6B53FF');
+        },
+        function() {
+            $(this).css('border-radius', '');
+            $(this).find('.line1px').css('background-color', ''); // Reset to initial color
+            $(this).find('.line3px').css('background-color', ''); // Reset to initial color
+        }
+    );
 </script>
-</body>
-</html>
