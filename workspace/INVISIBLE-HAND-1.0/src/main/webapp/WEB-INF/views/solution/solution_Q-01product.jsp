@@ -433,16 +433,16 @@ $(document).ready(function() {
 	  $(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
 	
-	let radioArr = []; // 라디오 값을 저장할 배열
-	let textArr = []; // 텍스트 값을 저장할 배열
-	let checkArr = []; // 체크박스 값을 저장할 배열
+	var radioArr = []; // 라디오 값을 저장할 배열
+	var textArr = []; // 텍스트 값을 저장할 배열
+	var checkArr = []; // 체크박스 값을 저장할 배열
 
 	// 제출 버튼 클릭 시 실행되는 함수
 	//$(".go-result").on("submit", function() {
 	$(".go-result").on("click", function() {
 	  $("input[type='radio']:checked").each(function(index) {
 		  if (index !== $("input[type='radio']:checked").length - 1) {
-		    radioArr.push($(this).next().text());
+			radioArr.push($(this).next().text());
 		  }
 		});
 	  
@@ -454,6 +454,7 @@ $(document).ready(function() {
 		  textArr.push($(this).val());
 		});
 
+      console.log(totalScore);
 	  console.log(radioArr);
 	  console.log(textArr);
 	  console.log(checkArr);
