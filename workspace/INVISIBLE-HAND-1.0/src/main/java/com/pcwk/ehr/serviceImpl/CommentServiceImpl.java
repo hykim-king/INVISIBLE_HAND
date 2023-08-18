@@ -19,7 +19,6 @@ public class CommentServiceImpl implements CommentService{
 	CommentDAO dao;
 	@Override
 	public List<CommentVO> doRetrieve(CommentVO commentVO) throws SQLException {
-
 		return dao.doRetrieve(commentVO);
 	}
 
@@ -39,8 +38,13 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int doUpdateLikes(CommentVO commentVO) throws SQLException {
-		return dao.doUpdateLikes(commentVO);
+	public int doUpdateLikes(int commentNumber, String likes) throws SQLException {
+		return dao.doUpdateLikes(commentNumber, likes);
+	}
+
+	@Override
+	public int doCommentCnt(int postNumber) throws SQLException {
+		return dao.doCommentCnt(postNumber);
 	}
 	
 

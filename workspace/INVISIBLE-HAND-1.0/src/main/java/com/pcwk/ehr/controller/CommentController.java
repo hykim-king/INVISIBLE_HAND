@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.CommentVO;
+import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.PcwkLoger;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CommentService;
@@ -132,5 +134,47 @@ public class CommentController implements PcwkLoger{
 		return jsonString;
 	}
 	
+	@RequestMapping(value = "/doUpdateLikes.do", method=RequestMethod.POST
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdateLikes(@RequestParam int commentNumber, HttpServletRequest request) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("┌────────────────────────────────┐");
+		LOG.debug("│commentNumber : " + commentNumber);
+		
+		String likes = request.getParameter("likes");
+		int flag = this.commentService.doUpdateLikes(commentNumber, likes);
+		/*
+		 * List<CommentVO> list = commentService.doRetrieve(commentVO);
+		 * LOG.debug("│inVO : " + commentVO);
+		 */
+		String message = "";
+	
+		if (1 == flag) {
+			message = "댓글을 추천하셨습니다.";
+			
+		} else {
+			message = "댓글 추천을 실패했습니다.";
+		}
+		
+		jsonString = StringUtil.validMessageToJson(flag+"", message);
+		LOG.debug("│jsonString                          │" + jsonString);	
+		
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/doCommentCnt.do")
+	public String doCommentCnt(int postNumber, Model model) throws SQLException {
+	    LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   doCommentCnt()      │");
+
+	    int commentCnt = this.commentService.doCommentCnt(postNumber);
+	    model.addAttribute("commentCnt", commentCnt);
+	    
+	    LOG.debug("│   commentCnt          │" + commentCnt);
+	    LOG.debug("└───────────────────────┘");
+	    return "post/postContents";
+	}
 
 }

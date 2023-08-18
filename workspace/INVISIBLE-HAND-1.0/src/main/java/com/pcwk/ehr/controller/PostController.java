@@ -22,6 +22,7 @@ import com.pcwk.ehr.VO.CmnCodeVO;
 import com.pcwk.ehr.VO.CommentVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PostVO;
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.CommentService;
@@ -110,7 +111,7 @@ public class PostController {
 		String message = "";
 
 		if (1 == flag) {
-			message = "<"+inVO.getTitle()+"> 수정 되었습니다.";
+			message = "'"+inVO.getTitle()+"' 수정 되었습니다.";
 			
 			
 		} else {
@@ -148,8 +149,6 @@ public class PostController {
 			commentVO.setPageSize(10);
 		}
 		
-		
-		
 		List<CommentVO> list = this.commentService.doRetrieve(commentVO);
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   list()     		   │"+list);
@@ -158,6 +157,9 @@ public class PostController {
 		model.addAttribute("list", list);
 		model.addAttribute("commentVO", commentVO);
 		
+		
+		int commentCnt = this.commentService.doCommentCnt(commentVO.getPostNumber());
+	    model.addAttribute("commentCnt", commentCnt);
 		
 		
 		return "post/postContents";
@@ -214,24 +216,23 @@ public class PostController {
 			inVO.setSearchDiv("");
 		}
 		
-		LOG.debug("inVO:" + inVO);
-		
 		// 코드조회: 검색코드
 		CmnCodeVO cmnCodeVO = new CmnCodeVO();
-		cmnCodeVO.setMasterCode("POST_SEARCH");
+		cmnCodeVO.setMasterCode("POSTSEARCH");
 		List<CmnCodeVO> searchList = cmnCodeService.doSearch(cmnCodeVO);
 		model.addAttribute("searchList", searchList);
-	
-		/*
-		 * // 코드조회: 페이지 사이즈 cmnCodeVO.setMasterCode("CMN_PAGE_SIZE"); List<CmnCodeVO>
-		 * pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
-		 * model.addAttribute("pageSizeList", pageSizeList);
-		 */
-	
-		List<PostVO> list = postService.doRetrieve(inVO);
-		model.addAttribute("list", list);
-		model.addAttribute("inVO", inVO);
 		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   searchList:         │"+searchList);
+	 	LOG.debug("└───────────────────────┘");
+		
+		List<PostVO> list = this.postService.doRetrieve(inVO);
+		model.addAttribute("list", list);
+		
+		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   list:               │"+list);
+	 	LOG.debug("└───────────────────────┘");
 		//총글수
 		int totalCnt = 0;
 		if(null !=list && list.size() >0 ) {
@@ -240,9 +241,16 @@ public class PostController {
 		}
 		
 		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("inVO", inVO);
+		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   inVO:               │"+inVO);
+	 	LOG.debug("└───────────────────────┘");
 		
 		return "post/postList";
 	}
+	
+	
 	
 	@RequestMapping(value="/doMoveToPostReg.do")
 	public String doMoveToPostReg(PostVO inVO, Model model) throws SQLException{
@@ -262,11 +270,9 @@ public class PostController {
 		LOG.debug("│   postContents()      │");
 		LOG.debug("└───────────────────────┘");
 		
-		
-		
-		
 		return "post/postContents";
 	}
+
 	@RequestMapping(value = "/postReg.do")
 	public String postReg() {
 		LOG.debug("┌───────────────────────┐");
@@ -275,8 +281,6 @@ public class PostController {
 		
 		return "post/postReg";
 	}
-	
-	
 	
 	
 	 @RequestMapping(value = "/postMod.do", method = RequestMethod.GET) 
@@ -291,4 +295,35 @@ public class PostController {
 	 return "post/postMod"; 
 	 }
 
+	@RequestMapping(value = "/doUpdateLikes.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdateLikes(@RequestParam int postNumber, HttpServletRequest request) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("┌────────────────────────────────┐");
+		LOG.debug("│postNumber : " + postNumber);
+	
+		String likes = request.getParameter("likes");
+		int flag = this.postService.doUpdateLikes(postNumber, likes);
+		
+		LOG.debug("│likes : " + likes);
+		/*
+		 * List<PostVO> list = postService.doRetrieve(inVO); LOG.debug("│inVO : " +
+		 * inVO);
+		 */
+		String message = "";
+	
+		if (1 == flag) {
+			message = "게시물을 추천하셨습니다.";
+			
+		} else {
+			message = "게시글 추천을 실패했습니다.";
+		}
+		
+		jsonString = StringUtil.validMessageToJson(flag+"", message);
+		LOG.debug("│jsonString                          │" + jsonString);	
+		
+		return jsonString;
+	}
+	
 }

@@ -10,6 +10,9 @@ public interface CommentService {
 	//댓글 목록 조회
 	List<CommentVO> doRetrieve(CommentVO commentVO) throws SQLException;
 	
+	//댓글수 조회
+	int doCommentCnt(int postNumber)throws SQLException;
+	
 	//댓글 등록
 	int doSave(CommentVO commentVO)throws SQLException;
 	
@@ -20,6 +23,6 @@ public interface CommentService {
 	int doDelete(int commentNumber) throws SQLException;
 	
 	//댓글 좋아요
-	int doUpdateLikes(CommentVO commentVO) throws SQLException;
+	int doUpdateLikes(int commentNumber, String likes) throws SQLException;
 
 }

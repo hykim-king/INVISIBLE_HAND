@@ -18,12 +18,6 @@
     int postNumValue  = vo.getPostNumber();
     request.setAttribute("postNumValue", postNumValue);
     
-    // 세션에서 닉네임 가져오기
-    String nickname = (String) session.getAttribute("nickname");
-    if (nickname == null || nickname.isEmpty()) {
-        nickname = "비회원";
-    }
-    request.setAttribute("nickname", nickname);
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
 <!DOCTYPE html>
@@ -61,7 +55,7 @@
 	        
 	        <div class="write-box nick">
 	          <!-- <label for="exampleFormControlInput1" class="form-label">닉네임</label> -->
-	          <input type="text" class="nick-write" id="nickname" name="nickname" value="${nickname}" readonly="readonly">
+	          <input type="text" class="nick-write" id="nickname" name="nickname" value="${sessionScope.member.nickName}" readonly="readonly">
 	        </div>
 	        
 	        <div class="write-box content">

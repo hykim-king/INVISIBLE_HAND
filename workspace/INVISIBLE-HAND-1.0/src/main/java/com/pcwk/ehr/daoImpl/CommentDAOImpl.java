@@ -74,15 +74,31 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 
 
 	@Override
-	public int doUpdateLikes(CommentVO commentVO) throws SQLException {
+	public int doUpdateLikes(int commentNumber, String likes) throws SQLException {
+		
+		CommentVO commentVO = new CommentVO();
+		commentVO.setLikes(Integer.parseInt(likes));
+		commentVO.setCommentNumber(commentNumber);
+		
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│doUpdateLikes                 │");
-		LOG.debug("│commentVO                     │"+commentVO);
+		LOG.debug("│commentVO               	  │"+commentVO);
 		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doUpdateLikes");
 		LOG.debug("└──────────────────────────────┘");	
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateLikes", commentVO);
 	
+	}
+
+
+	@Override
+	public int doCommentCnt(int postNumber) throws SQLException {
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│doCommentCnt                  │");
+		LOG.debug("│postNumber               	  │"+postNumber);
+		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doCommentCnt");
+		LOG.debug("└──────────────────────────────┘");	
+		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"doCommentCnt", postNumber);
 	}
 
 
