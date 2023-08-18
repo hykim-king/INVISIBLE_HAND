@@ -3,6 +3,7 @@
 <%@page import="com.pcwk.ehr.VO.CommentVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.pcwk.ehr.cmn.StringUtil"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
     PostVO vo = (PostVO)request.getAttribute("inVO");
@@ -18,6 +19,26 @@
     request.setAttribute("ctg", ctg);
     request.setAttribute("ctgNumValue", ctgNumValue);
     request.setAttribute("postNumValue", postNumValue);
+    
+    int bottomCount = 10;
+    int pageSize    = 10;
+    int pageNo      =  1;
+    int totalCnt    =  0;
+    String searchWord = "";
+    String searchDiv  = "";
+      
+    if(null != vo){
+         pageSize   = vo.getPageSize();
+         pageNo     = vo.getPageNo();
+         searchDiv  = vo.getSearchDiv();
+         searchWord = vo.getSearchWord();
+    }
+    
+    if(null !=  request.getAttribute("totalCnt")){
+         totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
+    }
+    
+    String cPath  = request.getContextPath();
     
 %>
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
@@ -52,12 +73,9 @@
         <form action="${CP}/post/postContents.do" method="get" name="contentsFrm">
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
-          <input type="hidden" name="likes"    id="likes" value="${outVO.getLikes()}">
-          <input type="hidden" name="postNumber"    id="postNumber" value="${outVO.getPostNumber()}">
-          <input type="hidden" name="memberId" id="memberId" value="${memberId}">
           <div id="title" class="contents-title">
             <p><c:out value="${outVO.title}" /><p>
-            <div class="writer">작성자:<c:out value="${outVO.nickname}" /></div>
+            <div class="writer">글쓴이:<c:out value="${outVO.nickname}" /></div>
           </div>
           <div class="contents content" id="contents content">
             <p><c:out value="${outVO.content}" /></p>
