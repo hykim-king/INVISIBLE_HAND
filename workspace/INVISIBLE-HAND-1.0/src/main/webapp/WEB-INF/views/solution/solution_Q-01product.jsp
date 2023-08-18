@@ -440,20 +440,55 @@ $(document).ready(function() {
 	// 제출 버튼 클릭 시 실행되는 함수
 	//$(".go-result").on("submit", function() {
 	$(".go-result").on("click", function() {
+		
+		radioArr = [];
+		textArr = [];
+		checkArr = [];
+		
+		// 배열에 입력
 	  $("input[type='radio']:checked").each(function(index) {
 		  if (index !== $("input[type='radio']:checked").length - 1) {
 		    radioArr.push($(this).next().text());
 		  }
 		});
 	  
-	  $("input[type='checkbox']:checked").each(function() {
-		  checkArr.push($(this).next().text());
-	  });
+	  let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수
 	  
-	  $("input[type='text']").each(function() {
+	  // 라디오 값 누락 시 예외처리
+    $("input[type='radio']").each(function() {
+      let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
+      let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
+      if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
+        alert("모두 입력해주세요.");
+        isRadioValid = false;
+        return false; // each 함수 탈출
+      }
+    });
+
+    if(!isRadioValid) return;
+    
+    // input에 text 값 누락시 예외처리
+    if ($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {
+		  alert("값을 입력해주세요.");
+		  return;
+		}
+    
+    // 배열에 입력
+    $("input[type='text']").each(function() {
 		  textArr.push($(this).val());
 		});
-
+	  
+    // input에 check박스 누락시 예외처리
+    if ($("input[type='checkbox']:checked").length === 0) {
+    	alert("기업경영상 애로요인을 1가지 이상 입력해주세요.");
+		  return;
+		}
+		
+    // 배열에 입력
+		$("input[type='checkbox']:checked").each(function() {
+		  checkArr.push($(this).next().text());
+		});
+	  
 	  console.log(radioArr);
 	  console.log(textArr);
 	  console.log(checkArr);
