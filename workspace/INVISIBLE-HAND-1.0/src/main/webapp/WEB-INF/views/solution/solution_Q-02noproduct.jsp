@@ -305,8 +305,10 @@ $(document).ready(function() {
 	let checkArr = []; // 체크박스 배열
 	
 	$(".go-result").on("click", function() {
-		$("input[type='radio']:checked").each(function() {
+		$("input[type='radio']:checked").each(function(index) {
+			if ($("input[type='radio']:checked").length - 1 !== index) {
 			radioArr.push($(this).next().text());
+			}
 		}) ;
 		
 		$("input[type='checkbox']:checked").each(function() {
