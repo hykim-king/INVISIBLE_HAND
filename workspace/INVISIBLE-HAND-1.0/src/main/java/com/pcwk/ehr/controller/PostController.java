@@ -110,7 +110,7 @@ public class PostController {
 		String message = "";
 
 		if (1 == flag) {
-			message = "<"+inVO.getTitle()+"> 수정 되었습니다.";
+			message = "'"+inVO.getTitle()+"' 수정 되었습니다.";
 			
 			
 		} else {
@@ -148,8 +148,6 @@ public class PostController {
 			commentVO.setPageSize(10);
 		}
 		
-		
-		
 		List<CommentVO> list = this.commentService.doRetrieve(commentVO);
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("│   list()     		   │"+list);
@@ -158,6 +156,9 @@ public class PostController {
 		model.addAttribute("list", list);
 		model.addAttribute("commentVO", commentVO);
 		
+		
+		int commentCnt = this.commentService.doCommentCnt(commentVO.getPostNumber());
+	    model.addAttribute("commentCnt", commentCnt);
 		
 		
 		return "post/postContents";
@@ -262,11 +263,9 @@ public class PostController {
 		LOG.debug("│   postContents()      │");
 		LOG.debug("└───────────────────────┘");
 		
-		
-		
-		
 		return "post/postContents";
 	}
+
 	@RequestMapping(value = "/postReg.do")
 	public String postReg() {
 		LOG.debug("┌───────────────────────┐");
@@ -275,8 +274,6 @@ public class PostController {
 		
 		return "post/postReg";
 	}
-	
-	
 	
 	
 	 @RequestMapping(value = "/postMod.do", method = RequestMethod.GET) 
@@ -291,4 +288,35 @@ public class PostController {
 	 return "post/postMod"; 
 	 }
 
+	@RequestMapping(value = "/doUpdateLikes.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdateLikes(@RequestParam int postNumber, HttpServletRequest request) throws SQLException {
+		String jsonString = "";
+		
+		LOG.debug("┌────────────────────────────────┐");
+		LOG.debug("│postNumber : " + postNumber);
+	
+		String likes = request.getParameter("likes");
+		int flag = this.postService.doUpdateLikes(postNumber, likes);
+		
+		LOG.debug("│likes : " + likes);
+		/*
+		 * List<PostVO> list = postService.doRetrieve(inVO); LOG.debug("│inVO : " +
+		 * inVO);
+		 */
+		String message = "";
+	
+		if (1 == flag) {
+			message = "게시물을 추천하셨습니다.";
+			
+		} else {
+			message = "게시글 추천을 실패했습니다.";
+		}
+		
+		jsonString = StringUtil.validMessageToJson(flag+"", message);
+		LOG.debug("│jsonString                          │" + jsonString);	
+		
+		return jsonString;
+	}
+	
 }

@@ -54,7 +54,7 @@ public interface PostDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	int doUpdateLikes(PostVO inVO) throws SQLException;
+	int doUpdateLikes(int postNumber,String likes) throws SQLException;
 	
 	/**
 	 * 조회수

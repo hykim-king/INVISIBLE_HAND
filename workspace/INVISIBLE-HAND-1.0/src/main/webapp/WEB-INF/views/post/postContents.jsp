@@ -52,46 +52,54 @@
         <form action="${CP}/post/postContents.do" method="get" name="contentsFrm">
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
+          <input type="hidden" name="likes"    id="likes" value="${outVO.getLikes()}">
           <input type="hidden" name="postNumber"    id="postNumber" value="${outVO.getPostNumber()}">
           <input type="hidden" name="memberId" id="memberId" value="${memberId}">
-          <input type="hidden" name="sessionNickname" id="sessionNickname" value="${sessionNickname}">
           <div id="title" class="contents-title">
             <p><c:out value="${outVO.title}" /><p>
+            <div class="writer">작성자:<c:out value="${outVO.nickname}" /></div>
           </div>
           <div class="contents content" id="contents content">
             <p><c:out value="${outVO.content}" /></p>
-          <div class="writer">
-            <p class="text-r" style="font-size: 14px; color: #979797;">-<c:out value="${outVO.nickname}" />-<p>
           </div>
+          <div class="btn-area">
+            <input type="button" class="button btn-w" value="추천" id=postUpdateLikes>
+            <div class="likes">
+              <c:out value="${outVO.likes}" />
+            </div>
           </div>
+          
         </form>
       <!-- *---댓글 Start---* -->
-      <div class="comment-area">
-        <h3>3개의 댓글</h3>
+      <div class="comment-area" var="comment">
+       <c:if test="${commentCnt > 0}">
+          <h2><c:out value="${commentCnt}"/>개의 댓글</h2>
+          <div class="h30px"></div>
+        </c:if>
         <div class="h30px"></div>
-
-          <c:forEach var="comment" items="${list}">
+        
+          <c:forEach var="comment" items="${list}" varStatus="status">
             <div class="comment-box">
-	            
-	            <div class="comment-desc">
-		            <input type="hidden" name="commentNumber"    id="commentNumber" value="${comment.commentNumber}">   
-			            <h4><c:out value="${comment.nickname}"/></h4>
-			            <span><c:out value="${comment.writtenDate}"/></span>
-			            <p><c:out value="${comment.content}"/></p>
-			         </div>
-			         
-		           <div class="comment-icon">
-		           
-		                <i class='fas fa-ellipsis-v fa-sm text-r' style='color:#979797; cursor: pointer;'></i>
-		                <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i>
-			            <div class="btn-right">
-			              <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
-                    data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}">
-			            </div>
-		           </div>
-		            
-		            
-	           
+              
+              <div class="comment-desc">
+                <input type="hidden" name="commentNumber"    id="commentNumber" value="${comment.commentNumber}">   
+                  <h4><c:out value="${comment.nickname}"/></h4>
+                  <span><c:out value="${comment.writtenDate}"/></span>
+                  <p><c:out value="${comment.content}"/></p>
+               </div>
+               
+                <div class="comment-icon">
+                    <i class='fas fa-bars fa-sm' style='color:#979797'></i>
+                   <%-- <i class='fas fa-thumbs-up fa-sm' style='color:#FF007A'> <c:out value="${comment.likes}"/></i> --%>
+                    <i class='fas fa-thumbs-up fa-sm cmt-like-icon' style='color:#FF007A'
+                data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}"> <c:out value="${comment.likes}"/></i>
+                  <div class="btn-right">
+                    <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
+                    data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                    <%-- <input type="button" class="btn-cmtLikes" value="추천" name="cmtUpdateLikes" id="cmtUpdateLikes${status.index}" 
+                    data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}"> --%>
+                  </div>
+                </div>
             </div> 
           </c:forEach>
           
@@ -122,9 +130,12 @@
         <input type="hidden" name="postNumber"    id="postNumber" value="${inVO.getPostNumber()}"> 
         
         <div class="add-comment">
-          <label>댓글 작성자 </label>${sessionNickname}
+          <label>댓글 작성자 </label>
           <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
-          <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" required="required" placeholder="댓글을 작성해 주세요."></textarea></p>
+          <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" 
+             required="required" 
+             ${empty sessionScope.member.nickName ? 'placeholder="비회원은 댓글을 작성할 수 없습니다."' : ''} 
+             ${empty sessionScope.member.nickName ? 'readonly' : ''}></textarea></p>
           <!-- 버튼------------------> 
           <div class="btn-right">
             <input type="button" class="button btn btn-p" value="등록" name="addComment" id="addComment" >
@@ -137,7 +148,6 @@
        <div class="yellow-box" style="margin-top: -15px; height: 15px;"></div>
       </div><!-- *---제목+내용 End---* -->
       
-      
     </div><!-- contents-wrap -->
 
   </div><!-- container-1400 -->
@@ -148,15 +158,93 @@
 <script src="${CP}/resources/js/util.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
+   
+    //cmtUpdateLikes
+    $(".cmt-like-icon").on("click", function() {
+       var likes = $(this).data("comment-likes");
+       var commentNumber = $(this).data("comment-number");
+       
+       console.log("commentNumber: " + commentNumber );
+       console.log("likes: " + likes);
+       
+       $.ajax({
+           type: "POST",
+           url: "/ehr/comment/doUpdateLikes.do",
+           async: "true",
+           dataType: "html",
+           data: {
+              likes: likes,
+              commentNumber: commentNumber
+           },
+           success: function(data) { // 통신 성공
+               console.log("success data:" + data);
+               console.log("likes: " + likes);
+               let parsedJson = JSON.parse(data);
+               
+               if ("1" == parsedJson.msgId) {
+                   alert(parsedJson.msgContents);
+                   location.reload(); // 페이지 새로고침
+    
+               } else {
+                   alert(parsedJson.msgContents);
+               }
+           },
+           error: function(data) { // 실패시 처리
+               console.log("error:" + data);
+           }
+       });
+    });//cmtUpdateLikes----------------------------------------
+   
+   
+   
+   
+    //postUpdateLikes
+    $("#postUpdateLikes").on("click", function() {
+       var likes = "${outVO.likes}"; 
+       const postNumber = "${postNumValue}"; 
+       console.log("postNumber: " + postNumber );
+       console.log("likes: " + likes);
+       
+       $.ajax({
+           type: "POST",
+           url: "/ehr/post/doUpdateLikes.do",
+           async: "true",
+           dataType: "html",
+           data: {
+              likes: likes,
+              postNumber: postNumber
+           },
+           success: function(data) { // 통신 성공
+               console.log("success data:" + data);
+               console.log("likes: " + "${outVO.likes}");
+               let parsedJson = JSON.parse(data);
+               
+               if ("1" == parsedJson.msgId) {
+                   alert(parsedJson.msgContents);
+                   // javascript
+                   location.reload(); // 페이지 새로고침
+
+               } else {
+                   alert(parsedJson.msgContents);
+               }
+           },
+           error: function(data) { // 실패시 처리
+               console.log("error:" + data);
+           }
+       });
+    });
+
+    
+
 
 //댓글 등록addComment
 $("#addComment").on("click", function() {
     var loggedInNickname = "${sessionScope.member.nickName}";
     
-    if (loggedInNickname != null) {
+    if (loggedInNickname !== null && loggedInNickname !== "") {
         var memberId = "${sessionScope.member.memberId}";
         
-        console.log("comment addComment");
+        console.log("addComment");
         console.log("postNumber: " + "${postNumValue}");
         console.log("loggedInNickname: " + loggedInNickname);
         console.log("memberId: " + memberId);

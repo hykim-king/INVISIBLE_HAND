@@ -85,7 +85,7 @@
  
             <div class="list-btn">  
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
-              <a href="#" class="btn button btn-b" style="margin-left: 30px;" onclick="doMoveToPostReg();" >글쓰기</a>  
+              <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>  
             </div>      
           </div>  
         </form>
@@ -180,7 +180,7 @@
     let postNumber = tdArray.eq(5).text();
     console.log('postNumber:'+postNumber);
     
-    if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
+    //if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
     
     //categoryNumber,postNumber
     ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393
@@ -188,18 +188,18 @@
     
   });
   
-  function doMoveToPostReg(){
-      console.log("doMoveToPostReg");
-      let frm = document.postFrm;
-      console.log("frm.categoryNumber.value:"+frm.categoryNumber.value);
-      frm.pageNo.value=1;
-      
-      /* frm.searchDiv.value = "all";   // Set searchDiv to "all"
-      frm.searchWord.value = "";     // Set searchWord to an empty string */
-      frm.action = "${CP}/post/doMoveToPostReg.do"
-      
-      frm.submit();
-    }
+	  $("#doMoveToPostReg").click(function() {
+	      console.log("doMoveToPostReg");
+	      var loggedInNickname = "${sessionScope.member.nickName}";
+	      console.log("loggedInNickname:"+loggedInNickname);
+	      if (loggedInNickname !== null && loggedInNickname !== "") {
+	    	    if( confirm("게시글을 작성하시겠습니까?") == false ) return;
+	          window.location.href = "${CP}/post/doMoveToPostReg.do?categoryNumber=" + $("#categoryNumber").val();
+	      } else {
+	          alert("로그인한 사용자만 게시글을 작성할 수 있습니다.");
+	      }
+	  });
+
     
    function doRetrieveCall(pageNo){
         let frm = document.postFrm;
