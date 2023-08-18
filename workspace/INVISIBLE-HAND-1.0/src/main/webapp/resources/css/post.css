@@ -87,6 +87,7 @@ h3{
   border-radius: 20px;
   box-sizing: border-box;
   margin-top:50px;
+  cursor: pointer;
 }
 .recommend-val{
   background-color: #121212;
