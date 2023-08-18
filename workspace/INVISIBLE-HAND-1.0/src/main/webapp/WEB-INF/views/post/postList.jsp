@@ -226,61 +226,34 @@
     /* 게시판 카테고리 선택시 노란색으로 변경 */
 
 $(document).ready(function() {
-  // 현재 URL 가져오기
   var currentURL = window.location.href;
-
-  // 만약 URL이 "AAA"를 포함하고 있다면
   if (currentURL.includes("Number=10")) {
-    // .selecter-list 요소에 "act" 클래스 추가
     $(".selecter-list10").addClass("act");
   }
-
-  // selecter-list를 클릭했을 때의 이벤트 핸들러
   $(".selecter-list10").click(function() {
-    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
     $(".selecter-list10.act").removeClass("act");
-
-    // 현재 클릭한 요소에 'act' 클래스를 추가
     $(this).addClass("act");
   });
 });
     
 $(document).ready(function() {
-	  // 현재 URL 가져오기
 	  var currentURL = window.location.href;
-
-	  // 만약 URL이 "AAA"를 포함하고 있다면
 	  if (currentURL.includes("Number=20")) {
-	    // .selecter-list 요소에 "act" 클래스 추가
 	    $(".selecter-list20").addClass("act");
 	  }
-
-	  // selecter-list를 클릭했을 때의 이벤트 핸들러
 	  $(".selecter-list20").click(function() {
-	    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
 	    $(".selecter-list20.act").removeClass("act");
-
-	    // 현재 클릭한 요소에 'act' 클래스를 추가
 	    $(this).addClass("act");
 	  });
 	});
 	
 $(document).ready(function() {
-	  // 현재 URL 가져오기
 	  var currentURL = window.location.href;
-
-	  // 만약 URL이 "AAA"를 포함하고 있다면
 	  if (currentURL.includes("Number=30")) {
-	    // .selecter-list 요소에 "act" 클래스 추가
 	    $(".selecter-list30").addClass("act");
 	  }
-
-	  // selecter-list를 클릭했을 때의 이벤트 핸들러
 	  $(".selecter-list30").click(function() {
-	    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
 	    $(".selecter-list30.act").removeClass("act");
-
-	    // 현재 클릭한 요소에 'act' 클래스를 추가
 	    $(this).addClass("act");
 	  });
 	});

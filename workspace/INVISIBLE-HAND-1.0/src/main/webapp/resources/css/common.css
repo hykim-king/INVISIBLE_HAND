@@ -269,108 +269,6 @@ header{
 
 
 
-/* 마이페이지 팝업 시작
- * --------------------------------------- */
-
-.mypage-box{
-  width: 200px;
-  height: 150px;
-  position: relative;
-  left:73%;
-  text-align: right;
-}
-
-.mypage-box p{
-  display: block;
-}
-
-.mypage_pop p{
-  text-align: center;
-}
-
-.mypage_pop {
-    display:none;
-    position: fixed;
-    left: 66%;
-    top: 15px;
-    padding:50px;
-    background-color: #fff;
-    border-radius: 20px;
-    z-index: 20000;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
-}
-
-.mypage_pop .fa-times-circle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 25px;
-}
-
-.search_input {
-    display: flex;
-    margin-top: 60px;
-}
-
-.search_input .fa-search,
-.mypage_pop input {
-    font-size: 18px;
-    line-height: 40px;
-}
-
-.mypage_pop input {
-    background-color: #121212;
-    border: none;
-    width: 300px;
-    color: #fff;
-    padding-left: 50px;
-}
-
-.underline {
-    display: block;
-    height: 3px;
-    background: radial-gradient(#454d55 10%, transparent 70%);
-}
-
-.mypage_pop input:focus {
-    outline: none;
-}
-
-.mypage_btn {
-    margin-top: 30px;
-    width: 250px;
-    justify-content: right;
-}
-
-
-.mypage_btn .tag_button {
-    background-color: #454d55;
-    border-radius: 20px;
-    height: 40px;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-
-.mypage_btn .tag_button p {
-    display:block;
-    line-height: 40px;
-    font-size: 16px;
-    padding: 0 15px;
-    color: #fff;
-}
-.mypage_btn .tag_button p a {
-    color: #fff;
-    display:block;
-    line-height: 40px;
-}
-
-
-
-
-/* 마이페이지 팝업 끝
- * --------------------------------------- */
-
 
 /* wrap------------------- */
 .main-wrap{
@@ -415,6 +313,10 @@ section{
   height:100px; 
   overflow:hidden;
 }
+
+.news h4{
+  margin-top: 0;
+}
 .rolling{
   position:relative; 
   width:100%; 
@@ -431,6 +333,7 @@ section{
   font-size: 28px;
   font-weight: 600px;
 }
+
 
 /* sec-chart------------------- */
 
@@ -495,6 +398,7 @@ section{
 .pagination a{
   margin: 0 5px;
 }
+
 
 /* footer------------------- */
 
