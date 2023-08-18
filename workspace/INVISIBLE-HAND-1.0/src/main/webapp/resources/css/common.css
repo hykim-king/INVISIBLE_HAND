@@ -78,7 +78,7 @@ input{
 .con-main{
   display: flex;
   position: relative;
-  align-items: center;
+  align-items: baseline;
 }
 
 .con-login{
@@ -218,6 +218,7 @@ header{
   width: 120px;
   display:flex;
   align-items: center;
+  justify-content: space-between;
   
 }
 
@@ -267,6 +268,30 @@ header{
   transform: translateY(-50%) rotate(45deg);
 }
 
+/* 헤더 마이페이지 시작
+ * --------------------------------------- */
+
+.mypage-box{
+  width: 200px;
+  height: 150px;
+  position: relative;
+  left:73%;
+  text-align: right;
+}
+
+.mypage-box p{
+  display: block;
+  margin: 10px 0;
+}
+
+.mypage_pop p{
+  text-align: center;
+}
+
+
+
+/* 헤더 마이페이지 끝
+ * --------------------------------------- */
 
 
 
@@ -301,6 +326,9 @@ section{
 .con-main h4{
   margin-top:50px;
   padding-left:50px;
+}
+.con-main h4:first-child{
+  margin-top: 0;
 }
 
 /* sec-news------------------- */
@@ -359,11 +387,30 @@ section{
 
 .main-post-tbody tr td:nth-child(1){text-align: center;}
 
+
+
+
+
+/* user-area------------------- */
+
+.user-area{
+  margin-left:15px;
+  width:270px;
+  height:180px;
+  padding:25px;
+  border-radius:20px;
+
+  background-color: #000;
+  border:1px solid #222;
+  
+  margin-bottom: 15px;
+}
+
 /* rank-area------------------- */
 
 .rank-area{
-  margin-left:30px;
-  width:300px;
+  margin-left:15px;
+  width:270px;
   height:500px;
   padding:25px;
   border-radius:20px;
@@ -371,12 +418,17 @@ section{
   background-color: #000;
   border:1px solid #222;
 }
+.rank-area h4{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
 
 .main-rank-table{
   width: 100%;
   font-size:12px;
   border-collapse: collapse;
-  border: none;
+  border: 5px solid #222;
 }
 
 .main-rank-table tr{

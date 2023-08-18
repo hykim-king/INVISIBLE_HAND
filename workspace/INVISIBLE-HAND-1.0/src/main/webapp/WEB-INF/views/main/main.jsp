@@ -75,22 +75,33 @@
       </section>
     </div>
     <!-- **---wrap End---** -->
-    <div class="rank-area">
-    <h3>업종별 변동 현황</h3>
-        <table class="main-rank-table">
-            <thead>
-                <tr>
-                <th>등수</th>
-                <th>업종명</th>                
-                <th>등수변동</th>
-                <th>화살표</th>
-                </tr>
-           </thead>
-           <tbody id="rankBody">
-            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-           </tbody>
-        </table>   
-    </div>
+		<div class="user-rank-wrap">
+		  <div class="user-area">
+		  <p>여기 로그인정보, 마이페이지 링크 자리를 만들어볼까 합니다</p>
+		  </div>
+		
+		
+		
+			<div class="rank-area">
+	    <h4>업종별 변동 현황</h4>
+	        <table class="main-rank-table">
+	            <thead>
+	                <tr>
+	                <th>등수</th>
+	                <th>업종명</th>                
+	                <th>등수변동</th>
+	                <th>화살표</th>
+	                </tr>
+	           </thead>
+	           <tbody id="rankBody">
+	            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
+	           </tbody>
+	        </table>   
+	    </div>
+		</div>
+
+    
+    
   </div>
   <!-- **---container End---** -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
