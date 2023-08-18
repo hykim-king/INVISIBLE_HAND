@@ -25,7 +25,7 @@
 						</label>
 						<label for="opt01_2" class="radio">
 						  <input type="radio" name="rdo1" id="opt01_2" class="hidden" />
-							<span class="label">다소나쁨</span>
+							<span class="label">다소 나쁨</span>
 						</label>
 						<label for="opt01_3" class="radio">
 						  <input type="radio" name="rdo1" id="opt01_3" class="hidden" />
@@ -488,10 +488,48 @@ $(document).ready(function() {
 		$("input[type='checkbox']:checked").each(function() {
 		  checkArr.push($(this).next().text());
 		});
-	  
-	  console.log(radioArr);
-	  console.log(textArr);
-	  console.log(checkArr);
+
+      var ratings = {
+    		  '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
+    		  '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
+              '동일': 2,'적정': 2,
+              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
+              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
+      };
+      var totalScore = 0
+      var sbhiScore = 0;
+      for (var i = 0; i < radioArr.length; i++) {
+          var score = ratings[radioArr[i]];
+          sbhiScore = sbhiScore + score
+      }
+      sbhiScore = (sbhiScore / radioArr.length) * 50;
+      
+      var operatingScore = 0
+      for (var i = 0; i < textArr.length; i++) {
+    	var tempscore = 100;
+    	var myscore = 8;
+    	while(true){
+    	  if (textArr[i] < tempscore){
+    		  tempscore = tempscore - 10;
+    		  myscore = myscore -2 ;
+    	  }
+    	  break;
+    	}
+    	operatingScore = operatingScore + myscore ; 
+      }
+      
+      var errorScore = checkArr.length * -0.3 ;
+      totalScore = sbhiScore + operatingScore + errorScore;
+      if(totalScore <= 0){
+    	  totalScore = 0;
+      }
+
+      console.log(radioArr);
+      console.log(textArr);
+      console.log(checkArr);
+      console.log(totalScore);
+      
+      
 	});
 });
 </script>
