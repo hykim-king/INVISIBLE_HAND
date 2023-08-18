@@ -8,6 +8,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
   <link rel="stylesheet" href="../resources/css/common.css">
   <link rel="stylesheet" href="../resources/css/chart.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
   <title>보이지 않는 손 레이아웃</title>
 </head>
@@ -49,7 +50,7 @@
       <h4>추천 게시글</h4>
       <section class="sec03 sec-board">
        
-	      <div>
+	      <div class="main-post-category">
 	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
 	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
 	      </div>
@@ -57,13 +58,13 @@
 	      <div>
 		       <table class="main-post-table">
 		          <thead class="main-post-thead">
-		            <tr>
-		            <th>No.</th>
-		            <th>제목</th>
-		            <th>글쓴이</th>
-		            <th>작성일</th>
-		            <th>조회수</th>
-		            <th>추천수</th>
+		            <tr width="900px">
+			            <th width="50px">No.</th>
+			            <th width="640px">제목</th>
+			            <th width="70px">글쓴이</th>
+			            <th width="70px">작성일</th>
+			            <th width="60px">조회수</th>
+			            <th width="60px">추천수</th>
 		            </tr>
 		          </thead>
 		          <tbody id="tableBody" class="main-post-tbody">
