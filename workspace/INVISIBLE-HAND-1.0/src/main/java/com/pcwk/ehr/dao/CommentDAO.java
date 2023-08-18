@@ -9,6 +9,9 @@ public interface CommentDAO {
 	
 	//댓글 목록 조회
 	public List<CommentVO> doRetrieve(CommentVO commentVO) throws SQLException;
+
+	//댓글 수 조회 
+	public int doCommentCnt(int postNumber) throws SQLException;
 	
 	//댓글 등록
 	public int doSave(CommentVO commentVO)throws SQLException;
@@ -20,6 +23,6 @@ public interface CommentDAO {
 	public int doDelete(int commentNumber) throws SQLException;
 	
 	//댓글 좋아요
-	public int doUpdateLikes(CommentVO commentVO) throws SQLException;
+	public int doUpdateLikes(int commentNumber, String likes) throws SQLException;
 
 }

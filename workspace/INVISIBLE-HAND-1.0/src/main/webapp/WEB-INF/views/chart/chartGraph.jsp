@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,9 +43,27 @@
 
       <!-- 차트 영역 1234 -->
       <div class="tab-box tab1 active" id="chart01">
-      <div>
-          <jsp:include page="chart01.jsp"/>
-      </div>
+        <c:choose>
+          <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+            <div class="chart-wrapper">
+              <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+            </div>
+            
+          </c:when>
+          <c:otherwise>
+            <div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
+              <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+            </div>
+            <div class="chart-login">
+	            <div class="desc">
+	              <p>인공지능이 예측한 자료 열람하기</p>
+	            </div>
+	            <div class="btn">
+	              <a href="${CP}/member/memberLogin.do"><span>로그인</span></a>
+	            </div>
+            </div>
+          </c:otherwise>
+        </c:choose>
        
        <div class="chart-nav">
           <select id="mainCategorySelect" name="mainCategory">

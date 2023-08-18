@@ -21,4 +21,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.getAllMemberDao(); // Dao호출
 	}
 
+
+	@Override
+	public boolean forceWithdraw(MemberVO member) {
+		return false;
+	}
+
 }

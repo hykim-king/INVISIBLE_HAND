@@ -39,19 +39,11 @@
 					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
-				<c:choose>
-	        <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-						<div class="chart-wrapper">
-						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-						</div>
-	        </c:when>
-	        <c:otherwise>
-						<div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
-						  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-						</div>
-	        </c:otherwise>
-	      </c:choose>
-	
+
+				<div class="chart-wrapper" onclick='doChart()'>
+				  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+				</div>
+
       </section>
       
       <h4>추천 게시글</h4>
@@ -115,9 +107,9 @@ mainCategorySelect.addEventListener("change", function() {
     submitButton.click();
 });
 
-function doLogin() {
- alert("로그인 후 이용해주세요");
- location.href = "../member/memberLogin.do";
+function doChart() {
+
+ location.href = "../chart/chart.do";
 }
 </script>
 </body>

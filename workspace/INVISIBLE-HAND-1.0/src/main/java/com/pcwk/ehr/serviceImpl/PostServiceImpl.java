@@ -53,13 +53,13 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 	}
 
 	@Override
-	public int doUpdateLikes(PostVO inVO) throws SQLException {
-		return dao.doUpdateLikes(inVO);
+	public int doUpdateLikes(int postNumber, String likes) throws SQLException {
+		return dao.doUpdateLikes(postNumber, likes);
 	}
 
 	@Override
 	public int doUpdateViews(PostVO inVO) throws SQLException {
-		return dao.doUpdateLikes(inVO);
+		return dao.doUpdateViews(inVO);
 	}
 	
 	

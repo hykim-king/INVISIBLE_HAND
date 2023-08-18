@@ -75,6 +75,12 @@
       WHERE
       email = #{email} AND Password=#{password}
     </delete>
+    
+    <!-- 회원 강제 탈퇴 -->
+    <delete id="forceWithdraw" parameterType="MemberVO">
+      DELETE FROM MEMBER
+      WHERE memberId = #{memberId}
+    </delete>
   
     <select id="findAll" resultType="MemberVO">
         SELECT * FROM MEMBER

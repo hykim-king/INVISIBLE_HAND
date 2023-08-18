@@ -70,7 +70,7 @@
   <div class="h60px"></div>
   <div class="container-1200 con-main min-100vh">
     <div class="wrap-1000 ">
-  
+      
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
@@ -78,14 +78,22 @@
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
           <div class="post-nav">
-  
-            <div>
-               <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
+            <div class="col-auto">
+              <select class="form-select" name="searchDiv" id="searchDiv"> 
+                <c:forEach var="vo" items="${searchList}">
+                    <option <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail}'/>">
+                        <c:out value='${vo.codeDetailName}'/>
+                    </option>
+                </c:forEach>  
+              </select>
             </div>
- 
+            <div class="col-auto">
+              <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
+            </div>
+            
             <div class="list-btn">  
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
-              <a href="#" class="btn button btn-b" style="margin-left: 30px;" onclick="doMoveToPostReg();" >글쓰기</a>  
+              <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>  
             </div>      
           </div>  
         </form>
@@ -138,7 +146,7 @@
        </table> <!-- **---table End---** -->
        <!-- 페이징 -->
        <div class="d-flex justify-content-center">
-       <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
+        <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "searchPage") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        
@@ -154,15 +162,15 @@
 <script>
 /* 게시판 카테고리 선택시 노란색으로 변경 */
 
-	    $('.selecter-list').click(function() {
-	    	   $('.selecter-list').siblings().removeClass("act");
-	    	   $('.selecter-list').addClass("act");
-	    });
+      $('.selecter-list').click(function() {
+           $('.selecter-list').siblings().removeClass("act");
+           $('.selecter-list').addClass("act");
+      });
 
 /* 게시판 카테고리 선택시 노란색으로 변경끝 */
-	
-	
-  function do_Retrieve(url, pageNo){
+  
+  
+  function searchPage(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);
     
@@ -180,7 +188,7 @@
     let postNumber = tdArray.eq(5).text();
     console.log('postNumber:'+postNumber);
     
-    if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
+    //if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
     
     //categoryNumber,postNumber
     ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393
@@ -188,18 +196,18 @@
     
   });
   
-  function doMoveToPostReg(){
-      console.log("doMoveToPostReg");
-      let frm = document.postFrm;
-      console.log("frm.categoryNumber.value:"+frm.categoryNumber.value);
-      frm.pageNo.value=1;
-      
-      /* frm.searchDiv.value = "all";   // Set searchDiv to "all"
-      frm.searchWord.value = "";     // Set searchWord to an empty string */
-      frm.action = "${CP}/post/doMoveToPostReg.do"
-      
-      frm.submit();
-    }
+    $("#doMoveToPostReg").click(function() {
+        console.log("doMoveToPostReg");
+        var loggedInNickname = "${sessionScope.member.nickName}";
+        console.log("loggedInNickname:"+loggedInNickname);
+        if (loggedInNickname !== null && loggedInNickname !== "") {
+            if( confirm("게시글을 작성하시겠습니까?") == false ) return;
+            window.location.href = "${CP}/post/doMoveToPostReg.do?categoryNumber=" + $("#categoryNumber").val();
+        } else {
+            alert("로그인한 사용자만 게시글을 작성할 수 있습니다.");
+        }
+    });
+
     
    function doRetrieveCall(pageNo){
         let frm = document.postFrm;
