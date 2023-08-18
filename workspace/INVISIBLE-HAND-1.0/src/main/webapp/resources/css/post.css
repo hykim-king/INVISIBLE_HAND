@@ -1,5 +1,9 @@
+.fas:hover{
+  cursor: pointer;
+}
+
 .wrap-1000{
-	margin:60px auto;
+  margin:60px auto;
 }
 
 h1{
@@ -10,7 +14,7 @@ h1{
 }
 
 h2{
-	width: 60%;
+  width: 60%;
   margin: 0 auto;
 }
 h3{
@@ -47,12 +51,22 @@ h3{
   font-size: 20px;
   font-weight: 600;
   color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .contents-title p{
   padding: 0 40px;
   line-height: 50px;
 }
-
+.contents-title .writer{
+  font-size: 14px;
+  font-weight: 400;
+  color: #979797;
+  line-height: 50px;
+  padding: 0 40px;
+  
+}
 .contents-area .contents{
   padding: 50px 80px;
 }
@@ -61,11 +75,35 @@ h3{
   color: #fff;
 }
 
+.recommend-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #FFA000;
+  background-Color: #121212;
+  color: #FFA000;   
+  width: 80px;
+  padding: 5px 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-top:50px;
+}
+.recommend-val{
+  background-color: #121212;
+  border:none;
+  color:#FFA000;
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 5px;
+  text-align: center;
+  
+  
+}
 
 /* 댓글 */
 .comment-area{
   width: 100%;
-  margin: 30px auto;
+  margin: 10px auto 30px;
   padding: 50px 0;
   background-color: #121212;
   border-top: 1px solid #979797;
@@ -183,8 +221,6 @@ textarea.form-contents {
 
 
 /*---리스트-검색,글쓰기버튼부분 Start---*/
-
-
 .category-selecter{
   display: flex;
   justify-content:flex-start;
@@ -209,6 +245,24 @@ textarea.form-contents {
 .selecter-list.act {
   color: #FFA000;
 }
+
+
+.form-select{
+  background-color: #121212;
+  color: #fff;
+  text-align: center;
+  padding:5px 10px;
+  border:none;
+  border-bottom:2px solid #FFA000;
+  margin-right: 15px; 
+}
+
+.form-select:focus {
+  border: 1px solid #121212;
+  border-bottom:2px solid #FFA000;
+  outline: none;
+}
+
 
 .post-nav{
   display: flex;
@@ -260,7 +314,7 @@ tr{
   height: 40px;
 }
 .cell:hover{
-	  background-color: #121212;
+    background-color: #121212;
 }
 
 td > a:hover{
@@ -329,69 +383,69 @@ tbody>tr:last-child{
 
 }
 .list-btn a{
-	width:75px;
-	
+  width:75px;
+  
 }
 .btn-delet{
   border:2px solid #222;    
   background-Color:#222;  
   color:#979797;  
-	font-weight: 600;
-	margin-top:10px;
+  font-weight: 600;
+  margin-top:10px;
   
 }
 .btn-delet:hover{
-	color:#FF007A;  
-	cursor: pointer;
-	font-weight: 600;
+  color:#FF007A;  
+  cursor: pointer;
+  font-weight: 600;
 }
 
 
 /* ----글쓰기---- */
 
 .write-box{
-	width: 100%;
-	border-bottom: 1px solid #979797;
-	padding: 0 5%;
+  width: 100%;
+  border-bottom: 1px solid #979797;
+  padding: 0 5%;
 }
 
 .write-box.content{
-	border-bottom: 1px solid #FFA000;
+  border-bottom: 1px solid #FFA000;
 }
 
 .write-form #title,
 .write-form #nickname,
 .write-form #content{
-	background: #222;
-	width: 90%;
-	color: #fff
-	
+  background: #222;
+  width: 90%;
+  color: #fff
+  
 }
 
 
 .write-form #title{
-	line-height: 40px;
-	font-size: 20px;
-	margin: 2px 0;
-	
+  line-height: 40px;
+  font-size: 20px;
+  margin: 2px 0;
+  
 }
 
 .nick label{
-	display: inline-block;
+  display: inline-block;
 }
 .write-form #nickname{
-	 line-height: 30px;
-	 text-align: right;
-	 margin: 2px 0;
-	 color: #979797;
+   line-height: 30px;
+   text-align: right;
+   margin: 2px 0;
+   color: #979797;
 }
 
 
 .write-form #content{
-	border: 1px solid #222;
-	height: 500px;
-	line-height: 20px;
-	margin: 15px 0;
+  border: 1px solid #222;
+  height: 500px;
+  line-height: 20px;
+  margin: 15px 0;
 }
 
 .write-form #content:focus {outline:none;}

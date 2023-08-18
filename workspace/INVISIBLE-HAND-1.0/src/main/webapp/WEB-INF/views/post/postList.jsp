@@ -78,15 +78,18 @@
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
           <div class="post-nav">
+           
             <div class="col-auto">
               <select class="form-select" name="searchDiv" id="searchDiv"> 
                 <c:forEach var="vo" items="${searchList}">
-                    <option <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail}'/>">
-                        <c:out value='${vo.codeDetailName}'/>
+                    <option 
+                      <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail}'/>">                     
+                      <c:out value='${vo.codeDetailName}'/>
                     </option>
                 </c:forEach>  
               </select>
             </div>
+           
             <div class="col-auto">
               <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
             </div>
@@ -94,7 +97,8 @@
             <div class="list-btn">  
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
               <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>  
-            </div>      
+            </div>     
+             
           </div>  
         </form>
       </div>

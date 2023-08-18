@@ -79,12 +79,12 @@
           </div>
           <div class="contents content" id="contents content">
             <p><c:out value="${outVO.content}" /></p>
-          </div>
-          <div class="btn-area">
-            <input type="button" class="button btn-w" value="추천" id=postUpdateLikes>
+          <div class="recommend-btn">
+            <input type="button" class="recommend-val" value="추천" id=postUpdateLikes>
             <div class="likes">
               <c:out value="${outVO.likes}" />
             </div>
+          </div>
           </div>
           
         </form>
