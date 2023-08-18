@@ -2,18 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.comment">
   
-    <!-- 검색조건 -->
-  <!-- 제목10 내용20 -->
-  <sql id="searchCondition">
-     <choose>
-      <when test=" '' != searchWord  and '10' == searchDiv  ">
-         AND title  LIKE #{searchWord} || '%'
-      </when>
-      <when test=" '' != searchWord  and '20' == searchDiv  ">
-         AND content  LIKE #{searchWord} || '%'
-      </when>
-     </choose>
-  </sql> 
+
   
   <!-- 댓글수 조회 -->
   <select id="doCommentCnt" parameterType="int" resultType="int">
@@ -43,7 +32,6 @@
           SELECT *
           FROM board_comment
           WHERE postnumber = #{postNumber}
-          <include refid="searchCondition"></include>
           ORDER BY writtendate DESC
           )T1
           <![CDATA[     WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1)+#{pageSize}   ]]>
@@ -54,7 +42,6 @@
     (SELECT COUNT(commentnumber) commentCnt
     FROM board_comment 
     WHERE postnumber = #{postNumber}
-    <include refid="searchCondition"></include>
     )B
   </select>
   

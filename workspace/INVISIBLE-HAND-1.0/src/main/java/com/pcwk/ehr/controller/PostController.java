@@ -22,6 +22,7 @@ import com.pcwk.ehr.VO.CmnCodeVO;
 import com.pcwk.ehr.VO.CommentVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PostVO;
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.CommentService;
@@ -215,24 +216,23 @@ public class PostController {
 			inVO.setSearchDiv("");
 		}
 		
-		LOG.debug("inVO:" + inVO);
-		
 		// 코드조회: 검색코드
 		CmnCodeVO cmnCodeVO = new CmnCodeVO();
-		cmnCodeVO.setMasterCode("POST_SEARCH");
+		cmnCodeVO.setMasterCode("POSTSEARCH");
 		List<CmnCodeVO> searchList = cmnCodeService.doSearch(cmnCodeVO);
 		model.addAttribute("searchList", searchList);
-	
-		/*
-		 * // 코드조회: 페이지 사이즈 cmnCodeVO.setMasterCode("CMN_PAGE_SIZE"); List<CmnCodeVO>
-		 * pageSizeList = cmnCodeService.doSearch(cmnCodeVO);
-		 * model.addAttribute("pageSizeList", pageSizeList);
-		 */
-	
-		List<PostVO> list = postService.doRetrieve(inVO);
-		model.addAttribute("list", list);
-		model.addAttribute("inVO", inVO);
 		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   searchList:         │"+searchList);
+	 	LOG.debug("└───────────────────────┘");
+		
+		List<PostVO> list = this.postService.doRetrieve(inVO);
+		model.addAttribute("list", list);
+		
+		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   list:               │"+list);
+	 	LOG.debug("└───────────────────────┘");
 		//총글수
 		int totalCnt = 0;
 		if(null !=list && list.size() >0 ) {
@@ -241,9 +241,16 @@ public class PostController {
 		}
 		
 		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("inVO", inVO);
+		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   inVO:               │"+inVO);
+	 	LOG.debug("└───────────────────────┘");
 		
 		return "post/postList";
 	}
+	
+	
 	
 	@RequestMapping(value="/doMoveToPostReg.do")
 	public String doMoveToPostReg(PostVO inVO, Model model) throws SQLException{

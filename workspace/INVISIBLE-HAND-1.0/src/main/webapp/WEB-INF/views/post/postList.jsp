@@ -70,7 +70,7 @@
   <div class="h60px"></div>
   <div class="container-1200 con-main min-100vh">
     <div class="wrap-1000 ">
-  
+      
       
       <!-- *---검색,글쓰기 Start---* -->
       <div class="table-search">
@@ -78,15 +78,27 @@
           <input type="hidden" name="pageNo" id="pageNo">
           <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
           <div class="post-nav">
-  
-            <div>
-               <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
+           
+            <div class="col-auto">
+              <select class="form-select" name="searchDiv" id="searchDiv"> 
+                <c:forEach var="vo" items="${searchList}">
+                    <option 
+                      <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail}'/>">                     
+                      <c:out value='${vo.codeDetailName}'/>
+                    </option>
+                </c:forEach>  
+              </select>
             </div>
- 
+           
+            <div class="col-auto">
+              <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
+            </div>
+            
             <div class="list-btn">  
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
               <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>  
-            </div>      
+            </div>     
+             
           </div>  
         </form>
       </div>
@@ -97,9 +109,9 @@
       <!-- *---Table Start---* -->
       
       <div class="category-selecter">
-        <a class="selecter-list act" href="${freePostURL}">자유 게시판</a>
-        <a class="selecter-list" href="${qnaPostURL}">Q&A 게시판</a>
-        <a class="selecter-list" href="${postURL}">공지사항</a>
+        <a class="selecter-list selecter-list10" href="${freePostURL}">자유 게시판</a>
+        <a class="selecter-list selecter-list20" href="${qnaPostURL}">Q&A 게시판</a>
+        <a class="selecter-list selecter-list30" href="${postURL}">공지사항</a>
       </div>
       <table id="postTable" class="table table-sm table-hover table-borderless">
           <thead class="post-thead">
@@ -138,7 +150,7 @@
        </table> <!-- **---table End---** -->
        <!-- 페이징 -->
        <div class="d-flex justify-content-center">
-       <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "do_Retrieve") %>
+        <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "searchPage") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        
@@ -152,17 +164,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 <script>
-/* 게시판 카테고리 선택시 노란색으로 변경 */
 
-	    $('.selecter-list').click(function() {
-	    	   $('.selecter-list').siblings().removeClass("act");
-	    	   $('.selecter-list').addClass("act");
-	    });
-
-/* 게시판 카테고리 선택시 노란색으로 변경끝 */
-	
-	
-  function do_Retrieve(url, pageNo){
+  
+  function searchPage(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);
     
@@ -188,17 +192,17 @@
     
   });
   
-	  $("#doMoveToPostReg").click(function() {
-	      console.log("doMoveToPostReg");
-	      var loggedInNickname = "${sessionScope.member.nickName}";
-	      console.log("loggedInNickname:"+loggedInNickname);
-	      if (loggedInNickname !== null && loggedInNickname !== "") {
-	    	    if( confirm("게시글을 작성하시겠습니까?") == false ) return;
-	          window.location.href = "${CP}/post/doMoveToPostReg.do?categoryNumber=" + $("#categoryNumber").val();
-	      } else {
-	          alert("로그인한 사용자만 게시글을 작성할 수 있습니다.");
-	      }
-	  });
+    $("#doMoveToPostReg").click(function() {
+        console.log("doMoveToPostReg");
+        var loggedInNickname = "${sessionScope.member.nickName}";
+        console.log("loggedInNickname:"+loggedInNickname);
+        if (loggedInNickname !== null && loggedInNickname !== "") {
+            if( confirm("게시글을 작성하시겠습니까?") == false ) return;
+            window.location.href = "${CP}/post/doMoveToPostReg.do?categoryNumber=" + $("#categoryNumber").val();
+        } else {
+            alert("로그인한 사용자만 게시글을 작성할 수 있습니다.");
+        }
+    });
 
     
    function doRetrieveCall(pageNo){
@@ -219,15 +223,70 @@
         console.log("doRetrieve");
         doRetrieveCall(1);
     });
+    /* 게시판 카테고리 선택시 노란색으로 변경 */
 
-$(".categorybox").click(function() {
-    $(this).siblings().removeClass("active");
-    $(this).addClass("active");
-   // $("html, body").scrollTop($(".tab-box").height());
-    let clickTab = $(this).attr("data-tab");
-    $(".tab-box").removeClass("active");
-    $("." + clickTab).addClass("active");
+$(document).ready(function() {
+  // 현재 URL 가져오기
+  var currentURL = window.location.href;
+
+  // 만약 URL이 "AAA"를 포함하고 있다면
+  if (currentURL.includes("Number=10")) {
+    // .selecter-list 요소에 "act" 클래스 추가
+    $(".selecter-list10").addClass("act");
+  }
+
+  // selecter-list를 클릭했을 때의 이벤트 핸들러
+  $(".selecter-list10").click(function() {
+    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
+    $(".selecter-list10.act").removeClass("act");
+
+    // 현재 클릭한 요소에 'act' 클래스를 추가
+    $(this).addClass("act");
+  });
 });
+    
+$(document).ready(function() {
+	  // 현재 URL 가져오기
+	  var currentURL = window.location.href;
+
+	  // 만약 URL이 "AAA"를 포함하고 있다면
+	  if (currentURL.includes("Number=20")) {
+	    // .selecter-list 요소에 "act" 클래스 추가
+	    $(".selecter-list20").addClass("act");
+	  }
+
+	  // selecter-list를 클릭했을 때의 이벤트 핸들러
+	  $(".selecter-list20").click(function() {
+	    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
+	    $(".selecter-list20.act").removeClass("act");
+
+	    // 현재 클릭한 요소에 'act' 클래스를 추가
+	    $(this).addClass("act");
+	  });
+	});
+	
+$(document).ready(function() {
+	  // 현재 URL 가져오기
+	  var currentURL = window.location.href;
+
+	  // 만약 URL이 "AAA"를 포함하고 있다면
+	  if (currentURL.includes("Number=30")) {
+	    // .selecter-list 요소에 "act" 클래스 추가
+	    $(".selecter-list30").addClass("act");
+	  }
+
+	  // selecter-list를 클릭했을 때의 이벤트 핸들러
+	  $(".selecter-list30").click(function() {
+	    // 기존에 'act' 클래스가 설정되어 있던 요소에 'act' 클래스를 제거
+	    $(".selecter-list30.act").removeClass("act");
+
+	    // 현재 클릭한 요소에 'act' 클래스를 추가
+	    $(this).addClass("act");
+	  });
+	});
+    /* 게시판 카테고리 선택시 노란색으로 변경끝 */
+
+
 </script>
 </body>
 </html>
