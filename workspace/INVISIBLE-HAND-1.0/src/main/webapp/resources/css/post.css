@@ -152,16 +152,10 @@ h3{
 	height: 30px;
 	background-color: #222;
 	
+	text-align: center;
+	
 
 	
-}
-.more-btn .p{
-	line-height:30px;
-	text-align: center;
-	background-color: #222;
-	border: none;
-	margin: 0 auto;
-	width: 100%
 }
 
 .more-btn.opa-0{
@@ -171,12 +165,20 @@ h3{
 	opacity: 1;
 }
 
+.fa-angle-down.act{
+	transform: rotate(180deg);
+}
+.fa-angle-down{
+	margin-top: 10px;
+}
+
+
 .comment-desc span{
   font-size: 14px;
   color: #979797;
 }
 .comment-desc p{
-  padding: 10px 0;
+  padding: 15px 0;
   color: #fff;
   
 
