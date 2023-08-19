@@ -118,7 +118,8 @@
                     data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}"> --%>
                   </div>
                 </div>
-		            <div class="more-btn"><p>더보기</p></div> 
+                
+		            <div class="more-btn opa-0"> <input type="button" class="p" id="more" value="더보기"></div> 
             </div>
           </c:forEach>
           
@@ -442,13 +443,34 @@ $("#addComment").on("click", function() {
             alert('댓글 작성자만 삭제할 수 있습니다.');
         }
     });//댓글삭제------------------------------
+
     
     $(document).ready(function() {
-    	  // 조건문을 사용하여 .a 클래스의 높이가 200px인 경우에만 새로운 클래스를 추가합니다.
-    	  if ($(".comment-box").height() === 200) {   		  
-    	    (this).addClass("more");
+    	  $(".comment-box").each(function() {
+    	    var commentBox = $(this);
+    	    if (commentBox.height() >= 140) {
+    	      commentBox.find(".more-btn.opa-0").addClass("opa-1");
+    	    }
+    	  });
+    	});
+    
+    $(".more-btn").on("click", function() {
+    	  var commentBox = $(this).closest(".comment-box"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
+    	  if (commentBox.height() >= 140) {
+    	    commentBox.toggleClass("more");
     	  }
     	});
+    
+    $(document).ready(function() {
+        $(".comment-box").each(function() {
+          var commentBox = $(this);
+          if (commentBox.hasclass("more")) {
+              var newValue = '접기';
+              $('#more').val(newValue);
+          }
+        });
+      });
+    
     
 </script>
   

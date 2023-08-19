@@ -152,14 +152,24 @@ h3{
 	height: 30px;
 	background-color: #222;
 	
-	cursor: pointer;
+
 	
 }
-.more-btn p{
+.more-btn .p{
 	line-height:30px;
 	text-align: center;
+	background-color: #222;
+	border: none;
+	margin: 0 auto;
+	width: 100%
 }
 
+.more-btn.opa-0{
+	opacity: 0;
+}
+.more-btn.opa-0.opa-1{
+	opacity: 1;
+}
 
 .comment-desc span{
   font-size: 14px;
