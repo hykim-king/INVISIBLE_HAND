@@ -1,3 +1,4 @@
+<%@page import="com.pcwk.ehr.cmn.StringUtil"%>
 <%@page import="com.pcwk.ehr.VO.PostVO"%>
 <%@page import="com.pcwk.ehr.VO.MemberVO"%>
 <%@page import="com.pcwk.ehr.VO.CommentVO"%>
