@@ -99,7 +99,6 @@
 	text-align: center;
 }
 
-/* 検索区分のテキストを中央に配置 */
 #searchDiv {
 	text-align: center;
 }
@@ -113,18 +112,18 @@
 }
 
 #pagetop a {
-	color: #fff; /*文字色*/
-	font-size: 20px; /*文字サイズ*/
+	color: #fff;
+	font-size: 20px;
 	text-decoration: none;
 	text-align: center;
 	display: block;
 	float: right;
 	margin-bottom: 50px;
-	background: #222; /*背景色*/
-	color: #999; /*文字色*/
-	width: 60px; /*幅*/
-	line-height: 60px; /*高さ*/
-	border-radius: 50%; /*角丸のサイズ*/
+	background: #222;
+	color: #999;
+	width: 60px;
+	line-height: 60px;
+	border-radius: 50%;
 }
 </style>
 <title>보이지 않는 회원조회</title>
@@ -306,13 +305,11 @@
 	<script src="${CP}/resources/js/util.js"></script>
 	<script>
     (function($) {
-        // クリックされたメニューを開く関数
         function openMenu($menu) {
           $menu.addClass('active');
           $menu.find('ul').slideDown('slow');
         }
 
-        // クリックされたメニューを閉じる関数
         function closeMenu($menu) {
           $menu.removeClass('active');
           $menu.find('ul').slideUp('slow');
@@ -320,18 +317,16 @@
 
         $('.cate ul').hide();
 
-        // すべてのメニューを開く
         $('.accordion .cate').each(function() {
           openMenu($(this));
         });
 
         $('.cate .menu .subopen').click(function(event) {
-          event.stopPropagation(); // イベントが親要素に伝播しないようにする
+          event.stopPropagation();
 
           var $parent = $(this).parent().parent();
           var isActive = $parent.hasClass('active');
 
-          // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
           if (isActive) {
             closeMenu($parent);
           } else {
@@ -361,7 +356,10 @@ $(document).on("click", "#boardTable tbody tr", function(e) {
             $("#memberName").val(data.memberName);
             $("#memberGrade").val(data.memberGrade);
             $("#email").val(data.email);
-            $("#updateDate").val(data.updateDate);
+
+            const updateDate = data.updateDate; 
+            const formattedDate = new Date(updateDate).toLocaleString(); 
+            $("#updateDate").val(formattedDate);
         },
         error: function(data) {
             console.log("error:" + data);
@@ -445,7 +443,7 @@ $("#init").on("click",function(){//--초기화---------------------------------
          
   });//init end ------------------------------------------------------------
 
-  $("#deleteOne").on("click", function() {
+  $("#deleteOne").on("click", function() { //-삭제---------------------------
 	    console.log('deleteOne click');
 	    
 	    let memberId = $("#memberId").val();
@@ -472,7 +470,12 @@ $("#init").on("click",function(){//--초기화---------------------------------
 	            let parsedJson = JSON.parse(data);
 	            if ("1" == parsedJson.msgId) {
 	                alert(parsedJson.msgContents);
-
+	                $("#memberId").val('');
+	                $("#nickName").val('');
+	                $("#memberName").val('');
+	                $("#memberGrade").val('1');
+	                $("#email").val('');
+	                $("#updateDate").val('');
 	            } else {
 	                alert(parsedJson.msgContents);
 	            }

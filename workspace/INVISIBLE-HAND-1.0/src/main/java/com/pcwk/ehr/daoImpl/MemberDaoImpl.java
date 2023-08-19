@@ -168,32 +168,33 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int update(MemberVO member) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		String statement = this.NAMESPACE+DOT+"update";
+		LOG.debug("1. statement-"+statement);
+		LOG.debug("2. param="+member);
+		
+		flag = this.sqlSessionTemplate.update(statement, member);
+
+		LOG.debug("3. flag="+flag);
+		
+		return flag;
 	}
 
 	@Override
 	public int deleteOne(MemberVO member) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		int flag = 0;
+		//---------------------------------------
+		String statement  = this.NAMESPACE+DOT+"deleteOne";
+		LOG.debug("----------------------------");
+		LOG.debug("1. statement-"+statement);
+		LOG.debug("----------------------------");
+		LOG.debug("2. param=\n"+member.toString());
+		flag = this.sqlSessionTemplate.delete(statement, member);
+		LOG.debug("3. flag="+flag);
 
-	@Override
-	public int forceWithdraw(MemberVO member) throws SQLException {
-	    int result = 0;
-	    
-	    String statement = NAMESPACE + DOT + "forceWithdraw";
-	    LOG.debug("----------------------------------------");
-	    LOG.debug("1. statement = " + statement);
-	    LOG.debug("----------------------------------------");
-	    LOG.debug("2. member = " + member);
-	    
-	    result = sqlSessionTemplate.delete(statement, member);
-	    LOG.debug("3. result = " + result);
-	    
-	    return result;
+		//----------------------------------------	
+		return flag;
 	}
-
 
 
 

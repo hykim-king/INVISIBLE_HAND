@@ -307,7 +307,6 @@ public class MemberController {
 		
 		MessageVO messageVO=new MessageVO(String.valueOf(flag),message);
 		
-		//{"msgId":"1","msgContents":"pt99_01가 삭제 되었습니다."}
 		jsonString = new Gson().toJson(messageVO);
 		LOG.debug("│jsonString:"+jsonString);
 		LOG.debug("└──────────────────────────────┘");

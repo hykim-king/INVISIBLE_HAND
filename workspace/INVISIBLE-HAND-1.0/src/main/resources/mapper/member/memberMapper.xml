@@ -77,7 +77,7 @@
     </delete>
     
     <!-- 회원 강제 탈퇴 -->
-    <delete id="forceWithdraw" parameterType="MemberVO">
+    <delete id="deleteOne" parameterType="MemberVO">
       DELETE FROM MEMBER
       WHERE memberId = #{memberId}
     </delete>
