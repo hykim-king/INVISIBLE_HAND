@@ -6,7 +6,7 @@
 
   <select id="chartGraphAvg" parameterType="ChartVO" resultType="ChartVO">
     SELECT
-	    TO_CHAR(chartdate,'YYYY.MM')AS chartdate,
+	    TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
 	    maincategory,
 	    ROUND(AVG(NVL(sbhi,0)) ,1) AS sbhiAvg ,
 	    ROUND(AVG(NVL(sbhi2,0)) ,1) AS sbhi2Avg,
@@ -31,7 +31,7 @@
 	    TO_CHAR(chartdate,'YYYY.MM') as chartdate,
 	    maincategory,
 	    subcategory,
-	    NVL(sbhi,0) AS sbhi,
+	    NVL(sbhi,0)  AS sbhi,
 	    NVL(sbhi2,0) AS sbhi2,
 	    NVL(sbhi3,0) AS sbhi3,
 	    NVL(sbhi4,0) AS sbhi4,
@@ -47,8 +47,122 @@
     AND subcategory = #{subcategory}
     ORDER BY chartdate
   </select>
-<!-- ////chart01 -->
+<!-- ////chart01 end-->
+
+<!-- chart02 -->
+    <select id="chart02GraphAvg" parameterType="ChartVO" resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      ROUND(AVG(NVL(data1,0)) ,1) AS data1Avg,
+      ROUND(AVG(NVL(data2,0)) ,1) AS data2Avg,
+      ROUND(AVG(NVL(data3,0)) ,1) AS data3Avg,
+      ROUND(AVG(NVL(data4,0)) ,1) AS data4Avg,
+      ROUND(AVG(NVL(data5,0)) ,1) AS data5Avg,
+      ROUND(AVG(NVL(data6,0)) ,1) AS data6Avg,
+      ROUND(AVG(NVL(data7,0)) ,1) AS data7Avg
+    FROM
+      salesdistribute
+    GROUP BY chartdate,maincategory
+    HAVING maincategory = #{maincategory}
+    ORDER BY chartdate
+  </select>
+  
+  <!-- maincategory와 subcategory 변수가 들어오면 작동하는 쿼리 -->
+  <select id="chart02Graph" parameterType="ChartVO"  resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      subcategory,
+      NVL(data1,0) AS data1,
+      NVL(data2,0) AS data2,
+      NVL(data3,0) AS data3,
+      NVL(data4,0) AS data4,
+      NVL(data5,0) AS data5,
+      NVL(data6,0) AS data6,
+      NVL(data7,0) AS data7
+    FROM
+      salesdistribute
+    WHERE maincategory = #{maincategory}
+    AND subcategory = #{subcategory}
+    ORDER BY chartdate
+  </select>   
+<!-- ////chart02 end -->
 
 
+<!-- chart03  -->
+    <select id="chart03GraphAvg" parameterType="ChartVO" resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      ROUND(AVG(NVL(data1,0)) ,2) AS data1Avg,
+      ROUND(AVG(NVL(data2,0)) ,2) AS data2Avg,
+      ROUND(AVG(NVL(data3,0)) ,2) AS data3Avg,
+      ROUND(AVG(NVL(data4,0)) ,2) AS data4Avg,
+      ROUND(AVG(NVL(data5,0)) ,2) AS data5Avg
+    FROM
+      publiccompany
+    GROUP BY chartdate,maincategory
+    HAVING maincategory = #{maincategory}
+    ORDER BY chartdate
+  </select>
+  
+  <!-- maincategory와 subcategory 변수가 들어오면 작동하는 쿼리 -->
+  <select id="chart03Graph" parameterType="ChartVO"  resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      subcategory,
+      NVL(data1,0) AS data1,
+      NVL(data2,0) AS data2,
+      NVL(data3,0) AS data3,
+      NVL(data4,0) AS data4,
+      NVL(data5,0) AS data5
+    FROM
+      publiccompany
+    WHERE maincategory = #{maincategory}
+    AND subcategory = #{subcategory}
+    ORDER BY chartdate
+  </select>   
+<!-- ////chart03 end -->
+
+<!-- chart04  -->
+    <select id="chart04GraphAvg" parameterType="ChartVO" resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      ROUND(AVG(NVL(data1,0)) ,1) AS data1Avg,
+      ROUND(AVG(NVL(data2,0)) ,1) AS data2Avg,
+      ROUND(AVG(NVL(data3,0)) ,1) AS data3Avg,
+      ROUND(AVG(NVL(data4,0)) ,1) AS data4Avg,
+      ROUND(AVG(NVL(data5,0)) ,1) AS data5Avg,
+      ROUND(AVG(NVL(data6,0)) ,1) AS data6Avg
+    FROM
+      GrowingIndicator
+    GROUP BY chartdate,maincategory
+    HAVING maincategory = #{maincategory}
+    ORDER BY chartdate
+  </select>
+  
+  <!-- maincategory와 subcategory 변수가 들어오면 작동하는 쿼리 -->
+  <select id="chart04Graph" parameterType="ChartVO"  resultType="ChartVO">
+    SELECT
+      TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+      maincategory,
+      subcategory,
+      NVL(data1,0) AS data1,
+      NVL(data2,0) AS data2,
+      NVL(data3,0) AS data3,
+      NVL(data4,0) AS data4,
+      NVL(data5,0) AS data5,
+      NVL(data6,0) AS data6
+    FROM
+      GrowingIndicator
+    WHERE maincategory = #{maincategory}
+    AND subcategory = #{subcategory}
+    ORDER BY chartdate
+  </select>   
+
+<!-- ////chart04 end -->
 
 </mapper>

@@ -19,7 +19,7 @@ public class ChartDaoImpl implements ChartDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	
+//chart01
 	//(변수 1개일때 maincategory)
 	public List<ChartVO> chartGraphAvg(ChartVO inVO){
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chartGraphAvg", inVO);
@@ -32,5 +32,48 @@ public class ChartDaoImpl implements ChartDao {
 	
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chartGraph", inVO);
 	}
+//chart01 end
+	
 
+	
+//chart02
+	public List<ChartVO> chart02GraphAvg(ChartVO inVO){
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart02GraphAvg", inVO);
+	}
+	
+	
+	public List<ChartVO> chart02Graph(ChartVO inVO) {			
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart02Graph", inVO);
+	}
+//chart02 end
+
+
+	
+//chart03
+	@Override
+	public List<ChartVO> chart03GraphAvg(ChartVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart03GraphAvg", inVO);
+	}
+
+	@Override
+	public List<ChartVO> chart03Graph(ChartVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart03Graph", inVO);
+	}
+//chart03 end
+
+	
+	
+//chart04
+	
+	@Override
+	public List<ChartVO> chart04GraphAvg(ChartVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart04GraphAvg", inVO);
+	}
+
+
+	@Override
+	public List<ChartVO> chart04Graph(ChartVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart04Graph", inVO);
+	}
+//chart04 end
 }

@@ -34,13 +34,16 @@
         <div class="chart-nav">
 				  <select id="mainCategorySelect" name="mainCategory">
 						    <option value="비제조업" selected="selected">비제조업</option>
-						    <option value="제조업">제조업</option>
+						    <option value="제조업">제조업</option>						    
 					</select>
+				  <select id="subCategorySelect" name="subCategory" style="display: none">
+          </select>
+					<button id="submitButton" style="display: none"></button>
 					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
 
-				<div class="chart-wrapper" onclick='doChart()'>
+				<div class="chart-wrapper">
 				  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
 				</div>
 
@@ -102,15 +105,12 @@
   <!-- main페이지 기능 관련 js end -->
   
 <script>
+
 const mainCategorySelect = document.getElementById("mainCategorySelect");
 mainCategorySelect.addEventListener("change", function() {
     submitButton.click();
 });
 
-function doChart() {
-
- location.href = "../chart/chart.do";
-}
 </script>
 </body>
 </html>
