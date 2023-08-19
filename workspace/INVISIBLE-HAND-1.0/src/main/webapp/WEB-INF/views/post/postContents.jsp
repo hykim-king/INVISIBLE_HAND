@@ -118,7 +118,8 @@
                     data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}"> --%>
                   </div>
                 </div>
-            </div> 
+		            <div class="more-btn"><p>더보기</p></div> 
+            </div>
           </c:forEach>
           
           
