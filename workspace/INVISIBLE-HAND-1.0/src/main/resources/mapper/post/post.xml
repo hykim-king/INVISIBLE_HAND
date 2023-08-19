@@ -54,7 +54,7 @@
   )A
   CROSS JOIN
   (
-  SELECT COUNT(postnumber) postNum
+  SELECT COUNT(postnumber) totalCnt
   FROM board
   WHERE categoryNumber = #{categoryNumber}
   <include refid="searchCondition"></include>
