@@ -24,35 +24,10 @@
 		
 		<div class="tab-box tab1 active" id="chart01">
       <div class="chart-wrapper">
-         <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
+         <jsp:include page="/WEB-INF/views/chart/solution_chart.jsp"/>
       </div>
 
        
-       <div class="chart-nav">
-          <select id="mainCategorySelect" name="mainCategory">
-                <option value="비제조업" selected="selected">비제조업</option>
-                <option value="제조업">제조업</option>
-          </select>
-          <select id="subCategorySelect" name="subCategory">
-            <option value="-" selected="selected">평균</option>
-            <option value="건설업">건설업</option>
-            <option value="교육서비스업">교육서비스업</option>
-            <option value="도매 및 소매업">도매 및 소매업</option>
-            <option value="부동산업 및 임대업">부동산업 및 임대업</option>
-            <option value="사업시설관리 및 사업지원서비스업">사업시설관리 및 사업지원서비스업</option>
-            <option value="서비스업">서비스업</option>
-            <option value="수리 및 기타개인서비스업">수리 및 기타개인서비스업</option>
-            <option value="숙박 및 음식점업">숙박 및 음식점업</option>                                           
-            <option value="예술,스포츠 및 여가관련서비스업">예술,스포츠 및 여가관련서비스업</option>
-            <option value="운수업">운수업</option>
-            <option value="전문,과학 및 기술서비스업">전문,과학 및 기술서비스업</option>
-            <option value="출판,영상,방송통신 및 정보서비스업">출판,영상,방송통신 및 정보서비스업</option>
-          </select>
-          <button id="submitButton" style="display: none;">Submit</button>
-        </div>
-      </div>
-		
-		
 		<div class="solution-desc">
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
