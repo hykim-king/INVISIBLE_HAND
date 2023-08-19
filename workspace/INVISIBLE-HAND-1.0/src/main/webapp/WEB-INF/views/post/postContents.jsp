@@ -1,4 +1,3 @@
-<%@page import="com.pcwk.ehr.cmn.StringUtil"%>
 <%@page import="com.pcwk.ehr.VO.PostVO"%>
 <%@page import="com.pcwk.ehr.VO.MemberVO"%>
 <%@page import="com.pcwk.ehr.VO.CommentVO"%>
@@ -119,7 +118,8 @@
                     data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}"> --%>
                   </div>
                 </div>
-            </div> 
+		            <div class="more-btn"><p>더보기</p></div> 
+            </div>
           </c:forEach>
           
           
@@ -443,7 +443,12 @@ $("#addComment").on("click", function() {
         }
     });//댓글삭제------------------------------
     
-    
+    $(document).ready(function() {
+    	  // 조건문을 사용하여 .a 클래스의 높이가 200px인 경우에만 새로운 클래스를 추가합니다.
+    	  if ($(".comment-box").height() === 200) {   		  
+    	    (this).addClass("more");
+    	  }
+    	});
     
 </script>
   
