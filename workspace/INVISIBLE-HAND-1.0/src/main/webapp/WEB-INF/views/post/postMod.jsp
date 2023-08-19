@@ -22,10 +22,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
-<!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 <script src="${CP}/resources/js/util.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
@@ -45,37 +41,40 @@
     <div class="wrap-1000 ">
       <h1><c:out value="${ctg}" /> 수정</h1>
 
-      <!-- 버튼 -->
-      <div class="row g-1 d-flex justify-content-end btn-area">
-        <div class="col-auto">
-          <input type="button" class="btn" value="목록" id="moveToList">
-          <input type="button" class="btn" value="수정 완료" id="doUpdate">
-        </div>
-      </div>
-      <!--// 버튼 ------------->
-    <div class="contents-area">
 
-      <form action="${CP}/post/postMod.do" method="post" name="mod_frm" id="mod_frm" onsubmit="submit">
+    <div class="contents-area" style="margin-bottom: 20px;">
+      <div class="yellow-box"></div>
+      <form action="${CP}/post/postMod.do" method="post" name="mod_frm" id="mod_frm" onsubmit="submit"  class="write-form">
         <input type="hidden" name="categoryNumber" id="categoryNumber" value="${inVO.getCategoryNumber()}">
         <input type="hidden" name="postNumber" id="postNumber" value="${inVO.getPostNumber()}">
     
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">제목</label>
+        <div class="write-box">
+           <!--  <label for="exampleFormControlInput1" class="form-label">제목</label> -->
             <input type="text" id="title" name="title" class="form-control title_cls" value="${outVO.title}" required="required" maxlength="66">
         </div>
     
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">닉네임</label>
-            <input type="text" class="form-control" id="nickname" name="nickname" value="${outVO.getNickname()}" readonly="readonly">
+        <div class="write-box nick">
+            <!-- <label for="exampleFormControlInput1" class="form-label">닉네임</label> -->
+            <input type="text" class="nick-write" id="nickname" name="nickname" value="${outVO.getNickname()}" readonly="readonly">
         </div>
     
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-            <textarea class="form-control" id="content" name="content" rows="3" required="required">${outVO.content}</textarea>
+        <div class="write-box content">
+            <!-- <label for="exampleFormControlTextarea1" class="form-label">내용</label> -->
+            <textarea class="content-write" id="content" name="content" rows="3" required="required">${outVO.content}</textarea>
         </div>
-                  
+        <div class="yellow-box"style="margin-top: 10px;"></div>      
       </form>
     </div>
+    
+          <!-- 버튼 -->
+      <div class="btn-area" style="margin-bottom: 100px;">
+        <div class="col-auto">
+          <input type="button" class="button btn btn-w" value="목록" id="moveToList">
+          <input type="button" class="button btn btn-b" value="수정 완료" id="doUpdate">
+        </div>
+      </div>
+      <!--// 버튼 ------------->
+    
     </div><!-- **---wrap End---** -->
   </div> <!-- **---container End---** -->
 <script>

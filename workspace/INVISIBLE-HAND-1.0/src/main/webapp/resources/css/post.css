@@ -97,6 +97,7 @@ h3{
   font-weight: 600;
   margin-right: 5px;
   text-align: center;
+  cursor: pointer;
   
   
 }
@@ -300,8 +301,11 @@ textarea.form-contents {
   border:none;
   border-bottom:2px solid #FFA000;
   margin-right: 15px; 
+  cursor: pointer;
 }
-
+.form-select>option{
+  cursor: pointer;	
+}
 .form-select:focus {
   border: 1px solid #121212;
   border-bottom:2px solid #FFA000;
@@ -568,3 +572,9 @@ tbody>tr:last-child{
   cursor: pointer;
   font-weight: 600;
 }
+
+
+
+
+
+
