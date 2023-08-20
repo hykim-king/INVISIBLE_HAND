@@ -25,6 +25,47 @@ public class MypageController {
 		
 		return "mypage/mypage";
 	}
-
+	
+	@RequestMapping(value = "/mypageUpdate.do")
+	public String mypageUpdate() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ mypageUpdate()       	   │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "mypage/mypageUpdate";
+	}
+	
+	@RequestMapping(value = "/mypageDelete.do")
+	public String mypageDelete() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ mypageDelete()       	   │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "mypage/mypageDelete";
+	}
+	@RequestMapping(value = "/mypagePayedit.do")
+	public String mypagePayedit() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ mypagePayedit()       	   │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "mypage/mypagePayedit";
+	}
+	@RequestMapping(value = "/mypagePayment.do")
+	public String mypagePayment() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ mypagePayment()       	   │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "mypage/mypagePayment";
+	}
+	
+	public String mypageView() {
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│ mypageView()       	   │");
+		LOG.debug("└───────────────────────┘");
+		
+		return "mypage/mypageView";
+	}
 	
 }

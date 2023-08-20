@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+    int result = (Integer) request.getAttribute("result");
+%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/payment.css">
@@ -22,6 +25,7 @@
       <div id="kakaoContent">
 				<c:if test="${empty paymentInfo}">
 		      <span>구독 정보가 없습니다.</span>
+		      <div>접속하신 유저의 구독 등급 : ${result}</div>
 				</c:if>
 				<c:if test="${not empty paymentInfo}">
 			    <div>session으로 정보 꺼내기</div><br>
@@ -38,7 +42,26 @@
 			    <div>로그인된 유저의 이메일 : ${paymentInfo.buyerEmail}</div>
 			    <div>로그인된 유저의 이름 : ${paymentInfo.buyerName}</div>
 			    <div>로그인된 유저의 번호 : ${paymentInfo.buyerTel}</div>
+			    <div>로그인된 유저의 구독 등급 : ${result}</div>
 				</c:if>
+				<c:choose>
+			    <c:when test="${result eq 0}">
+            <span>비로그인 c:if</span><br>
+			    </c:when>
+			    <c:when test="${result eq 1}">
+			      <span>비구독자 c:if</span><br>
+			    </c:when>
+			    <c:when test="${result eq 2}">
+			      <span>구독자 c:if</span><br>
+			    </c:when>
+				</c:choose>
+				<% if (result == 0) { %>
+				 <span>비로그인</span>
+				<% } else if (result == 1) { %>
+				 <span>비구독자</span>
+				<% } else if (result == 2) { %>
+				 <span>구독자</span>
+				<% } %>
       </div>
       <!-- *** kakaoContent *** -->
 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PaymentInfoVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.service.MemberService;
@@ -37,7 +36,7 @@ public class PaymentController {
 	// 구독 여부 확인
 	@ResponseBody
 	@RequestMapping(value = "/payment_check.do")
-	public String payment_check(PaymentInfoVO info, HttpServletRequest request) throws Exception {
+	public String paymentCheck(PaymentInfoVO info, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("email");
 		int result = payService.checkPaymentInfo(email);
@@ -54,6 +53,15 @@ public class PaymentController {
 		// PaymentInfoVO 객체 생성
 		PaymentInfoVO paymentInfo = new PaymentInfoVO();
 		paymentInfo = payService.getPaymentInfoByEmail(buyerEmail); // 객체에 정보 담기
+		
+		// 구독 여부 체크
+	    int result = 1; // 기본 값은 비구독자
+	    if (paymentInfo != null && payService.checkPaymentInfo(buyerEmail) == 1) {
+	        result = 2;
+	    } else if (buyerEmail == null) {
+	        result = 0;
+	    }
+	    model.addAttribute("result", result);
 	
 		model.addAttribute("paymentInfo", paymentInfo);
 	

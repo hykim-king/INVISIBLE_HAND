@@ -8,6 +8,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
   <link rel="stylesheet" href="../resources/css/common.css">
   <link rel="stylesheet" href="../resources/css/chart.css">
+  <link rel="stylesheet" href="../resources/css/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
   <title>보이지 않는 손 레이아웃</title>
 </head>
@@ -52,7 +53,7 @@
       <h4>추천 게시글</h4>
       <section class="sec03 sec-board">
        
-	      <div>
+	      <div class="main-post-category">
 	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
 	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
 	      </div>
@@ -60,13 +61,13 @@
 	      <div>
 		       <table class="main-post-table">
 		          <thead class="main-post-thead">
-		            <tr>
-		            <th>No.</th>
-		            <th>제목</th>
-		            <th>글쓴이</th>
-		            <th>작성일</th>
-		            <th>조회수</th>
-		            <th>추천수</th>
+		            <tr width="900px">
+			            <th width="50px">No.</th>
+			            <th width="640px">제목</th>
+			            <th width="70px">글쓴이</th>
+			            <th width="70px">작성일</th>
+			            <th width="60px">조회수</th>
+			            <th width="60px">추천수</th>
 		            </tr>
 		          </thead>
 		          <tbody id="tableBody" class="main-post-tbody">
@@ -77,22 +78,33 @@
       </section>
     </div>
     <!-- **---wrap End---** -->
-    <div class="rank-area">
-    <h3>업종별 변동 현황</h3>
-        <table class="main-rank-table">
-            <thead>
-                <tr>
-                <th>등수</th>
-                <th>업종명</th>                
-                <th>등수변동</th>
-                <th>화살표</th>
-                </tr>
-           </thead>
-           <tbody id="rankBody">
-            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
-           </tbody>
-        </table>   
-    </div>
+		<div class="user-rank-wrap">
+		  <div class="user-area">
+		  <p>여기 로그인정보, 마이페이지 링크 자리를 만들어볼까 합니다</p>
+		  </div>
+		
+		
+		
+			<div class="rank-area">
+	    <h4>업종별 변동 현황</h4>
+	        <table class="main-rank-table">
+	            <thead>
+	                <tr>
+	                <th>등수</th>
+	                <th>업종명</th>                
+	                <th>등수변동</th>
+	                <th>화살표</th>
+	                </tr>
+	           </thead>
+	           <tbody id="rankBody">
+	            <!-- 여기에 데이터가 동적으로 추가될 예정입니다 -->
+	           </tbody>
+	        </table>   
+	    </div>
+		</div>
+
+    
+    
   </div>
   <!-- **---container End---** -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
