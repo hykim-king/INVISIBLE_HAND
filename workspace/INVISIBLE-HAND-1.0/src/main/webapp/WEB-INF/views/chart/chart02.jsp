@@ -20,7 +20,6 @@
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart2"></div>
-
     </div>
     <!-- **---wrap End---** -->
   </div>
@@ -153,9 +152,17 @@ $(document).ready(function () {
 	            textStyle: { position: 'top', fontSize: 10, color: '#fff' },
 	          },
 	          series: {
-	              0: { color: '#F0A57C', lineWidth: 2, visibleInLegend: true },
-	              1: { color: '#91FFC3', lineWidth: 2, visibleInLegend: true }
-	          }
+	              0: { lineWidth: 2, visibleInLegend: true },
+	              1: { lineWidth: 2, visibleInLegend: true },
+	              2: { lineWidth: 2, visibleInLegend: true },
+	              3: { lineWidth: 2, visibleInLegend: true },
+	              4: { lineWidth: 2, visibleInLegend: true },
+	              5: { lineWidth: 2, visibleInLegend: true },
+	              6: { lineWidth: 2, visibleInLegend: true },
+	              7: { lineWidth: 2, visibleInLegend: true }
+	              
+	          },
+	          
 	        }; //options2
 
 	        let chart2 = new google.visualization.ColumnChart(document.getElementById('line_chart2'));
