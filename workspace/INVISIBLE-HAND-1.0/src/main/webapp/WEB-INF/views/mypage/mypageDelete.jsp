@@ -41,16 +41,16 @@ textarea.size {
 					<div class="form-h3">
 					<div class="line1px"></div>
 					<div class="line3px"></div>
-					<h3>회원 탈퇴</h3>
+					<h3 style="color: black;">회원 탈퇴</h3>
 					<div class="line3px"></div>
 					<div class="line1px"></div>
 				</div>
 
 				<form>
 	        <div class="label-margin">
-	            <p class="input-title">비밀번호 입력</p>
+	            <p class="input-title" style="color: black;">비밀번호 입력</p>
 	            <label>
-	                <input type="password" name="password" placeholder="비밀번호를 입력하세요" class="size border-bottom" required>
+	                <input type="password" name="password"  id="password" placeholder="비밀번호를 입력하세요" class="size border-bottom" value=""> 
 	            </label>
 	        </div>
 	
@@ -60,7 +60,8 @@ textarea.size {
 	                <textarea name="reason" placeholder="회원탈퇴를 원하는 이유를 간략히 입력하세요" class="size border-bottom" required></textarea>
 	            </label>
 	        </div>
-	
+			<input type="hidden" name="upassword" id="upassword" value="${member.password}">
+			<input type="hidden" name="uid" id="uid" value="${member.memberId}">
 	        <div class="label-margin">
             <!-- "확인" 버튼에 onclick 이벤트를 추가하여 확인 메시지를 띄우고 탈퇴 완료 메시지를 보여줍니다. -->
             <label>
@@ -72,21 +73,11 @@ textarea.size {
 	            </label>
 	        </div>
 	    </form>
-	   <script>
-        function confirmWithdrawal() {
-            // 확인 대화 상자를 띄우고 사용자가 확인 버튼을 누를 경우 탈퇴 완료 메시지를 보여줍니다.
-            if (confirm("정말로 탈퇴하시겠습니까?")) {
-                alert("탈퇴가 완료되었습니다.");
-                // 탈퇴 처리를 진행하는 코드를 추가해야 합니다.
-            }
-        }
-    </script>
-    
-	
+
 	    <!-- 주의 사항 안내 -->
 	    <div>
-	        <p>주의: 회원탈퇴 시 관련 데이터가 모두 삭제되며, 탈퇴 후에는 복구가 어려울 수 있습니다.</p>
-	        <p>탈퇴 후에는 동일한 계정으로 재가입이 불가능할 수 있습니다.</p>
+	        <p style="color: black">주의: 회원탈퇴 시 관련 데이터가 모두 삭제되며, 탈퇴 후에는 복구가 어려울 수 있습니다.</p>
+	        <p style="color: black">탈퇴 후에는 동일한 계정으로 재가입이 불가능할 수 있습니다.</p>
 	    </div>
 								
 			</div>
@@ -94,7 +85,55 @@ textarea.size {
 	</div>
 
 	<!-- **---container End---** -->
-	
-
 </body>
+<script>
+     function confirmWithdrawal() {
+         // 확인 대화 상자를 띄우고 사용자가 확인 버튼을 누를 경우 탈퇴 완료 메시지를 보여줍니다.  
+         if (confirm("정말로 탈퇴하시겠습니까?")) {
+        	 if(""==$("#password").val() || 0==$("#password").val().length){
+                 alert("비밀번호를 입력하세요");  
+                 $("#password").focus();
+                 return;
+        	 }
+        	 if($("#password").val() != $("#upassword").val()){
+        		 alert("현재사용중인 비밀번호가 아닙니다."); 
+        		 $("#password").focus();
+        		 return;
+        	 }
+        	 
+        	 else{
+        		 
+        		 $.ajax({
+        	            type: "POST",
+        	            url:"${CP}/mypage/mypageDelete.do",
+        	            asyn:"true",
+        	            dataType:"html",
+        	            data:{
+        	            	memberId: $("#uid").val(),
+        	                password: $("#password").val()
+        	            },
+        	            success:function(data){//통신 성공
+        	                  let parsedJSON = JSON.parse(data);
+        	                  
+        	                  if("10" == parsedJSON.msgId) {
+        	                      alert(parsedJSON.msgContents);
+        	                      window.location.href="${CP}/member/logout.do";
+        	                  }
+        	                  
+        	                  if("20" == parsedJSON.msgId) {
+        	                      alert(parsedJSON.msgContents);
+        	                      return;
+        	                  }
+
+        	              },
+        	              error:function(data){//실패시 처리
+        	                console.log("error:"+data);
+        	              }
+        	          });
+        	 }//else--end
+        	 
+             // 탈퇴 처리를 진행하는 코드를 추가해야 합니다.
+         }//1.if--end
+     }//function--end
+</script>
 </html>

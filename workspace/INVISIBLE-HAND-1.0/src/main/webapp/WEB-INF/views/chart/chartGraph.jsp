@@ -56,7 +56,7 @@
           <select id="subCategorySelect" name="subCategory">
           </select>
           <button id="submitButton" style="display: none;"></button>
-          <button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
+          <button id="restoreButton">초기화</button> <!-- Restore 버튼 추가 -->
         </div>
       </div> 
     
@@ -71,7 +71,7 @@
 	          <select id="subCategorySelect2" name="subCategory2">
 	          </select>
 	          <button id="submitButton2" style="display: none;"></button>
-	          <button id="restoreButton2">모두 보기</button> <!-- Restore 버튼 추가 -->
+	          <button id="restoreButton2">초기화</button> <!-- Restore 버튼 추가 -->
           </div>
       </div> 
 
@@ -86,7 +86,7 @@
             <select id="subCategorySelect3" name="subCategory3">
             </select>
             <button id="submitButton3" style="display: none;"></button>
-             <button id="restoreButton3">모두 보기</button> <!-- Restore 버튼 추가 -->
+             <button id="restoreButton3">초기화</button> <!-- Restore 버튼 추가 -->
           </div>
       </div>
 
@@ -101,7 +101,7 @@
             <select id="subCategorySelect4" name="subCategory4">
             </select>
             <button id="submitButton4" style="display: none;"></button>
-             <button id="restoreButton4">모두 보기</button> <!-- Restore 버튼 추가 -->
+             <button id="restoreButton4">초기화</button> <!-- Restore 버튼 추가 -->
           </div>
      </div>
  </c:when>
@@ -111,7 +111,7 @@
             </div>
             <div class="chart-login">
               <div class="desc">
-                <p>인공지능이 예측한 자료 열람하기</p>
+                <p>로그인 하고 자료 열람하기</p>
               </div>
               <div class="btn">
                 <a href="${CP}/member/memberLogin.do"><span>로그인</span></a>
