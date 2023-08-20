@@ -32,10 +32,10 @@
           <li>
 	          <c:choose>
 	            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-	              <a href="#" onclick="paymentCheckIf()">솔루션</a>
+	              <a href="#" onclick="paymentCheckIf()">마이기업솔루션</a>
 	            </c:when>
 	            <c:otherwise>
-	              <a href="#" id="loginBtn" onclick="doLogin()">솔루션</a>
+	              <a href="#" id="loginBtn" onclick="doLogin()">마이기업솔루션</a>
 	            </c:otherwise>
 	          </c:choose>
           </li>
