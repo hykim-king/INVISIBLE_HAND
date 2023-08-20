@@ -297,7 +297,7 @@ header{
 
 /* wrap------------------- */
 .main-wrap{
-  padding: 50px 30px;
+  padding: 40px 20px;
   background-color: #000;
   border-radius: 40px;
   margin-top: 60px;
@@ -366,7 +366,6 @@ section{
 /* sec-chart------------------- */
 
 .sec-chart{
-  padding:50px 0px;
   position: relative;
   overflow: hidden;
 }
@@ -378,7 +377,7 @@ section{
  
 /* sec-board------------------- */
 .sec-board{
-  padding:50px;
+  padding:40px 50px;
 }
 
 .main-post-table{
@@ -487,3 +486,37 @@ footer{
 .width80{
   width:80%;
 }
+
+
+/* 자동완성 기능 시 인풋 배경 하얗게 변하는 것 방지/ 포커싱 될때 테두리 생기는것 방지 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 1000px #121212 inset;
+    box-shadow: 0 0 0px 1000px #121212 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 1000px #121212 inset;
+    box-shadow: 0 0 0px 1000px #121212 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px #fff inset;
+}
+
+
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0 1000px #121212 inset;
+box-shadow: 0 0 0 1000px #121212 inset;
+}
+
+input:focus {outline: none;}

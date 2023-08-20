@@ -77,7 +77,7 @@
     </delete>
     
     <!-- 회원 강제 탈퇴 -->
-    <delete id="forceWithdraw" parameterType="MemberVO">
+    <delete id="deleteOne" parameterType="MemberVO">
       DELETE FROM MEMBER
       WHERE memberId = #{memberId}
     </delete>
@@ -96,7 +96,7 @@
 			  , email
 			  , nickname
 			  , TO_CHAR(joindate,'yyyy-mm-dd HH24MISS') JoinDate
-			  , TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updatedate
+			  , TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updateDate
 			  , isverified
 			  , phoneNumber
 			FROM
@@ -104,6 +104,20 @@
 			WHERE  memberId = #{memberId}
  
  </select>
+ 
+ <update id="update" parameterType="MemberVO">
+       UPDATE member          
+       SET  memberId      =  #{memberId} 
+           ,nickName      =  #{nickName} 
+           ,memberName    =  #{memberName} 
+           ,memberGrade   =  #{memberGrade}     
+           ,email         =  #{email}     
+           ,updateDate    =  #{updateDate}     
+
+       WHERE                     
+               memberId = #{memberId}     
+
+</update>
 
 
     

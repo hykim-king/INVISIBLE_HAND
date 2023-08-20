@@ -94,5 +94,164 @@ public class ChartController {
 		LOG.debug("=====================================");
 		return jsonString;
 	}
+	
 
+	@RequestMapping(value="/chart02.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String chart02Graph(@RequestParam(value = "mainCategory", required = false, defaultValue = "제조업") String mainCategory,
+            				 @RequestParam(value = "subCategory", required = false, defaultValue = "-") String subCategory) {
+		String jsonString02 = "";
+		ChartVO inVO = new ChartVO();
+		inVO.setMaincategory(mainCategory);
+		inVO.setSubcategory(subCategory);		
+		List<ChartVO> chartData02 = chartSerivce.chart02Graph(inVO);
+		
+		JsonArray mainArray02=new JsonArray();
+		if(subCategory.equals("-")) {
+			for(ChartVO outVO  :chartData02) {
+				JsonArray sArray=new JsonArray();
+				sArray.add(outVO.getChartdate());
+				sArray.add(outVO.getMaincategory());
+				sArray.add(outVO.getSubcategory());
+				sArray.add(outVO.getData1Avg());
+				sArray.add(outVO.getData2Avg());
+				sArray.add(outVO.getData3Avg());
+				sArray.add(outVO.getData4Avg());
+				sArray.add(outVO.getData5Avg());
+				sArray.add(outVO.getData6Avg());
+				sArray.add(outVO.getData7Avg());
+		
+				mainArray02.add(sArray);
+			}
+			jsonString02 = mainArray02.toString();
+			
+		}else if(!subCategory.equals("-")) {
+				for(ChartVO outVO  :chartData02) {
+					JsonArray sArray=new JsonArray();
+					sArray.add(outVO.getChartdate());
+					sArray.add(outVO.getMaincategory());
+					sArray.add(outVO.getSubcategory());
+					sArray.add(outVO.getData1());
+					sArray.add(outVO.getData2());
+					sArray.add(outVO.getData3());
+					sArray.add(outVO.getData4());
+					sArray.add(outVO.getData5());
+					sArray.add(outVO.getData6());
+					sArray.add(outVO.getData7());	
+					mainArray02.add(sArray);
+				}
+				jsonString02 = mainArray02.toString();
+		}
+		
+				
+		LOG.debug("=====================================");
+		LOG.debug("jsonString02"+jsonString02);
+		LOG.debug("=====================================");
+		return jsonString02;
+	}
+	
+	@RequestMapping(value="/chart03.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String chart03Graph(@RequestParam(value = "mainCategory", required = false, defaultValue = "제조업") String mainCategory,
+            				 @RequestParam(value = "subCategory", required = false, defaultValue = "-") String subCategory) {
+		String jsonString03 = "";
+		ChartVO inVO = new ChartVO();
+		inVO.setMaincategory(mainCategory);
+		inVO.setSubcategory(subCategory);		
+		List<ChartVO> chartData03 = chartSerivce.chart03Graph(inVO);
+		
+		JsonArray mainArray03=new JsonArray();
+		if(subCategory.equals("-")) {
+			for(ChartVO outVO  :chartData03) {
+				JsonArray sArray=new JsonArray();
+				sArray.add(outVO.getChartdate());
+				sArray.add(outVO.getMaincategory());
+				sArray.add(outVO.getSubcategory());
+				sArray.add(outVO.getData1Avg());
+				sArray.add(outVO.getData2Avg());
+				sArray.add(outVO.getData3Avg());
+				sArray.add(outVO.getData4Avg());
+				sArray.add(outVO.getData5Avg());
+		
+				mainArray03.add(sArray);
+			}
+			jsonString03 = mainArray03.toString();
+			
+		}else if(!subCategory.equals("-")) {
+				for(ChartVO outVO  :chartData03) {
+					JsonArray sArray=new JsonArray();
+					sArray.add(outVO.getChartdate());
+					sArray.add(outVO.getMaincategory());
+					sArray.add(outVO.getSubcategory());
+					sArray.add(outVO.getData1());
+					sArray.add(outVO.getData2());
+					sArray.add(outVO.getData3());
+					sArray.add(outVO.getData4());
+					sArray.add(outVO.getData5());
+					mainArray03.add(sArray);
+				}
+				jsonString03 = mainArray03.toString();
+		}
+		
+				
+		LOG.debug("=====================================");
+		LOG.debug("jsonString03"+jsonString03);
+		LOG.debug("=====================================");
+		return jsonString03;
+	}
+	
+	
+	@RequestMapping(value="/chart04.do",method = RequestMethod.GET
+			,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String chart04Graph(@RequestParam(value = "mainCategory", required = false, defaultValue = "제조업") String mainCategory,
+            				 @RequestParam(value = "subCategory", required = false, defaultValue = "-") String subCategory) {
+		String jsonString04 = "";
+		ChartVO inVO = new ChartVO();
+		inVO.setMaincategory(mainCategory);
+		inVO.setSubcategory(subCategory);		
+		List<ChartVO> chartData04 = chartSerivce.chart04Graph(inVO);
+		
+		JsonArray mainArray04=new JsonArray();
+		if(subCategory.equals("-")) {
+			for(ChartVO outVO  :chartData04) {
+				JsonArray sArray=new JsonArray();
+				sArray.add(outVO.getChartdate());
+				sArray.add(outVO.getMaincategory());
+				sArray.add(outVO.getSubcategory());
+				sArray.add(outVO.getData1Avg());
+				sArray.add(outVO.getData2Avg());
+				sArray.add(outVO.getData3Avg());
+				sArray.add(outVO.getData4Avg());
+				sArray.add(outVO.getData5Avg());
+				sArray.add(outVO.getData6Avg());
+				mainArray04.add(sArray);
+			}
+			jsonString04 = mainArray04.toString();
+			
+		}else if(!subCategory.equals("-")) {
+				for(ChartVO outVO  :chartData04) {
+					JsonArray sArray=new JsonArray();
+					sArray.add(outVO.getChartdate());
+					sArray.add(outVO.getMaincategory());
+					sArray.add(outVO.getSubcategory());
+					sArray.add(outVO.getData1());
+					sArray.add(outVO.getData2());
+					sArray.add(outVO.getData3());
+					sArray.add(outVO.getData4());
+					sArray.add(outVO.getData5());
+					sArray.add(outVO.getData6());
+					mainArray04.add(sArray);
+				}
+				jsonString04 = mainArray04.toString();
+		}
+		
+				
+		LOG.debug("=====================================");
+		LOG.debug("jsonString04"+jsonString04);
+		LOG.debug("=====================================");
+		return jsonString04;
+	}
 }

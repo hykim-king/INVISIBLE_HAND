@@ -157,3 +157,31 @@ input{
 input.hidden{
     margin-right: 5px;
 }
+
+
+
+/* A */
+
+.A-title{
+	color:#00FFF0;
+	margin-top: 100px;
+	padding: 50px
+}
+.solution-desc{
+	margin-bottom: 100px;
+}
+.solution-desc h3{
+	margin: 15px 0;
+}
+.solution-desc-list{
+	margin: 30px 100px
+}
+.solution-desc-list p{
+	font-size: 18px;
+	margin: 0;
+	margin-left: 50px;
+}
+.solution-desc-list span{
+	color: #00FFF0;
+}
+

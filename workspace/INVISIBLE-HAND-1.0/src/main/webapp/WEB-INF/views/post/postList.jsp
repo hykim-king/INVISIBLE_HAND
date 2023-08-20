@@ -17,7 +17,7 @@
          request.setAttribute("ctg", ctg);
          request.setAttribute("ctgNumValue", ctgNumValue);
          
-         //paging
+       //paging
          int bottomCount = 10;
          int pageSize    = 10;
          int pageNo      =  1;
@@ -150,7 +150,7 @@
        </table> <!-- **---table End---** -->
        <!-- 페이징 -->
        <div class="d-flex justify-content-center">
-        <%=StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount, cPath+"/post/postList.do", "searchPage") %>
+        <%= StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount,  cPath+"/post/postList.do", "searchPage") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
        

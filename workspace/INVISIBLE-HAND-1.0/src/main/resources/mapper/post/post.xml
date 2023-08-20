@@ -3,18 +3,21 @@
 <mapper namespace="com.pcwk.ehr.post">
 
   <!-- 검색조건 -->
-  <!-- 제목10 내용20 -->
+  <!-- 전체(제목+내용+글쓴이)10 제목10 내용20 글쓴이30 -->
   <sql id="searchCondition">
       <if test="searchWord != ''">
           <choose>
               <when test="searchDiv == '10'">
-                  AND (title LIKE #{searchWord} || '%' OR content LIKE #{searchWord} || '%')
+                AND (title LIKE #{searchWord} || '%' OR content LIKE #{searchWord} || '%' OR nickname LIKE #{searchWord} || '%')
               </when>
               <when test="searchDiv == '20'">
                   AND title LIKE #{searchWord} || '%'
               </when>
               <when test="searchDiv == '30'">
                   AND content LIKE #{searchWord} || '%'
+              </when>
+              <when test="searchDiv == '40'">
+                  AND nickname LIKE #{searchWord} || '%'
               </when>
           </choose>
       </if>
@@ -51,7 +54,7 @@
   )A
   CROSS JOIN
   (
-  SELECT COUNT(postnumber) postNum
+  SELECT COUNT(postnumber) totalCnt
   FROM board
   WHERE categoryNumber = #{categoryNumber}
   <include refid="searchCondition"></include>

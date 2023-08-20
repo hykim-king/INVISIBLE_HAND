@@ -36,6 +36,9 @@
     <lombok-version>1.18.26</lombok-version>
     <spring-boot.version>2.5.2</spring-boot.version>
     <spring-security.version>5.8.5</spring-security.version>
+    <spring-security-web>5.8.5</spring-security-web>
+    <spring-security-config>5.8.5</spring-security-config>
+    <spring-security-crypto>5.8.5</spring-security-crypto>
   </properties> 
    
 
@@ -51,19 +54,19 @@
     <dependency> 
         <groupId>org.springframework.security</groupId> 
         <artifactId>spring-security-web</artifactId> 
-        <version>${spring-security.version}</version> 
+        <version>${spring-security-web}</version> 
     </dependency>
     
     <dependency> 
         <groupId>org.springframework.security</groupId> 
         <artifactId>spring-security-config</artifactId> 
-        <version>${spring-security.version}</version> 
+        <version>${spring-security-config}</version> 
     </dependency>  
     
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-crypto</artifactId>
-        <version>${spring-security.version}</version>
+        <version>${spring-security-crypto}</version>
     </dependency>
       <!-- Spring security end -->
   
