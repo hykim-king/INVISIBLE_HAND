@@ -30,31 +30,28 @@
     <input type="hidden" id= "uemail" value="${member.email}">
     <div class="h60px"></div>
     <div class="container-1400 min-100vh con-login">
+     <p>[닉네임]님이 남긴  QnA 입니다.</p>
      <table>
          <thead>
            <tr>
-                <td style="color: black;">1</td>
-                <td style="color: black;">2</td>
-                <td style="color: black;">3</td>
-                <td style="color: black;">4</td>
-                <td style="color: black;">5</td>
-                <td style="color: black;">6</td>
-                <td style="color: black;">7</td> 
-                <td style="color: black;">8</td>
+           	    <td style="color: black;">No</td>
+                <td style="color: black;">게시글 제목(지금은 번호)</td>
+                <td style="color: black;">제목</td>
+                <td style="color: black;">글쓴이</td>
+                <td style="color: black;">작성일</td>
+                <td style="color: black;">조회수</td>
            </tr>
          </thead>
      
          <tbody>
-             <c:forEach items="${list}" var="list">
+             <c:forEach items="${list}" var="list" varStatus="status">
                  <tr>
-                      <td style="color: black;">${list.postNumber}</td>
-                      <td style="color: black;">${list.nickname}</td>
-                      <td style="color: black;">${list.title}</td>
-                      <td style="color: black;">${list.content}</td>
-                      <td style="color: black;">${list.writtenDate}</td>
-                      <td style="color: black;">${list.likes}</td>
-                      <td style="color: black;">${list.views}</td> 
-                      <td style="color: black;">${list.categoryNumber}</td> 
+                    <td style="color: black;">${status.count}</td>
+                    <td style="color: black;">${list.postNumber}</td>
+                    <td style="color: black;">${list.title}[${list.likes}]</td>
+                    <td style="color: black;">${list.nickname}</td>
+                    <td style="color: black;">${list.writtenDate}</td>
+                    <td style="color: black;">${list.views}</td> 
                  </tr>
              </c:forEach>
         </tbody>

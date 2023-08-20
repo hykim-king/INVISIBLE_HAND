@@ -33,8 +33,8 @@
      <table>
          <thead>
            <tr>
-           		<td style="color: black;">자유게시판</td>
-                <td style="color: black;">No</td>
+           	    <td style="color: black;">No</td>
+                <td style="color: black;">게시번호</td>
                 <td style="color: black;">제목</td>
                 <td style="color: black;">글쓴이</td>
                 <td style="color: black;">작성일</td>
@@ -43,9 +43,9 @@
          </thead>
      
          <tbody>
-             <c:forEach items="${list}" var="list">
+             <c:forEach items="${list}" var="list" varStatus="status">
                  <tr>
-                 	<td style="color: black;">${list.categoryNumber}</td> 
+                    <td style="color: black;">${status.count}</td>
                     <td style="color: black;">${list.postNumber}</td>
                     <td style="color: black;">${list.title}[${list.likes}]</td>
                     <td style="color: black;">${list.nickname}</td>

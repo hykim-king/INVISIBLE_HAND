@@ -32,20 +32,20 @@
 	 <table>
 	     <thead>
 	       <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td> 
+                <td>No</td>
+                <td>결제 ID</td>
+                <td>품목</td>
+                <td>금액</td>
+                <td>결제등록 이메일</td>
+                <td>구매자 이름</td>
+                <td>구매자 전화번호</td> 
            </tr>
 	     </thead>
      
 		 <tbody>
-			 <c:forEach items="${list}" var="list">
+			 <c:forEach items="${list}" var="list" varStatus="status">
 				 <tr>
-					  <td style="color: black;">${list.paymentinfoseq}</td>
+					  <td style="color: black;">${status.count}</td>
 					  <td style="color: black;">${list.merchantUid}</td>
 					  <td style="color: black;">${list.name}</td>
 					  <td style="color: black;">${list.amount}</td>

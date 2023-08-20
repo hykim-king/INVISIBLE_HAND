@@ -39,9 +39,9 @@
         <h2>나의활동</h2>
         <div class="my-info">
           <div class="my-info-list">
-            <span><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">작성한 게시글 보기</a></span>
-            <span><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">작성한 댓글 보기</a></span>
-            <span><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">문의글 보기</a></span>
+            <span><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글 보기</a></span>
+            <span><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">나의 댓글 보기</a></span>
+            <span><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글 보기</a></span>
           </div>
         </div>
         <div class="line1px black"></div>
@@ -54,7 +54,7 @@
         <h2>구독관리</h2>
         <div class="my-info">
           <div class="my-info-list">  
-            <span><a href="${CP}/mypage/mypagePayment.do?buyerEmail=${member.email}">구독 현황</a></span>
+            <span><a href="${CP}/mypage/mypagePayment.do?buyerEmail=${member.email}">결제 정보</a></span>
           </div>
         </div>
         <div class="line1px black"></div>
