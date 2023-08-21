@@ -69,13 +69,14 @@ public class PaymentController {
 	
 	@PostMapping("/payment_info.do")
 	@ResponseBody
-	public String paymentInfoAddOrUpdate(PaymentInfoVO inVO) throws SQLException {
+	public String paymentInfoAdd(PaymentInfoVO inVO) throws SQLException {
 		String jsonString = "";
 		
 		int flag = this.payService.addInfo(inVO);
 		// jsonString에 담을 메시지
 		String message = "";
 		if (1 == flag) {
+			payService.paymentGrade(inVO);
 			message = inVO.getBuyerEmail() + "가 등록 되었습니다.";
 		} else {
 			message = inVO.getBuyerEmail() + "님 등록이 실패되었습니다.";

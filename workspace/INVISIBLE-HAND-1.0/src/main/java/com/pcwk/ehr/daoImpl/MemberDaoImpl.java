@@ -201,7 +201,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberVO selectByEmail(String email) {
 		MemberVO info = this.sqlSessionTemplate.selectOne
-				(this.NAMESPACE + DOT + "SELECTbyEmail", email);
+				(this.NAMESPACE + DOT + "selectByEmail", email);
 		return info;
 	}
 	
