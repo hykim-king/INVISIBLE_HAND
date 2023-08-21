@@ -248,9 +248,10 @@
 	];
 	 
 	 generateSubCategoryOptions(subCategoryOptions);
+
 	function generateSubCategoryOptions(options) {
 	    const subCategorySelect = document.getElementById("subCategorySelect");
-	      
+	
 	      // 기존 옵션을 삭제합니다
 	      subCategorySelect.innerHTML = "";
 

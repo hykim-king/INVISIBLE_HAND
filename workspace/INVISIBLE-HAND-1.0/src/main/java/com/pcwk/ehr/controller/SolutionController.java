@@ -97,11 +97,16 @@ public class SolutionController {
 	@RequestMapping(value="/solution_AgetData.do",method = RequestMethod.POST
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String solution_AgetData(ArrayList<String> radioArr, 
-			ArrayList<String> textArr, 
-			ArrayList<String> checkArr,
-             String totalScore){
+	public String solution_AgetData(@RequestParam(value = "radioArr") List<String> radioArr, 
+									@RequestParam(value = "textArr") List<String> textArr, 
+									@RequestParam(value = "checkArr")  List<String> checkArr,
+									@RequestParam(value = "totalScore") String totalScore,
+						            @RequestParam(value = "mainCategory") String mainCategory, 
+									@RequestParam(value = "subCategory") String subCategory){
 	
+		
+		
+		
 		
 		
 		return "";

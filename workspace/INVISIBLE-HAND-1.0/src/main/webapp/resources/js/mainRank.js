@@ -5,11 +5,14 @@
 	      
 	  updateTable(selectedMainCategory);
 	  
-	  	$(".tab-button").click(function() {
-	    selectedMainCategory = $(this).text(); // 탭의 텍스트를 가져와서 카테고리 변경
-	    //console.log("Selected Main Category:", selectedMainCategory);
-	    updateTable(selectedMainCategory);
-	  	});
+	  $(".tab-button").click(function() {
+		    $(".tab-button").removeClass("active");
+		    $(this).addClass("active");
+
+		    selectedMainCategory = $(this).text();
+		    updateTable(selectedMainCategory);	
+		});
+
 	  
 	    function updateTable(selectedMainCategory) {
 	        //let tableBody = document.getElementById('rankBody');
@@ -28,12 +31,15 @@
 	                data.forEach(function(item,index){
 	                	
 	                	if(item.changeRank == 0  ){
-	                		 icon = '<i class="fas fa-minus"></i>';;
+	                		 icon = '<i class="fas fa-minus"></i>';
+	                		 item.changeRank = '-';
 	                	}else if(item.changeRank > 0 ){
 	                		 icon = '<i class="fas fa-chevron-up" style="color: red;"></i>';
+	                		 item.changeRank = '+' + item.changeRank;
 	                	}else if(item.changeRank < 0){
 	                		 icon = '<i class="fas fa-chevron-down" style="color: blue;"></i>';
 	                	}
+	                		                	
 	                    let row = '<tr>' + 
 	                      '<td>' + item.currentRank + '</td>' +
 	                      '<td>' + item.name + '</td>' +                     

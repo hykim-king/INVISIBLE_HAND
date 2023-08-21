@@ -109,6 +109,10 @@
             <div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
               <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
             </div>
+            <div class="chart-nav" style="display: none;">
+              <select id="mainCategorySelect" name="mainCategory"></select>
+              <select id="subCategorySelect" name="subCategory"></select>
+           </div>
             <div class="chart-login">
               <div class="desc">
                 <p>로그인 하고 자료 열람하기</p>
@@ -117,6 +121,7 @@
                 <a href="${CP}/member/memberLogin.do"><span>로그인</span></a>
               </div>
             </div>
+
           </c:otherwise>
         </c:choose>
     </div>

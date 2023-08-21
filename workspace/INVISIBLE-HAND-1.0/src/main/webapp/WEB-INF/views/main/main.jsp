@@ -88,11 +88,11 @@
 		
 		
 			<div class="rank-area">
-	    <h4>업종별 변동 현황</h4>
+	    <h4>업종별 솔루션 분석 빈도</h4>
 		    <div class="tab">
-	        <button class="tab-button" id="tab1">비제조업</button>
-	        <button class="tab-button" id="tab2">제조업</button>
-	      </div>
+	        <button class="tab-button" data-tab="비제조업" id="비제조업">비제조업</button>
+	        <button class="tab-button" data-tab="제조업" id="제조업">제조업</button>
+	      </div>      
 	        <table class="main-rank-table">
 	            <thead>
 	                <tr>
@@ -108,8 +108,8 @@
 	        </table>   
 	    </div>
 	    
-	    <div>
-	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="380">  
+	    <div class="figure-area">
+	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="350">  
 	    </div>
 		</div>
 
