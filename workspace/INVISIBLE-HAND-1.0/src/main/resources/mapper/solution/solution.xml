@@ -12,6 +12,11 @@
     SELECT DISTINCT(SUBCATEGORY) FROM SBHITABLE
     WHERE MAINCATEGORY = #{MAINCATEGORY}
   </select>
+  
+  <select id="getSolutionContents" parameterType="SolutionVO" resultType="SolutionVO">
+    SELECT SOLCONTENTS FROM SOLUTIONRESULT
+	WHERE SOLNAME = #{SOLNAME} AND CODENAME = #{CODENAME}
+  </select>
 
 
 

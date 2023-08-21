@@ -62,8 +62,8 @@ $(document).ready(function () {
 	              }, 
 	              dataType: 'json',
 	              success: function(data) {            
-	                  console.log("데이터를 가져옴");
-	                  console.log(data);
+	                  //console.log("데이터를 가져옴");
+	                  //console.log(data);
 	                  let chartData3 = [];
 	                  chartData3.push(["Year","총자본순이익률",
 	                    "총자본영업이익률","경영자본영업이익률",
@@ -82,14 +82,14 @@ $(document).ready(function () {
 	                    chartData3.push(row);
 	                    }                                 
 	                  
-	                  console.log(chartData3);
+	                  //console.log(chartData3);
 	                  drawChart(chartData3);
 	                                  
 	      
 	              },  //success
 	              error: function(xhr, status, error) {
 	                  // AJAX 요청이 실패했을 때 실행되는 부분
-	                  console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+	                  //console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
 	                  console.error(error);
 	              } //error
 	          }); //ajax
@@ -160,7 +160,7 @@ $(document).ready(function () {
 	            for (let seriesIndex in hiddenSeries) {
 	              for (let i = 0; i < chartData3.getNumberOfRows(); i++) {
 	                chartData3.setValue(i, parseInt(seriesIndex) + 1, originalData3.getValue(i, parseInt(seriesIndex) + 1));
-	                console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
+	                //console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
 	              }
 	            }
 	            chart3.draw(chartData3, options3);
@@ -268,13 +268,13 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener("DOMContentLoaded", function() {
   const mainCategorySelect3 = document.getElementById("mainCategorySelect3");
   mainCategorySelect3.addEventListener("change", function() {
-    console.log("mainCategorySelect3 Changed");
+    //console.log("mainCategorySelect3 Changed");
       submitButton3.click();
   });
 
   const subCategorySelect3 = document.getElementById("subCategorySelect3");
   subCategorySelect3.addEventListener("change", function() {
-    console.log("subCategorySelect3 Changed");
+    //console.log("subCategorySelect3 Changed");
       submitButton3.click();
   });
  });

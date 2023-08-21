@@ -145,6 +145,19 @@ public class MemberServiceImpl implements MemberService {
 		return checkStatus;
 	}
 	
+	// ---------------------- 결제시 사용 메소드 ----------------------
+	// 이메일 찾기
+	@Override
+	public MemberVO getbyEmail(String email) {
+		return memberDao.selectByEmail(email);
+	}
+
+	// 회원 등급 업데이트
+	@Override
+	public int updateByMemberGrade(MemberVO inVO) {
+		return memberDao.updateByMemberGrade(inVO);
+	}
+	// ---------------------- 결제시 사용 메소드 ----------------------
 
 
 	

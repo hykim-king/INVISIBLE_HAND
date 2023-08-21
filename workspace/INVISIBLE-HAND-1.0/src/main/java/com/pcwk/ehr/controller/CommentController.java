@@ -29,33 +29,38 @@ public class CommentController implements PcwkLoger{
 	CommentService commentService;
 	
 	//댓글 조회
-	@RequestMapping(value = "/commentList.do")
-	public String commentList(CommentVO commentVO,Model model, HttpServletRequest request)throws SQLException {
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   commentList()       │");
-		LOG.debug("└───────────────────────┘");
-		
-		
-		// page번호 초기값 1
-		if (null != commentVO && commentVO.getPageNo() == 0) {
-			commentVO.setPageNo(1);
-		}
-			
-		// pageSize 초기값 10
-		if (null != commentVO && commentVO.getPageSize() == 0) {
-			commentVO.setPageSize(10);
-		}
-		
-		//댓글 조회
-		List<CommentVO> list = this.commentService.doRetrieve(commentVO);
-		model.addAttribute("list", list);
-		model.addAttribute("commentVO", commentVO);
-		
-		
-	 	
-		 
-		 return "post/postContents";
+	@RequestMapping(value = "/commentList.do") 
+	public String
+	commentList(CommentVO commentVO,Model model, HttpServletRequest request)throws SQLException { 
+	LOG.debug("┌───────────────────────┐");
+	LOG.debug("│   commentList()       │");
+	LOG.debug("└───────────────────────┘");
+	
+	
+	// page번호 초기값 1 
+	if (null != commentVO && commentVO.getPageNo() == 0) {
+				commentVO.setPageNo(1); }
+	
+	// pageSize 초기값 10 
+	if (null != commentVO && commentVO.getPageSize() == 0) {
+			commentVO.setPageSize(10); } 
+	
+	//댓글 조회 
+	List<CommentVO> list = this.commentService.doRetrieve(commentVO);
+	LOG.debug("┌───────────────────────┐");
+	LOG.debug("│   list()     		   │"+list); model.addAttribute("list",list);
+	
+	//총글수 
+	int totalCnt = 0; 
+	if(null !=list && list.size() >0 ) { 
+			totalCnt = list.get(0).getTotalCnt(); LOG.debug("totalCnt:" + totalCnt); 
 	}
+	model.addAttribute("totalCnt", totalCnt); model.addAttribute("commentVO",commentVO);
+	
+	LOG.debug("│   commentVO()         │"+commentVO);
+	LOG.debug("└───────────────────────┘");
+	
+	return "post/postContents"; }
 	
 	//댓글 등록
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -145,10 +150,7 @@ public class CommentController implements PcwkLoger{
 		
 		String likes = request.getParameter("likes");
 		int flag = this.commentService.doUpdateLikes(commentNumber, likes);
-		/*
-		 * List<CommentVO> list = commentService.doRetrieve(commentVO);
-		 * LOG.debug("│inVO : " + commentVO);
-		 */
+		
 		String message = "";
 	
 		if (1 == flag) {

@@ -389,6 +389,18 @@ section{
 
 
 
+/*figure-area------------------ */
+.figure-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 350px;
+  padding: 25px;
+  border-radius: 20px;
+  margin: 0 auto 15px;
+  
+}
 
 /* user-area------------------- */
 
@@ -409,8 +421,10 @@ section{
 
 .rank-area{
   margin-left:15px;
+  justify-content: center;
+  align-items: center;
   width:270px;
-  height:500px;
+
   padding:25px;
   border-radius:20px;
 
@@ -422,6 +436,10 @@ section{
   padding: 0;
   margin-bottom: 10px;
 }
+.rank-area .tab-button{
+  padding: 0;
+}
+
 
 .main-rank-table{
   width: 100%;

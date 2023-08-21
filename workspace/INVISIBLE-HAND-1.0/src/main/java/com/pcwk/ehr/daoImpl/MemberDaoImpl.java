@@ -196,6 +196,22 @@ public class MemberDaoImpl implements MemberDao {
 		return flag;
 	}
 
+	// ---------------------- 결제시 사용 메소드 ----------------------
+	// 이메일 찾기
+	@Override
+	public MemberVO selectByEmail(String email) {
+		MemberVO info = this.sqlSessionTemplate.selectOne
+				(this.NAMESPACE + DOT + "selectByEmail", email);
+		return info;
+	}
+	
+	// 회원 등급 업데이트
+	@Override
+	public int updateByMemberGrade(MemberVO inVO) {
+		LOG.debug(sqlSessionTemplate.update(this.NAMESPACE + DOT + "updateByMemberGrade", inVO));
+		return sqlSessionTemplate.update(this.NAMESPACE + DOT + "updateByMemberGrade", inVO);
+	}
+	// ---------------------- 결제시 사용 메소드 ----------------------
 
 
 } // class end

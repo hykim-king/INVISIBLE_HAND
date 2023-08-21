@@ -53,9 +53,21 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 	}
 
 	@Override
-	public int doUpdateLikes(int postNumber, String likes) throws SQLException {
-		return dao.doUpdateLikes(postNumber, likes);
-	}
+	public int doUpdateLikes(int postNumber, String likes, String nickname) throws SQLException {
+		int updatedLikes = Integer.parseInt(likes);
+        int currentLikes = dao.doUpdateLikes(postNumber, likes, nickname);
+
+        if (currentLikes == updatedLikes + 1) {
+            // 좋아요 취소한 경우
+            return 0;
+        } else if (currentLikes == updatedLikes - 1) {
+            // 좋아요 추가한 경우
+            return 1;
+        } else {
+            // 업데이트 실패
+            return -1;
+        }
+    }
 
 	@Override
 	public int doUpdateViews(PostVO inVO) throws SQLException {

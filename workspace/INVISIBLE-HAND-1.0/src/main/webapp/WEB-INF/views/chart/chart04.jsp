@@ -61,8 +61,8 @@ $(document).ready(function () {
                }, 
                dataType: 'json',
                success: function(data) {            
-                   console.log("데이터를 가져옴");
-                   console.log(data);
+                   //console.log("데이터를 가져옴");
+                   //console.log(data);
                    let chartData4 = [];
                    chartData4.push(["Year","총자산증가율",
                      "유형자산증가율","유동자산증가율",
@@ -82,14 +82,14 @@ $(document).ready(function () {
                      chartData4.push(row);
                      }                                 
                    
-                   console.log(chartData4);
+                   //console.log(chartData4);
                    drawChart(chartData4);
                                    
        
                },  //success
                error: function(xhr, status, error) {
                    // AJAX 요청이 실패했을 때 실행되는 부분
-                   console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                   //console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
                    console.error(error);
                } //error
            }); //ajax
@@ -159,7 +159,7 @@ $(document).ready(function () {
              for (let seriesIndex in hiddenSeries) {
                for (let i = 0; i < chartData4.getNumberOfRows(); i++) {
                  chartData4.setValue(i, parseInt(seriesIndex) + 1, originalData4.getValue(i, parseInt(seriesIndex) + 1));
-                 console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
+                 //console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
                }
              }
              chart4.draw(chartData4, options4);
@@ -267,13 +267,13 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener("DOMContentLoaded", function() {
   const mainCategorySelect4 = document.getElementById("mainCategorySelect4");
   mainCategorySelect4.addEventListener("change", function() {
-    console.log("mainCategorySelect4 Changed");
+    //console.log("mainCategorySelect4 Changed");
       submitButton4.click();
   });
 
   const subCategorySelect4 = document.getElementById("subCategorySelect4");
   subCategorySelect4.addEventListener("change", function() {
-    console.log("subCategorySelect4 Changed");
+    //console.log("subCategorySelect4 Changed");
       submitButton4.click();
   });
   });

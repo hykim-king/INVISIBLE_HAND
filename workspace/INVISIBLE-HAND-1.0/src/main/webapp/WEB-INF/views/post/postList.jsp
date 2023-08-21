@@ -96,9 +96,11 @@
             
             <div class="list-btn">  
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
-              <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>  
+              <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
+              <c:if test="${sessionScope.member.memberId == 'admin'}">
+                <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doAdminDel">삭제</a>
+              </c:if>
             </div>     
-             
           </div>  
         </form>
       </div>
@@ -121,6 +123,11 @@
                <th class="text-c">글쓴이</th>
                <th class="text-c">작성일</th> 
                <th class="text-c">조회수</th>
+               <c:if test="${sessionScope.member.memberId == 'admin'}">
+               <th class="text-c">
+                 <input type="checkbox" name="adminPostAllChk" id="adminPostAllChk" onclick='selectAll(this)'>
+               </th>
+               </c:if>
             </tr>
           </thead>
           <tbody>
@@ -135,6 +142,11 @@
                       <td class="text-c"><c:out value="${vo.writtenDate}"/></td>
                       <td class="text-c"><c:out value="${vo.views}"/></td>
                       <td style="display:none;"><c:out value="${vo.postNumber}"/></td>
+		                  <c:if test="${sessionScope.member.memberId == 'admin'}">
+										    <td class="text-c">    
+									        <input type="checkbox" name="adminDelPost" value="<c:out value="${vo.postNumber}"/>">
+										    </td>  
+											</c:if>
                     </tr>            
                   </c:forEach>
                </c:when>
@@ -177,17 +189,12 @@
   }
   
   //table 목록 click시 postNumber값 찾기
-  $("#postTable>tbody").on("click","tr",function(e){
+  $("#postTable>tbody").on("click","tr a",function(e){
+	  e.preventDefault();
     console.log("#postTable>tbody");
-    let tdArray = $(this).children();
-    console.log('tdArray:'+tdArray);
-    let postNumber = tdArray.eq(5).text();
+    let postNumber = $(this).closest("tr").find("td:eq(5)").text();
     console.log('postNumber:'+postNumber);
     
-    //if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
-    
-    //categoryNumber,postNumber
-    ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393
     window.location.href = "${CP}/post/doSelectOne.do?categoryNumber="+$("#categoryNumber").val()+"&postNumber=" + postNumber;
     
   });
@@ -259,7 +266,29 @@ $(document).ready(function() {
 	});
     /* 게시판 카테고리 선택시 노란색으로 변경끝 */
 
+// admin전용 게시글 삭제 function
+function selectAll(selectAll)  {
+  const checkboxes 
+       = document.getElementsByName('adminDelPost');
+  
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = selectAll.checked;
+  })
+}
 
+$(document).ready(function() {
+	
+    let checkArr = [];
+  
+    $("#doAdminDel").on("click", function() {
+        $('input[name="adminDelPost"]:checked').each(function() {
+            checkArr.push($(this).val());
+        });
+        
+        alert(checkArr);
+        console.log(checkArr);
+    });
+});
 </script>
 </body>
 </html>

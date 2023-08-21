@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.VO.SolutionVO;
 
 public interface SolutionService {
 	
@@ -12,5 +13,5 @@ public interface SolutionService {
 
 	public List<ChartVO> SelectSubcategory(ChartVO inVO);
 	
-
+	public List<SolutionVO> getSolutionContents(SolutionVO inVO);
 }

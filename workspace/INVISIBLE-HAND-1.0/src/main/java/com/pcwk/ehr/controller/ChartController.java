@@ -254,4 +254,23 @@ public class ChartController {
 		LOG.debug("=====================================");
 		return jsonString04;
 	}
+	
+	/*
+	 * @RequestMapping(value="/chart04.do",method = RequestMethod.GET ,produces =
+	 * "application/json;charset=UTF-8")
+	 * 
+	 * @ResponseBody public String soultionChart(@RequestParam(value =
+	 * "mainCategory") String mainCategory,
+	 * 
+	 * @RequestParam(value = "subCategory") String subCategory) {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * return subCategory; }
+	 */
+	
+	
 }

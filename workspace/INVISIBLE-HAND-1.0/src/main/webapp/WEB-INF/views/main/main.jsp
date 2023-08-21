@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../resources/css/chart.css">
   <link rel="stylesheet" href="../resources/css/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+  <!-- 랭킹 화살표를 위해 추가 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -80,20 +82,31 @@
     <!-- **---wrap End---** -->
 		<div class="user-rank-wrap">
 		  <div class="user-area">
-		  <p>여기 로그인정보, 마이페이지 링크 자리를 만들어볼까 합니다</p>
+        <p >${sessionScope.member.nickName}님 환영합니다!</p> 
+        <p><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글 보기</a></p>
+        <p><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">나의 댓글 보기</a></p>
+        <p><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글 보기</a></p>
+		    <div class="user-btn">
+		      <p><a href="${CP}/mypage/mypageUpdate.do">회원정보 수정</a></p>
+		      <p><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></p>	    
+		    </div>
 		  </div>
 		
 		
 		
 			<div class="rank-area">
-	    <h4>업종별 변동 현황</h4>
+	    <h4>업종별 솔루션 분석 빈도</h4>
+		    <div class="tab">
+	        <button class="tab-button active" data-tab="비제조업" id="비제조업">비제조업</button>
+	        <button class="tab-button" data-tab="제조업" id="제조업">제조업</button>
+	      </div>      
 	        <table class="main-rank-table">
 	            <thead>
 	                <tr>
 	                <th>등수</th>
 	                <th>업종명</th>                
 	                <th>등수변동</th>
-	                <th>화살표</th>
+	                <th></th>
 	                </tr>
 	           </thead>
 	           <tbody id="rankBody">
@@ -101,7 +114,10 @@
 	           </tbody>
 	        </table>   
 	    </div>
-	    <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="400">  
+	    
+	    <div class="figure-area">
+	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="350">  
+	    </div>
 		</div>
 
   
@@ -119,11 +135,14 @@
   
 <script>
 
-const mainCategorySelect = document.getElementById("mainCategorySelect");
-mainCategorySelect.addEventListener("change", function() {
-    submitButton.click();
-});
+$(document).ready(function() { 
+	const mainCategorySelect = document.getElementById("mainCategorySelect");
+	mainCategorySelect.addEventListener("change", function() {
+	    submitButton.click();
+	});
+	
 
+});
 </script>
 </body>
 </html>

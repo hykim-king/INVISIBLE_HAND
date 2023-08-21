@@ -10,7 +10,7 @@
           query: "중소기업"
         },
         success: function (data) {
-            console.log("success data:", data); // 서버에서 반환한 JSON 데이터를 그대로 출력
+            //console.log("success data:", data); // 서버에서 반환한 JSON 데이터를 그대로 출력
               // 서버에서 반환한 JSON 데이터를 그대로 사용
               let newsHeadlines = $("#newsHeadlines");
               let newItems = data.items;
@@ -21,8 +21,8 @@
                   let newsTitle = (item.title).replace(/<\/?b>/g, ''); //볼드체 제거                    
                   let newsUrl = item.link;
                 
-                console.log("newsTitle"+newsTitle);
-                console.log("newsUrl"+newsUrl);
+                //console.log("newsTitle"+newsTitle);
+                //console.log("newsUrl"+newsUrl);
             	   
                 // 생성한 HTML을 동적으로 추가
                 newsHeadlines.append("<li><a href='"+newsUrl+"' target='_blank' class=link>'"+newsTitle+"'</a></li>");                 
@@ -32,7 +32,8 @@
 
         },
         error: function (xhr, status, error) {
-        	  console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+        	  //console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+        		console.error(error);
         	}
       });
 

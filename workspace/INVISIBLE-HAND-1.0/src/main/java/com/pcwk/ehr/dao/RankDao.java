@@ -11,6 +11,8 @@ public interface RankDao {
 	//1. 랭킹 정보 main 화면에 출력할 로직
 	List<RankVO> doGetRanking(RankVO inVO) throws SQLException;
 	
+	List<RankVO> doGetRanking2(RankVO inVO) throws SQLException;
+	
 	//2. 현재 스코어에 따른 등수 업데이트
 	int doUpdatePrevious(RankVO inVO) throws SQLException;
 	

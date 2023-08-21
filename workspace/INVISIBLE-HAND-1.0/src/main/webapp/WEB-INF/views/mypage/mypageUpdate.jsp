@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/mypage2.css">
+<link rel="stylesheet" href="../resources/css/login.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <title>마이페이지 입니다</title>
 
@@ -17,56 +17,59 @@
 	<!-- *---container Start---* -->
 	<div class="h60px"></div>
 	<div class="container-1400 min-100vh con-login">
-		<div class="mypage-wrap">
+		<div class="my-update-wrap">
 			<div class="box-area">
                    
-				<div class="form-h3">
+				<div class="form-h3" style="margin:0; ">
 				<div class="line1px"></div>
-                <div class="line3px"></div>
-					<h3 style="color: black;">${member.memberName} 님의 마이 페이지</h3>
+        <div class="line3px"></div>
+					<h3>${member.memberName} 님의 회원정보 변경</h3>
 				<div class="line3px"></div>
-                <div class="line1px"></div>
-				</div>				
+        <div class="line1px"></div>
+				</div>								
+				<div class="h30px"></div>
+				<div class="label-margin">
+			        <p class="input-title">아이디</p>			        
+              <label>
+  			        <input type="text" name="nickname" id="nickname" value="${member.memberId}" class="size border-bottom" required="required">
+                <input  type="button"value="변경불가" class="btn btn-white" style="cursor: default;">
+              </label>
+			  </div>
 				
+			   <div class="label-margin">
+		        <p class="input-title">닉네임 변경</p>
+		        <input type="hidden" id="unickname" name="unickname" value="${member.nickName}">
+		        <label>
+		            <input type="text" name="nickname" id="nickname"  value="${member.nickName}" class="size border-bottom" required="required">
+		            <input  type="button" id="checkNickname" name="checkNickname"value="중복확인" class="btn btn-white">
+		        </label>
+			   </div>
 				
 				<div class="label-margin">
-			        <p class="input-title" style="color: black;">아이디 : ${member.memberId}</p>			        
-			    </div>
-				
-				
-			    <div class="label-margin">
-			        <p class="input-title" style="color: black;">닉네임 변경</p>
-			        <input type="hidden" id="unickname" name="unickname" value="${member.nickName}">
-			        <label>
-			            <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력하세요" value="${member.nickName}" class="size border-bottom" required="required">
-			            <input  type="button" id="checkNickname" name="checkNickname"value="중복확인" class="btn btn-white">
-			        </label>
-			    </div>
-				
-				<div class="label-margin">
-					<p class="input-title" style="color: black;">비밀번호 변경</p>
+					<p class="input-title">비밀번호 변경</p>
 					<label> 
-						<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요" class="size border-bottom" value="${member.password}">
+						<input type="password" name="password" id="password" class="size border-bottom" value="${member.password}">
 						<input type="hidden" id="upassword" name="upassword" value="${member.password}">	
-                        <input type="button" id="checkpass" name="checkpass" value="중복 확인" class="btn btn-white">
+            <input type="button" id="checkpass" name="checkpass" value="사용중" class="btn btn-white">
 					</label>
 				</div>
 				
-                <div class="label-margin">
-                    <p class="input-title" style="color: black;">이메일 변경</p>
-                    <label> 
-                        <input type="text"  id="email" name="email" value="${member.email}" class="size border-bottom" required="required">
-                        <input type="hidden" id="uemial" name="uemial" value="${member.email}">
-                        <input type="button" id="mailsend" name="mailsend" value="인증번호 전송" class="btn btn-white">
-                    </label>
-                </div>
+        <div class="label-margin">
+            <p class="input-title" >이메일 변경</p>
+            <label> 
+                <input type="text"  id="email" name="email" value="${member.email}" class="size border-bottom" required="required">
+                <input type="hidden" id="uemial" name="uemial" value="${member.email}">
+                <input type="button" id="mailsend" name="mailsend" value="인증번호 전송" class="btn btn-white">
+            </label>
+        </div>
 				
 				<div class="label-margin">
-					<p class="input-title" style="color: black;">E-mail 인증번호 확인</p>
+					<p class="input-title">E-mail 인증번호 확인</p>
 					<label> 
 						<input type="text" class="size numberOnly border-bottom checkmark" name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required>
 						<i class='fas fa-check-circle fa-sm' style="color:#4200FF;"></i>
 						<span id="mail-check-warn"></span>
+	
 					</label>
 				</div>
 				
@@ -77,7 +80,7 @@
                     <input type="hidden" id="emailsuccess" value="0">
 			        <input id="update" type="button" value="수정 완료" class="btn w70">
 			        <input id="reset" type="reset" value="취소" class="btn w70"
-			        onclick="${CP}/mypage/mypage.do">
+			        onclick="${CP}/mypage/mypage.do" style="margin-top: 15px;">
 			    </div>
 								
 			</div>

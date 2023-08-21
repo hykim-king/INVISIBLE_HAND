@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%  //solution_Q-00select 에서 선택한 변수 받기
-        String mainCategory = request.getParameter("mainCategory");
-        String subCategory = request.getParameter("subCategory");
-        
-        
-        // 받아온 데이터 출력 (선택사항)
-        out.println("Selected Main Category: " + mainCategory);
-        out.println("Selected Sub Category: " + subCategory);
-    %>
+<%
+    String selectedMainCategory = request.getParameter("selectedMainCategory");
+    String selectedSubCategory = request.getParameter("selectedSubCategory");
+    
+     out.println(selectedMainCategory);
+     out.println(selectedSubCategory);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +23,7 @@
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="#" method="get" class="form cf">		 
-		<form class="form cf" id="solution_form">
-
+		<form action="/ehr/solution/solution_A.do" class="solution" id="data-form" method="POST">		 
 			<h2>1. 월간 경기동향 실적</h2>
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p> 
 			<div class="que-wrap">
@@ -431,6 +427,13 @@
 				</div>
 				
 			</div>
+			  <input type="hidden" name="radioArr" id="radioArr">
+        <input type="hidden" name="textArr" id="textArr">
+        <input type="hidden" name="checkArr" id="checkArr">
+        <input type="hidden" name="totalScore" id="totalScore">
+        <input type="hidden" name="selectedMainCategory" id="selectedMainCategory">
+        <input type="hidden" name="selectedSubCategory" id="selectedSubCategory">
+			
 			<!--que-wrap End-->
 			<div class="submit">
 				<input type="button" value="제출하기" class="go-result">
@@ -445,14 +448,18 @@
 
 $(document).ready(function() {
 	
+	//이전 페이지에서 선택한 메인과 서브카테고리 값
+	let selectedMainCategory = '<%= selectedMainCategory %>';
+	let selectedSubCategory = '<%= selectedSubCategory %>';
+  let radioArr = []; // 라디오 값을 저장할 배열
+  let textArr = []; // 텍스트 값을 저장할 배열
+  let checkArr = []; // 체크박스 값을 저장할 배열
+	
 	// 숫자 작성만 허용
 	$(".numberOnly").on("keyup", function(e) {
 	  $(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
-	
-	let radioArr = []; // 라디오 값을 저장할 배열
-	let textArr = []; // 텍스트 값을 저장할 배열
-	let checkArr = []; // 체크박스 값을 저장할 배열
+
 
 	// 제출 버튼 클릭 시 실행되는 함수
 	$(".go-result").on("click", function() {
@@ -468,23 +475,7 @@ $(document).ready(function() {
 		  }
 		});
 	  
-	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수
-	    
-/* 		  // 라디오 값 누락 시 예외처리
-	    $("input[type='radio']").each(function() {
-	      let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
-	      console.log(radioVals)
-	      let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
-	      console.log(isChecked)
-	      if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
-	        alert("체크 안한 설문이 있는지 확인해주세요.");
-	        window.scrollTo({ top: 0, behavior: "smooth" });
-	        isRadioValid = false;
-	        return false; // each 함수 탈출
-	      }
-	    });
-
-	    if(!isRadioValid) return;  */
+	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수	    
 	    
 	    // input에 text 값 누락시 예외처리
 	    if($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {
@@ -536,40 +527,25 @@ $(document).ready(function() {
 	    var errorScore = checkArr.length * -0.3 ;
 	    totalScore = sbhiScore + operatingScore + errorScore;
 	
-	    console.log(radioArr);
-	    console.log(textArr);
-	    console.log(checkArr);
-	    console.log(totalScore);
-		
+        $("#radioArr").val(JSON.stringify(radioArr));
+        $("#textArr").val(JSON.stringify(textArr));
+        $("#checkArr").val(JSON.stringify(checkArr));
+        $("#totalScore").val(totalScore);
+        $("#selectedMainCategory").val(selectedMainCategory);
+        $("#selectedSubCategory").val(selectedSubCategory);
+
+        // form 제출
+      $("#data-form").attr("action", "/ehr/solution/solution_A.do").submit();
 	    
-	    getData(radioArr,textArr,checkArr,totalScore)
+	    
+	    //제출이 성공되면 score 증가
+	    doUpdateScore(selectedMainCategory,selectedSubCategory)
+	        
+	    
+	    
 	});
 	
-	function getData(radioArr, textArr, checkArr, totalScore) {	    
-	    $.ajax({
-	        type: "POST",
-	        url: "/ehr/solution/solution_AgetData.do",
-	        async: true,
-	        dataType: "JSON",   
-	        data: {
-	            radioArr: radioArr,  // 추가
-	            textArr: textArr,
-	            checkArr: checkArr,
-	            totalScore: totalScore 
-	        },
-	        success: function(data) {
-	            console.log("성공");
-	            // 이후 작업 수행
-	        },
-	        error: function(data) {
-	            console.log("에러");
-	        }
-	    }); // ajax 종료
-	}
 
-});
-
-	//로직 성공시에 넣으면 될듯
 function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
     $.ajax({
         url: '/ehr/solution/doUpdateScore.do', 
@@ -579,21 +555,18 @@ function doUpdateScore(selectedMainCategory, selectedSubCategory) {
             subCategory: selectedSubCategory
         },
         dataType: 'json',
-        success: function(response) {            
-            console.log(response);           
-            //메시지 표시
-            if (response.message) {
-                alert(response.message); 
-            }
+        success: function(data) {            
+          console.log(data);     
 
         },
-        error: function(error) {
-            console.error("에러 발생");
-            console.error(error);
+        error: function(xhr, status, error) {
+              console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+              console.error(error.message);
         }
      }); 
 }
 
+}); //document end
 </script>
 </body>
 </html>

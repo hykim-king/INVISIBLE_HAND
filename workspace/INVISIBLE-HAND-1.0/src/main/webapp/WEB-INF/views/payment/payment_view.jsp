@@ -30,7 +30,6 @@
 				<button class="btn-hover color-11" id="payBtn" onclick="paymentReady()">결제하기</button>
 			</div>
 			<!-- *** kakaoContent *** -->
-
 		</div>
 		<!-- *** kakaoWrap *** -->
 
@@ -86,7 +85,7 @@ function paymentReady() {
           }
 	      });
 
-				document.location.href = "/ehr/main/main.do";
+				document.location.href = document.referrer;
 			} else {
 				let msg = data.error_msg;
 

@@ -1,4 +1,4 @@
-\<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -58,12 +58,7 @@
              subCategory : selectedSubCategory
             }, 
             dataType: 'json',
-            success: function(data) {            
-                console.log("데이터를 가져옴");                              
-                console.log(data);
-                
-                
-                
+            success: function(data) {                                                                         
                 let chartData = [];
                 chartData.push(["Year","경기전반","고용수준","내수판매","수출","영업이익","자금사정"]);
                 
@@ -93,14 +88,13 @@
                   chartData.push(row);
                 }
                 
-                console.log(chartData);
+                
                 drawChart(chartData);
                                 
     
             },  //success
             error: function(xhr, status, error) {
-                // AJAX 요청이 실패했을 때 실행되는 부분
-                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                // AJAX 요청이 실패했을 때 실행되는 부분              
                 console.error(error);
             } //error
         }); //ajax
@@ -168,7 +162,7 @@
           for (let seriesIndex in hiddenSeries) {
             for (let i = 0; i < chartData1.getNumberOfRows(); i++) {
               chartData1.setValue(i, parseInt(seriesIndex) + 1, originalData1.getValue(i, parseInt(seriesIndex) + 1));
-              console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
+            
             }
           }
           chart1.draw(chartData1, options1);
@@ -250,9 +244,10 @@
 	];
 	 
 	 generateSubCategoryOptions(subCategoryOptions);
+
 	function generateSubCategoryOptions(options) {
 	    const subCategorySelect = document.getElementById("subCategorySelect");
-	      
+	
 	      // 기존 옵션을 삭제합니다
 	      subCategorySelect.innerHTML = "";
 

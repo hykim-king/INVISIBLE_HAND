@@ -47,17 +47,17 @@ h5{
 
 /* Q_01~02 */
 
-h2{
+.solution h2{
     color:#00FFF0;
     margin: 70px 0 0 90px;
 }
-h4{
+.solution h4{
     color: #ffffff;
     font-weight: 400;
     font-size: 14px;
     margin: 25px 0;
 }
-p{
+.solution p{
     margin: 15px 0 15px 120px;
     color: #979797;
     font-size: 12px;
@@ -184,4 +184,5 @@ input.hidden{
 .solution-desc-list span{
 	color: #00FFF0;
 }
+
 
