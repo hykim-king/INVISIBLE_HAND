@@ -451,16 +451,15 @@ $(document).ready(function() {
 	//이전 페이지에서 선택한 메인과 서브카테고리 값
 	let selectedMainCategory = '<%= selectedMainCategory %>';
 	let selectedSubCategory = '<%= selectedSubCategory %>';
-
+  let radioArr = []; // 라디오 값을 저장할 배열
+  let textArr = []; // 텍스트 값을 저장할 배열
+  let checkArr = []; // 체크박스 값을 저장할 배열
 	
 	// 숫자 작성만 허용
 	$(".numberOnly").on("keyup", function(e) {
 	  $(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
-	
-	let radioArr = []; // 라디오 값을 저장할 배열
-	let textArr = []; // 텍스트 값을 저장할 배열
-	let checkArr = []; // 체크박스 값을 저장할 배열
+
 
 	// 제출 버튼 클릭 시 실행되는 함수
 	$(".go-result").on("click", function() {
@@ -546,9 +545,6 @@ $(document).ready(function() {
 	    
 	});
 	
-
-//변수 저장
-
 
 function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
     $.ajax({

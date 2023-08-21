@@ -23,7 +23,7 @@
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="/solution/solution_Q_01" method="post" class="form cf">
+		<form action="/ehr/solution/solution_A.do"  id="data-form" method="POST">
 			<h2>1. 월간 경기동향 실적</h2>			
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p>
 			<div class="que-wrap">
@@ -302,18 +302,28 @@
 
 				</div>
 			</div>
-			<!--que-wrap End-->
+      
+        <input type="hidden" name="radioArr" id="radioArr">
+        <input type="hidden" name="checkArr" id="checkArr">
+        <input type="hidden" name="totalScore" id="totalScore">
+        <input type="hidden" name="selectedMainCategory" id="selectedMainCategory">
+        <input type="hidden" name="selectedSubCategory" id="selectedSubCategory">
+      
+      <!--que-wrap End-->
+      <div class="submit">
+        <input type="button" value="제출하기" class="go-result">
+      </div>
 
-			<div class="submit">
-				<input type="button" value="제출하기" class="go-result">
-			</div>
-		</form>
+    </form>
 	</div>
 	<!-- **---wrap End---** -->
 </div>
 <!-- **---container End---** -->
 <script>
 $(document).ready(function() {
+	  //변수 저장
+	let selectedMainCategory = '<%= selectedMainCategory %>';
+	let selectedSubCategory = '<%= selectedSubCategory %>';	
   let radioArr = []; // 라디오값 배열
   let checkArr = []; // 체크박스 배열
 
@@ -351,19 +361,42 @@ $(document).ready(function() {
       checkArr.push($(this).next().text());
     });
 
-    console.log(radioArr);
-    console.log(checkArr);
+    var totalScore = 0
+    var ratings = {
+          '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
+          '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
+              '동일': 2,'적정': 2,
+              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
+              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
+    };
+   
+    var sbhiScore = 0;
+    for (var i = 0; i < radioArr.length; i++) {
+      var score = ratings[radioArr[i]];
+        sbhiScore = sbhiScore + score
+    }
+    sbhiScore = (sbhiScore / radioArr.length) * 50;
+  
+    var errorScore = checkArr.length * -0.3 ;
+    totalScore = sbhiScore  + errorScore;
+
+    
+    $("#radioArr").val(JSON.stringify(radioArr));
+    $("#checkArr").val(JSON.stringify(checkArr));
+    $("#totalScore").val(totalScore);
+    $("#selectedMainCategory").val(selectedMainCategory);
+    $("#selectedSubCategory").val(selectedSubCategory);
+
+    // form 제출
+  $("#data-form").attr("action", "/ehr/solution/solution_A.do").submit();
+    
+  //제출이 성공되면 score 증가
+  doUpdateScore(selectedMainCategory,selectedSubCategory)
+  
   });
   
   
-  //변수 저장
-  let selectedMainCategory = '<%= selectedMainCategory %>';
-  let selectedSubCategory = '<%= selectedSubCategory %>';
-  console.log(selectedMainCategory);
-  console.log(selectedSubCategory);
-	
-  doUpdateScore(selectedMainCategory,selectedSubCategory)
-  
+
   function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
 	    $.ajax({
 	        url: '/ehr/solution/doUpdateScore.do', 
