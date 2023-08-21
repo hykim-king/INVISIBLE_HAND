@@ -37,7 +37,6 @@
 		         <thead class="post-thead">
 		           <tr>
 		           	    <td class="text-c" >No.</td>
-		                <td class="text-c" >게시글 제목(지금은 번호)</td>
 		                <td class="text-c" >제목</td>
 		                <td class="text-c" >글쓴이</td>
 		                <td class="text-c" >작성일</td>
@@ -49,7 +48,6 @@
 		             <c:forEach items="${list}" var="list" varStatus="status">
 		                 <tr>
 		                    <td class="text-c" >${status.count}</td>
-		                    <td class="text-c" >${list.postNumber}</td>
 		                    <td class="text-l" >${list.title}[${list.likes}]</td>
 		                    <td class="text-c" >${list.nickname}</td>
 		                    <td class="text-c" >${list.writtenDate}</td>

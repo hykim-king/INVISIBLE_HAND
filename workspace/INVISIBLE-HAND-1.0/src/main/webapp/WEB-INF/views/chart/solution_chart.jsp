@@ -25,6 +25,13 @@ $(document).ready(function() {
 	// 차트 생성
 	function drawChart() {
 	  let data = new google.visualization.arrayToDataTable([
+		  
+		  //2023 5월 6월 7월 8월 값 (8월은 Ai값)
+		  //파랑 점선은 5월 6월 7월 값을 표시하고 8월을 null로 줌
+		  //빨간 점선은 7~8월 값으로 표시 (7월 8월 값이 있어야 그려짐)
+		  //노란 점선은 다른 jsp에서 받은 totalScore값을 8월에 주기(7월은 db값)
+		  
+		  
 	      ['Year', 'one', 'two', 'three'],
 	      ['05', 1030, null, null],
 	      ['06', 980, null, null],

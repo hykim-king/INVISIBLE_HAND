@@ -7,6 +7,7 @@
 <%@ page import="java.lang.reflect.Type" %>
 <% 
         // hidden 필드로부터 값을 추출
+        
         String radioArrJson = request.getParameter("radioArr");
         String textArrJson = request.getParameter("textArr");
         String checkArrJson = request.getParameter("checkArr");
@@ -85,45 +86,42 @@
 	<!-- **---container End---** -->
 
 <script>
+$(document).ready(function() {
+	
+    let radioArr = <%= radioArrJson %>; // 이미 배열이므로 JSON.parse() 필요 없음
+    let textArr = <%= textArrJson %>;
+    let checkArr = <%= checkArrJson %>;
+    let totalScore = '<%= totalScore %>';
+    let selectedMainCategory = '<%= selectedMainCategory %>';
+    let selectedSubCategory = '<%= selectedSubCategory %>';
 
-let radioArr             = '<%= radioArrJson %>';
-let textArr              = '<%= textArrJson %>';
-let checkArr             = '<%= checkArrJson %>';
-let totalScore           = '<%= totalScore %>';
-let selectedMainCategory = '<%= selectedMainCategory %>';
-let selectedSubCategory  = '<%= selectedSubCategory %>';
-
+getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory)
 function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {     
     $.ajax({
         type: "POST",
         url: "/ehr/solution/getProductData.do",
         async: true,
         contentType: "application/json; charset=utf-8",
-        dataType: "JSON",   
-        data: {
-            radioArr: radioArr,  // 추가
+        dataType: "json",   
+        data: JSON.stringify({
+            radioArr: radioArr, 
             textArr: textArr,
             checkArr: checkArr,
             totalScore: totalScore,
             mainCategory:selectedMainCategory,
             subCategory:selectedSubCategory
-        },
+        }),
         success: function(data) {
             console.log("성공");
-            // 이후 작업 수행
+            
         },
         error: function(data) {
             console.log("에러");
         }
     }); // ajax 종료
 }
-</script>
 
+});
+</script>
 </body>
-
-<script>
-	var sbhi = 1000;
-</script>
-
-
 </html>
