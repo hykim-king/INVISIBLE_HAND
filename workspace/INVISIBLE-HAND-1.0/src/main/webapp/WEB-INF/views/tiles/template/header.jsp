@@ -106,7 +106,7 @@
             <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
               <p>${sessionScope.member.nickName}님 환영합니다!</p> 
               <p><a href="/ehr/mypage/mypage.do">마이페이지</a></p> 
-              <p>고객지원</p> 
+              <p>고객지원 문의사항</p> 
             </c:when>
             <c:otherwise>
               <p style="display: none;"></p>
