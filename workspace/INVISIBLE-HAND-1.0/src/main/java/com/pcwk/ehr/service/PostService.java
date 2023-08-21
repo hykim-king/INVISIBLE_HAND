@@ -26,6 +26,9 @@ public interface PostService {
 	 */
 	int doDelete(PostVO inVO)throws SQLException;
 	
+	// admin용 게시글 일괄 삭제
+	public int deleteAll(List<Integer> delPostNums) throws SQLException;
+	
 	/**
 	 * 게시글 수정
 	 * @param inVO

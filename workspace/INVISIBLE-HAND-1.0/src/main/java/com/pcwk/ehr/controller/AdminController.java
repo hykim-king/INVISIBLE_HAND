@@ -1,7 +1,10 @@
 package com.pcwk.ehr.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,32 +43,37 @@ public class AdminController {
 	}
 	
 	// 게시글 일괄 삭제
-	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET
-			, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/deleteAll.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(PostVO inVO) throws SQLException {
-		String jsonString = "";
+	public String deleteAll(HttpServletRequest req) throws SQLException {
+	    String jsonString = "";
+	    
+	    String adminDel = req.getParameter("checkArr"); // checkArr의 배열을 toString으로 묶어서 가져옴
+	    
+	    String[] postArr = adminDel.split(",");
+	    List<Integer> delPostNums = new ArrayList<>();
+	    
+	    for (String postId : postArr) {
+	    	delPostNums.add(Integer.parseInt(postId));  // 문자열로 된 게시글 번호를 정수로 변환하여 리스트에 추가
+	    }
+	    
+	    lg.debug("delPostNums------------" + delPostNums);
 
-		lg.debug("┌───────────────────────────────┐");
-		lg.debug("│post : " + inVO);
-		lg.debug("│postnumber : " + inVO.getPostNumber());
+	    int flag = this.postService.deleteAll(delPostNums);
 
-		int flag = this.postService.doDelete(inVO);
-		
-		String message = "";
+	    String message = "";
 
-		if (1 == flag) {
-			message = "게시글이 삭제되었습니다.";
-		} else {
-			message = "게시글 삭제를 실패했습니다.";
-		}
+	    if (1 == flag) {
+	        message = "게시글이 삭제되었습니다.";
+	    } else {
+	        message = "게시글 삭제를 실패했습니다.";
+	    }
 
-		jsonString = StringUtil.validMessageToJson(flag + "", message);
-		lg.debug("│jsonString                      │" + jsonString);
-		lg.debug("│jsonString : " + jsonString);
-		lg.debug("└────────────────────────────────┘");
+	    jsonString = StringUtil.validMessageToJson(flag + "", message);
+	    lg.debug("│jsonString : " + jsonString);
+	    lg.debug("└────────────────────────────────┘");
 
-		return jsonString;
+	    return jsonString;
 	}
 
 	// 회원조회

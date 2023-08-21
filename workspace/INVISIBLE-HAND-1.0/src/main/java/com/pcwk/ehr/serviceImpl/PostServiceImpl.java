@@ -3,8 +3,6 @@ package com.pcwk.ehr.serviceImpl;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +70,19 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 	@Override
 	public int doUpdateViews(PostVO inVO) throws SQLException {
 		return dao.doUpdateViews(inVO);
+	}
+
+	// admin용 게시글 삭제
+	@Override
+	public int deleteAll(List<Integer> delPostNums) throws SQLException {
+	    int count = 0;
+	    for (int postNum : delPostNums) {
+	        PostVO post = new PostVO();
+	        post.setPostNumber(postNum);
+	        dao.doDelete(post);
+	        count++;
+	    }
+	    return count;
 	}
 	
 	
