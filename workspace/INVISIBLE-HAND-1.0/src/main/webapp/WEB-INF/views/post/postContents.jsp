@@ -102,7 +102,6 @@
         
           <c:forEach var="comment" items="${list}" varStatus="status">
             <div class="comment-box" id="comment-box">
-               <%-- <form action="${CP}/post/doSelectOne.do" method="get" name="cmtListFrm" id="cmtListFrm"> --%>
                 <div class="comment-desc">
                     <input type="hidden" name="commentNumber" id="commentNumber" value="${comment.commentNumber}">   
                     <h4><c:out value="${comment.nickname}"/></h4>
