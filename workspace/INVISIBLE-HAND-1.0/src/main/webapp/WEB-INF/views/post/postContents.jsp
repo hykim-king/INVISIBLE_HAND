@@ -71,9 +71,10 @@
       <!-- *---제목+내용 Start---* -->
       <div class="contents-area">
         <div class="yellow-box"></div>
-        <form action="${CP}/post/postContents.do" method="get" name="contentsFrm">
-          <input type="hidden" name="pageNo" id="pageNo">
-          <input type="hidden" name="categoryNumber"    id="categoryNumber" value="${outVO.getCategoryNumber()}">
+        <form action="${CP}/post/doSelectOne.do" method="post" name="cmtFrm" id="cmtFrm">
+        <input type="hidden" name="pageNo" id="pageNo">
+        <input type="hidden" name="categoryNumber"    id="categoryNumber" value='${inVO.getCategoryNumber()}'>
+        <input type="hidden" name="postNumber"    id="postNumber" value="${inVO.getPostNumber()}"> 
           <div id="title" class="contents-title">
             <p><c:out value="${outVO.title}" /><p>
             <div class="writer">글쓴이:<c:out value="${outVO.nickname}" /></div>
@@ -133,10 +134,6 @@
        <!--// 페이징 ---------------------------------------------------------------->
         
       <!-- 댓글 작성 -------------->
-       <form action="${CP}/post/postContents.do" method="get" name="cmtFrm" id="cmtFrm">
-        <input type="hidden" name="pageNo" id="pageNo">
-        <input type="hidden" name="postNumber"    id="postNumber" value="${inVO.getPostNumber()}"> 
-        
         <div class="add-comment">
           <label>댓글 작성자 </label>
           <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
@@ -151,7 +148,6 @@
           <!-- //버튼---------------->
         </div>
         
-       </form>
        </div>
        <div class="yellow-box" style="margin-top: -15px; height: 15px;"></div>
       </div><!-- *---제목+내용 End---* -->
@@ -171,17 +167,11 @@ function searchPage(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);
     
-    let frm = document.cmtListFrm;
+    let frm = document.cmtFrm;
     frm.action = url;
     frm.pageNo.value=pageNo;
     frm.submit();//controller call  
   }
-			
-			function doRetrieveCall(pageNo){
-		        let frm = document.cmtListFrm;
-		        frm.pageNo.value=pageNo;//javascript
-		        frm.submit();//controller call    
-		    }
     
      //cmtUpdateLikes
      //$(".cmt-like-icon").on("click", function() {
