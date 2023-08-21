@@ -49,14 +49,14 @@ public class PaymentInfoServiceImpl implements PaymentInfoService, PcwkLoger {
 	public void paymentGrade(PaymentInfoVO paymentInfoVO) {
 		// 회원 등급 업데이트
 		MemberVO member = memberService.getbyEmail(paymentInfoVO.getBuyerEmail());
-		LOG.info("before update: {}", member.getMemberGrade());
-		if (member != null && member.getMemberGrade() < 2) {
+		LOG.debug("before update: {}", member.getMemberGrade());
+		if (member != null && member.getMemberGrade() > 2) {
 			// 결제 금액이 100원이고 회원 등급이 2보다 낮은 경우에 업그레이드를 진행합니다.
 		    member.setMemberGrade(2); // 예시로 회원 등급을 2로 업그레이드 함
 		    memberService.updateByMemberGrade(member);
 		    LOG.debug("memberService.updateByMemberGrade(member) : " + memberService.updateByMemberGrade(member));
 		}
-		LOG.info("after update: {}", member.getMemberGrade());
+		LOG.debug("after update: {}", member.getMemberGrade());
 		
 	}
 

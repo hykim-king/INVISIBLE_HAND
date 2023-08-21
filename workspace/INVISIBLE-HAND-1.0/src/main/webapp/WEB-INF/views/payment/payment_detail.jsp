@@ -24,8 +24,8 @@
 
       <div id="kakaoContent">
 				<c:if test="${empty paymentList}">
-		      <span>구독 정보가 없습니다.</span>
-		      <div>접속하신 유저의 구독 등급 : ${result}</div>
+		      <span>구독 정보가 없습니다.</span><br>
+		      <td>${sessionScope.member.memberGrade}</td>
 				</c:if>
 				<c:if test="${not empty paymentList}">
            <table>
