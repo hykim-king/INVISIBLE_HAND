@@ -136,7 +136,9 @@
         <div class="label-margin">
 
           <div class="input-title">
-            <span>이용약관동의여부 확인 <a href="../member/memberAgree.do">[이용약관 자세히 읽기]</a></span>
+          <span>이용약관 동의여부 확인 
+            <a href="#" onclick="openNewWindow()">[이용약관 자세히 읽기]</a>
+          </span>
           </div>
           <div class="input-chek">
             <input checked="checked" type="radio" name="agree" value="Y" id="m_y" requi#FF007A>
@@ -167,7 +169,11 @@
   <!-- **---container End---** -->
 
   <script src="../resources/js/jquery-3.7.0.js"></script>
-
+  <script>
+	function openNewWindow() {
+	  window.open("../member/memberAgree.do", '이용약관', 'width=1024, height=768');
+	}
+  </script>
   <script>
 
   $(document).ready(function() {
@@ -180,7 +186,8 @@
     // 회원가입 동의 여부 버튼
     const agreeRadio = document.getElementById('m_y');
     const disagreeRadio = document.getElementById('m_n');
-      
+    //이용약관 새 창 띄우기
+
     // 아이디 중복 확인 체크----------------------------------------------
     $("#id-check-btn").on("click", function () {
       var id = $.trim($("#memberId").val());

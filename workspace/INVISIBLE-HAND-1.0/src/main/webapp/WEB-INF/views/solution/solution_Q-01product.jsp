@@ -10,18 +10,24 @@
         out.println("Selected Main Category: " + mainCategory);
         out.println("Selected Sub Category: " + subCategory);
     %>
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/solution.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<title>보이지 않는 손 레이아웃</title>
+</head>
+<body>
 <script src="../resources/js/jquery-3.7.0.js"></script>
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="#" method="get" class="form cf">
-		
-		 
+		<form action="#" method="get" class="form cf">		 
+		<form class="form cf" id="solution_form">
+
 			<h2>1. 월간 경기동향 실적</h2>
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p> 
 			<div class="que-wrap">
@@ -449,7 +455,6 @@ $(document).ready(function() {
 	let checkArr = []; // 체크박스 값을 저장할 배열
 
 	// 제출 버튼 클릭 시 실행되는 함수
-	//$(".go-result").on("submit", function() {
 	$(".go-result").on("click", function() {
 		
 		radioArr = [];
@@ -457,94 +462,111 @@ $(document).ready(function() {
 		checkArr = [];
 		
 		// 배열에 입력
-	  $("input[type='radio']:checked").each(function(index) {
+	    $("input[type='radio']:checked").each(function(index) {
 		  if (index !== $("input[type='radio']:checked").length - 1) {
 		    radioArr.push($(this).next().text());
 		  }
 		});
 	  
-	  let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수
-	  
-	  // 라디오 값 누락 시 예외처리
-    $("input[type='radio']").each(function() {
-      let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
-      let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
-      if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
-        alert("모두 입력해주세요.");
-        isRadioValid = false;
-        return false; // each 함수 탈출
-      }
-    });
+	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수
+	    
+/* 		  // 라디오 값 누락 시 예외처리
+	    $("input[type='radio']").each(function() {
+	      let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
+	      console.log(radioVals)
+	      let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
+	      console.log(isChecked)
+	      if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
+	        alert("체크 안한 설문이 있는지 확인해주세요.");
+	        window.scrollTo({ top: 0, behavior: "smooth" });
+	        isRadioValid = false;
+	        return false; // each 함수 탈출
+	      }
+	    });
 
-    if(!isRadioValid) return;
-    
-    // input에 text 값 누락시 예외처리
-    if ($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {
-		  alert("값을 입력해주세요.");
-		  return;
-		}
-    
-    // 배열에 입력
-    $("input[type='text']").each(function() {
-		  textArr.push($(this).val());
-		});
-	  
-    // input에 check박스 누락시 예외처리
-    if ($("input[type='checkbox']:checked").length === 0) {
-    	alert("기업경영상 애로요인을 1가지 이상 입력해주세요.");
-		  return;
-		}
-		
-    // 배열에 입력
+	    if(!isRadioValid) return;  */
+	    
+	    // input에 text 값 누락시 예외처리
+	    if($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {
+			  alert("공장 가동률을 입력해주세요.");
+			  window.scrollTo({ top: 1500, behavior: "smooth" });
+			  return;
+			}
+	    
+	    // 배열에 입력
+	    $("input[type='text']").each(function() {
+			  textArr.push($(this).val());
+			});
+		  
+			
+	    // 배열에 입력
 		$("input[type='checkbox']:checked").each(function() {
-		  checkArr.push($(this).next().text());
+			checkArr.push($(this).next().text());
 		});
-
-      var ratings = {
-    		  '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
-    		  '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
-              '동일': 2,'적정': 2,
-              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
-              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
-      };
-      var totalScore = 0
-      var sbhiScore = 0;
-      for (var i = 0; i < radioArr.length; i++) {
-          var score = ratings[radioArr[i]];
-          sbhiScore = sbhiScore + score
-      }
-      sbhiScore = (sbhiScore / radioArr.length) * 50;
-      
-      var operatingScore = 0
-      for (var i = 0; i < textArr.length; i++) {
-    	var tempscore = 100;
-    	var myscore = 8;
-    	while(true){
-    	  if (textArr[i] < tempscore){
-    		  tempscore = tempscore - 10;
-    		  myscore = myscore -2 ;
-    	  }
-    	  break;
-    	}
-    	operatingScore = operatingScore + myscore ; 
-      }
-      
-      var errorScore = checkArr.length * -0.3 ;
-      totalScore = sbhiScore + operatingScore + errorScore;
-      if(totalScore <= 0){
-    	  totalScore = 0;
-      }
-
-      console.log(radioArr);
-      console.log(textArr);
-      console.log(checkArr);
-      console.log(totalScore);
-      
-      
+		var totalScore = 0
+	    var ratings = {
+	    		  '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
+	    		  '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
+	              '동일': 2,'적정': 2,
+	              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
+	              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
+	    };
+	   
+	    var sbhiScore = 0;
+	    for (var i = 0; i < radioArr.length; i++) {
+	    	var score = ratings[radioArr[i]];
+	        sbhiScore = sbhiScore + score
+	    }
+	    sbhiScore = (sbhiScore / radioArr.length) * 50;
+	      
+	    var operatingScore = 0
+	    for (var i = 0; i < textArr.length; i++) {
+	    	var tempscore = 100;
+	    	var myscore = 8;
+	    	while(true){
+	    		if (textArr[i] < tempscore){
+	    			tempscore = tempscore - 10;
+	    			myscore = myscore -2 ;
+	    	    }
+	    		break;
+	    	}
+	    	operatingScore = operatingScore + myscore ; 
+	    }
+    
+	    var errorScore = checkArr.length * -0.3 ;
+	    totalScore = sbhiScore + operatingScore + errorScore;
+	
+	    console.log(radioArr);
+	    console.log(textArr);
+	    console.log(checkArr);
+	    console.log(totalScore);
+		
+	    
+	    getData(radioArr,textArr,checkArr,totalScore)
 	});
 	
-	
-	
+	function getData(radioArr, textArr, checkArr, totalScore) {	    
+	    $.ajax({
+	        type: "POST",
+	        url: "/ehr/solution/solution_AgetData.do",
+	        async: true,
+	        dataType: "JSON",   
+	        data: {
+	            radioArr: radioArr,  // 추가
+	            textArr: textArr,
+	            checkArr: checkArr,
+	            totalScore: totalScore 
+	        },
+	        success: function(data) {
+	            console.log("성공");
+	            // 이후 작업 수행
+	        },
+	        error: function(data) {
+	            console.log("에러");
+	        }
+	    }); // ajax 종료
+	}
+
 });
 
 	//로직 성공시에 넣으면 될듯
@@ -571,7 +593,7 @@ function doUpdateScore(selectedMainCategory, selectedSubCategory) {
         }
      }); 
 }
-	
-	
 
 </script>
+</body>
+</html>

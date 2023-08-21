@@ -40,7 +40,7 @@
 				  <select id="subCategorySelect" name="subCategory" style="display: none">
           </select>
 					<button id="submitButton" style="display: none"></button>
-					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
+					<button id="restoreButton">초기화</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
 
@@ -55,7 +55,7 @@
        
 	      <div class="main-post-category">
 	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
-	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
+	        <a href = "${CP}/post/postList.do?categoryNumber=20">Q&A 게시판으로 이동</a>	     
 	      </div>
 	      
 	      <div>
@@ -101,9 +101,10 @@
 	           </tbody>
 	        </table>   
 	    </div>
+	    <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="400">  
 		</div>
 
-    
+  
     
   </div>
   <!-- **---container End---** -->
