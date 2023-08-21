@@ -1,4 +1,4 @@
-\<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -59,8 +59,7 @@
             }, 
             dataType: 'json',
             success: function(data) {            
-                console.log("데이터를 가져옴");                              
-                console.log(data);
+                
                 
                 
                 
@@ -93,14 +92,13 @@
                   chartData.push(row);
                 }
                 
-                console.log(chartData);
+                
                 drawChart(chartData);
                                 
     
             },  //success
             error: function(xhr, status, error) {
-                // AJAX 요청이 실패했을 때 실행되는 부분
-                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                // AJAX 요청이 실패했을 때 실행되는 부분              
                 console.error(error);
             } //error
         }); //ajax
@@ -168,7 +166,7 @@
           for (let seriesIndex in hiddenSeries) {
             for (let i = 0; i < chartData1.getNumberOfRows(); i++) {
               chartData1.setValue(i, parseInt(seriesIndex) + 1, originalData1.getValue(i, parseInt(seriesIndex) + 1));
-              console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
+            
             }
           }
           chart1.draw(chartData1, options1);

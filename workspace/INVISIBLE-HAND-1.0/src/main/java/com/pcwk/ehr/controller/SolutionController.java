@@ -1,6 +1,7 @@
 package com.pcwk.ehr.controller;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.ChartVO;
+import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.service.RankService;
 import com.pcwk.ehr.service.SolutionService;
 
 @Controller
@@ -24,6 +28,9 @@ public class SolutionController {
 	final Logger LOG = LogManager.getLogger(getClass());
 	@Autowired
 	SolutionService solutionService;
+	
+	@Autowired
+	RankService rankservice;
 	
 	@RequestMapping(value = "/solution_Q.do")
 	public String solutionQ(Model model) {
@@ -62,6 +69,28 @@ public class SolutionController {
 	
 		
 		return "solution/solution_A";
+	}
+	
+	@RequestMapping(value="/doUpdateScore.do",method = RequestMethod.POST
+	,produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdateScore(@RequestParam(value = "mainCategory") String mainCategory, 
+								@RequestParam(value = "subCategory") String subCategory, RankVO inVO) throws SQLException {
+		String jsonString = "";
+		String message = "";
+		inVO.setMainCategory(mainCategory);
+		inVO.setSubCategory(subCategory);
+		
+		int flag = rankservice.doUpdateScore(inVO);
+		
+		if(flag ==1) {
+			 message = String.format("%s-%s의 score에 점수를 1점 추가하였습니다.",mainCategory, subCategory);			
+		}
+		else {			
+			 message = String.format("%s-%s의 score에 점수를 추가하지 못했습니다.",mainCategory, subCategory);
+		}
+		jsonString = StringUtil.validMessageToJson(flag+"", message);	
+		return jsonString;
 	}
 	
 	

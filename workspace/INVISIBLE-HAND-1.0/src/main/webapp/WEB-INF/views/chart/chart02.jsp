@@ -65,8 +65,8 @@ $(document).ready(function () {
 	            }, 
 	            dataType: 'json',
 	            success: function(data) {            
-	                console.log("데이터를 가져옴");
-	                console.log(data);
+	               
+	               
 	                let chartData2 = [];
 	                chartData2.push(["Year","5억원초과~20억원이하",
 	                	"20억원초과~50억원이하","50억원초과~80억원이하",
@@ -88,13 +88,13 @@ $(document).ready(function () {
 	                  chartData2.push(row);
 	                  }               	                
 	                
-	                console.log(chartData2);
+	                
 	                drawChart(chartData2);
 	                                
 	            },  //success
 	            error: function(xhr, status, error) {
 	                // AJAX 요청이 실패했을 때 실행되는 부분
-	                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+	                
 	                console.error(error);
 	            } //error
 	        }); //ajax
@@ -174,7 +174,7 @@ $(document).ready(function () {
 	          for (let seriesIndex in hiddenSeries) {
 	            for (let i = 0; i < chartData2.getNumberOfRows(); i++) {
 	              chartData2.setValue(i, parseInt(seriesIndex) + 1, originalData2.getValue(i, parseInt(seriesIndex) + 1));
-	              console.log("parseInt(seriesIndex) : "+ parseInt(seriesIndex))
+	              
 	            }
 	          }
 	          chart2.draw(chartData2, options2);
@@ -280,13 +280,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.addEventListener("DOMContentLoaded", function() {
 	const mainCategorySelect2 = document.getElementById("mainCategorySelect2");
 	mainCategorySelect2.addEventListener("change", function() {
-	  console.log("mainCategorySelect2 Changed");
+	  
 	    submitButton2.click();
 	});
 
 	const subCategorySelect2 = document.getElementById("subCategorySelect2");
 	subCategorySelect2.addEventListener("change", function() {
-	  console.log("subCategorySelect2 Changed");
+	 
 	    submitButton2.click();
 	});
 });

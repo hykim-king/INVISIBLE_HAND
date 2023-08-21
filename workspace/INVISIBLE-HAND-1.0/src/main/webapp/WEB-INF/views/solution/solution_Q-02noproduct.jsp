@@ -360,8 +360,10 @@ $(document).ready(function() {
   let selectedMainCategory = '<%= selectedMainCategory %>';
   let selectedSubCategory = '<%= selectedSubCategory %>';
   console.log(selectedMainCategory);
-  console.log(selecedSubcategory);
-		  
+  console.log(selectedSubCategory);
+	
+  doUpdateScore(selectedMainCategory,selectedSubCategory)
+  
   function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
 	    $.ajax({
 	        url: '/ehr/solution/doUpdateScore.do', 
@@ -371,17 +373,13 @@ $(document).ready(function() {
 	            subCategory: selectedSubCategory
 	        },
 	        dataType: 'json',
-	        success: function(response) {            
-	            console.log(response);           
-	            
-	            if (response.message) {
-	                alert(response.message); 
-	            }
+	        success: function(data) {            
+	        	console.log(data);     
 
 	        },
-	        error: function(error) {
-	            console.error("에러 발생");
-	            console.error(error);
+	        error: function(xhr, status, error) {
+                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                console.error(error.message);
 	        }
 	     }); 
 	}

@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%  //solution_Q-00select 에서 선택한 변수 받기
-        String mainCategory = request.getParameter("mainCategory");
-        String subCategory = request.getParameter("subCategory");
-        
-        
-        // 받아온 데이터 출력 (선택사항)
-        out.println("Selected Main Category: " + mainCategory);
-        out.println("Selected Sub Category: " + subCategory);
-    %>
+<%
+    String selectedMainCategory = request.getParameter("selectedMainCategory");
+    String selectedSubCategory = request.getParameter("selectedSubCategory");
+    
+     out.println(selectedMainCategory);
+     out.println(selectedSubCategory);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +23,7 @@
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="#" method="get" class="form cf">		 
-		<form class="form cf" id="solution_form">
-
+		<form action="/ehr/solution/solution_A" method="get" class="form cf" id="solution_form">		 
 			<h2>1. 월간 경기동향 실적</h2>
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p> 
 			<div class="que-wrap">
@@ -567,9 +563,14 @@ $(document).ready(function() {
 	    }); // ajax 종료
 	}
 
-});
+//변수 저장
+let selectedMainCategory = '<%= selectedMainCategory %>';
+let selectedSubCategory = '<%= selectedSubCategory %>';
+console.log(selectedMainCategory);
+console.log(selectedSubCategory);
 
-	//로직 성공시에 넣으면 될듯
+doUpdateScore(selectedMainCategory,selectedSubCategory)
+
 function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
     $.ajax({
         url: '/ehr/solution/doUpdateScore.do', 
@@ -579,21 +580,18 @@ function doUpdateScore(selectedMainCategory, selectedSubCategory) {
             subCategory: selectedSubCategory
         },
         dataType: 'json',
-        success: function(response) {            
-            console.log(response);           
-            //메시지 표시
-            if (response.message) {
-                alert(response.message); 
-            }
+        success: function(data) {            
+          console.log(data);     
 
         },
-        error: function(error) {
-            console.error("에러 발생");
-            console.error(error);
+        error: function(xhr, status, error) {
+              console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+              console.error(error.message);
         }
      }); 
 }
 
+}); //document end
 </script>
 </body>
 </html>
