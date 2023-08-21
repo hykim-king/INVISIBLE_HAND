@@ -291,7 +291,6 @@ $(document).ready(function() {
         });
         
         alert(checkArr);
-        console.log(checkArr);
     });
 });
 </script>

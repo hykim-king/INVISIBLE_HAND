@@ -1,5 +1,6 @@
 package com.pcwk.ehr.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,10 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.MemberVO;
+import com.pcwk.ehr.VO.PostVO;
+import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.AdminService;
+import com.pcwk.ehr.service.PostService;
 
 
 @Controller
@@ -21,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	PostService postService;
 
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
@@ -29,6 +37,35 @@ public class AdminController {
 		lg.debug("└─────────┘");
 
 		return "admin/admin";
+	}
+	
+	// 게시글 일괄 삭제
+	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET
+			, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doDelete(PostVO inVO) throws SQLException {
+		String jsonString = "";
+
+		lg.debug("┌───────────────────────────────┐");
+		lg.debug("│post : " + inVO);
+		lg.debug("│postnumber : " + inVO.getPostNumber());
+
+		int flag = this.postService.doDelete(inVO);
+		
+		String message = "";
+
+		if (1 == flag) {
+			message = "게시글이 삭제되었습니다.";
+		} else {
+			message = "게시글 삭제를 실패했습니다.";
+		}
+
+		jsonString = StringUtil.validMessageToJson(flag + "", message);
+		lg.debug("│jsonString                      │" + jsonString);
+		lg.debug("│jsonString : " + jsonString);
+		lg.debug("└────────────────────────────────┘");
+
+		return jsonString;
 	}
 
 	// 회원조회
