@@ -56,7 +56,7 @@ public interface PostService {
 	 * @return
 	 * @throws SQLException
 	 */
-	int doUpdateLikes(int postNumber, String likes) throws SQLException;
+	int doUpdateLikes(int postNumber, String likes, String nickname) throws SQLException;
 	
 	/**
 	 * 게시글 조회수

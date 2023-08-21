@@ -20,17 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.CmnCodeVO;
 import com.pcwk.ehr.VO.CommentVO;
+import com.pcwk.ehr.VO.LikesVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.PcwkLoger;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.CommentService;
+import com.pcwk.ehr.service.LikesService;
 import com.pcwk.ehr.service.PostService;
 
 @Controller("postController")
 @RequestMapping(value = "post")	//WEB_INF아래 폴더이름을 적는곳.
-public class PostController {
+public class PostController implements PcwkLoger{
 	
 	@Autowired
 	PostService postService;
@@ -41,10 +44,11 @@ public class PostController {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	LikesService likesService;
+	
 	public PostController() {}
 	
-	final Logger LOG = LogManager.getLogger(getClass());
-
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body 부분이 그대로 브라우저에 전달됨
 	public String doSave(PostVO inVO) throws SQLException{
@@ -125,8 +129,11 @@ public class PostController {
 	
 	//게시물 단건조회
 	@RequestMapping("/doSelectOne.do")
-	public String doSelectOne(CommentVO commentVO,PostVO inVO,Model model ,HttpSession httpSession) throws SQLException {
-
+	public String doSelectOne(CommentVO commentVO,PostVO inVO,Model model, HttpServletRequest request ,HttpSession httpSession) throws SQLException {
+		
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("member");
+		
 		PostVO outVO = postService.doSelectOne(inVO);
 		
 		model.addAttribute("outVO",outVO);
@@ -139,6 +146,20 @@ public class PostController {
 		LOG.debug("│   outVO()             │"+outVO);
 		LOG.debug("└───────────────────────┘");
 		
+		LikesVO postLikesVO = new LikesVO();
+		postLikesVO.setLikesType(10);//10게시판
+		postLikesVO.setTypeNumber(outVO.getPostNumber());
+		//postLikesVO.setNickname(memberInfo.getNickName());
+		int postLikesCnt = likesService.doLikesCount(postLikesVO);
+		
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   postLikesVO()       │"+postLikesVO);
+		LOG.debug("│   postLikesCnt:       │"+postLikesCnt);
+		LOG.debug("└───────────────────────┘");
+		
+		model.addAttribute("postLikesVO", postLikesVO);
+		model.addAttribute("postLikesCnt", postLikesCnt);
+		
 		// page번호 초기값 1
 		if (null != commentVO && commentVO.getPageNo() == 0) {
 			commentVO.setPageNo(1);
@@ -150,16 +171,22 @@ public class PostController {
 		}
 		
 		List<CommentVO> list = this.commentService.doRetrieve(commentVO);
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│   list()     		   │"+list);
-		LOG.debug("│   commentVO()         │"+commentVO);
-		LOG.debug("└───────────────────────┘");
 		model.addAttribute("list", list);
 		model.addAttribute("commentVO", commentVO);
 		
-		
-		int commentCnt = this.commentService.doCommentCnt(commentVO.getPostNumber());
-	    model.addAttribute("commentCnt", commentCnt);
+		//총글수
+		int totalCnt = 0;
+		if(null !=list && list.size() >0 ) {
+			totalCnt = list.get(0).getTotalCnt();
+			LOG.debug("totalCnt:" + totalCnt);
+		}
+				
+		model.addAttribute("totalCnt", totalCnt);
+		LOG.debug("┌───────────────────────┐");
+		LOG.debug("│   list()     		   │"+list);
+		LOG.debug("│   commentVO()         │"+commentVO);
+		LOG.debug("│   totalCnt:           │"+totalCnt);
+		LOG.debug("└───────────────────────┘");
 		
 		
 		return "post/postContents";
@@ -297,16 +324,18 @@ public class PostController {
 
 	@RequestMapping(value = "/doUpdateLikes.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doUpdateLikes(@RequestParam int postNumber, HttpServletRequest request) throws SQLException {
+	public String doUpdateLikes(int postNumber, HttpServletRequest request) throws SQLException {
 		String jsonString = "";
 		
 		LOG.debug("┌────────────────────────────────┐");
 		LOG.debug("│postNumber : " + postNumber);
 	
 		String likes = request.getParameter("likes");
-		int flag = this.postService.doUpdateLikes(postNumber, likes);
+		String nickname = request.getParameter("nickname");
+		int flag = this.postService.doUpdateLikes(postNumber, likes, nickname);
 		
 		LOG.debug("│likes : " + likes);
+		LOG.debug("│nickname : " + nickname);
 		/*
 		 * List<PostVO> list = postService.doRetrieve(inVO); LOG.debug("│inVO : " +
 		 * inVO);

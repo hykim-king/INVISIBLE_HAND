@@ -54,7 +54,7 @@ public interface PostDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	int doUpdateLikes(int postNumber,String likes) throws SQLException;
+	int doUpdateLikes(int postNumber,String likes, String nickname) throws SQLException;
 	
 	/**
 	 * 조회수
