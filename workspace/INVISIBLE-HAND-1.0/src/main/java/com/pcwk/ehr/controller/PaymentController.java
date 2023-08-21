@@ -1,6 +1,7 @@
 package com.pcwk.ehr.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -50,55 +51,42 @@ public class PaymentController {
 		HttpSession session = request.getSession();
 		String buyerEmail = (String) session.getAttribute("email"); // session으로 email정보 넘기기
 	
-		// PaymentInfoVO 객체 생성
-		PaymentInfoVO paymentInfo = new PaymentInfoVO();
-		paymentInfo = payService.getPaymentInfoByEmail(buyerEmail); // 객체에 정보 담기
+		List<PaymentInfoVO> paymentList = payService.getPaymentListByEmail(buyerEmail); // 객체에 정보 담기
 		
 		// 구독 여부 체크
 	    int result = 1; // 기본 값은 비구독자
-	    if (paymentInfo != null && payService.checkPaymentInfo(buyerEmail) == 1) {
+	    if (paymentList != null && payService.checkPaymentInfo(buyerEmail) == 1) {
 	        result = 2;
 	    } else if (buyerEmail == null) {
 	        result = 0;
 	    }
 	    model.addAttribute("result", result);
 	
-		model.addAttribute("paymentInfo", paymentInfo);
+		model.addAttribute("paymentList", paymentList);
 	
 		return "payment/payment_detail";
 	}
 	
 	@PostMapping("/payment_info.do")
 	@ResponseBody
-	public String paymentInfoAddOrUpdate(PaymentInfoVO inVO, HttpSession session) throws SQLException {
-		String email = (String) session.getAttribute("email"); // session으로 email정보 넘기기
-
-		int rowCount = payService.checkPaymentInfo(email); // count가 0이면 insert, 1이면 update
+	public String paymentInfoAdd(PaymentInfoVO inVO) throws SQLException {
+		String jsonString = "";
 		
-		lg.debug("rowCount----------------" + rowCount);
-		if (rowCount == 0) { // 결제 정보가 없으면 추가
-			int result = payService.addInfo(inVO);
-			if (result == 1) {
-				String msg = inVO.getBuyerName() + "님의 구독되었습니다!";
-				MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
-				return new Gson().toJson(messageVO);
-			} else {
-				String msg = inVO.getBuyerName() + "님의 구독 실패되었습니다.";
-				MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
-				return new Gson().toJson(messageVO);
-			}
-		} else { // 있으면 업데이트
-			int result = payService.updatePaymentInfo(inVO);
-			if (result == 1) {
-				String msg = inVO.getBuyerName() + "님의 구독 정보가 업데이트되었습니다!";
-				MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
-				return new Gson().toJson(messageVO);
-			} else {
-				String msg = inVO.getBuyerName() + "님의 구독 정보 업데이트가 실패되었습니다.";
-				MessageVO messageVO = new MessageVO(Integer.toString(result), msg);
-				return new Gson().toJson(messageVO);
-			}
+		int flag = this.payService.addInfo(inVO);
+		// jsonString에 담을 메시지
+		String message = "";
+		if (1 == flag) {
+			payService.paymentGrade(inVO);
+			message = inVO.getBuyerEmail() + "가 등록 되었습니다.";
+		} else {
+			message = inVO.getBuyerEmail() + "님 등록이 실패되었습니다.";
 		}
+
+		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+
+		jsonString = new Gson().toJson(messageVO);
+
+		return jsonString;
 	}
 
 	@GetMapping("/payment_view.do")

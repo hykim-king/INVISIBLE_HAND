@@ -118,8 +118,30 @@
                memberId = #{memberId}     
 
 </update>
-
-
-    
+  
+  <select id="selectByEmail" parameterType="MemberVO" resultType="MemberVO">
+    SELECT 
+      memberId
+      , password
+      , membergrade
+      , membername
+      , email
+      , nickname
+      , JoinDate
+      , updateDate
+      , isverified
+      , phoneNumber
+    FROM
+      member
+    WHERE
+      email = #{email}
+  </select>
+  
+  <update id="updateByMemberGrade" parameterType="MemberVO">
+    UPDATE member
+    SET  memberGrade = #{memberGrade}
+    WHERE
+    email = #{email}
+  </update>
     
 </mapper>

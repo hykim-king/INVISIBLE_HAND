@@ -86,7 +86,7 @@ function paymentReady() {
           }
 	      });
 
-				document.location.href = "/ehr/main/main.do";
+				document.location.href = document.referrer;
 			} else {
 				let msg = data.error_msg;
 
