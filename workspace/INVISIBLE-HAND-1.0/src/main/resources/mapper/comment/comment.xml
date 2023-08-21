@@ -18,36 +18,55 @@
   
   <!-- 댓글 조회 -->
   <select id="doRetrieve" parameterType="DTO" resultType="CommentVO">
-    SELECT A.*,B.* 
-    FROM(
-      SELECT  TT1.rnum as num,
-            TT1.commentnumber,
-            TT1.nickname,
-            TT1.content,
-            TT1.likes,
-            --당일 등록이면 : 03:45 그렇치 않으면 2023/07/29
-            DECODE( TO_CHAR(TT1.writtendate,'YYYYMMDD'),TO_CHAR(sysdate,'YYYYMMDD')
-                ,TO_CHAR(TT1.writtendate,'HH24:MI')
-                ,TO_CHAR(TT1.writtendate,'YYYY/MM/DD') )writtendate,
-            TT1.postnumber,
-            TT1.memberid
-      FROM(
-        SELECT ROWNUM AS rnum, T1.*
-        FROM(
-          SELECT *
-          FROM board_comment
-          WHERE postnumber = #{postNumber}
-          ORDER BY writtendate DESC
-          )T1
-          <![CDATA[     WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1)+#{pageSize}   ]]>
-      )TT1
-      <![CDATA[    WHERE rnum >=#{pageSize} * (#{pageNo}-1)+ 1 ]]>
-    )A 
-    CROSS JOIN
-    (SELECT COUNT(commentnumber) commentCnt
-    FROM board_comment 
-    WHERE postnumber = #{postNumber}
-    )B
+    SELECT 
+        TT1.rnum as num,
+        TT1.commentnumber,
+        TT1.nickname,
+        TT1.content,
+        CASE 
+            WHEN TO_CHAR(TT1.writtendate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+                THEN TO_CHAR(TT1.writtendate,'HH24:MI')
+            ELSE TO_CHAR(TT1.writtendate,'YYYY/MM/DD')
+        END AS writtendate,
+        TT1.postnumber,
+        TT1.memberid,
+        B.totalCnt,
+        COALESCE(C.likes, 0) AS likes
+    FROM (
+        SELECT 
+            ROWNUM AS rnum, 
+            T1.commentnumber,
+            T1.nickname,
+            T1.content,
+            T1.writtendate,
+            T1.postnumber,
+            T1.memberid
+        FROM (
+            SELECT *
+            FROM board_comment
+            WHERE postnumber = #{postNumber}
+            ORDER BY writtendate DESC
+        ) T1
+        <![CDATA[ 
+        WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1) + #{pageSize}
+        ]]> 
+    ) TT1
+    CROSS JOIN (
+        SELECT COUNT(commentnumber) totalCnt
+        FROM board_comment 
+        WHERE postnumber = #{postNumber}
+    ) B
+    LEFT JOIN (
+        SELECT bc.commentnumber, 
+               COUNT(l.typenumber) AS likes
+        FROM board_comment bc
+        LEFT JOIN likes l ON l.likestype = 20 AND l.typenumber = bc.commentnumber
+        WHERE bc.postnumber = #{postNumber}
+        GROUP BY bc.commentnumber
+    ) C ON TT1.commentnumber = C.commentnumber
+    <![CDATA[
+    WHERE TT1.rnum >= #{pageSize} * (#{pageNo}-1) + 1
+    ]]> 
   </select>
   
   <!-- 댓글 등록 -->
