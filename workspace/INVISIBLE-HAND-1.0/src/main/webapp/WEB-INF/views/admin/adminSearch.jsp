@@ -4,7 +4,30 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	DTO dto = (DTO) request.getAttribute("search");
 
+//paging
+int bottomCount = 10;
+int pageSize = 10;
+int pageNo = 1;
+int totalCnt = 0;
+String searchWord = "";
+String searchDiv = "";
+
+if (null != dto) {
+	pageSize = dto.getPageSize();
+	pageNo = dto.getPageNo();
+	searchDiv = dto.getSearchDiv();
+	searchWord = dto.getSearchWord();
+}
+
+if (null != request.getAttribute("totalCnt")) {
+	totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
+}
+
+String cPath = request.getContextPath();
+%>
 
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 
@@ -145,13 +168,20 @@
 					<li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
 					<li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
 				</ul>
+				<div class="cate">
+        <span class="menu"> <a href="${CP}/admin/admin.do"
+          class="menulink">서비스 관리</a> <a href="javascript:void(0);"
+          class="subopen"></a>
+        </span>
+        <ul>
+          <li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a></li>
+        </ul>
+      </div>
 			</div>
 		</div>
 	</div>
 
-	</div>
 	<!-- accordion 메뉴 end -->
-	<div class="h60px"></div>
 	<div class="container">
 		<h1>회원관리</h1>
 
@@ -179,7 +209,8 @@
 					<option value="50">50</option>
 					<option value="100">100</option>
 					<option value="200">200</option>
-				</select> <input type="button" class="btn" value="조회" id="#" onclick="#">
+				</select> <input type="button" class="btn" value="조회" value="조회"
+					id="doRetrieve" onclick="window.doRetrieve();">
 			</form>
 		</div>
 		<table id="boardTable"
@@ -228,9 +259,16 @@
 					<li class="page-item"><a class="page-link" href="#"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="1">1</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="2">2</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="3">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="4">4</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="5">5</a></li>
 					<li class="page-item"><a class="page-link" href="#"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
@@ -301,193 +339,238 @@
 	<p id="pagetop" class="inner">
 		<a href="#">↑</a>
 	</p>
+
 	<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 	<script src="${CP}/resources/js/util.js"></script>
 	<script>
-    (function($) {
-        function openMenu($menu) {
-          $menu.addClass('active');
-          $menu.find('ul').slideDown('slow');
-        }
+		(function($) {
+			function openMenu($menu) {
+				$menu.addClass('active');
+				$menu.find('ul').slideDown('slow');
+			}
 
-        function closeMenu($menu) {
-          $menu.removeClass('active');
-          $menu.find('ul').slideUp('slow');
-        }
+			function closeMenu($menu) {
+				$menu.removeClass('active');
+				$menu.find('ul').slideUp('slow');
+			}
 
-        $('.cate ul').hide();
+			$('.cate ul').hide();
 
-        $('.accordion .cate').each(function() {
-          openMenu($(this));
-        });
+			$('.accordion .cate').each(function() {
+				openMenu($(this));
+			});
 
-        $('.cate .menu .subopen').click(function(event) {
-          event.stopPropagation();
+			$('.cate .menu .subopen').click(function(event) {
+				event.stopPropagation();
 
-          var $parent = $(this).parent().parent();
-          var isActive = $parent.hasClass('active');
+				var $parent = $(this).parent().parent();
+				var isActive = $parent.hasClass('active');
 
-          if (isActive) {
-            closeMenu($parent);
-          } else {
-            openMenu($parent);
-          }
-        });
-      })(jQuery); 
-    
-    //테이블에 데이터를 click event
-    //jquery선택자
-    //id : #아이디 이름
-    //class : .클래스 이름
-$(document).on("click", "#boardTable tbody tr", function(e) {
-    let memberId = $(this).find(".c-txt:eq(0)").text();
+				if (isActive) {
+					closeMenu($parent);
+				} else {
+					openMenu($parent);
+				}
+			});
+		})(jQuery);
 
-    $.ajax({
-        type: "POST",
-        url: "${CP}/member/get.do",
-        async: true,
-        dataType: "json",
-        data: {
-            memberId: memberId
-        },
-        success: function(data) {
-            $("#memberId").val(data.memberId);
-            $("#nickName").val(data.nickName);
-            $("#memberName").val(data.memberName);
-            $("#memberGrade").val(data.memberGrade);
-            $("#email").val(data.email);
+		//테이블에 데이터를 click event
+		//jquery선택자
+		//id : #아이디 이름
+		//class : .클래스 이름
+		$(document).on(
+				"click",
+				"#boardTable tbody tr",
+				function(e) {
+					let memberId = $(this).find(".c-txt:eq(0)").text();
 
-            const updateDate = data.updateDate; 
-            const formattedDate = new Date(updateDate).toLocaleString(); 
-            $("#updateDate").val(formattedDate);
-        },
-        error: function(data) {
-            console.log("error:" + data);
-        }
-    });
-});
-    
-//수정
-$("#update").on("click",function(){
-  console.log('update click');
-    if(eUtil.ISEmpty($("#memberId").val())==true){
-          alert("아이디를 입력 하세요.")
-          $("#memberId").focus();
-          return;
-    }
-    
-    if(eUtil.ISEmpty($("#nickName").val())==true){
-        alert("닉네임을 입력 하세요.")
-        $("#nickName").focus();
-        return;
-    }       
-    
-    if(eUtil.ISEmpty($("#memberName").val())==true){
-        alert("회원이름을 입력 하세요.")
-        $("#memberName").focus();
-        return;
-    } 
-    
-    if(eUtil.ISEmpty($("#email").val())==true){
-        alert("이메일을 입력 하세요.")
-        $("#email").focus();
-        return;
-    }
-    
-    $.ajax({
-        type: "POST",
-        url:"/ehr/member/update.do",
-        asyn:"true",
-        dataType:"json",   
-        data:{
-          "memberId" : $("#memberId").val(),
-          "nickName" : $("#nickName").val(),
-          "memberName" : $("#memberName").val(),
-          "memberGrade" : $("#memberGrade").val(),
-          "email" : $("#email").val()
-        },
-        success:function(data){//통신 성공
-            console.log("success data:"+data);
-            let parsedJson = JSON.parse(data);
-            if("1" == parsedJson.msgId){
-              alert(parsedJson.msgContents);
-              doRetrieve();
-            }else{
-              alert(parsedJson.msgContents);
-            }
-        
-        },
-        error:function(data){//실패시 처리
-            console.log("error:"+data);
-        }
-      });           
-      
-});//--수정----------------------------------------------------------------
+					$.ajax({
+						type : "POST",
+						url : "${CP}/member/get.do",
+						async : true,
+						dataType : "json",
+						data : {
+							memberId : memberId
+						},
+						success : function(data) {
+							$("#memberId").val(data.memberId);
+							$("#nickName").val(data.nickName);
+							$("#memberName").val(data.memberName);
+							$("#memberGrade").val(data.memberGrade);
+							$("#email").val(data.email);
 
-$("#init").on("click",function(){//--초기화---------------------------------
-    console.log('init');
-    
-      //1. 등록 버튼 활성화
-      //2. 아이디 read/write로 변경         
-      $("#add").prop("disabled", false);
-      $("#memberId").prop("disabled",false);
-      
-      const initValue = "";
-      $("#memberId").val(initValue);
-      $("#nickName").val(initValue);
-      $("#memberName").val(initValue);
-      //select box : basic
-      $("#memberGrade").val(1);
-      $("#email").val(initValue);
-      $("#updateDate").val(initValue);
-         
-  });//init end ------------------------------------------------------------
+							const updateDate = data.updateDate;
+							const formattedDate = new Date(updateDate)
+									.toLocaleString();
+							$("#updateDate").val(formattedDate);
+						},
+						error : function(data) {
+							console.log("error:" + data);
+						}
+					});
+				});
 
-  $("#deleteOne").on("click", function() { //-삭제---------------------------
-	    console.log('deleteOne click');
-	    
-	    let memberId = $("#memberId").val();
-	    
-	    console.log('memberId:' + memberId);
-	    if (null == memberId || undefined == memberId || memberId.length == 0) {
-	        alert('아이디를 입력 하세요.');
-	        $("#memberId").focus();
-	        return;
-	    }
-	    
-	    if (confirm('삭제 하시겠습니까?') == false) return;
-	    
-	    $.ajax({
-	        type: "GET",
-	        url: "${CP}/member/deleteOne.do",
-	        asyn: "true",
-	        dataType: "json",
-	        data: {
-	            memberId: memberId
-	        },
-	        success: function(data) {
-	            console.log("success data:" + data);
-	            let parsedJson = JSON.parse(data);
-	            if ("1" == parsedJson.msgId) {
-	                alert(parsedJson.msgContents);
-	                $("#memberId").val('');
-	                $("#nickName").val('');
-	                $("#memberName").val('');
-	                $("#memberGrade").val('1');
-	                $("#email").val('');
-	                $("#updateDate").val('');
-	            } else {
-	                alert(parsedJson.msgContents);
-	            }
-	        },
-	        error: function(data) {
-	            console.log("error:" + data);
-	        }
-	    });
-      
-      
-    });//deleteOne button ----------------------------------------------------
+		//수정
+		$("#update").on("click", function() {
+			console.log('update click');
+			if (eUtil.ISEmpty($("#memberId").val()) == true) {
+				alert("아이디를 입력 하세요.")
+				$("#memberId").focus();
+				return;
+			}
 
-  </script>
+			if (eUtil.ISEmpty($("#nickName").val()) == true) {
+				alert("닉네임을 입력 하세요.")
+				$("#nickName").focus();
+				return;
+			}
+
+			if (eUtil.ISEmpty($("#memberName").val()) == true) {
+				alert("회원이름을 입력 하세요.")
+				$("#memberName").focus();
+				return;
+			}
+
+			if (eUtil.ISEmpty($("#email").val()) == true) {
+				alert("이메일을 입력 하세요.")
+				$("#email").focus();
+				return;
+			}
+
+			$.ajax({
+				type : "POST",
+				url : "${CP}/member/update.do",
+				async : true,
+				dataType : "json",
+				data : {
+					"memberId" : $("#memberId").val(),
+					"nickName" : $("#nickName").val(),
+					"memberName" : $("#memberName").val(),
+					"memberGrade" : $("#memberGrade").val(),
+					"email" : $("#email").val()
+				},
+				success : function(data) {
+					console.log("success data:", data);
+					let parsedJson = JSON.parse(data);
+					if ("1" == parsedJson.msgId) {
+						alert(parsedJson.msgContents);
+						doRetrieve();
+					} else {
+						alert(parsedJson.msgContents);
+					}
+				},
+				error : function(data) {
+					console.log("error:", data);
+				}
+			});
+		});
+
+		$("#init").on("click", function() {//--초기화---------------------------------
+			console.log('init');
+
+			//1. 등록 버튼 활성화
+			//2. 아이디 read/write로 변경         
+			$("#add").prop("disabled", false);
+			$("#memberId").prop("disabled", false);
+
+			const initValue = "";
+			$("#memberId").val(initValue);
+			$("#nickName").val(initValue);
+			$("#memberName").val(initValue);
+			//select box : basic
+			$("#memberGrade").val(1);
+			$("#email").val(initValue);
+			$("#updateDate").val(initValue);
+
+		});//init end ------------------------------------------------------------
+
+		$("#deleteOne").on(
+				"click",
+				function() { //-삭제---------------------------
+					console.log('deleteOne click');
+
+					let memberId = $("#memberId").val();
+
+					console.log('memberId:' + memberId);
+					if (null == memberId || undefined == memberId
+							|| memberId.length == 0) {
+						alert('아이디를 입력 하세요.');
+						$("#memberId").focus();
+						return;
+					}
+
+					if (confirm('삭제 하시겠습니까?') == false)
+						return;
+
+					$.ajax({
+						type : "GET",
+						url : "${CP}/member/deleteOne.do",
+						asyn : "true",
+						dataType : "json",
+						data : {
+							memberId : memberId
+						},
+						success : function(data) {
+							console.log("success data:" + data);
+							let parsedJson = JSON.parse(data);
+							if ("1" == parsedJson.msgId) {
+								alert(parsedJson.msgContents);
+								$("#memberId").val('');
+								$("#nickName").val('');
+								$("#memberName").val('');
+								$("#memberGrade").val('1');
+								$("#email").val('');
+								$("#updateDate").val('');
+							} else {
+								alert(parsedJson.msgContents);
+							}
+						},
+						error : function(data) {
+							console.log("error:" + data);
+						}
+					});
+
+				});//deleteOne button ----------------------------------------------------
+
+		//검색어를 입력하고 Enter 사용시 서버로 전달
+		$("#searchWord").on("keypress", function(e) {
+			console.log('searchWord keypress');
+			console.log(e.type + ":" + e.which);
+			if (13 == e.which) {//Enter keyCode
+				e.preventDefault();//event 버블링 방지
+				doRetrieve();
+			}
+		});
+
+		//숫자만 입력되도록 처리
+		$(".numberOnly").on("keyup", function(e) {
+			console.log('numberOnly keyup' + $(this).val());
+			//REG EXP
+			$(this).val($(this).val().replace(/[^0-9]/g, ""));
+		});//numberOnly end---------------------------------------------------------
+
+		//paging
+		function do_Retrieve(url, pageNo) {
+			//alert("url:"+url+",pageNo:"+pageNo);
+			//console.log("pageNo:"+pageNo);
+
+			let frm = document.user_frm;
+			frm.pageNo.value = pageNo;
+			frm.submit();
+
+		}
+
+		//첫 페이지 조회
+		function doRetrieve() {
+
+			let frm = document.user_frm;
+			//frm.action  ="/ehr/user/doRetrieve.do";
+			frm.pageNo.value = 1;
+			frm.submit();
+
+		}
+	</script>
+
+	</script>
 </body>
 </html>
