@@ -444,7 +444,6 @@ function searchPage(url, pageNo){
                     async: true,
                     dataType: "html",
                     data: {
-                        categoryNumber: '<%= ctgNumValue %>',
                         postNumber: '<%= postNumValue %>'
                     },
                     success: function(data) { // 통신 성공
@@ -452,7 +451,7 @@ function searchPage(url, pageNo){
                         // 성공, 실패
                         // 성공->board_list.jsp로 이동
                         let parsedJson = JSON.parse(data);
-                        if ("1" == parsedJson.msgId) {
+                        if ("-1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
                             moveToListView();
                         } else {

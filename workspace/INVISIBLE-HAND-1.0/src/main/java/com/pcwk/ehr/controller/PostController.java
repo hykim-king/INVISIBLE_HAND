@@ -84,19 +84,17 @@ public class PostController implements PcwkLoger{
 		LOG.debug("│postnumber : " + inVO.getPostNumber());
 
 		int flag = this.postService.doDelete(inVO);
-		
+		LOG.debug("│flag : " + flag);
 		String message = "";
 
-		if (1 == flag) {
+		if (-1 == flag) {
 			message = "게시글이 삭제되었습니다.";
 		} else {
 			message = "게시글 삭제를 실패했습니다.";
 		}
 
 		jsonString = StringUtil.validMessageToJson(flag + "", message);
-		LOG.debug("│jsonString                          │" + jsonString);
-
-		LOG.debug("│jsonString : " + jsonString);
+		LOG.debug("│jsonString                      │" + jsonString);
 		LOG.debug("└────────────────────────────────┘");
 
 		return jsonString;
