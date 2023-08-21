@@ -1,7 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.google.gson.reflect.TypeToken" %>
+<%@ page import="java.lang.reflect.Type" %>
+<% 
+        // hidden 필드로부터 값을 추출
+        String radioArrJson = request.getParameter("radioArr");
+        String textArrJson = request.getParameter("textArr");
+        String checkArrJson = request.getParameter("checkArr");
+        String totalScore = request.getParameter("totalScore");
+        String selectedMainCategory = request.getParameter("selectedMainCategory");
+        String selectedSubCategory = request.getParameter("selectedSubCategory");
+        
+        out.println("<br>");
+        out.println("<br>");
+        out.println("<br>");
+        out.println("Radio Array: " + radioArrJson + "<br>");
+        out.println("Text Array: " + textArrJson + "<br>");
+        out.println("Check Array: " + checkArrJson+ "<br>");
+        out.println("Total Score: " + totalScore + "<br>");
+        out.println("Selected Main Category: " + selectedMainCategory + "<br>");
+        out.println("Selected Sub Category: " + selectedSubCategory + "<br>");
 
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +77,40 @@
 
 	<!-- **---container End---** -->
 
+<script>
 
+let radioArr             = '<%= radioArrJson %>';
+let textArr              = '<%= textArrJson %>';
+let checkArr             = '<%= checkArrJson %>';
+let totalScore           = '<%= totalScore %>';
+let selectedMainCategory = '<%= selectedMainCategory %>';
+let selectedSubCategory  = '<%= selectedSubCategory %>';
+
+function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {     
+    $.ajax({
+        type: "POST",
+        url: "/ehr/solution/getProductData.do",
+        async: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "JSON",   
+        data: {
+            radioArr: radioArr,  // 추가
+            textArr: textArr,
+            checkArr: checkArr,
+            totalScore: totalScore,
+            mainCategory:selectedMainCategory,
+            subCategory:selectedSubCategory
+        },
+        success: function(data) {
+            console.log("성공");
+            // 이후 작업 수행
+        },
+        error: function(data) {
+            console.log("에러");
+        }
+    }); // ajax 종료
+}
+</script>
 
 </body>
 </html>
