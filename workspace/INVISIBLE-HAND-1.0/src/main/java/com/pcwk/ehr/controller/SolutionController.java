@@ -4,12 +4,14 @@ package com.pcwk.ehr.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,15 +99,19 @@ public class SolutionController {
 	@RequestMapping(value="/getProductData.do",method = RequestMethod.POST
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getProductData(@RequestParam(value = "radioArr") String radioArr, 
-									@RequestParam(value = "textArr") String textArr, 
-									@RequestParam(value = "checkArr")  String checkArr,
-									@RequestParam(value = "totalScore") String totalScore,
-						            @RequestParam(value = "mainCategory") String mainCategory, 
-									@RequestParam(value = "subCategory") String subCategory){
-
+	public String getProductData(@RequestBody Map<String, Object> requestData) {
 		
-		return "";
+	    List<String> radioArr = (List<String>) requestData.get("radioArr");
+	    List<String> textArr = (List<String>) requestData.get("textArr");
+	    List<String> checkArr = (List<String>) requestData.get("checkArr");
+	    String totalScore = (String) requestData.get("totalScore");
+	    String mainCategory = (String) requestData.get("mainCategory");
+	    String subCategory = (String) requestData.get("subCategory");
+
+	    // 이후 데이터 처리 작업 수행
+	    LOG.debug("파라미터가 생기나용");
+
+	    return "";
 	}
 	
 

@@ -58,11 +58,7 @@
              subCategory : selectedSubCategory
             }, 
             dataType: 'json',
-            success: function(data) {            
-                
-                
-                
-                
+            success: function(data) {                                                                         
                 let chartData = [];
                 chartData.push(["Year","경기전반","고용수준","내수판매","수출","영업이익","자금사정"]);
                 
