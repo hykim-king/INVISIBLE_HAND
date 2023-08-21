@@ -11,4 +11,5 @@ public interface SolutionDao {
 	
 	public List<ChartVO> SelectSubcategory(ChartVO inVO);
 
+	
 }

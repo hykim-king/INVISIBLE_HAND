@@ -1,5 +1,6 @@
 package com.pcwk.ehr.serviceImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.VO.ChartVO;
-
+import com.pcwk.ehr.VO.RankVO;
 import com.pcwk.ehr.service.SolutionService;
 import com.pcwk.ehr.dao.SolutionDao;
 
@@ -27,7 +28,6 @@ public class SolutionServiceImpl implements SolutionService {
 	public List<ChartVO> SelectSubcategory(ChartVO inVO) {
 		return solutionDao.SelectSubcategory(inVO);
 	}
-
 
 
 }

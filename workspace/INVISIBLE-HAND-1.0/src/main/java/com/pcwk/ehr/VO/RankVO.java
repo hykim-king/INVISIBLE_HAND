@@ -22,4 +22,6 @@ public class RankVO {
 	private int previousRank;
 	private String rankingUpdate;
 	private int changeRank;
+	private	String mainCategory;	
+	private String subCategory;
 }

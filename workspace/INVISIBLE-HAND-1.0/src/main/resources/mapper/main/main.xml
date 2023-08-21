@@ -53,7 +53,8 @@
 	<update id="doUpdateScore" parameterType="RankVO">
 		UPDATE Ranking
 		SET score = NVL(score,0) + 1
-		WHERE name = #{name}
+		WHERE mainCategory = #{mainCategory}
+		AND subCategory = #{subCategory}
 	</update>
 
 	<!-- 3. 이전 랭킹과 현재 랭킹을 기록 -->

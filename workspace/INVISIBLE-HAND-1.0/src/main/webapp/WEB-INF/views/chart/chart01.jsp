@@ -41,9 +41,8 @@
 	         $("#submitButton").click(function () {
 	             // 선택된 값 가져오기
 	             let selectedMainCategory = $("#mainCategorySelect").val();
-	             let selectedSubCategory = $("#subCategorySelect").val();
-
-	             mainCategory = selectedMainCategory; // mainCategory 값을 선택한 값으로 업데이트
+	             let selectedSubCategory = $("#subCategorySelect").val();	          
+	             
 
 	             loadChartData(selectedMainCategory, selectedSubCategory);
 	         });

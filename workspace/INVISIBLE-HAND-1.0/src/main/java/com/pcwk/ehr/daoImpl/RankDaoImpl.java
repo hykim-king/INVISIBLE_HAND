@@ -44,14 +44,13 @@ public class RankDaoImpl implements RankDao{
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateCurrent", inVO);
 	}
-	
+
+
 	//4. 특정 행동에 따른 Score에 +1 하는 로직  
 	@Override
 	public int doUpdateScore(RankVO inVO) throws SQLException {
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateScore", inVO);		
 	}
-
-	
 
 }

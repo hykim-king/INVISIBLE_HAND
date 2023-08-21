@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%  //solution_Q-00select 에서 선택한 변수 받기
+        String mainCategory = request.getParameter("mainCategory");
+        String subCategory = request.getParameter("subCategory");
+        
+        
+        // 받아온 데이터 출력 (선택사항)
+        out.println("Selected Main Category: " + mainCategory);
+        out.println("Selected Sub Category: " + subCategory);
+    %>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
@@ -10,9 +19,11 @@
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="#" method="post" class="form cf">
+		<form action="#" method="get" class="form cf">
+		
+		 
 			<h2>1. 월간 경기동향 실적</h2>
-			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p>  
+			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p> 
 			<div class="que-wrap">
 			
 				<div class="que que01">
@@ -531,5 +542,36 @@ $(document).ready(function() {
       
       
 	});
+	
+	
+	
 });
+
+	//로직 성공시에 넣으면 될듯
+function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
+    $.ajax({
+        url: '/ehr/solution/doUpdateScore.do', 
+        type: 'POST',
+        data: {
+            mainCategory: selectedMainCategory,
+            subCategory: selectedSubCategory
+        },
+        dataType: 'json',
+        success: function(response) {            
+            console.log(response);           
+            //메시지 표시
+            if (response.message) {
+                alert(response.message); 
+            }
+
+        },
+        error: function(error) {
+            console.error("에러 발생");
+            console.error(error);
+        }
+     }); 
+}
+	
+	
+
 </script>

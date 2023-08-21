@@ -44,6 +44,7 @@ public class RankServiceImpl implements RankService {
 
 		return rankDao.doUpdateScore(inVO);
 	}
+
 	
 	
 	
