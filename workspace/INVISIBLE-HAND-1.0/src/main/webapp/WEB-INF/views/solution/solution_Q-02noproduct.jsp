@@ -23,7 +23,7 @@
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
-		<form action="/ehr/solution/solution_A.do"  id="data-form" method="POST">
+		<form action="/ehr/solution/solution_A.do"  class="solution" id="data-form" method="POST">
 			<h2>1. 월간 경기동향 실적</h2>			
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p>
 			<div class="que-wrap">
@@ -194,27 +194,8 @@
 			<!--que-wrap End-->
 
 
-			<h2>2. 기업경영상 애로요인</h2>
-			<p>*당원 기준으로 해당 항목을 모두 선택해 주시기 바랍니다.</p>
-			<div class="que-wrap">
-				<div class="line line01">
-					<label for="opt11_1" class="radio">
-            <input type="radio" name="rdo11" id="opt11_1" class="hidden" />
-            <span class="label">증가</span>
-          </label>
-          <label for="opt11_2" class="radio">
-            <input type="radio" name="rdo11" id="opt11_2" class="hidden" />
-            <span class="label">감소</span>
-          </label>
-          <label for="opt11_3" class="radio">
-           <input type="radio" name="rdo11" id="opt11_3" class="hidden" />
-           <span class="label">동일</span>
-          </label>
-        </div>
-      </div>
-      <!--que-wrap End-->
 
-      <h2>4. 기업경영상 애로요인</h2>
+      <h2>2. 기업경영상 애로요인</h2>
       <p>*당원 기준으로 해당 항목을 모두 선택해 주시기 바랍니다.</p>
       <div class="que-wrap">
         <div class="line line01">
