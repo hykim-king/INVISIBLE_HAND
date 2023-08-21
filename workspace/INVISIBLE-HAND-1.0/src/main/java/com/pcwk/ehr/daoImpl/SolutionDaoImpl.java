@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.VO.SolutionVO;
 import com.pcwk.ehr.dao.SolutionDao;
 
 
@@ -28,6 +29,11 @@ public class SolutionDaoImpl implements SolutionDao {
 	public List<ChartVO> SelectSubcategory(ChartVO inVO) {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"SelectSubcategory", inVO);
 	}
+	
+	public List<SolutionVO> getSolutionContents(SolutionVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"getSolutionContents", inVO);
+	}
+	
 	
 	
 	

@@ -30,27 +30,14 @@ color:#979797;
   padding:50px;
 }
 
-.pwShHi {
-    position: relative;
-    display: inline-block;
-}
 
-.pwShHi i {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    cursor: pointer;
-    margin-right : 5px; 
-}
-
-.pwShHi img {
-    position: absolute;
-    right: calc(100% + 10px);
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+.my-update-wrap{
+	margin: 100px auto;
+  width: 526px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;
+  padding:50px;
 }
 
 .find-wrap{
@@ -60,6 +47,20 @@ color:#979797;
   border: 1px solid #6B53FF;
   border-radius:30px;
   padding:50px;
+}
+
+.delete-wrap{  
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width: 300px;
+  height: 460px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;  
+  padding:50px;
+  color: #fff;
 }
 
 .login-wrap .login-logo{
@@ -203,7 +204,15 @@ color:#979797;
   box-sizing: border-box;
   transition:0.5s;
 }
+.delet-btns{
+ width:100%;
+ display: flex;
+ justify-content:space-around;
+ 
+}
 
+
+/* 비밀번호 변경 */
 
 p.find{
   font-size: 13px;
@@ -283,7 +292,44 @@ root:{
   margin-left:15px;
 }
 
-/* 배경 */
+
+/* 회원탈퇴 */
+.caution p{
+	font-size: 14px;
+	color: #979797;
+	
+}
+
+
+
+/* pwShHi */
+
+
+.pwShHi {
+    position: relative;
+    display: inline-block;
+}
+
+.pwShHi i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #979797;
+    cursor: pointer;
+    margin-right : 5px; 
+}
+
+.pwShHi img {
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
 
 .drops{
 
