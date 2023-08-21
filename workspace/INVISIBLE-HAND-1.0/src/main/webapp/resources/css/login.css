@@ -30,27 +30,14 @@ color:#979797;
   padding:50px;
 }
 
-.pwShHi {
-    position: relative;
-    display: inline-block;
-}
 
-.pwShHi i {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    cursor: pointer;
-    margin-right : 5px; 
-}
-
-.pwShHi img {
-    position: absolute;
-    right: calc(100% + 10px);
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+.my-update-wrap{
+	margin: 100px auto;
+  width: 526px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;
+  padding:50px;
 }
 
 .find-wrap{
@@ -283,7 +270,36 @@ root:{
   margin-left:15px;
 }
 
-/* 배경 */
+
+
+/* pwShHi */
+
+
+.pwShHi {
+    position: relative;
+    display: inline-block;
+}
+
+.pwShHi i {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    cursor: pointer;
+    margin-right : 5px; 
+}
+
+.pwShHi img {
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+
 
 .drops{
 

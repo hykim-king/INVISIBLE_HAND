@@ -108,7 +108,7 @@
           <p class="input-title">비밀번호 입력</p>
           <label for="password">
           <input placeholder="비밀번호는 8이상 12자 이하로 설정바랍니다" type="password"  class="size border-bottom" id="password" name="password" requi#FF007A>
-            <input type="button" name="pwConfirmBtn" value="부적합" class="btn btn-white pwbtn">
+          <input type="button" name="pwConfirmBtn" value="부적합" class="btn btn-white pwbtn">
 
           </label>
         </div>
