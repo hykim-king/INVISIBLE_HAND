@@ -189,17 +189,12 @@
   }
   
   //table 목록 click시 postNumber값 찾기
-  $("#postTable>tbody").on("click","tr",function(e){
+  $("#postTable>tbody").on("click","tr a",function(e){
+	  e.preventDefault();
     console.log("#postTable>tbody");
-    let tdArray = $(this).children();
-    console.log('tdArray:'+tdArray);
-    let postNumber = tdArray.eq(5).text();
+    let postNumber = $(this).closest("tr").find("td:eq(5)").text();
     console.log('postNumber:'+postNumber);
     
-    //if( confirm("상세 조회 test: 이건 없앨거임") == false ) return;
-    
-    //categoryNumber,postNumber
-    ////http://localhost:8080/ehr/post/doSelectOne.do?div=10&postNumber=393
     window.location.href = "${CP}/post/doSelectOne.do?categoryNumber="+$("#categoryNumber").val()+"&postNumber=" + postNumber;
     
   });
