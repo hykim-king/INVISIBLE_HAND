@@ -21,6 +21,14 @@ public interface MemberService {
 	// 로그인시 비번 체크
 	public int passCheck(MemberVO member) throws SQLException;
 	
+	// ---------------------- 결제시 사용 메소드 ----------------------
+	// 이메일 찾기
+	public MemberVO getbyEmail(String email);
+	
+	// 회원 등급 업데이트
+	public int updateByMemberGrade(MemberVO inVO);
+	// ---------------------- 결제시 사용 메소드 ----------------------
+	
 	
 	/**
 	 * 로그인
