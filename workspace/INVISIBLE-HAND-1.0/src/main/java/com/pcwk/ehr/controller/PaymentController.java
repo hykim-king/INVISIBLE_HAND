@@ -53,15 +53,6 @@ public class PaymentController {
 	
 		List<PaymentInfoVO> paymentList = payService.getPaymentListByEmail(buyerEmail); // 객체에 정보 담기
 		
-		// 구독 여부 체크
-	    int result = 1; // 기본 값은 비구독자
-	    if (paymentList != null && payService.checkPaymentInfo(buyerEmail) == 1) {
-	        result = 2;
-	    } else if (buyerEmail == null) {
-	        result = 0;
-	    }
-	    model.addAttribute("result", result);
-	
 		model.addAttribute("paymentList", paymentList);
 	
 		return "payment/payment_detail";

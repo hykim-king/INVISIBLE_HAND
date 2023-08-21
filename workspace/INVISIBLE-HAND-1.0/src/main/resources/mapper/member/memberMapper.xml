@@ -19,7 +19,7 @@
         VALUES (
             #{memberId},
             #{password},
-            0, 
+            3, 
             #{memberName}, 
             #{email}, 
             #{nickName},

@@ -30,7 +30,6 @@
 				<button class="btn-hover color-11" id="payBtn" onclick="paymentReady()">결제하기</button>
 			</div>
 			<!-- *** kakaoContent *** -->
-
 		</div>
 		<!-- *** kakaoWrap *** -->
 
