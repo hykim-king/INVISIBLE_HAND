@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.comment">
   
-
+  <!--마이페이지 댓글 조회 -->
+  <select id="mypagecomment" parameterType="CommentVO" resultType="CommentVO" >
+    SELECT *
+    FROM board_comment
+    WHERE NICKNAME = #{nickname}
+  </select>
   
   <!-- 댓글수 조회 -->
   <select id="doCommentCnt" parameterType="int" resultType="int">

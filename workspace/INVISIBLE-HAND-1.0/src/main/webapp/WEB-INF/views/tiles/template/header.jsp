@@ -32,10 +32,10 @@
           <li>
 	          <c:choose>
 	            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
-	              <a href="#" onclick="paymentCheckIf()">솔루션</a>
+	              <a href="#" onclick="paymentCheckIf()">마이기업솔루션</a>
 	            </c:when>
 	            <c:otherwise>
-	              <a href="#" id="loginBtn" onclick="doLogin()">솔루션</a>
+	              <a href="#" id="loginBtn" onclick="doLogin()">마이기업솔루션</a>
 	            </c:otherwise>
 	          </c:choose>
           </li>
@@ -45,18 +45,27 @@
         <ul class="local_nav_bar">
           <li>
             <ul class="sub-menu nav-tabs">
-              <li class="tab-li"><a href="#chart01">SBHI</a></li>
-              <li class="tab-li"><a href="#chart02">기업경영분석지표</a></li>
+              <li class="tab-li"><a href="${CP}/chart/chart.do#chart01">SBHI</a></li>
+              <li class="tab-li"><a href="${CP}/chart/chart.do#chart02">기업경영분석지표</a></li>
               <li class="tab-li"><a href="${CP}/chart/chart.do#chart03">성장성</a></li>
               <li class="tab-li"><a href="${CP}/chart/chart.do#chart04">수익성</a></li>
             </ul>
           </li>
           <li>
             <ul class="sub-menu">
-              <li><a href="#">서브메뉴2</a></li>
-              <li><a href="#">서브메뉴2</a></li>
-              <li><a href="#">서브메뉴2</a></li>
-              <li><a href="#">서브메뉴2</a></li>
+              <li>
+              	<c:choose>
+		           <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+		             <a href="#" onclick="paymentCheckIf()">SBHI지수 예측하기</a>
+		           </c:when>
+		           <c:otherwise>
+		             <a href="#" id="loginBtn" onclick="doLogin()">SBHI지수 예측하기</a>
+		           </c:otherwise>
+		        </c:choose>
+	          </li>
+              <li><a href="#" onclick="notImplement()">기업현황 예측하기</a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
             </ul>
           </li>
           <li>
@@ -64,6 +73,7 @@
               <li><a href="${freePostURL}">자유 게시판</a></li>
               <li><a href="${qnaPostURL}">Q&A 게시판</a></li>
               <li><a href="${postURL}">공지사항</a></li>
+              <li><a href="#"></a></li>
             </ul>
           </li>
         </ul>
@@ -125,9 +135,11 @@ function doLogout(name) {
     
 function doLogin() {
   alert("로그인 후 이용해주세요.");
-  location.href = "../member/memberLogin.do";
 }
-
+function notImplement() {
+  alert("추후 구현예정입니다.");
+}
+	
 function paymentCheckIf() {
   let email = '${sessionScope.member.email}';
   

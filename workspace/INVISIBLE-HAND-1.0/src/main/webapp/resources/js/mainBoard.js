@@ -17,15 +17,15 @@
                 // AJAX 요청이 성공했을 때 실행되는 부분
                 // result에 받아온 데이터가 들어있음
                 // 이 데이터를 가지고 게시글 목록을 업데이트하는 로직을 작성  
-                console.log("데이터를 가져옴");
-                console.log(result);
+                //console.log("데이터를 가져옴");
+                //console.log(result);
                 updateTable(result); // 테이블 업데이트 함수 호출
                 
     
             },
             error: function(xhr, status, error) {
                 // AJAX 요청이 실패했을 때 실행되는 부분
-                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                //console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
                 console.error(error);
             }
         });

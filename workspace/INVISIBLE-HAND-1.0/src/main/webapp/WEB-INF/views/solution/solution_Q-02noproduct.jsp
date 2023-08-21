@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+		String selectedMainCategory = request.getParameter("selectedMainCategory");
+		String selectedSubCategory = request.getParameter("selectedSubCategory");
+		
+		 out.println(selectedMainCategory);
+		 out.println(selectedSubCategory);
+%>
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/solution.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+	<title>보이지 않는 손 레이아웃</title>
+</head>
+<body>
 <div class="h60px"></div>
 <div class="container-1400">
 	<div class="wrap-1000">
 		<form action="/solution/solution_Q_01" method="post" class="form cf">
-			<h2>1. 월간 경기동향 실적</h2>
+			<h2>1. 월간 경기동향 실적</h2>			
 			<p>*전월 대비 실적 전망에 해당하는 번호를 선택 바랍니다.</p>
 			<div class="que-wrap">
 				<div class="que que01">
@@ -341,5 +354,39 @@ $(document).ready(function() {
     console.log(radioArr);
     console.log(checkArr);
   });
+  
+  
+  //변수 저장
+  let selectedMainCategory = '<%= selectedMainCategory %>';
+  let selectedSubCategory = '<%= selectedSubCategory %>';
+  console.log(selectedMainCategory);
+  console.log(selectedSubCategory);
+	
+  doUpdateScore(selectedMainCategory,selectedSubCategory)
+  
+  function doUpdateScore(selectedMainCategory, selectedSubCategory) {   
+	    $.ajax({
+	        url: '/ehr/solution/doUpdateScore.do', 
+	        type: 'POST',
+	        data: {
+	            mainCategory: selectedMainCategory,
+	            subCategory: selectedSubCategory
+	        },
+	        dataType: 'json',
+	        success: function(data) {            
+	        	console.log(data);     
+
+	        },
+	        error: function(xhr, status, error) {
+                console.log("데이터를 불러오지 못했습니다. 오류 메시지:", error);
+                console.error(error.message);
+	        }
+	     }); 
+	}
+  
+  
 });
+
 </script>
+	</body>
+</html>

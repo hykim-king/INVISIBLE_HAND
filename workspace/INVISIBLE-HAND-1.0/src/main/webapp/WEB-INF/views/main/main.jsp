@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../resources/css/chart.css">
   <link rel="stylesheet" href="../resources/css/main.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+  <!-- 랭킹 화살표를 위해 추가 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
@@ -35,13 +37,16 @@
         <div class="chart-nav">
 				  <select id="mainCategorySelect" name="mainCategory">
 						    <option value="비제조업" selected="selected">비제조업</option>
-						    <option value="제조업">제조업</option>
+						    <option value="제조업">제조업</option>						    
 					</select>
-					<button id="restoreButton">모두 보기</button> <!-- Restore 버튼 추가 -->
+				  <select id="subCategorySelect" name="subCategory" style="display: none">
+          </select>
+					<button id="submitButton" style="display: none"></button>
+					<button id="restoreButton">초기화</button> <!-- Restore 버튼 추가 -->
 				</div>
 				
 
-				<div class="chart-wrapper" onclick='doChart()'>
+				<div class="chart-wrapper">
 				  <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
 				</div>
 
@@ -52,7 +57,7 @@
        
 	      <div class="main-post-category">
 	        <a href = "${CP}/post/postList.do?categoryNumber=10">자유게시판으로 이동</a>	        	        
-	        <a href = "${CP}/post/postList.do?categoryNumber=30">Q&A 게시판으로 이동</a>	     
+	        <a href = "${CP}/post/postList.do?categoryNumber=20">Q&A 게시판으로 이동</a>	     
 	      </div>
 	      
 	      <div>
@@ -84,13 +89,17 @@
 		
 			<div class="rank-area">
 	    <h4>업종별 변동 현황</h4>
+		    <div class="tab">
+	        <button class="tab-button" id="tab1">비제조업</button>
+	        <button class="tab-button" id="tab2">제조업</button>
+	      </div>
 	        <table class="main-rank-table">
 	            <thead>
 	                <tr>
 	                <th>등수</th>
 	                <th>업종명</th>                
 	                <th>등수변동</th>
-	                <th>화살표</th>
+	                <th></th>
 	                </tr>
 	           </thead>
 	           <tbody id="rankBody">
@@ -98,9 +107,13 @@
 	           </tbody>
 	        </table>   
 	    </div>
+	    
+	    <div>
+	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="380">  
+	    </div>
 		</div>
 
-    
+  
     
   </div>
   <!-- **---container End---** -->
@@ -114,15 +127,15 @@
   <!-- main페이지 기능 관련 js end -->
   
 <script>
-const mainCategorySelect = document.getElementById("mainCategorySelect");
-mainCategorySelect.addEventListener("change", function() {
-    submitButton.click();
+
+$(document).ready(function() { 
+	const mainCategorySelect = document.getElementById("mainCategorySelect");
+	mainCategorySelect.addEventListener("change", function() {
+	    submitButton.click();
+	});
+	
+
 });
-
-function doChart() {
-
- location.href = "../chart/chart.do";
-}
 </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../resources/css/mypage.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <!-- *---container Start---* -->
-
+<body>
 <div class="h60px"></div>
 <div class="container-1400 min-100vh con-login">
   <div class="mypage-wrap">
@@ -24,8 +24,8 @@
             <div class="bedge"></div>
           </div>
           <div class="my-info-list">
-            <span><a href="../member/memberPWChange.do">회원정보 수정</a></span>
-            <span><a href="../member/memberDelete.do">회원 탈퇴</a></span>
+            <span><a href="${CP}/mypage/mypageUpdate.do">회원정보 수정</a></span>
+            <span><a href="${CP}/mypage/mypageDelete.do">회원 탈퇴</a></span>
             <span><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></span>
           </div>
         </div>
@@ -39,9 +39,9 @@
         <h2>나의활동</h2>
         <div class="my-info">
           <div class="my-info-list">
-            <span><a href="login">작성한 게시글 보기</a></span>
-            <span><a href="login">작성한 댓글 보기</a></span>
-            <span><a href="login">문의글 보기</a></span>
+            <span><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글 보기</a></span>
+            <span><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">나의 댓글 보기</a></span>
+            <span><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글 보기</a></span>
           </div>
         </div>
         <div class="line1px black"></div>
@@ -53,9 +53,8 @@
         <div class="line1px black"></div>
         <h2>구독관리</h2>
         <div class="my-info">
-          <div class="my-info-list">
-            <span><a href="../payment/payment_view.do">결제정보 수정</a></span> <span><a
-              href="../payment/payment_detail.do">구독현황</a></span>
+          <div class="my-info-list">  
+            <span><a href="${CP}/mypage/mypagePayment.do?buyerEmail=${member.email}">결제 정보</a></span>
           </div>
         </div>
         <div class="line1px black"></div>
@@ -66,9 +65,8 @@
   </div>
   <!-- **---wrap End---** -->
 </div>
-
 <!-- **---container End---** -->
-
+</body>
 <script>
   function doLogout(name) {
     if (confirm(name + '님 로그아웃하시겠습니까?') == false)

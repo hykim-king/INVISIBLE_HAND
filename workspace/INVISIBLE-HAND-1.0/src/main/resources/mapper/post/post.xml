@@ -69,6 +69,20 @@
    ]]>  
 </update>
 
+<select id="mypagepost" parameterType="PostVO" resultType="PostVO">
+   SELECT *
+   FROM board
+   WHERE NICKNAME  = #{nickname}
+   AND CATEGORYNUMBER = 10
+</select>
+
+<select id="myQNA" parameterType="PostVO" resultType="PostVO">
+   SELECT *
+   FROM board
+   WHERE NICKNAME  = #{nickname}
+   AND CATEGORYNUMBER = 20
+</select>
+
 <update id="doUpdateLikes" parameterType="PostVO">
    <![CDATA[
    UPDATE board
@@ -127,7 +141,6 @@
           categorynumber  = #{categoryNumber}
       WHERE postnumber = #{postNumber}  
 </update>
-
 
 
 <!--  

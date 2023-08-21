@@ -78,11 +78,12 @@ public class MainController {
 	}
 	
 	
-	//1. 랭킹 정보 main 화면에 출력할 로직
+	//1. 랭킹 정보 main 화면에 출력할 로직(비제조업을 선택하냐 제조업을 선택하냐에 rank 값이 달라짐.)
 	@RequestMapping(value="main/Rank.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<RankVO> doGetRanking(RankVO inVO) throws SQLException {
+	public List<RankVO> doGetRanking(@RequestParam(value = "mainCategory", required = false, defaultValue = "비제조업") String mainCategory, RankVO inVO) throws SQLException {
+		inVO.setMainCategory(mainCategory);		
 		List<RankVO> rankData = rankService.doGetRanking(inVO);
 		LOG.debug("┌───────────────────────┐");
 		LOG.debug("rankData"+rankData);

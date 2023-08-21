@@ -31,6 +31,12 @@ public class RankDaoImpl implements RankDao{
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doGetRanking", inVO);
 	}
 	
+	@Override
+	public List<RankVO> doGetRanking2(RankVO inVO) throws SQLException {
+				
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"doGetRanking2", inVO);
+	}
+	
 	//2. 현재 스코어에 따른 등수 업데이트
 	@Override
 	public int doUpdatePrevious(RankVO inVO) throws SQLException {
@@ -44,14 +50,13 @@ public class RankDaoImpl implements RankDao{
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateCurrent", inVO);
 	}
-	
+
+
 	//4. 특정 행동에 따른 Score에 +1 하는 로직  
 	@Override
 	public int doUpdateScore(RankVO inVO) throws SQLException {
 		
 		return sqlSessionTemplate.update(NAMESPACE+DOT+"doUpdateScore", inVO);		
 	}
-
-	
 
 }
