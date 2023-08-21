@@ -49,6 +49,20 @@ color:#979797;
   padding:50px;
 }
 
+.delete-wrap{  
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width: 300px;
+  height: 460px;
+  background-color: #222;
+  border: 1px solid #6B53FF;
+  border-radius:30px;  
+  padding:50px;
+  color: #fff;
+}
+
 .login-wrap .login-logo{
   text-align: center;
   
@@ -190,7 +204,14 @@ color:#979797;
   box-sizing: border-box;
   transition:0.5s;
 }
+.delet-btns{
+ width:100%;
+ display: flex;
+ justify-content:space-around;
+}
 
+
+/* 비밀번호 변경 */
 
 p.find{
   font-size: 13px;
@@ -268,6 +289,14 @@ root:{
 
 #m_n{
   margin-left:15px;
+}
+
+
+/* 회원탈퇴 */
+.caution p{
+	font-size: 14px;
+	color: #979797;
+	
 }
 
 

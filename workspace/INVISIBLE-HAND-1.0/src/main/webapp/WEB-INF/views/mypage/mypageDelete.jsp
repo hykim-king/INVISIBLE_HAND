@@ -8,16 +8,12 @@
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/mypage2.css">
+<link rel="stylesheet" href="../resources/css/login.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <title>마이페이지 입니다</title>
 <style>
 
 
-h2, p, label, input, span, button {
-    font-size: 20px; 
-
-}
 textarea.size {
     width: 100%; 
     height: 150px; 
@@ -35,50 +31,51 @@ textarea.size {
 
 	<div class="h60px"></div>
 	<div class="container-1400 min-100vh con-login">
-		<div class="mypage-wrap">
+		<div class="delete-wrap">
 			<div class="box-area" >
 
-					<div class="form-h3">
+					<div class="form-h3" style="margin: 0;">
 					<div class="line1px"></div>
 					<div class="line3px"></div>
-					<h3 style="color: black;">회원 탈퇴</h3>
+					<h3>회원 탈퇴</h3>
 					<div class="line3px"></div>
 					<div class="line1px"></div>
 				</div>
 
 				<form>
 	        <div class="label-margin">
-	            <p class="input-title" style="color: black;">비밀번호 입력</p>
+	            <p class="input-title">비밀번호 입력</p>
 	            <label>
-	                <input type="password" name="password"  id="password" placeholder="비밀번호를 입력하세요" class="size border-bottom" value=""> 
+	                <input type="password" name="password"  id="password" placeholder="비밀번호를 입력하세요" class="size password" value=""> 
 	            </label>
 	        </div>
 	
 	        <div class="label-margin">
 	            <p class="input-title">탈퇴 사유 입력</p>
 	            <label>
-	                <textarea name="reason" placeholder="회원탈퇴를 원하는 이유를 간략히 입력하세요" class="size border-bottom" required></textarea>
+	                <textarea name="reason" placeholder="탈퇴 이유를 입력해주세요" class="size border-bottom" required></textarea>
 	            </label>
 	        </div>
-			<input type="hidden" name="upassword" id="upassword" value="${member.password}">
-			<input type="hidden" name="uid" id="uid" value="${member.memberId}">
-	        <div class="label-margin">
+	        
+			    <!-- 주의 사항 안내 -->
+			    <div class="caution">
+			        <p>- 탈퇴 후 동일한 계정으로 재가입이 불가능합니다.</p>
+			        <p>- 회원탈퇴 시 관련 데이터가 모두 삭제되며<br> 탈퇴 후에는 복구가 어렵습니다.</p>
+			    </div>
+          
+          <div class="h30px"></div>
+	        <div class="delet-btns">
             <!-- "확인" 버튼에 onclick 이벤트를 추가하여 확인 메시지를 띄우고 탈퇴 완료 메시지를 보여줍니다. -->
             <label>
                 <!-- onclick 이벤트에서 확인 대화 상자를 띄우도록 수정하였습니다. -->
-                <button type="button" class=0"btn btn-primary" onclick="confirmWithdrawal()">확인</button>
+                <button type="button" class="btn btn-primary" onclick="confirmWithdrawal()">확인</button>
             </label>
-	            <label>
-	                <button type="button" class="btn btn-primary">취소</button>
-	            </label>
+            <label>
+                <button type="button" class="btn btn-primary">취소</button>
+            </label>
 	        </div>
 	    </form>
 
-	    <!-- 주의 사항 안내 -->
-	    <div>
-	        <p style="color: black">주의: 회원탈퇴 시 관련 데이터가 모두 삭제되며, 탈퇴 후에는 복구가 어려울 수 있습니다.</p>
-	        <p style="color: black">탈퇴 후에는 동일한 계정으로 재가입이 불가능할 수 있습니다.</p>
-	    </div>
 								
 			</div>
 		</div><!-- **---wrap End---** -->
