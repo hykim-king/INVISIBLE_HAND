@@ -208,6 +208,7 @@ color:#979797;
  width:100%;
  display: flex;
  justify-content:space-around;
+ 
 }
 
 
@@ -311,10 +312,10 @@ root:{
 
 .pwShHi i {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #fff;
+    color: #979797;
     cursor: pointer;
     margin-right : 5px; 
 }
