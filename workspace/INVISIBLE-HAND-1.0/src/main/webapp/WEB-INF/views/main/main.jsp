@@ -82,7 +82,14 @@
     <!-- **---wrap End---** -->
 		<div class="user-rank-wrap">
 		  <div class="user-area">
-		  <p>여기 로그인정보, 마이페이지 링크 자리를 만들어볼까 합니다</p>
+        <p >${sessionScope.member.nickName}님 환영합니다!</p> 
+        <p><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글 보기</a></p>
+        <p><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">나의 댓글 보기</a></p>
+        <p><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글 보기</a></p>
+		    <div class="user-btn">
+		      <p><a href="${CP}/mypage/mypageUpdate.do">회원정보 수정</a></p>
+		      <p><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></p>	    
+		    </div>
 		  </div>
 		
 		
@@ -90,7 +97,7 @@
 			<div class="rank-area">
 	    <h4>업종별 솔루션 분석 빈도</h4>
 		    <div class="tab">
-	        <button class="tab-button" data-tab="비제조업" id="비제조업">비제조업</button>
+	        <button class="tab-button active" data-tab="비제조업" id="비제조업">비제조업</button>
 	        <button class="tab-button" data-tab="제조업" id="제조업">제조업</button>
 	      </div>      
 	        <table class="main-rank-table">

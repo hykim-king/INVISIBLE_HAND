@@ -14,6 +14,7 @@
     <typeAlias  type="com.pcwk.ehr.VO.PaymentInfoVO" alias="PaymentInfoVO"/>
     <typeAlias type="com.pcwk.ehr.VO.CmnCodeVO"   alias="CmnCodeVO"/>
     <typeAlias type="com.pcwk.ehr.VO.CommentVO" alias="CommentVO"/>
+    <typeAlias type="com.pcwk.ehr.VO.LikesVO" alias="LikesVO"/>
     <!--
     <typeAlias type="com.pcwk.ehr.code.domain.CodeVO"   alias="CodeVO"/>
     <typeAlias type="com.pcwk.ehr.user.domain.UserVO"   alias="UserVO"/>

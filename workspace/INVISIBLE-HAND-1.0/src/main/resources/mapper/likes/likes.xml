@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.likes">
+
+  <!-- 추천수 조회 -->   
+	<select id="doLikesCount" resultType="int" parameterType="LikesVO">
+	    SELECT COUNT(LIKESNUMBER) AS likesCnt
+	    FROM LIKES
+	    WHERE LIKESTYPE = #{likesType} 
+	    AND TYPENUMBER = #{typeNumber}
+	</select>
+	
+  <!-- 추천 여부 -->
+  <select id="doCheckLike" parameterType="LikesVO" resultType="int">
+       SELECT COUNT(*) FROM LIKES
+       WHERE NICKNAME = #{nickname}
+       AND LIKESTYPE = #{likesType}
+       AND TYPENUMBER = #{typeNumber}
+  </select>
+  
+  <!-- 추천 -->
+  <insert id="insertLike" parameterType="LikesVO">
+	  <selectKey keyProperty="likesNumber" resultType="int" order="BEFORE">
+	    SELECT INVISIBLEHAND.LIKESNUMBER.NEXTVAL FROM DUAL
+	  </selectKey>
+    INSERT INTO LIKES (
+      NICKNAME, 
+      LIKESTYPE, 
+      TYPENUMBER
+    )
+    VALUES (
+      #{nickname}, 
+      #{likesType}, 
+      #{typeNumber}
+    )
+  </insert>
+  
+  <!-- 추천 취소 -->
+  <delete id="deleteLike" parameterType="LikesVO">
+       DELETE FROM LIKES
+       WHERE NICKNAME = #{nickname}
+       AND LIKESTYPE = #{likesType}
+       AND TYPENUMBER = #{typeNumber}
+  </delete>
+
+</mapper>

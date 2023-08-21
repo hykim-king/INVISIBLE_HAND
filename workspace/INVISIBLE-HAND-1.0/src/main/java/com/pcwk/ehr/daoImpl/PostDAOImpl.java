@@ -79,10 +79,11 @@ public class PostDAOImpl implements PostDao, PcwkLoger {
 	}
 
 	@Override
-	public int doUpdateLikes(int postNumber, String likes) throws SQLException {
+	public int doUpdateLikes(int postNumber, String likes, String nickname) throws SQLException {
 
 		PostVO inVO = new PostVO();
 		inVO.setLikes(Integer.parseInt(likes));
+		inVO.setNickname(nickname);
 		inVO.setPostNumber(postNumber);
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│doUpdateLikes                 │");

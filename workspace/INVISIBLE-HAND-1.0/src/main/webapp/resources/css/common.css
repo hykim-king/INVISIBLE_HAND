@@ -424,7 +424,7 @@ section{
   justify-content: center;
   align-items: center;
   width:270px;
-  height:530px;
+
   padding:25px;
   border-radius:20px;
 
@@ -436,6 +436,10 @@ section{
   padding: 0;
   margin-bottom: 10px;
 }
+.rank-area .tab-button{
+  padding: 0;
+}
+
 
 .main-rank-table{
   width: 100%;
