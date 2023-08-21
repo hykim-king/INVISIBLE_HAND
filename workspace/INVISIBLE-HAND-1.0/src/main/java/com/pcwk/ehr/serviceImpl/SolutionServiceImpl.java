@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.VO.SolutionVO;
 import com.pcwk.ehr.service.SolutionService;
 import com.pcwk.ehr.dao.SolutionDao;
 
@@ -29,5 +30,7 @@ public class SolutionServiceImpl implements SolutionService {
 		return solutionDao.SelectSubcategory(inVO);
 	}
 
-
+	public List<SolutionVO> getSolutionContents(SolutionVO inVO) {
+		return solutionDao.getSolutionContents(inVO);
+	}
 }

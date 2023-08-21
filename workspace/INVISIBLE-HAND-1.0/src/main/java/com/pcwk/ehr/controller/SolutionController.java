@@ -103,11 +103,7 @@ public class SolutionController {
 									@RequestParam(value = "totalScore") String totalScore,
 						            @RequestParam(value = "mainCategory") String mainCategory, 
 									@RequestParam(value = "subCategory") String subCategory){
-	
-		
-		
-		
-		
+
 		
 		return "";
 	}
