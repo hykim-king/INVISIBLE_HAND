@@ -95,7 +95,8 @@ $(document).ready(function() {
     let selectedMainCategory = '<%= selectedMainCategory %>';
     let selectedSubCategory = '<%= selectedSubCategory %>';
 
-getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory)
+	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
+
 function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {     
     $.ajax({
         type: "POST",

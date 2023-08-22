@@ -33,7 +33,7 @@ $(document).ready(function() {
 		  
 		  
 	      ['Year', 'one', 'two', 'three'],
-	      ['05', 1030, null, null],
+	      ['05', 800, null, null],
 	      ['06', 980, null, null],
 	      ['07', 1200, 1200, 1200],
 	      ['08', null, 1200, 1500],

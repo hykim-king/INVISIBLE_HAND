@@ -100,8 +100,7 @@
   <!-- 댓글 수정 -->
   <update id="doUpdate" parameterType="CommentVO">
       UPDATE board_comment           
-      SET content = #{content},      
-          postnumber = #{postNumber} 
+      SET content = #{content}  
       WHERE commentnumber = #{commentNumber} 
   </update>
   

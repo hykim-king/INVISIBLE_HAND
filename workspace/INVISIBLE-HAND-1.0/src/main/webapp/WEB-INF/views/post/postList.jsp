@@ -285,8 +285,30 @@ $(document).ready(function() {
             checkArr.push($(this).val());
         });
         
-        alert(checkArr);
-        console.log(checkArr);
+        console.log(checkArr.toString());
+        
+        $.ajax({
+            type: "GET",
+            url: "/ehr/admin/deleteAll.do",
+            async: true,
+            dataType: "html",
+            data: {
+            	checkArr : checkArr.toString()
+            },
+            success: function(data) {
+                console.log("success data:" + data);
+                let parsedJson = JSON.parse(data);
+                if ("1" == parsedJson.msgId) {
+                    alert(parsedJson.msgContents);
+                    location.reload(); // 페이지 새로고침
+                } else {
+                    alert(parsedJson.msgContents);
+                }
+            },
+            error: function(data) {
+                console.log("error:" + data);
+            }
+        });
     });
 });
 </script>
