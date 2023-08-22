@@ -137,7 +137,7 @@
           <label>댓글 작성자 </label>
           <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
           <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" 
-             required="required" 
+             required="required" style="resize: none;"
              ${empty sessionScope.member.nickName ? 'placeholder="비회원은 댓글을 작성할 수 없습니다."' : ''} 
              ${empty sessionScope.member.nickName ? 'readonly' : ''}></textarea></p>
           <!-- 버튼------------------> 
@@ -378,8 +378,6 @@ function searchPage(url, pageNo){
 
     $(document).ready(function () {
           $("#moveToList").on("click", function () {
-              if (confirm('목록하면으로 이동합니다.') == false) return;
-
               moveToListView();
           });
       });
@@ -398,12 +396,13 @@ function searchPage(url, pageNo){
         console.log("categoryNumber:"+"${ctgNumValue}");
         
         var loggedInNickname = "${sessionScope.member.nickName}"; 
+        let admin = 'admin';
         var postNickname = "${outVO.getNickname()}";
         
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         
-        if (loggedInNickname === postNickname) {
+        if (loggedInNickname === postNickname || admin === 'admin') {
             if (confirm('수정 화면으로 이동 하시겠습니까?')) {
                 moveToUpdateView(); // 수정 페이지로 이동하는 함수 호출
             }
@@ -420,12 +419,13 @@ function searchPage(url, pageNo){
         console.log("postNumber: ${postNumValue}");
         console.log("categoryNumber: ${ctgNumValue}");
         var loggedInNickname = "${sessionScope.member.nickName}";
+        let admin = 'admin';
         var postNickname = "${outVO.getNickname()}";
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         
 
-        if (loggedInNickname === postNickname) {
+        if (loggedInNickname === postNickname || admin === 'admin') {
             if (confirm('삭제 하시겠습니까?')) {
                 $.ajax({
                     type: "GET",

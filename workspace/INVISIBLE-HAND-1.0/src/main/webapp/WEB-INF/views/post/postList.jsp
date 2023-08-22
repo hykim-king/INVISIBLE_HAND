@@ -98,7 +98,7 @@
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
               <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
               <c:if test="${sessionScope.member.memberId == 'admin'}">
-                <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doAdminDel">삭제</a>
+                <a href="#" class="btn button btn-b" style="margin-left: 10px;" id="doAdminDel">삭제</a>
               </c:if>
             </div>     
           </div>  
@@ -204,7 +204,6 @@
         var loggedInNickname = "${sessionScope.member.nickName}";
         console.log("loggedInNickname:"+loggedInNickname);
         if (loggedInNickname !== null && loggedInNickname !== "") {
-            if( confirm("게시글을 작성하시겠습니까?") == false ) return;
             window.location.href = "${CP}/post/doMoveToPostReg.do?categoryNumber=" + $("#categoryNumber").val();
         } else {
             alert("로그인한 사용자만 게시글을 작성할 수 있습니다.");
@@ -281,34 +280,43 @@ $(document).ready(function() {
     let checkArr = [];
   
     $("#doAdminDel").on("click", function() {
+	    	checkArr = [];
+    	
         $('input[name="adminDelPost"]:checked').each(function() {
             checkArr.push($(this).val());
         });
         
-        console.log(checkArr.toString());
+        if ($("input[type='checkbox']:checked").length === 0) {
+				  alert("삭제할 게시글을 선택해주세요.");
+				  return;
+				}
         
-        $.ajax({
-            type: "GET",
-            url: "/ehr/admin/deleteAll.do",
-            async: true,
-            dataType: "html",
-            data: {
-            	checkArr : checkArr.toString()
-            },
-            success: function(data) {
-                console.log("success data:" + data);
-                let parsedJson = JSON.parse(data);
-                if ("1" == parsedJson.msgId) {
-                    alert(parsedJson.msgContents);
-                    location.reload(); // 페이지 새로고침
-                } else {
-                    alert(parsedJson.msgContents);
-                }
-            },
-            error: function(data) {
-                console.log("error:" + data);
-            }
-        });
+        if (confirm('삭제 하시겠습니까?')) {
+	        $.ajax({
+	            type: "GET",
+	            url: "/ehr/admin/deleteAll.do",
+	            async: true,
+	            dataType: "html",
+	            data: {
+	            	checkArr : checkArr.toString()
+	            },
+	            success: function(data) {
+	                console.log("success data:" + data);
+	                let parsedJson = JSON.parse(data);
+	                if (parsedJson.msgId < "1") {
+	                    alert(parsedJson.msgContents);
+	                    location.reload();
+	                } else {
+	                    alert(parsedJson.msgContents);
+	                }
+	            },
+	            error: function(data) {
+	                console.log("error:" + data);
+	            }
+	        });
+        } else {
+        	alert("삭제에 실패했습니다.");
+        }
     });
 });
 </script>
