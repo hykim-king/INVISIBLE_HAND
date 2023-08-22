@@ -98,7 +98,7 @@
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
               <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
               <c:if test="${sessionScope.member.memberId == 'admin'}">
-                <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doAdminDel">삭제</a>
+                <a href="#" class="btn button btn-b" style="margin-left: 10px;" id="doAdminDel">삭제</a>
               </c:if>
             </div>     
           </div>  

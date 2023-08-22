@@ -60,7 +60,7 @@
 	        
 	        <div class="write-box content">
 	          <!-- <label for="exampleFormControlTextarea1" class="form-label">내용</label> -->
-	          <textarea class="content-write" id="content" name="content" rows="3" required="required"></textarea>
+	          <textarea class="content-write" id="content" name="content" rows="3" required="required" style="resize: none;" placeholder="내용을 입력하세요."></textarea>
 	        </div>
 	                
 	    </form>
