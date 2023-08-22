@@ -565,6 +565,18 @@ function doUpdateScore(selectedMainCategory, selectedSubCategory) {
         }
      }); 
 }
+function getWorstSurvey(surveyArray){
+	var worstscore = 999;
+	var worstindex;
+    for (var i = 0; i < surveyArray.length; i++) {
+    	var score = ratings[surveyArray[i]];
+    	if (score < worstscore){
+    		worstscore = score;
+    		worstindex = i;
+    	}
+    }
+    
+}
 
 }); //document end
 </script>
