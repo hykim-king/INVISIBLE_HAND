@@ -21,17 +21,17 @@
                         귀사의 업체 종목을  선택해 주십시오.
        </h5>
             <div class="btn">
-              <form id="categoryForm" action="" method = "POST">
-             <select id="mainCategorySelect" name="mainCategory">
+              <form id="categoryForm" action="" method = "POST" >
+             <select id="mainCategorySelect" name="mainCategory" class="form-select">
                 <option value="비제조업" selected="selected">비제조업</option>
                 <option value="제조업" >제조업</option>
 	           </select>
-	           <select id="subCategorySelect" name="subCategory">
+	           <select id="subCategorySelect" name="subCategory" class="form-select">
 	           </select>
 	           <!-- Hidden Form Fields -->
                 <input type="hidden" id="selectedMainCategory" name="selectedMainCategory" value="비제조업">
                 <input type="hidden" id="selectedSubCategory" name="selectedSubCategory" value="-">
-               <button id="sendTypeButton">선택하기</button> 
+               <button id="sendTypeButton">선택완료</button> 
 						</form>      
             </div>           
         </div>
