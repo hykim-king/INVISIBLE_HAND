@@ -18,4 +18,6 @@ public interface ChartDao {
 	public List<ChartVO> chart04GraphAvg(ChartVO inVO);	
 	public List<ChartVO> chart04Graph(ChartVO inVO);
 	
+	
+	public List<ChartVO> soultionChart(ChartVO inVO);
 }

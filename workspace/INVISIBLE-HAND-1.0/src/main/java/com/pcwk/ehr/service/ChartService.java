@@ -13,4 +13,6 @@ public interface ChartService {
 	public List<ChartVO> chart03Graph(ChartVO inVO);
 	
 	public List<ChartVO> chart04Graph(ChartVO inVO);
+	
+	public List<ChartVO> soultionChart(ChartVO inVO);
 }
