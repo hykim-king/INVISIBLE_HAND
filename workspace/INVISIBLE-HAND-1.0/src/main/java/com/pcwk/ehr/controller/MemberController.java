@@ -170,6 +170,7 @@ public class MemberController {
 			if (memberInfo != null) {
 				// session설정
 				httpSession.setAttribute("member", memberInfo);
+				httpSession.setAttribute("memberId", memberInfo.getMemberId());
 				httpSession.setAttribute("email", memberInfo.getEmail());
 
 				LOG.debug("999member" + member);
