@@ -13,8 +13,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class SolutionVO {
-	private String  solname;		
-	private String  codename;
+	private int  solname;		
+	private int  codename;
 	private String  solcontents;
-
+		
 }                      

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.VO.SolutionVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.RankService;
 import com.pcwk.ehr.service.SolutionService;
@@ -99,16 +100,26 @@ public class SolutionController {
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getProductData(@RequestBody Map<String, Object> requestData) {
-		
-	    List<String> radioArr = (List<String>) requestData.get("radioArr");
+		List<SolutionVO> solContentsList = new ArrayList<>();
+	    List<Double> radioArr = (List<Double>) requestData.get("radioArr");
 	    List<String> textArr = (List<String>) requestData.get("textArr");
 	    List<String> checkArr = (List<String>) requestData.get("checkArr");
 	    String totalScore = (String) requestData.get("totalScore");
 	    String mainCategory = (String) requestData.get("mainCategory");
 	    String subCategory = (String) requestData.get("subCategory");
 
+	    solContentsList.addAll(solutionService.returnRadioContents(radioArr));
+	    solContentsList.addAll(solutionService.returnTextContents(textArr));
+	    solContentsList.addAll(solutionService.returnCheckContents(checkArr));
 	    // 이후 데이터 처리 작업 수행
-	    LOG.debug("파라미터가 생기나용");
+	    LOG.debug("파라미터가 radioArr:" + radioArr);
+	    LOG.debug("파라미터가 textArr:" + textArr);
+	    LOG.debug("파라미터가 checkArr:" + checkArr);
+	    LOG.debug("파라미터가 totalScore:" + totalScore);
+	    LOG.debug("파라미터가 mainCategory:" + mainCategory);
+	    LOG.debug("파라미터가 subCategory:" + subCategory);
+	    LOG.debug("파라미터가 solContentsList:" + solContentsList);
+	    
 	    
 	    return "";
 	}

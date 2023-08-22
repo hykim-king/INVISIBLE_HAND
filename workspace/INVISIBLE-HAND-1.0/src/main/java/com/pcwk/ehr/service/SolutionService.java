@@ -1,6 +1,7 @@
 package com.pcwk.ehr.service;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import com.pcwk.ehr.VO.ChartVO;
@@ -14,4 +15,10 @@ public interface SolutionService {
 	public List<ChartVO> SelectSubcategory(ChartVO inVO);
 	
 	public List<SolutionVO> getSolutionContents(SolutionVO inVO);
+
+	public List<SolutionVO> returnRadioContents(List<Double> radioArr);
+
+	public List<SolutionVO> returnTextContents(List<String> textArr);
+
+	public List<SolutionVO> returnCheckContents(List<String> checkArr);
 }

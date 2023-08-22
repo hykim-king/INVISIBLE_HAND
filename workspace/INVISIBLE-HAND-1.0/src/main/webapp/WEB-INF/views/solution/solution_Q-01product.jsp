@@ -451,9 +451,10 @@ $(document).ready(function() {
 	//이전 페이지에서 선택한 메인과 서브카테고리 값
 	let selectedMainCategory = '<%= selectedMainCategory %>';
 	let selectedSubCategory = '<%= selectedSubCategory %>';
-  let radioArr = []; // 라디오 값을 저장할 배열
-  let textArr = []; // 텍스트 값을 저장할 배열
-  let checkArr = []; // 체크박스 값을 저장할 배열
+    let radioArr = []; // 라디오 값을 저장할 배열
+    let textArr = []; // 텍스트 값을 저장할 배열
+    let checkArr = []; // 체크박스 값을 저장할 배열
+    let radioScoreArr = [];
 	
 	// 숫자 작성만 허용
 	$(".numberOnly").on("keyup", function(e) {
@@ -465,6 +466,7 @@ $(document).ready(function() {
 	$(".go-result").on("click", function() {
 		
 		radioArr = [];
+		radioScoreArr = [];
 		textArr = [];
 		checkArr = [];
 		
@@ -499,13 +501,14 @@ $(document).ready(function() {
 	    		  '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
 	    		  '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
 	              '동일': 2,'적정': 2,
-	              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
-	              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
+	              '다소 감소': 1,'다소 나쁨': 1,'다소 악화': 1,'다소 곤란': 1,'다소 부족': 1,
+	              '매우 감소': 0,'매우 나쁨': 0,'매우 악화': 0,'매우 곤란': 0,'매우 부족': 0
 	    };
 	   
 	    var sbhiScore = 0;
 	    for (var i = 0; i < radioArr.length; i++) {
 	    	var score = ratings[radioArr[i]];
+	    	radioScoreArr.push(score);
 	        sbhiScore = sbhiScore + score
 	    }
 	    sbhiScore = (sbhiScore / radioArr.length) * 50;
@@ -527,7 +530,7 @@ $(document).ready(function() {
 	    var errorScore = checkArr.length * -0.3 ;
 	    totalScore = sbhiScore + operatingScore + errorScore;
 	
-        $("#radioArr").val(JSON.stringify(radioArr));
+        $("#radioArr").val(JSON.stringify(radioScoreArr));
         $("#textArr").val(JSON.stringify(textArr));
         $("#checkArr").val(JSON.stringify(checkArr));
         $("#totalScore").val(totalScore);
