@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,10 +35,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
-		lg.debug("┌─────────┐");
-		lg.debug("│ admin() │");
-		lg.debug("└─────────┘");
-
 		return "admin/admin";
 	}
 	
@@ -50,19 +47,13 @@ public class AdminController {
 	    String adminDel = req.getParameter("checkArr"); // checkArr의 배열을 toString으로 묶어서 가져옴
 	    
 	    String[] delAdminPostNums = adminDel.split(",");
-	    //[Ljava.lang.String;@7528378
-	    lg.debug("delAdminPostNums------------" + delAdminPostNums);
 
 	    List<Integer> delAdminPostList = new ArrayList<>();
 	    for (String numStr : delAdminPostNums) {
 	    	delAdminPostList.add(Integer.parseInt(numStr.trim()));
 	    }
 	    
-	    // [876, 875, 873, 486]
-	    lg.debug("deladminPostList------------" + delAdminPostList);
-
 	    int flag = this.postService.deleteAll(delAdminPostList);
-	    lg.debug("flag------------" + flag);
 
 	    String message = "";
 

@@ -146,7 +146,7 @@
       </div>
       <div class="cate">
         <span class="menu">
-          <a href="${CP}/admin/admin.do" class="menulink">게시판관리</a>
+          <a href="#" class="menulink">게시판관리</a>
           <a href="javascript:void(0);" class="subopen"></a>
         </span>
         <ul>
@@ -167,14 +167,11 @@
         </ul>
       </div>
     </div>
-    <div class="admin-post">
-      <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
-    </div>
   </div>
   <!-- accordion 메뉴 end -->
 
   <p id="pagetop" class="inner">
-    <a href="#">↑</a>
+    <a href="#">↑</a>   
   </p>
   <script src="../resources/js/jquery-3.7.0.js"></script>
   <script>
