@@ -69,7 +69,6 @@ public class SolutionController {
 		LOG.debug("│  solution_A()         │");
 		LOG.debug("└───────────────────────┘");
 	
-		
 		return "solution/solution_A";
 	}
 	
@@ -110,10 +109,17 @@ public class SolutionController {
 
 	    // 이후 데이터 처리 작업 수행
 	    LOG.debug("파라미터가 생기나용");
-
+	    
 	    return "";
 	}
 	
-
+    public static ArrayList<String> parseStringToArraylist(String input) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        String[] elements = input.replaceAll("[\\[\\]\"]", "").split(",");
+        for (String element : elements) {
+            arrayList.add(element.trim());
+        }
+        return arrayList;
+    }
 	
 }
