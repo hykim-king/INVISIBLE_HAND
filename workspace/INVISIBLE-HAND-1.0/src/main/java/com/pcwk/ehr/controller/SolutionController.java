@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
 import com.pcwk.ehr.VO.SolutionVO;
@@ -100,6 +101,8 @@ public class SolutionController {
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getProductData(@RequestBody Map<String, Object> requestData) {
+		String jsonString = "";
+		JsonArray mainArray = new JsonArray();
 		List<SolutionVO> solContentsList = new ArrayList<>();
 	    List<Double> radioArr = (List<Double>) requestData.get("radioArr");
 	    List<String> textArr = (List<String>) requestData.get("textArr");
@@ -120,17 +123,21 @@ public class SolutionController {
 	    LOG.debug("파라미터가 subCategory:" + subCategory);
 	    LOG.debug("파라미터가 solContentsList:" + solContentsList);
 	    
-	    
-	    return "";
+		for (SolutionVO outVO : solContentsList) {
+			JsonArray sArray = new JsonArray();
+			sArray.add(outVO.getSolname());
+			sArray.add(outVO.getCodename());
+			sArray.add(outVO.getSolcontents());
+			mainArray.add(sArray);
+		}
+		
+		jsonString = mainArray.toString();
+		LOG.debug("=====================================");
+		LOG.debug("jsonString" + jsonString);
+		LOG.debug("=====================================");
+		
+	    return jsonString;
 	}
 	
-    public static ArrayList<String> parseStringToArraylist(String input) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] elements = input.replaceAll("[\\[\\]\"]", "").split(",");
-        for (String element : elements) {
-            arrayList.add(element.trim());
-        }
-        return arrayList;
-    }
 	
 }

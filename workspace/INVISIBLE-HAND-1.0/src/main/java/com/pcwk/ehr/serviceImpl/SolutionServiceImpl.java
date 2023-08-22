@@ -109,14 +109,12 @@ public class SolutionServiceImpl implements SolutionService {
 		List<Integer> intList = convertStringsToIntegers(checkArr);
 		List<SolutionVO> collectonVO = new ArrayList<>();
 		SolutionVO inVO = new SolutionVO();
-		LOG.debug("이것이벨류야");
 		
         for (int value : intList) {
         	inVO.setSolname(3);
         	inVO.setCodename(value);
         	collectonVO.addAll(solutionDao.getSolutionContents(inVO));
         }
-        LOG.debug("너는실행되니??");
 		return collectonVO;
 	}
 	
@@ -125,9 +123,7 @@ public class SolutionServiceImpl implements SolutionService {
 
         for (String stringValue : stringList) {
             try {
-            	LOG.debug("스트링벨류" + stringValue.substring(0,2));
                 int intValue = Integer.parseInt(stringValue.substring(0,2));
-                LOG.debug("인트벨류" + intValue);
                 if (intValue >= 0 && intValue <= 99) {
                     intList.add(intValue);
                 } else {

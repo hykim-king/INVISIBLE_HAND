@@ -42,7 +42,7 @@
 		<div class="wrap-1000">
 		
 		<h1 class="A-title">귀사의 기업 솔루션 결과입니다</h1>
-		
+		<h3>야호호${solContentsList[0].solname}</h3>
 		<div class="tab-box tab1 active" id="chart01">
       <div class="chart-wrapper">
 				<div class="container-1200 con-main">
@@ -57,26 +57,32 @@
 		<div class="solution-desc">
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		         귀사의 SBHI 지수는 <span>${sbhi}</span>으로  AI 예측대비  <span>(점수)</span>높/낮은 수치입니다.</h3>
-		    <p>귀사는 다량의 인력 유출, 심각한 업종의 경기 침체, 잘못된 투자 방향성 등 치명적인 악재가 겹친것으로 예측됩니다. 대외적 활동과 투자 유치보다는 내부 문제를 들여다보고 악재가 끝날때까지 버텨보시길 바랍니다.
+		         귀사의 SBHI 지수는 <span id="sol1_1"></span>으로  AI 예측대비  <span>(점수)</span>높/낮은 수치입니다.</h3>
+		    <p id ="sol1_1">
+		   	 이 글이 보이면 실패
 		    </p>
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
 		          귀사는  <span>[설문솔루션 케이스]</span>입니다.</h3>
-		    <p>어려운 상황 속에서도 기회는 항상 있습니다. 목표와 전략을 재조정하여 리소스를 최적으로 활용하고, 변화에 잘 적응하여 탄력을 발휘할 수 있다면 이 위기 또한 지나갈 것입니다. 기존의 지속적인 투자를 통해 위기를 견디는 것 또한 방법이지만 새로운 도전을 하여 가치를 창조하는 방법도 고려해 보시기 바랍니다.
-			</p>
+		    <p id ="sol1_2">
+		   	 이 글이 보이면 실패
+		    </p>
 
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
 		         귀사의 생산설비 가동률은 전월대비 <span>[증가/평이/감소]</span>입니다.</h3>
-		    <p>시장 수요 증가와 함께 생산설비가 원활하게 가동된 결과로 추측합니다. 이에 따라 다음 달 보유예정인 생산설비, 제품 제고, 종사자수를 조정하여 수요를 충족시키고 고객 만족을 증가시키면 좋을 것 같습니다.</p>
+		   	<p id ="sol1_3">
+		   	 이 글이 보이면 실패
+		    </p>  
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		         또한 귀사의 생산설비 가동률은 <span>어쩌구</span>입니다.</h3>
-		    <p>설명설명</p>
+		           또한 귀사의 생산설비 가동률은 <span>어쩌구</span>입니다.</h3>
+		    <p id ="sol1_4">
+		   	 이 글이 보이면 실패
+		    </p>
 		  </div>
 		</div>
 		
@@ -89,8 +95,10 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
-<%-- $(document).ready(function() {
-	
+$(document).ready(function() {
+	let documentIds = [
+		"sol1_1","sol1_2","sol1_3","sol1_4","sol1_5"
+	];
     let radioArr = <%= radioArrJson %>; // 이미 배열이므로 JSON.parse() 필요 없음
     let textArr = <%= textArrJson %>;
     let checkArr = <%= checkArrJson %>;
@@ -99,8 +107,10 @@
     let selectedSubCategory = '<%= selectedSubCategory %>';
 
 	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
+	
 
-function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {     
+function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {
+
     $.ajax({
         type: "POST",
         url: "/ehr/solution/getProductData.do",
@@ -115,9 +125,10 @@ function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, 
             mainCategory:selectedMainCategory,
             subCategory:selectedSubCategory
         }),
-        success: function(data) {
-            console.log("성공");
-            
+        success: function(data) {	
+        	for(var i=0; i=documentIds.length; i++){
+                document.getElementById(documentIds[0]).innerHTML = "수정된 내용입니다.";
+        	}
         },
         error: function(data) {
             console.log("에러");
@@ -125,7 +136,8 @@ function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, 
     }); // ajax 종료
 }
 
-}); --%>
+});
+
 </script>
 <script>
 //차트 관련
