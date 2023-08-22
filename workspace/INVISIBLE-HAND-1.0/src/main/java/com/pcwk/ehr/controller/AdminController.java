@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcwk.ehr.VO.MemberVO;
-import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.AdminService;
 import com.pcwk.ehr.service.PostService;
@@ -50,26 +49,30 @@ public class AdminController {
 	    
 	    String adminDel = req.getParameter("checkArr"); // checkArr의 배열을 toString으로 묶어서 가져옴
 	    
-	    String[] postArr = adminDel.split(",");
-	    List<Integer> delPostNums = new ArrayList<>();
-	    
-	    for (String postId : postArr) {
-	    	delPostNums.add(Integer.parseInt(postId));  // 문자열로 된 게시글 번호를 정수로 변환하여 리스트에 추가
+	    String[] delAdminPostNums = adminDel.split(",");
+	    //[Ljava.lang.String;@7528378
+	    lg.debug("delAdminPostNums------------" + delAdminPostNums);
+
+	    List<Integer> delAdminPostList = new ArrayList<>();
+	    for (String numStr : delAdminPostNums) {
+	    	delAdminPostList.add(Integer.parseInt(numStr.trim()));
 	    }
 	    
-	    lg.debug("delPostNums------------" + delPostNums);
+	    // [876, 875, 873, 486]
+	    lg.debug("deladminPostList------------" + delAdminPostList);
 
-	    int flag = this.postService.deleteAll(delPostNums);
+	    int flag = this.postService.deleteAll(delAdminPostList);
+	    lg.debug("flag------------" + flag);
 
 	    String message = "";
 
-	    if (1 == flag) {
-	        message = "게시글이 삭제되었습니다.";
-	    } else {
-	        message = "게시글 삭제를 실패했습니다.";
-	    }
+	    if (1 > flag) {
+			message = "게시글이 삭제되었습니다.";
+		} else {
+			message = "게시글 삭제를 실패했습니다.";
+		}
 
-	    jsonString = StringUtil.validMessageToJson(flag + "", message);
+	    jsonString = StringUtil.validMessageToJson(Integer.toString(flag) + "", message);
 	    lg.debug("│jsonString : " + jsonString);
 	    lg.debug("└────────────────────────────────┘");
 

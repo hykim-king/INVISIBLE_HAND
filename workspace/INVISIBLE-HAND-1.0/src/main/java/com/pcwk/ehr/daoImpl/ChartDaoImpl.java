@@ -76,4 +76,12 @@ public class ChartDaoImpl implements ChartDao {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"chart04Graph", inVO);
 	}
 //chart04 end
+	
+	@Override
+	public List<ChartVO> soultionChart(ChartVO inVO){
+		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"soultionChart", inVO);
+		
+	}
+	
+	
 }

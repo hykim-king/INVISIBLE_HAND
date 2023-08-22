@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.google.gson.Gson" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.google.gson.reflect.TypeToken" %>
-<%@ page import="java.lang.reflect.Type" %>
 <% 
         // hidden 필드로부터 값을 추출
         
@@ -49,7 +45,12 @@
 		
 		<div class="tab-box tab1 active" id="chart01">
       <div class="chart-wrapper">
-         <jsp:include page="/WEB-INF/views/chart/solution_chart.jsp"/>
+				<div class="container-1200 con-main">
+						  <div class="wrap-1000">
+						    <div id="solution_chart"></div>						
+						  </div>
+				  <!-- **---wrap End---** -->
+				</div>
       </div>
 
        
@@ -84,9 +85,11 @@
 	</div>
 
 	<!-- **---container End---** -->
-
+	
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
-$(document).ready(function() {
+<%-- $(document).ready(function() {
 	
     let radioArr = <%= radioArrJson %>; // 이미 배열이므로 JSON.parse() 필요 없음
     let textArr = <%= textArrJson %>;
@@ -122,7 +125,134 @@ function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, 
     }); // ajax 종료
 }
 
-});
+}); --%>
+</script>
+<script>
+//차트 관련
+$(document).ready(function() {
+  
+    let totalScore           = '<%= totalScore %>';
+    let selectedMainCategory = '<%= selectedMainCategory %>';
+    let selectedSubCategory  = '<%= selectedSubCategory %>';
+    
+ 
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(function() {
+        loadChartData(selectedMainCategory, selectedSubCategory, totalScore); 
+        });   
+   
+    //날짜 변환 함수
+    function formatDate(date) {
+       let year = date.getFullYear();
+       let month = (date.getMonth() + 1).toString().padStart(2, '0');
+       return year + '.' + month;
+     }
+   
+   function loadChartData(selectedMainCategory, selectedSubCategory,totalScore) {
+     
+     
+     $.ajax({
+              url: '/ehr/chart/soultionChart.do',
+              type: 'GET',
+              data: { 
+               mainCategory: selectedMainCategory,
+               subCategory : selectedSubCategory
+              }, 
+              dataType: 'json',
+              success: function(data) {
+            	  let chartData = [];
+            	  chartData.push(["Year","one","two","three"]);
+                  for (let i = 0; i < data.length; i++) {
+                      let row = [];
+                      let date = new Date(data[i][0]);
+                      let formattedDate = formatDate(date); // 날짜를 "YYYY.MM" 형식으로 변환
+                      row.push(formattedDate);
+                      
+                      let value = parseFloat(data[i][3]);
+                      
+                      if (formattedDate >= '2023.05' && formattedDate <= '2023.07') {
+                          row.push(value);
+                      } else {
+                          row.push(null);
+                      }    
+                      
+                      // 'two'값 처리
+					            if (formattedDate === '2023.07') {
+					                row.push(value);
+					            } else if (formattedDate === '2023.08') {
+					            	  row.push(value);
+					            } else {
+					                row.push(null);
+					            }
+					            
+					            // 'three' 열의 나머지 기간 처리
+                      if (formattedDate === '2023.07') {
+                          row.push(value);
+                      } else if (formattedDate === '2023.08') {
+                          // JSP에서 주는 데이터 사용
+                          row.push(totalScore);
+                      } else {
+                          row.push(null);
+                      }
+                      
+                      
+                      chartData.push(row);
+                  }
+                  console.log(chartData);
+                  drawChart(chartData);
+
+              },
+              error: function(xhr, status, error) {
+            	  console.error(error);
+              }
+       });//solution chart end
+   } //  function loadChartData end
+    
+  // 차트 생성
+  function drawChart(data) {
+    const originalData = new google.visualization.arrayToDataTable(data);
+
+    let chartData = originalData.clone();
+
+    let options = {
+      //title: '차트1',
+      pointSize: 0,
+      width: 1000,
+      height: 500,
+      backgroundColor: '#222',
+      titleTextStyle: { color: '#fff' },
+      hAxis: {
+        textStyle: { fontSize: 15, color: '#fff' },
+        baselineColor: '#fff'
+      },
+      vAxis: {
+        //title: 
+        textStyle: { color: '#fff' },
+        viewWindow: {
+          min: 0,
+          max: 200
+        },
+        format: '###'
+      },
+      legend: {
+        textStyle: { position: 'top', fontSize: 13, color: '#fff' },
+      },
+      series: {
+          1: {lineDashStyle: [4, 4]},
+          2: {lineDashStyle: [4, 4]}
+        }
+    };
+
+    let chart = new google.visualization.LineChart(document.getElementById('solution_chart'));
+   
+    chart.draw(chartData, options);
+
+  }
+
+  $(window).resize(function() {
+   drawChart();
+  });
+}); //차트 관련 doucument
 </script>
 </body>
 </html>

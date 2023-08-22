@@ -2,18 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="CP" value="${pageContext.request.contextPath }"/>  
-
-<!-- GrowingIndicator -> 차트이름 : 성장성 지표
-        data칼럼에 들어갈 이름 : ['총자산증가율', '유형자산증가율','유동자산증가율','재고자산증가율','자기자본증가율','매출액증가율'] -->
-<!DOCTYPE html>
-<html>
-<head>
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<title>Insert title here</title>
-</head>
-<body>
+
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart4"></div>
@@ -137,7 +129,10 @@ $(document).ready(function () {
              vAxis: {
                  //title: 'title',
                  textStyle: { color: '#fff' },
-                 ticks: [-5,0,5,10,15,20,25,30,35, 40],
+                 viewWindow:{
+                     min: -5,
+                     max: 40
+                   },
                  format: '##',
                  baselineColor: '#fff',
              },
@@ -265,18 +260,11 @@ document.addEventListener("DOMContentLoaded", function() {
   </script>
   <script>
   document.addEventListener("DOMContentLoaded", function() {
-  const mainCategorySelect4 = document.getElementById("mainCategorySelect4");
-  mainCategorySelect4.addEventListener("change", function() {
-    //console.log("mainCategorySelect4 Changed");
-      submitButton4.click();
-  });
 
   const subCategorySelect4 = document.getElementById("subCategorySelect4");
   subCategorySelect4.addEventListener("change", function() {
     //console.log("subCategorySelect4 Changed");
       submitButton4.click();
   });
-  });
+});
   </script>
-</body>
-</html>

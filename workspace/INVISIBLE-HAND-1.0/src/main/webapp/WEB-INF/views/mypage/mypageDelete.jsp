@@ -20,6 +20,8 @@ textarea.size {
     border: 1px solid #ccc;
     padding: 8px;
     font-size: 16px;
+    resize: none;
+    color:white;
 }
 
 

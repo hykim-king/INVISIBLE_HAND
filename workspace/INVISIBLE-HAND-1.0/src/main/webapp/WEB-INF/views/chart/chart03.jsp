@@ -2,19 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="CP" value="${pageContext.request.contextPath }"/> 
-<!-- 
-  publicCompany -> 차트이름 : 상장기업 부가가치
-        data칼럼에 들어갈 이름 :['총자본순이익률','총자본영업이익률','경영자본영업이익률','자기자본영업이익률','매출액영업이익률']
- -->
-<!DOCTYPE html>
-<html>
-<head>
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<title>Insert title here</title>
-</head>
-<body>
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart3"></div>
@@ -28,6 +18,16 @@
 <!-- 차트 관련 -->
 <script>
 $(document).ready(function () {   
+    let selectedMainCategory3 = "제조업";
+    let selectedSubCategory3  = "-";
+     //구글 차트 api
+     
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(function() {
+          loadChartData03(selectedMainCategory3, selectedSubCategory3); // 일단 loadChartData 호출
+          submitbutton3(); // submitbutton 함수를 호출하여 이벤트 등록
+      });
+      
 	  //날짜 변환 함수
 	   function formatDate(date) {
 	      let year = date.getFullYear();
@@ -35,9 +35,7 @@ $(document).ready(function () {
 	      return year + '.' + month;
 	    }
 	   	     
-	      let mainCategory = "제조업";
-	      let subCategory  = "-";
-	      
+
 	      
 	      function submitbutton3() {
 	             $("#submitButton3").click(function () {
@@ -95,13 +93,6 @@ $(document).ready(function () {
 	          }); //ajax
 	      } //loadChartData03
 	  
-	  
-	      //구글 차트 api
-	      google.charts.load('current', {'packages':['corechart']});
-	      google.charts.setOnLoadCallback(function() {
-	          loadChartData03(); // 일단 loadChartData 호출
-	          submitbutton3(); // submitbutton 함수를 호출하여 이벤트 등록
-	      });
 	      
 	      function drawChart(data) {
 	          const originalData3 = new google.visualization.arrayToDataTable(data);
@@ -136,9 +127,12 @@ $(document).ready(function () {
 	                baselineColor: '#fff',
 	            },
 	            vAxis: {
-	                //title: 'title',
+	                
 	                textStyle: { color: '#fff' },
-	                ticks: [-20,-10,0,10,20,30],
+	                viewWindow:{
+	                    min: -20,
+	                    max: 30
+	                  },
 	                format: '##',
 	                baselineColor: '#fff',
 	            },
@@ -266,11 +260,6 @@ document.addEventListener("DOMContentLoaded", function() {
   </script>
   <script>
   document.addEventListener("DOMContentLoaded", function() {
-  const mainCategorySelect3 = document.getElementById("mainCategorySelect3");
-  mainCategorySelect3.addEventListener("change", function() {
-    //console.log("mainCategorySelect3 Changed");
-      submitButton3.click();
-  });
 
   const subCategorySelect3 = document.getElementById("subCategorySelect3");
   subCategorySelect3.addEventListener("change", function() {
@@ -279,5 +268,3 @@ document.addEventListener("DOMContentLoaded", function() {
   });
  });
   </script>
-</body>
-</html>

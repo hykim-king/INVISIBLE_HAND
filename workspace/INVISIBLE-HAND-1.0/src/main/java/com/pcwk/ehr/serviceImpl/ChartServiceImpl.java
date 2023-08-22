@@ -99,7 +99,15 @@ public class ChartServiceImpl implements ChartService {
 		
 		return chartdata04;
 	}
-	
 
+	
+	@Override
+	public List<ChartVO> soultionChart(ChartVO inVO) {
+		
+		
+		return chartDao.soultionChart(inVO);
+	}
+	
+  
 
 }

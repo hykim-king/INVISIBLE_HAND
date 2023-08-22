@@ -166,4 +166,36 @@
 <!-- ////chart04 end -->
 
 
+<!-- soultion chart -->
+  <select id="soultionChart" parameterType="ChartVO"  resultType="ChartVO">
+     <![CDATA[
+         SELECT
+          t1.chartdate AS chartdate,
+			    t1.mainCategory AS mainCategory,
+			    t1.subCategory As subCategory,
+			    CASE
+			    WHEN mainCategory = '비제조업' THEN ROUND(t1.sbhisum1/6,2)
+			    WHEN mainCategory = '제조업' THEN ROUND((t1.sbhisum1+t1.sbhisum2)/10,2)
+			    END AS sbhiAVG 
+			   FROM(
+			        SELECT
+			          mainCategory,
+			          subCategory,
+			          TO_CHAR(chartdate,'YYYY.MM') AS chartdate,
+			          SUM(NVL(sbhi,0)+ NVL(sbhi2,0)+ NVL(sbhi3,0)+ NVL(sbhi4,0)+ NVL(sbhi5,0)+ NVL(sbhi6,0) ) AS sbhisum1,
+			          SUM(NVL(sbhi7,0)+ NVL(sbhi8,0)+ NVL(sbhi9,0)+ NVL(sbhi10,0)) AS sbhisum2
+			        FROM
+			            SBHITABLE 
+			        GROUP BY mainCategory, subCategory, TO_CHAR(chartdate,'YYYY.MM') 
+			        HAVING
+			            TO_DATE('2023-04-01', 'YYYY-MM-DD') < MAX(chartdate)
+			        ORDER BY chartdate ASC    
+			            ) t1
+			    WHERE
+			        mainCategory = #{maincategory}
+			    AND subCategory  = #{subcategory} ]]>
+</select>
+
+<!-- soultion chart end -->
+
 </mapper>
