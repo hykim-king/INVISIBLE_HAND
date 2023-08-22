@@ -82,14 +82,39 @@
     <!-- **---wrap End---** -->
 		<div class="user-rank-wrap">
 		  <div class="user-area">
-        <p >${sessionScope.member.nickName}님 환영합니다!</p> 
-        <p><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글 보기</a></p>
-        <p><a href="${CP}/mypage/mycomment.do?nickname=${member.nickName}">나의 댓글 보기</a></p>
-        <p><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글 보기</a></p>
-		    <div class="user-btn">
-		      <p><a href="${CP}/mypage/mypageUpdate.do">회원정보 수정</a></p>
-		      <p><a href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></p>	    
-		    </div>
+			  <div class="user-box">
+		       <c:choose>
+            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
+    
+					    <div class="line1px black"></div>           
+              <div class="line3px black"></div>
+			        <p class="text-c">${sessionScope.member.nickName}님 환영합니다!</p> 
+              <div class="line3px black"></div>
+					    <div class="line1px black"></div>  
+					    <div class="user-mypage">
+			          <p class="text-c"><a href="${CP}/mypage/mypost.do?nickname=${member.nickName}">나의 게시글</a></p>
+			          <p class="text-c"><a href="${CP}/mypage/myqna.do?nickname=${member.nickName}">나의 문의글</a></p>
+					    </div>         
+					    <div class="user-btn">
+					      <p style="width: 100%;"><a style="width: 100%;" href="javascript:doLogout('${sessionScope.member.nickName}');">로그아웃</a></p>	    
+					    </div>
+            </c:when>
+            <c:otherwise>
+              <div class="line1px black"></div>           
+              <div class="line3px black"></div>
+              <p class="text-c">로그인해주세요</p> 
+              <div class="line3px black"></div>
+              <div class="line1px black"></div>
+					    <div class="user-btn">
+					      <p><a href="${CP}/member/memberLogin.do">로그인</a></p>
+					      <p><a href="${CP}/member/memberJoin.do;">회원가입</a></p>	    
+					    </div>
+            </c:otherwise>
+          </c:choose>
+			  </div>
+		  
+		    
+
 		  </div>
 		
 		
