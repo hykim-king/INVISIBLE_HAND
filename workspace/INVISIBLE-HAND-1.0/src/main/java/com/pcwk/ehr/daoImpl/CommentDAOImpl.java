@@ -50,7 +50,12 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 
 
 	@Override
-	public int doUpdate(CommentVO commentVO) throws SQLException {
+	public int doUpdate(int commentNumber, String content) throws SQLException {
+		
+		CommentVO commentVO = new CommentVO();
+		commentVO.setCommentNumber(commentNumber);
+		commentVO.setContent(content);
+		
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│doUpdate                      │");
 		LOG.debug("│commentVO                     │"+commentVO);
