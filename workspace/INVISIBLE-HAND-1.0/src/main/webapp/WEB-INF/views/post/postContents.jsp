@@ -124,6 +124,8 @@
                               data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
                           <input type="button" class="btn-subUpdt" value="확인" name="updateComment" id="updateComment${status.index}" 
                               data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <input type="button" class="btn-noUpdt" value="취소" name="noUpdateComment" id="noUpdateComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
                       </div>                    
                   </div>
                   <div class="update-form hidden" id="updateForm${status.index}">
@@ -175,25 +177,47 @@
 <script src="${CP}/resources/js/util.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
+
+$(".btn-noUpdt").on("click", function() {
+    const commentBox = $(this).closest('.comment-box');
+    const updateForm = commentBox.find('.update-form');
+    const contentText = commentBox.find('.content-text');
+    const subUpdtButton = commentBox.find('.btn-subUpdt');
+
+    updateForm.addClass('hidden');
+    subUpdtButton.hide();
+    contentText.find('p').show();
+    contentText.find('textarea[name="newContent"]').hide();
+    commentBox.find('.btn-delet, .btn-updt').show();
+    
+    commentBox.find('.btn-noUpdt').hide();
+});
+</script>
+<script>
   
 //수정 버튼 클릭 시
   $(document).ready(function() {
     $(".update-form").hide(); // 숨기기
-    $(".btn-subUpdt").hide();
+    $(".btn-subUpdt, .btn-noUpdt").hide();
+    
     $(".btn-updt").on("click", function() {
         const commentBox = $(this).closest('.comment-box');
         const updateForm = commentBox.find('.update-form');
         const contentText = commentBox.find('.content-text');
         const subUpdtButton = commentBox.find('.btn-subUpdt');
+        const noUpdtButton = commentBox.find('.btn-noUpdt');
 
         const content = contentText.find('p').text();
         const textarea = contentText.find('textarea[name="newContent"]');
-
+        
+        // 활성화된 수정 버튼 클래스를 변경하여 비활성화로 만듦
+        $(".btn-updt").prop("disabled", true);
+        $(this).prop("disabled", false); // 클릭한 버튼만 활성화
         textarea.val(content);
 
         updateForm.removeClass('hidden');
         subUpdtButton.show(); // 확인 버튼 나타내기
-
+        noUpdtButton.show();//취소 버튼 나타내기
         contentText.find('p').hide(); // p 요소 숨기기
         textarea.show(); // textarea 요소 보이기
 
@@ -229,6 +253,7 @@
                         if ("1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
                             location.reload(); // 페이지 새로고침
+                            contentParagraph.text(newContent + " (수정됨)");
                         } else {
                             alert(parsedJson.msgContents);
                         }
