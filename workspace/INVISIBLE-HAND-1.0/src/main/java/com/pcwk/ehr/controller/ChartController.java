@@ -249,10 +249,10 @@ public class ChartController {
 		return jsonString04;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/soultionChart.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String soultionChart(@RequestParam(value = "mainCategory") String mainCategory,
-			@RequestParam(value = "subCategory") String subCategory) {
+								@RequestParam(value = "subCategory") String subCategory) {
 
 		String jsonStringSol = "";
 		ChartVO inVO = new ChartVO();
@@ -270,8 +270,11 @@ public class ChartController {
 			mainArraySol.add(sArray);
 		}
 		
-		jsonStringSol = mainArraySol.toString();
 		
+		jsonStringSol = mainArraySol.toString();
+		LOG.debug("=====================================");
+		LOG.debug("jsonStringSol" + jsonStringSol);
+		LOG.debug("=====================================");
 		return jsonStringSol;
 
 	}

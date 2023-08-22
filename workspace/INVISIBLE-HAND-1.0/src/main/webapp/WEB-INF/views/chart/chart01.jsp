@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<title>보이지 않는 손 레이아웃</title>
-</head>
-<body>
   <!-- *---container Start---* -->
 
   <div class="container-1200 con-main">
@@ -25,6 +20,15 @@
 <script>
  //차트 관련
  $(document).ready(function () {      
+	  let mainCategory = "비제조업";
+	  let subCategory  = "-";
+	  
+    //구글 차트 api
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(function() {
+        loadChartData(); // 일단 loadChartData 호출
+        submitbutton(); // submitbutton 함수를 호출하여 이벤트 등록
+    });   
 	 
 	 //날짜 변환 함수
 	 function formatDate(date) {
@@ -32,11 +36,7 @@
 		  let month = (date.getMonth() + 1).toString().padStart(2, '0');
 		  return year + '.' + month;
 		}
-	 
-	 
-	  let mainCategory = "비제조업";
-	  let subCategory  = "-";
-	  
+	 	 	  
 	 function submitbutton() {
 	         $("#submitButton").click(function () {
 	             // 선택된 값 가져오기
@@ -100,13 +100,8 @@
         }); //ajax
     } //loadChartData
   
-    //구글 차트 api
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(function() {
-        loadChartData(); // 일단 loadChartData 호출
-        submitbutton(); // submitbutton 함수를 호출하여 이벤트 등록
-    });   
-        
+
+    //차트 그리기
     function drawChart(data) {
         const originalData1 = new google.visualization.arrayToDataTable(data);
 
@@ -141,7 +136,10 @@
           vAxis: {
               //title: 'title',
               textStyle: { color: '#fff' },
-              ticks: [0, 20, 40, 60, 80, 100, 120, 140, 160],
+              viewWindow:{
+                  min: 0,
+                  max: 160
+                },
               format: '###',
           },
           legend: {
@@ -300,5 +298,3 @@ subCategorySelect.addEventListener("change", function() {
 });
 });
 </script>
-</body>
-</html>

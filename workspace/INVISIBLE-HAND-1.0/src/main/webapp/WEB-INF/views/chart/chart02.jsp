@@ -2,21 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="CP" value="${pageContext.request.contextPath }"/>  
-<!-- 
-  salesdistribute -> 차트이름 : 매출액규모별분포
-               data칼럼에 들어갈 이름 : 
-               ['5억원초과~20억원이하','20억원초과~50억원이하','50억원초과~80억원이하','80억원초과~120억원이하',
-              '120억원초과~200억원이하','200억원초과~500억원이하','500억원초과~1500억원이하']     
- -->
-<!DOCTYPE html>
-<html>
-<head>
 <link rel="shortcut icon" type="image/x-icon" href="/ehr/favicon.ico">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/chart.css">
-<title>Insert title here</title>
-</head>
-<body>
   <div class="container-1200 con-main">
     <div class="wrap-1000">
         <div id="line_chart2"></div>
@@ -30,18 +18,23 @@
 <!-- 차트 관련 -->
 <script>
 $(document).ready(function () {   
+	
+    let selectedMainCategory2 = "제조업";
+    let selectedSubCategory2  = "-";
+     //구글 차트 api
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(function() {
+          loadChartData02(selectedMainCategory2, selectedSubCategory2); // 일단 loadChartData 호출
+          submitbutton2(); // submitbutton 함수를 호출하여 이벤트 등록
+      });
+      
 	  //날짜 변환 함수
 	   function formatDate(date) {
 	      let year = date.getFullYear();
 	      let month = (date.getMonth() + 1).toString().padStart(2, '0');
 	      return year + '.' + month;
 	    }
-	 
-	   
-	    let mainCategory = "제조업";
-	    let subCategory  = "-";
-	    
-	    
+	     
 	    function submitbutton2() {
 	           $("#submitButton2").click(function () {
 	               // 선택된 값 가져오기
@@ -101,12 +94,7 @@ $(document).ready(function () {
 	    } //loadchartData02
 	
 	
-	    //구글 차트 api
-	    google.charts.load('current', {'packages':['corechart']});
-	    google.charts.setOnLoadCallback(function() {
-	        loadChartData02(); // 일단 loadChartData 호출
-	        submitbutton2(); // submitbutton 함수를 호출하여 이벤트 등록
-	    });
+
 	    
 	    function drawChart(data) {
 	        const originalData2 = new google.visualization.arrayToDataTable(data);
@@ -141,11 +129,10 @@ $(document).ready(function () {
 	          },
 	          vAxis: {	              
 	              textStyle: { color: '#fff' },
-	              viewWindow: {
-	                  min: 0, // y축 최소값 설정
-	                  max: 60// y축 최대값 설정
-	              },
-	              ticks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55,60],
+	              viewWindow:{
+	                  min: 0,
+	                  max: 60
+	                },
 	              format: '##',
 	          },
 	          legend: {
@@ -278,11 +265,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	</script>
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
-	const mainCategorySelect2 = document.getElementById("mainCategorySelect2");
-	mainCategorySelect2.addEventListener("change", function() {
-	  
-	    submitButton2.click();
-	});
 
 	const subCategorySelect2 = document.getElementById("subCategorySelect2");
 	subCategorySelect2.addEventListener("change", function() {
@@ -291,5 +273,3 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 });
 	</script>
-</body>
-</html>
