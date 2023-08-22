@@ -108,19 +108,19 @@
                       <span><c:out value="${comment.writtenDate}"/></span>
                       <div class="content-text">
                           <p>${comment.content}</p>
-                          <textarea name="newContent" style="display: none;">${comment.content}</textarea>
+                          <textarea name="newContent" class="update-comment" id="update-comment"style="display: none;">${comment.content}</textarea>
                       </div>
                   </div>
                   <div class="comment-icon">
-                      <i class='fas fa-bars fa-sm' style='color:#979797'></i>
+                     <!--  <i class='fas fa-bars fa-sm' style='color:#979797'></i> -->
                       <i class='fas fa-thumbs-up fa-sm cmt-like-icon' style='color:#FF007A'
                           data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
                           <c:out value="${comment.likes}"/>
                       </i>
                       <div class="btn-right">
-                          <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
-                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
                           <input type="button" class="btn-updt" value="수정" name="updateViewComment" id="updateViewComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
                               data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
                           <input type="button" class="btn-subUpdt" value="확인" name="updateComment" id="updateComment${status.index}" 
                               data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
