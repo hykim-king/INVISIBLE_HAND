@@ -31,6 +31,9 @@
           <li><a href="${CP}/chart/chart.do">차트</a></li>
           <li>
 	          <c:choose>
+	            <c:when test="${sessionScope.member.memberId == 'admin'}">
+	              <a href="../solution/solution_Q.do">마이기업솔루션</a>
+	            </c:when>
 	            <c:when test="${null != sessionScope.member && not empty sessionScope.member}">
 	              <a href="#" onclick="paymentCheckIf()">마이기업솔루션</a>
 	            </c:when>

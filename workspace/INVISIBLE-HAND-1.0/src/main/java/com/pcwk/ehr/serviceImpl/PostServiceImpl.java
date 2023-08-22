@@ -74,17 +74,17 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 
 	// admin용 게시글 삭제
 	@Override
-	public int deleteAll(List<Integer> delPostNums) throws SQLException {
+	public int deleteAll(List<Integer> delAdminPostList) throws SQLException {
 	    int count = 0;
-	    for (int postNum : delPostNums) {
+	    LOG.debug("postServiceImpl delAdminPostList" + delAdminPostList);
+	    for (int postNum : delAdminPostList) {
 	        PostVO post = new PostVO();
 	        post.setPostNumber(postNum);
-	        dao.doDelete(post);
-	        count++;
+	        LOG.debug("postServiceImpl postNum" + post);
+	        count += dao.doDelete(post);
 	    }
+	    LOG.debug("postServiceImpl count" + count);
 	    return count;
 	}
-	
-	
 
 }

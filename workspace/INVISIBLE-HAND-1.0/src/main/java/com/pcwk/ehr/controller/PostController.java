@@ -6,9 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSessionException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +20,6 @@ import com.pcwk.ehr.VO.CommentVO;
 import com.pcwk.ehr.VO.LikesVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PostVO;
-import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.PcwkLoger;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.CmnCodeService;
