@@ -97,7 +97,7 @@
        <c:if test="${commentCnt > 0}">
           <h2><c:out value="${commentCnt}"/>개의 댓글</h2>
           <div class="h30px"></div>
-        </c:if>
+       </c:if>
         <div class="h30px"></div>
         
           <c:forEach var="comment" items="${list}" varStatus="status">
