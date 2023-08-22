@@ -3,7 +3,7 @@
 <mapper namespace="com.pcwk.ehr.paymentInfo">
   
   <!-- 구독 결제 -->
-	<insert id="InsertInfo" parameterType="PaymentInfoVO">
+	<insert id="insertInfo" parameterType="PaymentInfoVO">
 		<selectKey keyProperty="paymentinfoseq" resultType="int" order="BEFORE">
 	    SELECT paymentinfoseq.nextval FROM DUAL
 	  </selectKey>

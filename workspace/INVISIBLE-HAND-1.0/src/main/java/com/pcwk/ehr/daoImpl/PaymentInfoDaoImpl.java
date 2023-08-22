@@ -26,8 +26,8 @@ public class PaymentInfoDaoImpl implements PaymentInfoDao, PcwkLoger {
 
 	// 결제 정보 입력
 	@Override
-	public int InsertInfo(PaymentInfoVO inVO) {
-		return sqlSessionTemplate.insert(NAMESPACE + DOT + "InsertInfo", inVO);
+	public int insertInfo(PaymentInfoVO inVO) {
+		return sqlSessionTemplate.insert(NAMESPACE + DOT + "insertInfo", inVO);
 	}
 
 	// 결제 정보 업데이트

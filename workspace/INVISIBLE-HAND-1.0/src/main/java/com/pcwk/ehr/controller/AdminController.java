@@ -64,8 +64,6 @@ public class AdminController {
 		}
 
 	    jsonString = StringUtil.validMessageToJson(Integer.toString(flag) + "", message);
-	    lg.debug("│jsonString : " + jsonString);
-	    lg.debug("└────────────────────────────────┘");
 
 	    return jsonString;
 	}

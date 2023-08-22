@@ -156,7 +156,7 @@ function paymentCheckIf() {
       data: {
         email : email
       }, success: function(data) {
-        if (data == 1) {
+        if (data > 1) {
           location.href = "../solution/solution_Q.do";
         } else {
           alert("유료 결제 페이지입니다. 구독 후 이용해주세요.");
