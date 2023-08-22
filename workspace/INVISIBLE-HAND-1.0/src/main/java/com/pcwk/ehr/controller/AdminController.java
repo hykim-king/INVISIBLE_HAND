@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,10 +35,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
-		lg.debug("┌─────────┐");
-		lg.debug("│ admin() │");
-		lg.debug("└─────────┘");
-
 		return "admin/admin";
 	}
 	
