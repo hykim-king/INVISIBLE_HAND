@@ -98,7 +98,7 @@
           <h2><c:out value="${commentCnt}"/> 개의 댓글</h2>
           <div class="h30px"></div>
        </c:if>
-        <div class="h30px"></div>
+
         
           <c:forEach var="comment" items="${list}" varStatus="status">
               <div class="comment-box" id="comment-box">
@@ -136,6 +136,7 @@
                           
                       </form>
                   </div>
+                  <div class="more-btn opa-0"><i class='fas fa-angle-down fa-lg' style='color:#FF007A'></i></div>
               </div>
           </c:forEach>
 
@@ -619,23 +620,29 @@ $(".btn-noUpdt").on("click", function() {
           var commentBox = $(this);
           if (commentBox.height() >= 140) {
             commentBox.find(".more-btn.opa-0").addClass("opa-1");
-              var newValue = '펼치기';
-              commentBox.find('#see').val(newValue);
+
           }
         });
       });
     
+
     $(".more-btn").on("click", function() {
         var commentBox = $(this).closest(".comment-box"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
         var angle = $(this).find(".fa-angle-down"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
         if (commentBox.height() >= 140) {
           commentBox.toggleClass("more");
           angle.toggleClass("act");
-            var newValue = '접기';
-            commentBox.find('#see').val(newValue);
+
         }
       });
-
+    
+    $(".btn-updt").on("click", function() {
+        var commentBox = $(this).closest(".comment-box"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
+        if (commentBox.height() >= 140) {
+          commentBox.addClass("updt");
+        }
+      });
+    
     
 </script>
   
