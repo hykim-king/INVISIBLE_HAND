@@ -4,14 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../r"UTesources/css/login.css">
+<link rel="stylesheet" href="../resources/css/login.css">
 <style>
 
 /* -------이용약관-------- */
-/* 
-body{
-background-color: #F3F3F3;
-}
+
 #agree-con {
   width: 100vw;
   height: 100%
@@ -26,7 +23,7 @@ background-color: #F3F3F3;
   height: 35vh;
   margin: 10px auto;
   overflow: scroll;
-  background-color: #fff;
+  background-color: #222;
   border-radius: 20px;
   padding: 30px;
   border: 1px solid #979797;
@@ -40,11 +37,11 @@ background-color: #F3F3F3;
 #agree-con a {
   font-weight: 600;
   text-decoration: none;
-  background-color: #9599af;
+  background-color: #6B53FF;
   color: #ffffff;
   padding: 10px 20px;
   border-radius: 20px;
-} */
+}
 </style>
 <title>이용약관동의 자세히보기</title>
 </head>
