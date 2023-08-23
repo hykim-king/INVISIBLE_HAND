@@ -305,12 +305,14 @@ $(document).ready(function() {
 	  //변수 저장
 	let selectedMainCategory = '<%= selectedMainCategory %>';
 	let selectedSubCategory = '<%= selectedSubCategory %>';	
-  let radioArr = []; // 라디오값 배열
-  let checkArr = []; // 체크박스 배열
+    let radioArr = []; // 라디오값 배열
+    let checkArr = []; // 체크박스 배열
+    let radioScoreArr = [];
 
   $(".go-result").on("click", function() {
     // 예외 처리 실행 시마다 배열 초기화
     radioArr = [];
+    radioScoreArr = [];
     checkArr = [];
 
     $("input[type='radio']:checked").each(function(index) {
@@ -344,25 +346,27 @@ $(document).ready(function() {
 
     var totalScore = 0
     var ratings = {
-          '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
-          '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
+    		  '매우 좋음': 4,'매우 증가': 4,'매우 원활': 4,'매우 과잉': 4,
+    		  '다소 좋음': 3,'다소 증가': 3,'다소 원활': 3,'다소 과잉': 3,
               '동일': 2,'적정': 2,
-              '다소 감소': 1,'다소 나쁨': 1,'다소 약화': 1,'다소 곤란': 1,
-              '매우 감소': 0,'매우 나쁨': 0,'매우 약화': 0,'매우 곤란': 0
+              '다소 감소': 1,'다소 나쁨': 1,'다소 악화': 1,'다소 곤란': 1,'다소 부족': 1,
+              '매우 감소': 0,'매우 나쁨': 0,'매우 악화': 0,'매우 곤란': 0,'매우 부족': 0
     };
    
     var sbhiScore = 0;
     for (var i = 0; i < radioArr.length; i++) {
-      var score = ratings[radioArr[i]];
+    	var score = ratings[radioArr[i]];
+    	radioScoreArr.push(score);
         sbhiScore = sbhiScore + score
     }
     sbhiScore = (sbhiScore / radioArr.length) * 50;
-  
+      
+
     var errorScore = checkArr.length * -0.3 ;
     totalScore = sbhiScore  + errorScore;
 
     
-    $("#radioArr").val(JSON.stringify(radioArr));
+    $("#radioArr").val(JSON.stringify(radioScoreArr));
     $("#checkArr").val(JSON.stringify(checkArr));
     $("#totalScore").val(totalScore);
     $("#selectedMainCategory").val(selectedMainCategory);

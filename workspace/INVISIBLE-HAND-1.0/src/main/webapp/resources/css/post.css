@@ -115,6 +115,7 @@ h3{
   font-size: 20px;
   padding: 0px 110px;
   color: #fff;
+  width: 70%;
 }
 
 .comment-area h4{
@@ -141,6 +142,9 @@ h3{
 .comment-box.more{
   max-height: none;
 	
+}
+.comment-box.updt{
+	  height: 110px;
 }
 
 .more-btn{
@@ -173,6 +177,9 @@ h3{
 	margin-top: 10px;
 }
 
+.comment-desc{
+	width: 90%
+}
 
 .comment-desc span{
   font-size: 14px;
@@ -590,8 +597,15 @@ tbody>tr:last-child{
   color:#FF007A;  
   font-weight: 600;
 }
+.btn-noUpdt:hover{
+  color:#FF007A;  
+  font-weight: 600;
+}
 
 .btn-updt:hover{
+  color:#FFA000; 
+}
+.btn-subUpdt:hover{
   color:#FFA000; 
 }
 

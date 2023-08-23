@@ -4,9 +4,19 @@
   
   <!--마이페이지 댓글 조회 -->
   <select id="mypagecomment" parameterType="CommentVO" resultType="CommentVO" >
-    SELECT *
-    FROM board_comment
-    WHERE NICKNAME = #{nickname}
+    SELECT 
+        a1.commentNumber as commentNumber,
+        a1.nickname as nickname,
+        a1.content as content,
+        a1.likes as likes,
+        a1.writtenDate as writtenDate,
+        a1.postNumber as postNumber,
+        a1.memberId as memberId,
+        b1.categoryNumber as categoryNumber
+    FROM board_comment a1
+    JOIN board b1
+    ON a1.postNumber = b1.postNumber
+    WHERE a1.nickname = #{nickname}
   </select>
   
   <!-- 댓글수 조회 -->

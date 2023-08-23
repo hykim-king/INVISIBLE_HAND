@@ -24,6 +24,7 @@ import com.pcwk.ehr.service.MailSendService;
 import com.pcwk.ehr.service.MemberService;
 import com.pcwk.ehr.service.MyPageService;
 import com.pcwk.ehr.service.PaymentInfoService;
+import com.pcwk.ehr.service.PostService;
 import com.pcwk.ehr.cmn.MessageVO;
 
 @Controller
@@ -44,6 +45,8 @@ public class MypageController {
 	@Autowired
 	MailSendService mailSend;
 
+	
+	
 	@RequestMapping(value = "/mypage.do")
 	public String mypage() {
 		LOG.debug("┌───────────────────────┐");

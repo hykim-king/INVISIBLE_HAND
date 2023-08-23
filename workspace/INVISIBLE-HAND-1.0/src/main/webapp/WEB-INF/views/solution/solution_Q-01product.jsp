@@ -315,11 +315,11 @@
 			<div class="que-wrap que-wrqp-flex">
 				<div class="que-box">
 					<h4>지난달 가동률</h4>
-					<input type="text" name="percent" id="percent" class="percent numberOnly" placeholder="0~100" />%
+					<input type="text" name="percent" id="percent" class="percent numberOnly" min="0" max="100" placeholder="0~100" />%
 				</div>
 				<div class="que-box">
 					<h4>이번달 가동률</h4>
-					<input type="text" name="percent" id="percent" class="percent numberOnly" placeholder="0~100" />%
+					<input type="text" name="percent" id="percent" class="percent numberOnly" min="0" max="100" placeholder="0~100" />%
 				</div>
 				<div class="que-box">
 					<h4>이번달 생산능력</h4>
@@ -461,7 +461,19 @@ $(document).ready(function() {
 	  $(this).val($(this).val().replace(/[^0-9]/g, ""));
 	});
 
-
+	//0~100 숫자만 입력 허용
+   $(".percent").on("input", function() {
+       const inputValue = parseFloat($(this).val());
+       
+       if (inputValue < 0) {
+           $(this).val(0);
+           alert("0 미만의 값은 입력할 수 없습니다. 0~100 사이의 숫자를 입력해주세요.");
+       } else if (inputValue > 100) {
+           $(this).val(100);
+           alert("100을 초과하는 값은 입력할 수 없습니다. 0~100 사이의 숫자를 입력해주세요.");
+       }
+   });
+	
 	// 제출 버튼 클릭 시 실행되는 함수
 	$(".go-result").on("click", function() {
 		
@@ -477,7 +489,19 @@ $(document).ready(function() {
 		  }
 		});
 	  
-	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수	    
+	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수	 
+	    
+	    $("input[type='radio']").each(function() {
+	        let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
+	        let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
+	        if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
+	          alert("모두 입력해주세요.");
+	          isRadioValid = false;
+	          return false; // each 함수 탈출
+	        }
+	      });
+	    
+	    if (!isRadioValid) return; // 함수 실행 중지
 	    
 	    // input에 text 값 누락시 예외처리
 	    if($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {

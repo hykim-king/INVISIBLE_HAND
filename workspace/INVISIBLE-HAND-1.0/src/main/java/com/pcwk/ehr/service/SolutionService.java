@@ -18,7 +18,7 @@ public interface SolutionService {
 
 	public List<SolutionVO> returnRadioContents(List<Double> radioArr);
 
-	public List<SolutionVO> returnTextContents(List<String> textArr);
+	public List<SolutionVO> returnTextContents(List<String> textArr, String string);
 
 	public List<SolutionVO> returnCheckContents(List<String> checkArr);
 
