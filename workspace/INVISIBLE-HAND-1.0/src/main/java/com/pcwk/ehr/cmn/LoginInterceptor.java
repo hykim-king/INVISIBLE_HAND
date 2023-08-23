@@ -25,13 +25,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 		//session객체 생성
 		HttpSession  session = request.getSession();
 		
+		
 		if(null == session.getAttribute("user")) {
 			
 			//login 페이지로 이동
 			LOG.debug("┌──────────────────────────────┐");
 			LOG.debug("│preHandle                     │");
 			LOG.debug("└──────────────────────────────┘");	
-			// /ehr/login/loginView.do
+			
 			response.sendRedirect(request.getContextPath()+"/login/loginView.do");
 			return false;//controller호출 않됨
 		}

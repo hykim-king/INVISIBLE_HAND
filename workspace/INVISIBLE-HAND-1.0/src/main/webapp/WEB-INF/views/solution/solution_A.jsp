@@ -104,6 +104,8 @@ $(document).ready(function() {
     let selectedMainCategory = '<%= selectedMainCategory %>';
     let selectedSubCategory = '<%= selectedSubCategory %>';
     
+    
+    
     function updateSolUI1(data) {
         var grade = "";
         switch (data[0][1]) {
@@ -257,10 +259,9 @@ $(document).ready(function() {
 	        $('#sol5_1').html(mytext); // Use .html() to interpret HTML tags
 	    }
 	}
-
-
-    
+	
 	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
+	
 	function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {
 	
 	    $.ajax({
@@ -290,23 +291,6 @@ $(document).ready(function() {
 	    }); // ajax 종료
 	}
 
-
-});
-
-</script>
-<script>
-//차트 관련
-$(document).ready(function() {
-  
-    let totalScore           = '<%= totalScore %>';
-    let selectedMainCategory = '<%= selectedMainCategory %>';
-    let selectedSubCategory  = '<%= selectedSubCategory %>';
-    
- 
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(function() {
-        loadChartData(selectedMainCategory, selectedSubCategory, totalScore); 
-        });   
    
     //날짜 변환 함수
     function formatDate(date) {
@@ -376,12 +360,18 @@ $(document).ready(function() {
        });//solution chart end
    } //  function loadChartData end
     
+   
+   //구글 차트
+   google.charts.load('current', {'packages':['corechart']});
+   google.charts.setOnLoadCallback(function() {
+       loadChartData(selectedMainCategory, selectedSubCategory, totalScore); 
+       });   
   // 차트 생성
   function drawChart(data) {
-    const originalData = new google.visualization.arrayToDataTable(data);
+   
 
-    let chartData = originalData.clone();
-
+    let chartData = new google.visualization.arrayToDataTable(data);
+    
     let options = {
       //title: '차트1',
       pointSize: 0,
@@ -401,7 +391,7 @@ $(document).ready(function() {
           max: 200
         },
         format: '###'
-      },
+      },     
       legend: {
         textStyle: { position: 'top', fontSize: 13, color: '#fff' },
       },
@@ -417,10 +407,12 @@ $(document).ready(function() {
 
   }
 
-  $(window).resize(function() {
+/*   $(window).resize(function() {
    drawChart();
-  });
-}); //차트 관련 doucument
+  }); */
+  
+
+});
 </script>
 </body>
 </html>
