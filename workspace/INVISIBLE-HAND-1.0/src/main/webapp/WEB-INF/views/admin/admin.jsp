@@ -16,19 +16,6 @@
   margin: 80px;
 }
 
-.additional-text {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-weight: bold;
-}
-
 .cate {
   width: 300px;
   position: relative;
@@ -125,8 +112,6 @@
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
-  <span class="additional-text">관리자님 환영 합니다 !</span>
-
 
   <!-- *---container Start---* -->
   <!-- accordion 메뉴 -->
@@ -176,13 +161,11 @@
   <script src="../resources/js/jquery-3.7.0.js"></script>
   <script>
     (function($) {
-      // クリックされたメニューを開く関数
       function openMenu($menu) {
         $menu.addClass('active');
         $menu.find('ul').slideDown('slow');
       }
 
-      // クリックされたメニューを閉じる関数
       function closeMenu($menu) {
         $menu.removeClass('active');
         $menu.find('ul').slideUp('slow');
@@ -190,18 +173,16 @@
 
       $('.cate ul').hide();
 
-      // すべてのメニューを開く
       $('.accordion .cate').each(function() {
         openMenu($(this));
       });
 
       $('.cate .menu .subopen').click(function(event) {
-        event.stopPropagation(); // イベントが親要素に伝播しないようにする
+        event.stopPropagation();
 
         var $parent = $(this).parent().parent();
         var isActive = $parent.hasClass('active');
 
-        // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
         if (isActive) {
           closeMenu($parent);
         } else {

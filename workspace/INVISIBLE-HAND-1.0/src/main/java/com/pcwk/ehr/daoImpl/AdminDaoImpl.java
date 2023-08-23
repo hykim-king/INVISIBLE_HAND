@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.AdminDao;
 
@@ -17,6 +18,7 @@ public class AdminDaoImpl implements AdminDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 
 	final String NAMESPACEMEMBER = "mapper.member.memberMapper"; // src/main/resources/member 폴더 까지.
+	final String NAMESPACESUBSCRIPTION = "mapper.subscription.gradeInfo"; // src/main/resources/subscription
 	final String DOT = ".";
 
 	@Autowired
@@ -36,7 +38,6 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public int getCount(MemberVO member) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -84,6 +85,48 @@ public class AdminDaoImpl implements AdminDao {
 
 		// ----------------------------------------
 		return flag;
+	}
+	@Override
+	public List<AdminVO> getAllsubscriptionDao() {
+		String statement1 = NAMESPACESUBSCRIPTION + DOT + "subscriptionAll";
+		LOG.debug("1. statement1: " + statement1);
+		List<AdminVO> subscriptionlist = sqlSessionTemplate.selectList(statement1);
+		for (AdminVO subscriptionone : subscriptionlist) {
+			LOG.debug("2. subscriptionone: " + subscriptionone);
+		}
+
+		return subscriptionlist;
+	}
+
+	@Override
+	public int update(AdminVO admin) throws SQLException {
+		int flag = 0;
+		String statement = this.NAMESPACESUBSCRIPTION + DOT + "update";
+		LOG.debug("1. statement-" + statement);
+		LOG.debug("2. param=" + admin);
+
+		flag = this.sqlSessionTemplate.update(statement, admin);
+
+		LOG.debug("3. flag=" + flag);
+
+		return flag;
+	}
+
+	@Override
+	public AdminVO get(AdminVO admin) throws ClassNotFoundException, SQLException {
+		
+			AdminVO outVO = null;
+
+			String statement = this.NAMESPACESUBSCRIPTION + DOT + "get";
+			LOG.debug("----------------------------");
+			LOG.debug("1. statement-" + statement);
+			LOG.debug("----------------------------");
+			LOG.debug("2. param=\n" + admin.toString());
+
+			outVO = this.sqlSessionTemplate.selectOne(statement, admin);
+			LOG.debug("3.outVO:" + outVO);
+
+			return outVO;
 	}
 
 } // class end

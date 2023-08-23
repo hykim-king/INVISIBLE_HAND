@@ -3,6 +3,7 @@ package com.pcwk.ehr.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
 
 public interface AdminService {
@@ -36,7 +37,29 @@ public interface AdminService {
 	 */
 	public int add(MemberVO member) throws ClassNotFoundException, SQLException;
 	
+	/**
+	 * 구독정보 조회
+	 * @return
+	 */
+	List<AdminVO> getAllsubscriptionService();
 	
+	/**
+	 * 
+	 * @param admin
+	 * @return 구독자 확인
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public AdminVO get(AdminVO admin) throws ClassNotFoundException, SQLException;
+
+
+	/**
+	 * 구독가격 수정
+	 * @param admin
+	 * @return
+	 * @throws SQLException
+	 */
+	public int update(AdminVO admin) throws SQLException;
 
 
 }
