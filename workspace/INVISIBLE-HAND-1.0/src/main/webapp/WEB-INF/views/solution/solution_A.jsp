@@ -42,7 +42,6 @@
 		<div class="wrap-1000">
 		
 		<h1 class="A-title">귀사의 기업 솔루션 결과입니다</h1>
-		<h3>야호호${solContentsList[0].solname}</h3>
 		<div class="tab-box tab1 active" id="chart01">
       <div class="chart-wrapper">
 				<div class="container-1200 con-main">
@@ -58,39 +57,32 @@
 		<div class="solution-desc">
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    (solname0에 대한 결과)귀사는  업계 평균 대비  <span id="sol1_2">undefined</span>입니다.</h3>
+		    	귀사의 SBHI지수는 업계 평균대비 <span id="sol1_2">undefined</span>입니다.</h3>
 		    <p id ="sol1_1">
-		   	 이 글이 보이면 실패
+		   	undefined
 		    </p>
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    (solname1에 대한 결과)귀사는  <span id="sol2_2">undefined</span>입니다.</h3>
+		    	귀사는  <span id="sol2_2">undefined</span>부분이 취약합니다.</h3>
 		    <p id ='sol2_1'>
-		   	 이 글이 보이면 실패
+		   	 undefined
 		    </p>
 
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		     (solname2-상대생산률에 대한 결과)귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>입니다.</h3>
-		   	<p id ="sol3_1">
-		   	 이 글이 보이면 실패
+		     	귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>입니다.</h3>
+		   	<p id ="sol3_1"> <span>또한 귀사는</span><p id ="sol3_3">
+		   	 undefined
 		    </p>  
-		  </div>
-		  <div class="solution-desc-list">
-		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    (solname2-절대생산률에 대한 결과)또한 귀사의 생산설비 가동률은 <span id="sol4_2">undefined</span>입니다.</h3>
-		    <p id ="sol4_1">
-		   	 이 글이 보이면 실패
-		    </p> 
 		  </div>
 		  <div>
 			<div class="solution-desc-list">
-		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    (solname3에 대한 결과)<span id="sol5_2">undefined</span>입니다.</h3>
+		    <h3 id="sol5_2"><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
+		    	undefined</h3>
 		    <p id ="sol5_1">
-		   	 이 글이 보이면 실패
+		   	undefined
 		    </p>
 		  </div>
 		</div>
@@ -105,12 +97,6 @@
 <script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
 $(document).ready(function() {
-	var documentIds = [
-		'#sol1_1','#sol1_2',
-		'#sol2_1','#sol1_2',
-		'#sol3_1',
-		'#sol4_1'
-	];
     let radioArr = <%= radioArrJson %>; // 이미 배열이므로 JSON.parse() 필요 없음
     let textArr = <%= textArrJson %>;
     let checkArr = <%= checkArrJson %>;
@@ -118,15 +104,162 @@ $(document).ready(function() {
     let selectedMainCategory = '<%= selectedMainCategory %>';
     let selectedSubCategory = '<%= selectedSubCategory %>';
     
-	function updateUI(data) {
-		$('#sol1_1').text(data[0][2]);
-		$('#sol1_2').text(data[0][1]);
-		$('#sol2_1').text(data[1][2]);
-		$('#sol2_2').text(data[1][1]);
-		$(documentIds[3]).text(data[3][2]);
-		$(documentIds[4]).text(data[4][2]);
+    function updateSolUI1(data) {
+        var grade = "";
+        switch (data[0][1]) {
+            case 1:
+                grade = "최상위등급";
+                break;
+            case 2:
+                grade = "상위등급";
+                break;
+            case 3:
+                grade = "우수등급";
+                break;
+            case 4:
+                grade = "양호등급";
+                break;
+            case 5:
+                grade = "주의등급";
+                break;
+            case 6:
+                grade = "위험등급";
+                break;
+        }
+        $('#sol1_1').text(data[0][2]);
+        $('#sol1_2').text(grade);
+    }
+
+    function updateSolUI2(data) {
+        var grade = "";
+        switch (data[1][1]) {
+            case 1:
+                grade = "경기 전반의 나쁨";
+                break;
+            case 2:
+                grade = "생산 수준 감소";
+                break;
+            case 3:
+                grade = "내수 판매 감소";
+                break;
+            case 4:
+                grade = "수출 판매 감소";
+                break;
+            case 5:
+                grade = "영업이익 감소";
+                break;
+            case 6:
+                grade = "자금사정 악화";
+                break;
+            case 7:
+                grade = "원자재 조달 곤란";
+                break;
+            case 8:
+                grade = "생산 설비 부족";
+                break;
+            case 9:
+                grade = "제품 제고 부족";
+                break;
+            case 10:
+                grade = "종사자 수 부족";
+                break;
+            case 11:
+                grade = "모든 지표가 긍정적";
+                break;
+            case 12:
+                grade = "모든 지표가 부정적";
+                break;
+        }
+        $('#sol2_1').text(data[1][2]);
+        $('#sol2_2').text(grade);
+    }
+	function updateSolUI3(data) {
+        var grade = "";
+        switch (data[2][1]) {
+            case 1:
+                grade = "증가";
+                break;
+            case 2:
+                grade = "동일";
+                break;
+            case 3:
+            	grade = "감소";
+                break;
+        }
+		$('#sol3_1').text(data[2][2]);
+		$('#sol3_2').text(grade);
+		$('#sol3_3').text(data[3][2]);
 	}
-	
+	function updateSolUI4(data) {
+	    var mytext = "";
+	    if (data.length <= 4) {
+	        $('#sol5_2').html(""); // Clear the content
+	    } else {
+	        $('#sol5_2').html("<span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span> 아래는 귀사의 애로요인에 대한 <span>솔루션</span>입니다.");
+	        for (var i = 4; i < data.length; i++) {
+	        	var grade = "";
+	            switch (data[i][1]) {
+		            case 1:
+		                grade = "<인력확보난>";
+		                break;
+		            case 2:
+		                grade = "<인건비 상승>";
+		                break;
+		            case 3:
+		            	grade = "물류비상승 및 운송난";
+		                break;
+		            case 4:
+		                grade = "기술경쟁력 약화";
+		                break;
+		            case 5:
+		                grade = "제품(판매)단가 하락";
+		                break;
+		            case 6:
+		            	grade = "고금리";
+		                break;
+		            case 7:
+		                grade = "설비노후 및 부족";
+		                break;
+		            case 8:
+		                grade = "계절적 비수기";
+		                break;
+		            case 9:
+		            	grade = "환율변동";
+		                break;
+		            case 10:
+		                grade = "내수부진";
+		                break;
+		            case 11:
+		                grade = "수출부진";
+		                break;
+		            case 12:
+		            	grade = "판매대금 회수 지연";
+		                break;
+		            case 13:
+		                grade = "자금조달 곤란";
+		                break;
+		            case 14:
+		                grade = "업체간 과다경쟁";
+		                break;
+		            case 15:
+		            	grade = "원자재 가격 상승";
+		                break;
+		            case 16:
+		                grade = "원자재(원재료) 구득난";
+		                break;
+		            case 17:
+		                grade = "모기업 불공정거래";
+		                break;
+	        	}
+	            mytext += "<br>" + grade + "</br>";
+	            mytext += "<br>" + data[i][2] + "</br>";
+	        }
+	        $('#sol5_1').html(mytext); // Use .html() to interpret HTML tags
+	    }
+	}
+
+
+    
 	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
 	function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {
 	
@@ -146,7 +279,10 @@ $(document).ready(function() {
 	        }),
 	        success: function(data) {	
 	        	console.log(data);
-	        	updateUI(data);
+	        	updateSolUI1(data);
+	        	updateSolUI2(data);
+	        	updateSolUI3(data);
+	        	updateSolUI4(data);
 	        },
 	        error: function(data) {
 	            console.log("에러");

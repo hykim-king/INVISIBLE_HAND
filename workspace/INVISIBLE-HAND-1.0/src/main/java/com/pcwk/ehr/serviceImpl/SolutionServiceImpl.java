@@ -124,30 +124,31 @@ public class SolutionServiceImpl implements SolutionService {
 		SolutionVO inVO = new SolutionVO();
 		inVO.setSolname(0);
 		tempArr = solutionDao.getScoreContents(checkArr);
-		LOG.debug("이게리턴이야: " + tempArr.get(0).getSbhiAvg());
 		
-
 		double aiScore = tempArr.get(0).getSbhiAvg();
-		if (Double.parseDouble(totalScore) - aiScore > 12.0){
+		double modifyScore = (Double.parseDouble(totalScore) + aiScore ) * 0.5;
+
+		
+		if (modifyScore - aiScore > 12.0){
 			inVO.setCodename(1);
 		}
-		if (Double.parseDouble(totalScore) - aiScore > 6.0 && Double.parseDouble(totalScore) - aiScore <= 12.0){
+		if (modifyScore - aiScore > 6.0 && modifyScore - aiScore <= 12.0){
 			inVO.setCodename(2);
 		}
-		if (Double.parseDouble(totalScore) - aiScore > 0.0 && Double.parseDouble(totalScore) - aiScore <= 6.0){
+		if (modifyScore - aiScore > 0.0 && modifyScore - aiScore <= 6.0){
 			inVO.setCodename(3);
 		}
-		if (Double.parseDouble(totalScore) - aiScore > -6.0 && Double.parseDouble(totalScore) - aiScore <= 0.0){
+		if (modifyScore - aiScore > -6.0 && modifyScore - aiScore <= 0.0){
 			inVO.setCodename(4);
 		}
-		if (Double.parseDouble(totalScore) - aiScore > -12.0 && Double.parseDouble(totalScore) - aiScore <= -6.0){
+		if (modifyScore - aiScore > -12.0 && modifyScore - aiScore <= -6.0){
 			inVO.setCodename(5);
 		}
-		if (Double.parseDouble(totalScore) - aiScore <= -12.0){
+		if (modifyScore - aiScore <= -12.0){
 			inVO.setCodename(6);
 		}
 		collectonVO.addAll(solutionDao.getSolutionContents(inVO));
-		
+		LOG.debug("modifyScore: " + modifyScore);
 		return collectonVO;
 		
 	}
