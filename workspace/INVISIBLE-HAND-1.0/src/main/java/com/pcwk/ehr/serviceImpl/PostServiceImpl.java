@@ -76,14 +76,11 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 	@Override
 	public int deleteAll(List<Integer> delAdminPostList) throws SQLException {
 	    int count = 0;
-	    LOG.debug("postServiceImpl delAdminPostList" + delAdminPostList);
 	    for (int postNum : delAdminPostList) {
 	        PostVO post = new PostVO();
 	        post.setPostNumber(postNum);
-	        LOG.debug("postServiceImpl postNum" + post);
 	        count += dao.doDelete(post);
 	    }
-	    LOG.debug("postServiceImpl count" + count);
 	    return count;
 	}
 

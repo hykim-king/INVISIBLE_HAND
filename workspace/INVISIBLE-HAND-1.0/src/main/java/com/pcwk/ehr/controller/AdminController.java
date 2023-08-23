@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
+import com.pcwk.ehr.VO.MessageVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.AdminService;
 import com.pcwk.ehr.service.PostService;
@@ -34,10 +38,6 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
-		lg.debug("┌─────────┐");
-		lg.debug("│ admin() │");
-		lg.debug("└─────────┘");
-
 		return "admin/admin";
 	}
 	
@@ -50,19 +50,13 @@ public class AdminController {
 	    String adminDel = req.getParameter("checkArr"); // checkArr의 배열을 toString으로 묶어서 가져옴
 	    
 	    String[] delAdminPostNums = adminDel.split(",");
-	    //[Ljava.lang.String;@7528378
-	    lg.debug("delAdminPostNums------------" + delAdminPostNums);
 
 	    List<Integer> delAdminPostList = new ArrayList<>();
 	    for (String numStr : delAdminPostNums) {
 	    	delAdminPostList.add(Integer.parseInt(numStr.trim()));
 	    }
 	    
-	    // [876, 875, 873, 486]
-	    lg.debug("deladminPostList------------" + delAdminPostList);
-
 	    int flag = this.postService.deleteAll(delAdminPostList);
-	    lg.debug("flag------------" + flag);
 
 	    String message = "";
 
@@ -73,8 +67,6 @@ public class AdminController {
 		}
 
 	    jsonString = StringUtil.validMessageToJson(Integer.toString(flag) + "", message);
-	    lg.debug("│jsonString : " + jsonString);
-	    lg.debug("└────────────────────────────────┘");
 
 	    return jsonString;
 	}
@@ -95,13 +87,57 @@ public class AdminController {
 
 	//
 	@RequestMapping(value = "/adminSubChargeChange.do")
-	public String adminSubChargeChange() {
+	public String adminSubChargeChange(Model model) {
 		lg.debug("┌─────────────────────────┐");
 		lg.debug("│ adminSubChargeChange()  │");
 		lg.debug("└─────────────────────────┘");
 
+		List<AdminVO> resultList1 = adminService.getAllsubscriptionService(); // 회원정보 전부 가져옴. service호출.
+		model.addAttribute("subscriptionlist", resultList1);
+
 		return "admin/adminSubChargeChange";
 	}
-    
-    
+	
+	//회원정보 표시
+    @RequestMapping(value = "/get.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String getSubscriptionDetails(String memberGradeName) {
+    	lg.debug("┌─────────────────────────────┐");
+    	lg.debug("│   getSubscriptionDetails()  │ memberGradeName: " + memberGradeName);
+    	lg.debug("└─────────────────────────────┘");
+    	
+
+	    AdminVO adminInfo = new AdminVO();
+	    adminInfo.setMemberGradeName(memberGradeName);
+	    try {
+	    	adminInfo = adminService.get(adminInfo);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	    
+	    return new Gson().toJson(adminInfo);
+	}
+
+    // 구독가격 수정
+    @RequestMapping(value = "/update.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String updateSubscription(AdminVO admin) throws SQLException {
+        lg.debug("┌─────────────────────────────┐");
+        lg.debug("│   updateSubscription()      │ subscriptionPrice: " + admin.getSubscriptionPrice());
+        lg.debug("└─────────────────────────────┘");
+
+        int result = adminService.update(admin);
+
+        MessageVO message = new MessageVO();
+        if (result == 1) {
+            message.setMsgId("1");
+            message.setMsgContents("구독 가격이 업데이트되었습니다.");
+        } else {
+            message.setMsgId("0");
+            message.setMsgContents("구독 정보 업데이트에 실패했습니다.");
+        }
+
+        return new Gson().toJson(message);
+    }
+
 }

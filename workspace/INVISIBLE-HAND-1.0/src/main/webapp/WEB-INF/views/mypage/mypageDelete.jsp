@@ -30,7 +30,12 @@ textarea.size {
 </head>
 <body>
 	<!-- *---container Start---* -->
-
+  <div class="drops">
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+  </div>
 	<div class="h60px"></div>
 	<div class="container-1400 min-100vh con-login">
 		<div class="delete-wrap">

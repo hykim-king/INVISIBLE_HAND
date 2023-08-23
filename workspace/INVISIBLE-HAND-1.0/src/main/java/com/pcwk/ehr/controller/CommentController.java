@@ -90,13 +90,14 @@ public class CommentController implements PcwkLoger{
 	
 	@RequestMapping(value = "/doUpdate.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doUpdate(CommentVO commentVO) throws SQLException {
+	public String doUpdate(int commentNumber, String content) throws SQLException {
 		String jsonString = "";
 		
 		LOG.debug("┌────────────────────────────────┐");
-		LOG.debug("│post : " + commentVO);
+		LOG.debug("│commentNumber : " + commentNumber);
+		LOG.debug("│content : " + content);
 
-		int flag = this.commentService.doUpdate(commentVO);
+		int flag = this.commentService.doUpdate(commentNumber, content);
 		
 		String message = "";
 

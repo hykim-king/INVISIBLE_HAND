@@ -57,7 +57,7 @@ lr_scheduler = LearningRateScheduler(lr_schedule)
 model.compile(optimizer=Adam(), loss="mean_squared_error")
 # 모델 학습
 # 모델 학습
-history = model.fit(X_train, y_train, epochs=1000, batch_size=8, verbose=2, callbacks=[lr_scheduler], validation_data=(X_test, y_test))
+history = model.fit(X_train, y_train, epochs=300, batch_size=8, verbose=2, callbacks=[lr_scheduler], validation_data=(X_test, y_test))
 
 # 손실 값 추출
 train_loss = history.history['loss']

@@ -8,19 +8,12 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/common.css">
 <style>
-
-
-.additional-text {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.c {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
-  font-weight: bold;
+}
+
+.admin-post {
+  margin: 80px;
 }
 
 .cate {
@@ -102,25 +95,23 @@
 }
 
 #pagetop a {
-  color: #fff; /*文字色*/
-  font-size: 20px; /*文字サイズ*/
+  color: #fff;
+  font-size: 20px;
   text-decoration: none;
   text-align: center;
   display: block;
   float: right;
   margin-bottom: 50px;
-  background: #222; /*背景色*/
-  color: #999; /*文字色*/
-  width: 60px; /*幅*/
-  line-height: 60px; /*高さ*/
-  border-radius: 50%; /*角丸のサイズ*/
+  background: #222;
+  color: #999;
+  width: 60px;
+  line-height: 60px;
+  border-radius: 50%;
 }
 </style>
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
-  <span class="additional-text">관리자님 환영 합니다 !</span>
-
 
   <!-- *---container Start---* -->
   <!-- accordion 메뉴 -->
@@ -128,42 +119,53 @@
   <div class="c">
     <div class="accordion">
       <div class="cate">
-        <span class="menu"> <a href="${CP}/admin/admin.do"
-          class="menulink">회원관리</a> <a href="javascript:void(0);"
-          class="subopen"></a>
+        <span class="menu">
+          <a href="#" class="menulink">회원관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
         </span>
         <ul>
-          <li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
+          <li>
+            <a href="${CP}/admin/adminSearch.do">회원조회</a>
+          </li>
         </ul>
       </div>
       <div class="cate">
-        <span class="menu"> <a href="${CP}/admin/admin.do"
-          class="menulink">서비스 관리</a> <a href="javascript:void(0);"
-          class="subopen"></a>
+        <span class="menu">
+          <a href="#" class="menulink">게시판관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
         </span>
         <ul>
-          <li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금
-              변경</a></li>
+          <li><a href="${CP}/post/postList.do?categoryNumber=10">자유게시판</a></li>
+          <li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
+          <li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
+        </ul>
+      </div>
+      <div class="cate">
+        <span class="menu">
+          <a href="#" class="menulink">서비스 관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
+        </span>
+        <ul>
+          <li>
+            <a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a>
+          </li>
         </ul>
       </div>
     </div>
-
   </div>
   <!-- accordion 메뉴 end -->
 
   <p id="pagetop" class="inner">
-    <a href="#">↑</a>
+    <a href="#">↑</a>   
   </p>
   <script src="../resources/js/jquery-3.7.0.js"></script>
   <script>
     (function($) {
-      // クリックされたメニューを開く関数
       function openMenu($menu) {
         $menu.addClass('active');
         $menu.find('ul').slideDown('slow');
       }
 
-      // クリックされたメニューを閉じる関数
       function closeMenu($menu) {
         $menu.removeClass('active');
         $menu.find('ul').slideUp('slow');
@@ -171,18 +173,16 @@
 
       $('.cate ul').hide();
 
-      // すべてのメニューを開く
       $('.accordion .cate').each(function() {
         openMenu($(this));
       });
 
       $('.cate .menu .subopen').click(function(event) {
-        event.stopPropagation(); // イベントが親要素に伝播しないようにする
+        event.stopPropagation();
 
         var $parent = $(this).parent().parent();
         var isActive = $parent.hasClass('active');
 
-        // クリックされたメニューが閉じている場合は開く、開いている場合は閉じる
         if (isActive) {
           closeMenu($parent);
         } else {

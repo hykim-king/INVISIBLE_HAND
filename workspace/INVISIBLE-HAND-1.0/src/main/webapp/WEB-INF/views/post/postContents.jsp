@@ -94,36 +94,52 @@
       <!-- *---댓글 Start---* -->
       <div class="comment-area" var="comment">
      
-       <c:if test="${commentCnt > 0}">
-          <h2><c:out value="${commentCnt}"/>개의 댓글</h2>
+       <c:if test="${commentCnt >= 0}">
+          <h2><c:out value="${commentCnt}"/> 개의 댓글</h2>
           <div class="h30px"></div>
-        </c:if>
+       </c:if>
         <div class="h30px"></div>
         
           <c:forEach var="comment" items="${list}" varStatus="status">
-            <div class="comment-box" id="comment-box">
-                <div class="comment-desc">
-                    <input type="hidden" name="commentNumber" id="commentNumber" value="${comment.commentNumber}">   
-                    <h4><c:out value="${comment.nickname}"/></h4>
-                    <span><c:out value="${comment.writtenDate}"/></span>
-                    <p><c:out value="${comment.content}"/></p>
-                </div>
-                <div class="comment-icon">
-                    <i class='fas fa-bars fa-sm' style='color:#979797'></i>
-                    <i class='fas fa-thumbs-up fa-sm cmt-like-icon' style='color:#FF007A'
-                        data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
-                        <c:out value="${comment.likes}"/>
-                    </i>
-                    <div class="btn-right">
-                        <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
-                            data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
-                    </div>
-                    
-                </div>
-                  <div class="more-btn opa-0"><i class='fas fa-angle-down fa-lg' style='color:#FF007A'></i></div>
-                  <!-- </form>  -->
-            </div>
+              <div class="comment-box" id="comment-box">
+                  <div class="comment-desc">
+                      <input type="hidden" name="commentNumber" id="commentNumber" value="${comment.commentNumber}">   
+                      <h4><c:out value="${comment.nickname}"/></h4>
+                      <span><c:out value="${comment.writtenDate}"/></span>
+                      <div class="content-text">
+                          <p>${comment.content}</p>
+                          <textarea name="newContent" class="update-comment" id="update-comment"style="display: none;">${comment.content}</textarea>
+                      </div>
+                  </div>
+                  <div class="comment-icon">
+                     <!--  <i class='fas fa-bars fa-sm' style='color:#979797'></i> -->
+                      <i class='fas fa-thumbs-up fa-sm cmt-like-icon' style='color:#FF007A'
+                          data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <c:out value="${comment.likes}"/>
+                      </i>
+                      <div class="btn-right">
+                          <input type="button" class="btn-updt" value="수정" name="updateViewComment" id="updateViewComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <input type="button" class="btn-delet" value="삭제" name="deleteComment" id="deleteComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <input type="button" class="btn-subUpdt" value="확인" name="updateComment" id="updateComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                          <input type="button" class="btn-noUpdt" value="취소" name="noUpdateComment" id="noUpdateComment${status.index}" 
+                              data-comment-number="${comment.commentNumber}" data-nickname="${comment.nickname}" data-comment-likes="${comment.likes}">
+                      </div>                    
+                  </div>
+                  <div class="update-form hidden" id="updateForm${status.index}">
+                      <form action="${CP}/comment/doUpdate.do" method="post">
+                          <input type="hidden" name="commentNumber" value="${comment.commentNumber}">
+                          <input type="hidden" name="content" value="${comment.content}">
+                          <textarea name="newContent" style="display: none;">${comment.content}</textarea>
+                          
+                      </form>
+                  </div>
+              </div>
           </c:forEach>
+
+
           
         
        <!-- 페이징 -->
@@ -137,7 +153,7 @@
           <label>댓글 작성자 </label>
           <input type="text" class="form-control" id="sessionNickname" name="sessionNickname" value="${sessionScope.member.nickName}" readonly="readonly">
           <p><textarea class="form-control" id="cmtContent" name="cmtContent" rows="3" 
-             required="required" style="resize: none;"
+             required="required" 
              ${empty sessionScope.member.nickName ? 'placeholder="비회원은 댓글을 작성할 수 없습니다."' : ''} 
              ${empty sessionScope.member.nickName ? 'readonly' : ''}></textarea></p>
           <!-- 버튼------------------> 
@@ -161,8 +177,108 @@
 <script src="${CP}/resources/js/util.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
+
+$(".btn-noUpdt").on("click", function() {
+    const commentBox = $(this).closest('.comment-box');
+    const updateForm = commentBox.find('.update-form');
+    const contentText = commentBox.find('.content-text');
+    const subUpdtButton = commentBox.find('.btn-subUpdt');
+
+    updateForm.addClass('hidden');
+    subUpdtButton.hide();
+    contentText.find('p').show();
+    contentText.find('textarea[name="newContent"]').hide();
+    commentBox.find('.btn-delet, .btn-updt').show();
     
-function searchPage(url, pageNo){
+    commentBox.find('.btn-noUpdt').hide();
+});
+</script>
+<script>
+  
+//수정 버튼 클릭 시
+  $(document).ready(function() {
+    $(".update-form").hide(); // 숨기기
+    $(".btn-subUpdt, .btn-noUpdt").hide();
+    
+    $(".btn-updt").on("click", function() {
+        const commentBox = $(this).closest('.comment-box');
+        const updateForm = commentBox.find('.update-form');
+        const contentText = commentBox.find('.content-text');
+        const subUpdtButton = commentBox.find('.btn-subUpdt');
+        const noUpdtButton = commentBox.find('.btn-noUpdt');
+
+        const content = contentText.find('p').text();
+        const textarea = contentText.find('textarea[name="newContent"]');
+        
+        // 활성화된 수정 버튼 클래스를 변경하여 비활성화로 만듦
+        $(".btn-updt").prop("disabled", true);
+        $(this).prop("disabled", false); // 클릭한 버튼만 활성화
+        textarea.val(content);
+
+        updateForm.removeClass('hidden');
+        subUpdtButton.show(); // 확인 버튼 나타내기
+        noUpdtButton.show();//취소 버튼 나타내기
+        contentText.find('p').hide(); // p 요소 숨기기
+        textarea.show(); // textarea 요소 보이기
+
+        commentBox.find('.btn-delet, .btn-updt').hide(); // 삭제와 수정 버튼 숨기기
+    });
+
+    // 확인 버튼 클릭 시
+    $(".btn-subUpdt").on("click", function() {
+        const commentBox = $(this).closest('.comment-box');
+        const updateForm = commentBox.find('.update-form');
+        const contentText = commentBox.find('.content-text');
+
+        const newContent = contentText.find('textarea[name="newContent"]').val();
+        const contentParagraph = contentText.find('p');
+        const confirmButton = $(this);
+
+        const commentNumber = confirmButton.data("comment-number");
+        const loggedInNickname = "${sessionScope.member.nickName}";
+        const updtNickname = confirmButton.data("nickname");
+
+        if (loggedInNickname === updtNickname) {
+            if (confirm('댓글을 수정 하시겠습니까?')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ehr/comment/doUpdate.do",
+                    async: true,
+                    dataType: "json",
+                    data: {
+                        commentNumber: commentNumber,
+                        content: newContent
+                    },
+                    success: function(parsedJson) {
+                        if ("1" == parsedJson.msgId) {
+                            alert(parsedJson.msgContents);
+                            location.reload(); // 페이지 새로고침
+                        } else {
+                            alert(parsedJson.msgContents);
+                        }
+                    },
+                    error: function(data) {
+                        console.log("error:" + data);
+                    }
+                });
+            }
+        } else {
+            alert('댓글 작성자만 수정할 수 있습니다.');
+        }
+
+        // Hide the update form and restore the original content display
+        contentParagraph.css('display', 'block');
+        contentText.find('textarea[name="newContent"]').css('display', 'none');
+        updateForm.addClass('hidden');
+
+        // Hide the confirm button and show the delete and update buttons
+        confirmButton.hide(); // 숨김 처리
+        commentBox.find('.btn-delet, .btn-updt').show(); // 나타내기
+    });
+});
+
+
+  function searchPage(url, pageNo){
     console.log("url:"+url);
     console.log("pageNo:"+pageNo);
     
@@ -378,17 +494,19 @@ function searchPage(url, pageNo){
 
     $(document).ready(function () {
           $("#moveToList").on("click", function () {
+              if (confirm('목록하면으로 이동합니다.') == false) return;
+
               moveToListView();
           });
       });
     
-      function moveToUpdateView(){
-            const postNumber = "${postNumValue}"; 
-            const categoryNumber = "${ctgNumValue}"; 
-            
-            const url = "${CP}/post/postMod.do?categoryNumber="+categoryNumber+"&postNumber=" + postNumber;
-            window.location.href = url;
-        }
+    function moveToUpdateView(){
+          const postNumber = "${postNumValue}"; 
+          const categoryNumber = "${ctgNumValue}"; 
+          
+          const url = "${CP}/post/postMod.do?categoryNumber="+categoryNumber+"&postNumber=" + postNumber;
+          window.location.href = url;
+      }
     
     $("#moveToUpdateView").on("click", function(){
         console.log("moveToUpdateView");
@@ -396,13 +514,12 @@ function searchPage(url, pageNo){
         console.log("categoryNumber:"+"${ctgNumValue}");
         
         var loggedInNickname = "${sessionScope.member.nickName}"; 
-        let admin = 'admin';
         var postNickname = "${outVO.getNickname()}";
         
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         
-        if (loggedInNickname === postNickname || admin === 'admin') {
+        if (loggedInNickname === postNickname) {
             if (confirm('수정 화면으로 이동 하시겠습니까?')) {
                 moveToUpdateView(); // 수정 페이지로 이동하는 함수 호출
             }
@@ -419,13 +536,12 @@ function searchPage(url, pageNo){
         console.log("postNumber: ${postNumValue}");
         console.log("categoryNumber: ${ctgNumValue}");
         var loggedInNickname = "${sessionScope.member.nickName}";
-        let admin = 'admin';
         var postNickname = "${outVO.getNickname()}";
         console.log("loggedInNickname:", loggedInNickname);
         console.log("postNickname:", postNickname);
         
 
-        if (loggedInNickname === postNickname || admin === 'admin') {
+        if (loggedInNickname === postNickname) {
             if (confirm('삭제 하시겠습니까?')) {
                 $.ajax({
                     type: "GET",
@@ -482,7 +598,7 @@ function searchPage(url, pageNo){
                         let parsedJson = JSON.parse(data);
                         if ("1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
-                            location.reload(); // 페이지 새로고침
+                            //location.reload(); // 페이지 새로고침
                         } else {
                             alert(parsedJson.msgContents);
                         }

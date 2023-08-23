@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.subscription.gradeInfo">
+
+	<!-- 전체 회원등급정보 취득 -->
+	<select id="subscriptionAll" resultType="AdminVO">
+		SELECT * FROM grade_information
+	</select>
+	
+	 <update id="update" parameterType="AdminVO">
+       UPDATE grade_information          
+       SET 
+           subscriptionPrice    =  #{subscriptionPrice} 
+       WHERE                     
+           memberGradeName = #{memberGradeName}     
+
+</update>
+
+
+</mapper>

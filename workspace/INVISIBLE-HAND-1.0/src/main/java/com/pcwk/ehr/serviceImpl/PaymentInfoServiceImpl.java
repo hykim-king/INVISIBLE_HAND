@@ -31,7 +31,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService, PcwkLoger {
 	// 결제 정보 입력
 	@Override
 	public int addInfo(PaymentInfoVO inVO) throws SQLException {
-		return dao.InsertInfo(inVO);
+		return dao.insertInfo(inVO);
 	}
 
 	// 결제 정보 업데이트

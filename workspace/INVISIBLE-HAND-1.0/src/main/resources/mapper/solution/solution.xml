@@ -14,8 +14,8 @@
   </select>
   
   <select id="getSolutionContents" parameterType="SolutionVO" resultType="SolutionVO">
-    SELECT SOLCONTENTS FROM SOLUTIONRESULT
-	WHERE SOLNAME = #{SOLNAME} AND CODENAME = #{CODENAME}
+    SELECT SOLNAME, CODENAME,SOLCONTENTS FROM SOLUTIONRESULT
+	WHERE SOLNAME = #{solname} AND CODENAME = #{codename}
   </select>
 
 

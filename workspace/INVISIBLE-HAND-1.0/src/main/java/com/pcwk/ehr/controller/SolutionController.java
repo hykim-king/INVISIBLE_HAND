@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.pcwk.ehr.VO.ChartVO;
 import com.pcwk.ehr.VO.RankVO;
+import com.pcwk.ehr.VO.SolutionVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.RankService;
 import com.pcwk.ehr.service.SolutionService;
@@ -99,27 +101,46 @@ public class SolutionController {
 	,produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getProductData(@RequestBody Map<String, Object> requestData) {
+		String jsonString = "";
+		JsonArray mainArray = new JsonArray();
 		
-	    List<String> radioArr = (List<String>) requestData.get("radioArr");
+		List<SolutionVO> solContentsList = new ArrayList<>();
+	    List<Double> radioArr = (List<Double>) requestData.get("radioArr");
 	    List<String> textArr = (List<String>) requestData.get("textArr");
 	    List<String> checkArr = (List<String>) requestData.get("checkArr");
 	    String totalScore = (String) requestData.get("totalScore");
-	    String mainCategory = (String) requestData.get("mainCategory");
-	    String subCategory = (String) requestData.get("subCategory");
+	    ChartVO chartInVO = new ChartVO();
+	    chartInVO.setMaincategory((String)requestData.get("mainCategory"));
+	    chartInVO.setSubcategory((String)requestData.get("subCategory"));
 
-	    // 이후 데이터 처리 작업 수행
-	    LOG.debug("파라미터가 생기나용");
+	    solContentsList.addAll(solutionService.returnScoreContents(chartInVO,totalScore));
+	    solContentsList.addAll(solutionService.returnRadioContents(radioArr));
+	    solContentsList.addAll(solutionService.returnTextContents(textArr));
+	    solContentsList.addAll(solutionService.returnCheckContents(checkArr));
 	    
-	    return "";
+	    // 이후 데이터 처리 작업 수행
+	    LOG.debug("파라미터가 radioArr:" + radioArr);
+	    LOG.debug("파라미터가 textArr:" + textArr);
+	    LOG.debug("파라미터가 checkArr:" + checkArr);
+	    LOG.debug("파라미터가 totalScore:" + totalScore);
+	    LOG.debug("파라미터가 solContentsList:" + solContentsList);
+	    
+	    
+		for (SolutionVO outVO : solContentsList) {
+			JsonArray sArray = new JsonArray();
+			sArray.add(outVO.getSolname());
+			sArray.add(outVO.getCodename());
+			sArray.add(outVO.getSolcontents());
+			mainArray.add(sArray);
+		}
+		
+		jsonString = mainArray.toString();
+		LOG.debug("=====================================");
+		LOG.debug("jsonString" + jsonString);
+		LOG.debug("=====================================");
+		
+	    return jsonString;
 	}
 	
-    public static ArrayList<String> parseStringToArraylist(String input) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        String[] elements = input.replaceAll("[\\[\\]\"]", "").split(",");
-        for (String element : elements) {
-            arrayList.add(element.trim());
-        }
-        return arrayList;
-    }
 	
 }

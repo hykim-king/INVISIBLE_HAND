@@ -182,6 +182,14 @@ public class PostController implements PcwkLoger{
 		LOG.debug("│   totalCnt:           │"+totalCnt);
 		LOG.debug("└───────────────────────┘");
 		
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   doCommentCnt()      │");
+
+	    int commentCnt = this.commentService.doCommentCnt(outVO.getPostNumber());
+	    model.addAttribute("commentCnt", commentCnt);
+	    
+	    LOG.debug("│   commentCnt          │" + commentCnt);
+	    LOG.debug("└───────────────────────┘");
 		
 		return "post/postContents";
 	}

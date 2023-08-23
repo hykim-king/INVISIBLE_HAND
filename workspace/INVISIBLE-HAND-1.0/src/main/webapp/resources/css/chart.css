@@ -186,4 +186,61 @@ body{
   right: 10%;
 }
 
+#mainCategorySelect,
+#mainCategorySelect2,
+#mainCategorySelect3,
+#mainCategorySelect4,
+#subCategorySelect,
+#subCategorySelect2,
+#subCategorySelect3,
+#subCategorySelect4{
+	
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding:5px 10px;
+  border:none;
+  border-bottom:2px solid #FF007A;
+  margin-right: 15px; 
+  cursor: pointer;
+}
+#mainCategorySelect>option,
+#mainCategorySelect2>option,
+#mainCategorySelect3>option,
+#mainCategorySelect4>option,
+#subCategorySelect>option,
+#subCategorySelect2>option,
+#subCategorySelect3>option,
+#subCategorySelect4>option{
+  cursor: pointer;
+  font-size: 14px;  
+}
+#mainCategorySelect:focus,
+#mainCategorySelect2:focus, 
+#mainCategorySelect3:focus, 
+#mainCategorySelect4:focus {
+  border: 1px solid #222;
+  border-bottom:2px solid #FF007A;
+  outline: none;
+}
+#subCategorySelect:focus,
+#subCategorySelect2:focus,
+#subCategorySelect3:focus,
+#subCategorySelect4:focus {
+  border: 1px solid #222;
+  border-bottom:2px solid #FF007A;
+  outline: none;
+}
 
+#restoreButton,
+#restoreButton2,
+#restoreButton3,
+#restoreButton4{
+  background-color: #222;
+  border: 2px solid #FF007A;
+  padding: 5px 10px;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
