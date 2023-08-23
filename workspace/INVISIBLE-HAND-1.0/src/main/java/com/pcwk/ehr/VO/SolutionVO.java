@@ -15,6 +15,7 @@ import lombok.ToString;
 public class SolutionVO {
 	private int  solname;		
 	private int  codename;
+	
 	private String  solcontents;
 		
 }                      

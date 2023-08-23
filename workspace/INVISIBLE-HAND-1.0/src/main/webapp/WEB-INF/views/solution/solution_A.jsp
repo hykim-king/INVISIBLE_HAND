@@ -47,7 +47,8 @@
       <div class="chart-wrapper">
 				<div class="container-1200 con-main">
 						  <div class="wrap-1000">
-						    <div id="solution_chart"></div>						
+						    <div id="solution_chart"></div>		
+						    				
 						  </div>
 				  <!-- **---wrap End---** -->
 				</div>
@@ -57,30 +58,38 @@
 		<div class="solution-desc">
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		         귀사의 SBHI 지수는 <span id="sol1_1"></span>으로  AI 예측대비  <span>(점수)</span>높/낮은 수치입니다.</h3>
+		    (solname0에 대한 결과)귀사는  업계 평균 대비  <span id="sol1_2">undefined</span>입니다.</h3>
 		    <p id ="sol1_1">
 		   	 이 글이 보이면 실패
 		    </p>
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		          귀사는  <span>[설문솔루션 케이스]</span>입니다.</h3>
-		    <p id ="sol1_2">
+		    (solname1에 대한 결과)귀사는  <span id="sol2_2">undefined</span>입니다.</h3>
+		    <p id ='sol2_1'>
 		   	 이 글이 보이면 실패
 		    </p>
 
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		         귀사의 생산설비 가동률은 전월대비 <span>[증가/평이/감소]</span>입니다.</h3>
-		   	<p id ="sol1_3">
+		     (solname2-상대생산률에 대한 결과)귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>입니다.</h3>
+		   	<p id ="sol3_1">
 		   	 이 글이 보이면 실패
 		    </p>  
 		  </div>
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		           또한 귀사의 생산설비 가동률은 <span>어쩌구</span>입니다.</h3>
-		    <p id ="sol1_4">
+		    (solname2-절대생산률에 대한 결과)또한 귀사의 생산설비 가동률은 <span id="sol4_2">undefined</span>입니다.</h3>
+		    <p id ="sol4_1">
+		   	 이 글이 보이면 실패
+		    </p> 
+		  </div>
+		  <div>
+			<div class="solution-desc-list">
+		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
+		    (solname3에 대한 결과)<span id="sol5_2">undefined</span>입니다.</h3>
+		    <p id ="sol5_1">
 		   	 이 글이 보이면 실패
 		    </p>
 		  </div>
@@ -96,8 +105,11 @@
 <script src="../resources/js/jquery-3.7.0.js"></script>
 <script>
 $(document).ready(function() {
-	let documentIds = [
-		"sol1_1","sol1_2","sol1_3","sol1_4","sol1_5"
+	var documentIds = [
+		'#sol1_1','#sol1_2',
+		'#sol2_1','#sol1_2',
+		'#sol3_1',
+		'#sol4_1'
 	];
     let radioArr = <%= radioArrJson %>; // 이미 배열이므로 JSON.parse() 필요 없음
     let textArr = <%= textArrJson %>;
@@ -105,36 +117,43 @@ $(document).ready(function() {
     let totalScore = '<%= totalScore %>';
     let selectedMainCategory = '<%= selectedMainCategory %>';
     let selectedSubCategory = '<%= selectedSubCategory %>';
-
-	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
+    
+	function updateUI(data) {
+		$('#sol1_1').text(data[0][2]);
+		$('#sol1_2').text(data[0][1]);
+		$('#sol2_1').text(data[1][2]);
+		$('#sol2_2').text(data[1][1]);
+		$(documentIds[3]).text(data[3][2]);
+		$(documentIds[4]).text(data[4][2]);
+	}
 	
+	getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory);
+	function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {
+	
+	    $.ajax({
+	        type: "POST",
+	        url: "/ehr/solution/getProductData.do",
+	        async: true,
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",   
+	        data: JSON.stringify({
+	            radioArr: radioArr, 
+	            textArr: textArr,
+	            checkArr: checkArr,
+	            totalScore: totalScore,
+	            mainCategory:selectedMainCategory,
+	            subCategory:selectedSubCategory
+	        }),
+	        success: function(data) {	
+	        	console.log(data);
+	        	updateUI(data);
+	        },
+	        error: function(data) {
+	            console.log("에러");
+	        }
+	    }); // ajax 종료
+	}
 
-function getData(radioArr, textArr, checkArr, totalScore, selectedMainCategory, selectedSubCategory) {
-
-    $.ajax({
-        type: "POST",
-        url: "/ehr/solution/getProductData.do",
-        async: true,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",   
-        data: JSON.stringify({
-            radioArr: radioArr, 
-            textArr: textArr,
-            checkArr: checkArr,
-            totalScore: totalScore,
-            mainCategory:selectedMainCategory,
-            subCategory:selectedSubCategory
-        }),
-        success: function(data) {	
-        	for(var i=0; i=documentIds.length; i++){
-                document.getElementById(documentIds[0]).innerHTML = "수정된 내용입니다.";
-        	}
-        },
-        error: function(data) {
-            console.log("에러");
-        }
-    }); // ajax 종료
-}
 
 });
 
@@ -173,7 +192,7 @@ $(document).ready(function() {
               dataType: 'json',
               success: function(data) {
             	  let chartData = [];
-            	  chartData.push(["Year","one","two","three"]);
+            	  chartData.push(["Year",selectedSubCategory+"의 SBHI지수","AI가 예측한 다음달 업계 SBHI지수","AI가 예측한 나의 기업 SBHI"]);
                   for (let i = 0; i < data.length; i++) {
                       let row = [];
                       let date = new Date(data[i][0]);
@@ -201,12 +220,13 @@ $(document).ready(function() {
                       if (formattedDate === '2023.07') {
                           row.push(value);
                       } else if (formattedDate === '2023.08') {
-                          // JSP에서 주는 데이터 사용
-                          row.push(totalScore);
+                    	  totalScore = (parseFloat(totalScore) + parseFloat(value)) * 0.5;
+                    	  row.push(totalScore);
+
+
                       } else {
                           row.push(null);
                       }
-                      
                       
                       chartData.push(row);
                   }

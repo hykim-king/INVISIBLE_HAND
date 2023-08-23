@@ -13,5 +13,7 @@ public interface SolutionDao {
 	public List<ChartVO> SelectSubcategory(ChartVO inVO);
 
 	public List<SolutionVO> getSolutionContents(SolutionVO inVO);
+
+	public List<ChartVO> getScoreContents(ChartVO checkArr);
 	
 }

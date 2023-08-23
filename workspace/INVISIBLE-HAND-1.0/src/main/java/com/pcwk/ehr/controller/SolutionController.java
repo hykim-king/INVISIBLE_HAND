@@ -103,25 +103,28 @@ public class SolutionController {
 	public String getProductData(@RequestBody Map<String, Object> requestData) {
 		String jsonString = "";
 		JsonArray mainArray = new JsonArray();
+		
 		List<SolutionVO> solContentsList = new ArrayList<>();
 	    List<Double> radioArr = (List<Double>) requestData.get("radioArr");
 	    List<String> textArr = (List<String>) requestData.get("textArr");
 	    List<String> checkArr = (List<String>) requestData.get("checkArr");
 	    String totalScore = (String) requestData.get("totalScore");
-	    String mainCategory = (String) requestData.get("mainCategory");
-	    String subCategory = (String) requestData.get("subCategory");
+	    ChartVO chartInVO = new ChartVO();
+	    chartInVO.setMaincategory((String)requestData.get("mainCategory"));
+	    chartInVO.setSubcategory((String)requestData.get("subCategory"));
 
+	    solContentsList.addAll(solutionService.returnScoreContents(chartInVO,totalScore));
 	    solContentsList.addAll(solutionService.returnRadioContents(radioArr));
 	    solContentsList.addAll(solutionService.returnTextContents(textArr));
 	    solContentsList.addAll(solutionService.returnCheckContents(checkArr));
+	    
 	    // 이후 데이터 처리 작업 수행
 	    LOG.debug("파라미터가 radioArr:" + radioArr);
 	    LOG.debug("파라미터가 textArr:" + textArr);
 	    LOG.debug("파라미터가 checkArr:" + checkArr);
 	    LOG.debug("파라미터가 totalScore:" + totalScore);
-	    LOG.debug("파라미터가 mainCategory:" + mainCategory);
-	    LOG.debug("파라미터가 subCategory:" + subCategory);
 	    LOG.debug("파라미터가 solContentsList:" + solContentsList);
+	    
 	    
 		for (SolutionVO outVO : solContentsList) {
 			JsonArray sArray = new JsonArray();

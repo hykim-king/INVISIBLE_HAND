@@ -17,6 +17,7 @@ import com.pcwk.ehr.dao.SolutionDao;
 public class SolutionDaoImpl implements SolutionDao {
 
 	final String NAMESPACE = "com.pcwk.ehr.solution";
+	final String NAMESPACECHART = "com.pcwk.ehr.chart";
 	final String DOT       = ".";
 	
 	@Autowired
@@ -32,6 +33,10 @@ public class SolutionDaoImpl implements SolutionDao {
 	
 	public List<SolutionVO> getSolutionContents(SolutionVO inVO) {
 		return sqlSessionTemplate.selectList(NAMESPACE+DOT+"getSolutionContents", inVO);
+	}
+	
+	public List<ChartVO> getScoreContents(ChartVO inVO) {
+		return sqlSessionTemplate.selectList(NAMESPACECHART+DOT+"getAiSolve", inVO);
 	}
 	
 	
