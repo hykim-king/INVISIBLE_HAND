@@ -94,8 +94,8 @@
       <!-- *---댓글 Start---* -->
       <div class="comment-area" var="comment">
      
-       <c:if test="${commentCnt > 0}">
-          <h2><c:out value="${commentCnt}"/>개의 댓글</h2>
+       <c:if test="${commentCnt >= 0}">
+          <h2><c:out value="${commentCnt}"/> 개의 댓글</h2>
           <div class="h30px"></div>
        </c:if>
         <div class="h30px"></div>
@@ -253,7 +253,6 @@ $(".btn-noUpdt").on("click", function() {
                         if ("1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
                             location.reload(); // 페이지 새로고침
-                            contentParagraph.text(newContent + " (수정됨)");
                         } else {
                             alert(parsedJson.msgContents);
                         }
