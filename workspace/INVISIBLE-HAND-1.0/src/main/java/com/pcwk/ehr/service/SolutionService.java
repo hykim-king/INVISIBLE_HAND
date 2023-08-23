@@ -21,4 +21,6 @@ public interface SolutionService {
 	public List<SolutionVO> returnTextContents(List<String> textArr);
 
 	public List<SolutionVO> returnCheckContents(List<String> checkArr);
+
+	public List<SolutionVO> returnScoreContents(ChartVO chartInVO, String totalScore);
 }

@@ -109,25 +109,54 @@ public class SolutionServiceImpl implements SolutionService {
 		List<Integer> intList = convertStringsToIntegers(checkArr);
 		List<SolutionVO> collectonVO = new ArrayList<>();
 		SolutionVO inVO = new SolutionVO();
-		LOG.debug("이것이벨류야");
 		
         for (int value : intList) {
         	inVO.setSolname(3);
         	inVO.setCodename(value);
         	collectonVO.addAll(solutionDao.getSolutionContents(inVO));
         }
-        LOG.debug("너는실행되니??");
 		return collectonVO;
+	}
+	
+	public List<SolutionVO> returnScoreContents(ChartVO checkArr,String totalScore){
+		List<SolutionVO> collectonVO = new ArrayList<>();
+		List<ChartVO> tempArr = new ArrayList<>();
+		SolutionVO inVO = new SolutionVO();
+		inVO.setSolname(0);
+		tempArr = solutionDao.getScoreContents(checkArr);
+		LOG.debug("이게리턴이야: " + tempArr.get(0).getSbhiAvg());
+		
+
+		double aiScore = tempArr.get(0).getSbhiAvg();
+		if (Double.parseDouble(totalScore) - aiScore > 12.0){
+			inVO.setCodename(1);
+		}
+		if (Double.parseDouble(totalScore) - aiScore > 6.0 && Double.parseDouble(totalScore) - aiScore <= 12.0){
+			inVO.setCodename(2);
+		}
+		if (Double.parseDouble(totalScore) - aiScore > 0.0 && Double.parseDouble(totalScore) - aiScore <= 6.0){
+			inVO.setCodename(3);
+		}
+		if (Double.parseDouble(totalScore) - aiScore > -6.0 && Double.parseDouble(totalScore) - aiScore <= 0.0){
+			inVO.setCodename(4);
+		}
+		if (Double.parseDouble(totalScore) - aiScore > -12.0 && Double.parseDouble(totalScore) - aiScore <= -6.0){
+			inVO.setCodename(5);
+		}
+		if (Double.parseDouble(totalScore) - aiScore <= -12.0){
+			inVO.setCodename(6);
+		}
+		collectonVO.addAll(solutionDao.getSolutionContents(inVO));
+		
+		return collectonVO;
+		
 	}
 	
     public List<Integer> convertStringsToIntegers(List<String> stringList) {
         List<Integer> intList = new ArrayList<>();
-
         for (String stringValue : stringList) {
             try {
-            	LOG.debug("스트링벨류" + stringValue.substring(0,2));
                 int intValue = Integer.parseInt(stringValue.substring(0,2));
-                LOG.debug("인트벨류" + intValue);
                 if (intValue >= 0 && intValue <= 99) {
                     intList.add(intValue);
                 } else {
