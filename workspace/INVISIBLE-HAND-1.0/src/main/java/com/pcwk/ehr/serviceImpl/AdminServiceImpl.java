@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.dao.AdminDao;
 import com.pcwk.ehr.service.AdminService;
@@ -54,9 +55,23 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int add(MemberVO member) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
+	@Override
+	public List<AdminVO> getAllsubscriptionService() {
+		return adminDao.getAllsubscriptionDao();
+	}
+
+	@Override
+	public int update(AdminVO admin) throws SQLException {
+		return adminDao.update(admin);
+	}
+
+	@Override
+	public AdminVO get(AdminVO admin) throws ClassNotFoundException, SQLException {
+		return adminDao.get(admin);
+	}
 
 } // class end

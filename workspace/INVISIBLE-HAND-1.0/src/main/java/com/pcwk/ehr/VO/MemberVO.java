@@ -1,6 +1,14 @@
 package com.pcwk.ehr.VO;
 
-public class MemberVO {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+public class MemberVO{
 	private String memberId; // id
 	private String password; // 비번
 	private int memberGrade; // 회원 등급
@@ -182,5 +190,65 @@ public class MemberVO {
 				+ phoneNumber + ", idCheck=" + idCheck + ", nickNameCheck=" + nickNameCheck + ", emailCheck="
 				+ emailCheck + ", loginIdCheck=" + loginIdCheck + ", passCheck=" + passCheck + ", login=" + login + "]";
 	}
+
+//	@Override
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		String role= "";
+//        int memberGrade = getMemberGrade();
+//
+//        switch (memberGrade) {
+//            case 1:
+//                role = "ADMIN"; 	 //관리자
+//                break;
+//            case 2:
+//                role = "SUBSCRIBER"; //구독자
+//                break;
+//            case 3:
+//                role = "MEMBER";     //회원
+//                break;                              
+//            default:			
+//            	break;
+//        }	
+//		String roleGrant = "ROLE_" + memberGrade;
+//        
+//        GrantedAuthority myGrant = new SimpleGrantedAuthority(roleGrant);
+//        
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        
+//        authorities.add(myGrant);
+//        
+//        return authorities;
+//    }
+//	
+//
+//	@Override
+//	public String getUsername() {
+//		
+//		return memberId;
+//	}
+//
+//	@Override
+//	public boolean isAccountNonExpired() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean isAccountNonLocked() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean isCredentialsNonExpired() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean isEnabled() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 }
