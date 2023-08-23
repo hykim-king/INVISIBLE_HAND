@@ -136,6 +136,7 @@
                           
                       </form>
                   </div>
+                  <div class="more-btn opa-0"><i class='fas fa-angle-down fa-lg' style='color:#FF007A'></i></div>
               </div>
           </c:forEach>
 
@@ -625,6 +626,7 @@ $(".btn-noUpdt").on("click", function() {
         });
       });
     
+
     $(".more-btn").on("click", function() {
         var commentBox = $(this).closest(".comment-box"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
         var angle = $(this).find(".fa-angle-down"); // 클릭한 버튼의 가장 가까운 .comment-box 요소를 찾습니다.
@@ -635,7 +637,6 @@ $(".btn-noUpdt").on("click", function() {
             commentBox.find('#see').val(newValue);
         }
       });
-
     
 </script>
   
