@@ -52,6 +52,7 @@
 	              <td class="text-c">댓글 내용</td>
 	              <td class="text-c">추천수</td>
 	              <td class="text-c">작성일</td>
+	              <td class="text-c">카테고리번호</td>
 	           </tr>
 	         </thead>
 	     
@@ -60,9 +61,10 @@
 	                 <tr>
 	                 	  <td class="text-c">${status.count}</td>
 	                    <td class="text-c">${list.commentNumber}</td>
-	                    <td class="text-l"><p class="area">${list.content}</p></td>
+	                    <td class="text-l"><p class="area"><a href="/ehr/post/doSelectOne.do?categoryNumber=${list.categoryNumber}&postNumber=${list.postNumber}">${list.content}</a></p></td>
 	                    <td class="text-c">${list.likes}</td>
 	                    <td class="text-c">${list.writtenDate}</td> 
+	                    <td class="text-c">${list.categoryNumber}</td>
 	                 </tr>
 	             </c:forEach>
 	        </tbody>
