@@ -14,6 +14,12 @@
 
 </head>
 <body>
+  <div class="drops">
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+  </div>
 	<!-- *---container Start---* -->
 	<div class="h60px"></div>
 	<div class="container-1400 min-100vh con-login">

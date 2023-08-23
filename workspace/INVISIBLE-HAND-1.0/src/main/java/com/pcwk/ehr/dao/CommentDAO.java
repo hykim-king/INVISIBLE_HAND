@@ -17,7 +17,7 @@ public interface CommentDAO {
 	public int doSave(CommentVO commentVO)throws SQLException;
 	
 	//댓글 수정
-	public int doUpdate(CommentVO commentVO)throws SQLException;
+	public int doUpdate(int commentNumber, String content)throws SQLException;
 
 	//댓글 삭제
 	public int doDelete(int commentNumber) throws SQLException;

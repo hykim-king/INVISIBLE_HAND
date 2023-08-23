@@ -19,7 +19,7 @@
 		<div class="wrap_demo" id="kakaoWrap">
 
 			<div id="kakaoHead">
-				<img src="../resources/image/kakaopay_icon.jpg" alt="kakaopay_logo"
+				<img src="../resources/image/kakaopay_logo.png" alt="kakaopay_logo"
 					width="100px" />
 			</div>
 

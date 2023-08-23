@@ -185,10 +185,15 @@ h3{
 
 }
 
+.comment-icon{
+	text-align: right;
+	
+}
 
 .comment-icon .fas{
   display: block;
 }
+
 .fa-thumbs-up{
   margin-top: 40px;
 }
@@ -231,6 +236,14 @@ h3{
   
 }
 
+.update-comment{
+  width:90%;
+  background-color: #121212;
+  color: #fff;
+  border:1px solid #121212;
+  border-radius:10px;
+  padding: 5px 15px;
+}
 
 /* ----상세보기 내용+댓글 끝----- */
 
@@ -251,7 +264,9 @@ input{
   border: none;
 }
 
-textarea.form-contents {
+textarea.form-contents,
+textarea.update-comment
+ {
   border: none;
 }
 
@@ -435,13 +450,17 @@ tbody>tr:last-child{
   width:75px;
   
 }
-.btn-delet{
+.btn-delet,
+.btn-updt,
+.btn-subUpdt,
+.btn-noUpdt{
   border:2px solid #222;    
   background-Color:#222;  
   color:#979797;  
   font-weight: 600;
   margin-top:10px;
-  
+  cursor: pointer;
+  transition:0.5s;
 }
 .btn-delet:hover{
   color:#FF007A;  
@@ -569,11 +588,12 @@ tbody>tr:last-child{
 }
 .btn-delet:hover{
   color:#FF007A;  
-  cursor: pointer;
   font-weight: 600;
 }
 
-
+.btn-updt:hover{
+  color:#FFA000; 
+}
 
 
 

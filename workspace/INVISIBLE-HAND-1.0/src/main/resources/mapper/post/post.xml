@@ -5,23 +5,24 @@
   <!-- 검색조건 -->
   <!-- 전체(제목+내용+글쓴이)10 제목10 내용20 글쓴이30 -->
   <sql id="searchCondition">
-      <if test="searchWord != ''">
-          <choose>
-              <when test="searchDiv == '10'">
-                AND (title LIKE #{searchWord} || '%' OR content LIKE #{searchWord} || '%' OR nickname LIKE #{searchWord} || '%')
-              </when>
-              <when test="searchDiv == '20'">
-                  AND title LIKE #{searchWord} || '%'
-              </when>
-              <when test="searchDiv == '30'">
-                  AND content LIKE #{searchWord} || '%'
-              </when>
-              <when test="searchDiv == '40'">
-                  AND nickname LIKE #{searchWord} || '%'
-              </when>
-          </choose>
-      </if>
-  </sql>
+    <if test="searchWord != ''">
+        <choose>
+            <when test="searchDiv == '10'">
+                AND (title LIKE '%' || #{searchWord} || '%' OR content LIKE '%' || #{searchWord} || '%' OR nickname LIKE '%' || #{searchWord} || '%')
+            </when>
+            <when test="searchDiv == '20'">
+                AND title LIKE '%' || #{searchWord} || '%'
+            </when>
+            <when test="searchDiv == '30'">
+                AND content LIKE '%' || #{searchWord} || '%'
+            </when>
+            <when test="searchDiv == '40'">
+                AND nickname LIKE '%' || #{searchWord} || '%'
+            </when>
+        </choose>
+    </if>
+</sql>
+
 
 
 <!-- categoryNumber: 자유(10)/QnA(20)/공지 게시판(30)-->

@@ -8,6 +8,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/common.css">
 <style>
+.c {
+  display: flex;
+}
+
+.admin-post {
+  margin: 80px;
+}
 
 /* 新しいスタイル */
 .additional-text {
@@ -126,31 +133,43 @@
 	<!-- *---container Start---* -->
 	<!-- accordion 메뉴 -->
 	<div class="h60px"></div>
-	<div class="c">
-		<div class="accordion">
-			<div class="cate">
-				<span class="menu"> <a href="${CP}/admin/admin.do"
-					class="menulink">회원관리</a> <a href="javascript:void(0);"
-					class="subopen"></a>
-				</span>
-				<ul>
-					<li><a href="${CP}/post/postList.do?categoryNumber=10">자유게시판</a></li>
-					<li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
-					<li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
-				</ul>
-				<div class="cate">
-					<span class="menu"> <a href="${CP}/admin/admin.do"
-						class="menulink">서비스 관리</a> <a href="javascript:void(0);"
-						class="subopen"></a>
-					</span>
-					<ul>
-						<li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금
-								변경</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="c">
+    <div class="accordion">
+      <div class="cate">
+        <span class="menu">
+          <a href="#" class="menulink">회원관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
+        </span>
+        <ul>
+          <li>
+            <a href="${CP}/admin/adminSearch.do">회원조회</a>
+          </li>
+        </ul>
+      </div>
+      <div class="cate">
+        <span class="menu">
+          <a href="#" class="menulink">게시판관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
+        </span>
+        <ul>
+          <li><a href="${CP}/post/postList.do?categoryNumber=10">자유게시판</a></li>
+          <li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
+          <li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
+        </ul>
+      </div>
+      <div class="cate">
+        <span class="menu">
+          <a href="#" class="menulink">서비스 관리</a>
+          <a href="javascript:void(0);" class="subopen"></a>
+        </span>
+        <ul>
+          <li>
+            <a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 	<!-- accordion 메뉴 end -->
 

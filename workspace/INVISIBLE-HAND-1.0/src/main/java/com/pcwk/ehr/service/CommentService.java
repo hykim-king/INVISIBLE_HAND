@@ -17,7 +17,7 @@ public interface CommentService {
 	int doSave(CommentVO commentVO)throws SQLException;
 	
 	//댓글 수정
-	int doUpdate(CommentVO commentVO)throws SQLException;
+	int doUpdate(int commentNumber, String content)throws SQLException;
 	
 	//댓글 삭제
 	int doDelete(int commentNumber) throws SQLException;

@@ -45,6 +45,14 @@ String cPath = request.getContextPath();
 <link rel="stylesheet" href="../resources/css/list.css">
 <link rel="stylesheet" href="../resources/css/common.css">
 <style>
+.c {
+  display: flex;
+}
+
+.admin-member {
+  margin: 80px;
+}
+
 .cate {
 	width: 300px;
 	position: relative;
@@ -126,8 +134,6 @@ String cPath = request.getContextPath();
 	text-align: center;
 }
 
-* /
-
 #pagetop {
 	clear: both;
 	padding-top: 40px;
@@ -159,180 +165,200 @@ String cPath = request.getContextPath();
 	<div class="c">
 		<div class="accordion">
 			<div class="cate">
-				<span class="menu"> <a href="${CP}/admin/admin.do"
-					class="menulink">회원관리</a> <a href="javascript:void(0);"
-					class="subopen"></a>
+				<span class="menu">
+					<a href="#" class="menulink">회원관리</a>
+					<a href="javascript:void(0);" class="subopen"></a>
+				</span>
+				<ul>
+					<li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
+				</ul>
+			</div>
+			<div class="cate">
+				<span class="menu">
+					<a href="${CP}/admin/admin.do" class="menulink">게시판관리</a>
+					<a href="javascript:void(0);" class="subopen"></a>
 				</span>
 				<ul>
 					<li><a href="${CP}/post/postList.do?categoryNumber=10">자유게시판</a></li>
 					<li><a href="${CP}/post/postList.do?categoryNumber=20">Q&A</a></li>
 					<li><a href="${CP}/post/postList.do?categoryNumber=30">공지사항</a></li>
 				</ul>
-				<div class="cate">
-        <span class="menu"> <a href="${CP}/admin/admin.do"
-          class="menulink">서비스 관리</a> <a href="javascript:void(0);"
-          class="subopen"></a>
-        </span>
-        <ul>
-          <li><a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a></li>
-        </ul>
-      </div>
+			</div>
+			<div class="cate">
+				<span class="menu">
+					<a href="#" class="menulink">서비스 관리</a>
+					<a href="javascript:void(0);" class="subopen"></a>
+				</span>
+				<ul>
+					<li>
+            <a href="${CP}/admin/adminSubChargeChange.do">구독제 요금 변경</a>
+          </li>
+				</ul>
 			</div>
 		</div>
-	</div>
 
-	<!-- accordion 메뉴 end -->
-	<div class="container">
-		<h1>회원관리</h1>
+		<!-- accordion 메뉴 end -->
+		<div class="container admin-member">
+			<h1 style="margin: 30px;">회원관리</h1>
 
-		<%-- sessionScope.user:${sessionScope.user } --%>
-		<div class="button-area">
-			<!-- 검색  -->
+			<%-- sessionScope.user:${sessionScope.user } --%>
+			<div class="button-area">
+				<!-- 검색  -->
 
-			<form action="#" name="user_frm">
-				<input type="hidden" name="pageNo" id="pageNo">
-				<!-- 검색구분 -->
-				<select name="searchDiv" id="searchDiv">
-					<option value="">전체</option>
-					<option value="">닉네임</option>
-					<option value="">등급</option>
-					<option value="">이메일</option>
-				</select>
-				<!-- 검색어 -->
-				<input type="text" value="${search.searchWord}" name="searchWord"
-					id="searchWord" placeholder="검색어를 입력하세요.">
-				<!-- pageSize:10,20,30,50,100,200 -->
-				<select name="pageSize" id="pageSize">
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-					<option value="200">200</option>
-				</select> <input type="button" class="btn" value="조회" value="조회"
-					id="doRetrieve" onclick="window.doRetrieve();">
-			</form>
-		</div>
-		<table id="boardTable"
-			class="table table-sm table-hover table-borderless">
-			<thead class="board-thead">
-				<tr>
-					<th class="text-center">회원ID</th>
-					<th class="text-center">닉네임</th>
-					<th class="text-center">회원이름</th>
-					<th class="text-center">등급</th>
-					<th class="text-center">이메일</th>
-					<th class="text-center">등록일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="vo" items="${memberList}">
-					<tr>
-						<td class="c-txt">${vo.memberId}</td>
-						<td class="c-txt">${vo.nickName}</td>
-						<td class="c-txt">${vo.memberName}</td>
-						<td class="c-txt">${vo.memberGrade}</td>
-						<td class="c-txt">${vo.email}</td>
-						<td class="c-txt">${vo.updateDate}</td>
-					</tr>
-				</c:forEach>
-				<c:choose>
-					<c:when test="${not empty list }">
-						<c:forEach var="vo" items="${list}">
-							<tr>
-								<!-- <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out value="${vo.num}"/></td> -->
-								<td class="text-center  col-sm-2  col-md-1  col-lg-1"></td>
-								<td class="text-left    col-sm-6  col-md-6  col-lg-7"><a
-									href="#"></a></td>
-								<td class="text-center  col-sm-2  col-md-2  col-lg-2"></td>
-								<td class="text-center  col-sm-2  col-md-2  col-lg-1"></td>
-								<td class="text-end     col-sm-0  col-md-1  col-lg-1"></td>
-							</tr>
-						</c:forEach>
-					</c:when>
-				</c:choose>
-			</tbody>
-		</table>
-		<div class="d-flex justify-content-center">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						data-page="1">1</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						data-page="2">2</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						data-page="3">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						data-page="4">4</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						data-page="5">5</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-			</nav>
-		</div>
-		<!-- paging : 1. java, 2.javascript -->
-		<div class="d-flex justify-content-center"></div>
-
-
-		<!--// paging --------------------------------------------------------------->
-		<!-- button -->
-		<div class="button-area ">
-			<input type="button" class="btn" value="초기화" id="init"> <input
-				type="button" class="btn" value="수정" id="update"> <input
-				type="button" class="btn" value="탈퇴" id="deleteOne">
-
-		</div>
-		<!-- button ----------------------------------------------------------------->
-		<!-- 관리 폼 -->
-		<div>
-			<form action="#" name="reg_frm">
-				<div class="form-group">
-					<label for="memberId">회원ID</label> <input type="text"
-						name="memberId" id="memberId" placeholder="회원ID를 입력 하세요."
-						maxlength="320">
-				</div>
-				<div class="form-group">
-					<label for="nickName">닉네임</label> <input type="text"
-						name="nickName" id="nickName" placeholder="닉네임을 입력 하세요."
-						maxlength="20">
-				</div>
-				<div class="form-group">
-					<label for="memberName">회원이름</label> <input type="text"
-						name="memberName" id="memberName" placeholder="회원이름을 입력 하세요."
-						maxlength="320">
-				</div>
-				<div class="form-group">
-					<label for="intLevel">등급</label> <select name="memberGrade"
-						id="memberGrade">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
+				<form action="#" name="user_frm">
+					<input type="hidden" name="pageNo" id="pageNo">
+					<!-- 검색구분 -->
+					<select name="searchDiv" id="searchDiv">
+						<option value="">전체</option>
+						<option value="">닉네임</option>
+						<option value="">등급</option>
+						<option value="">이메일</option>
 					</select>
-				</div>
-				<div class="form-group">
-					<label for="recommend">이메일</label> <input type="text" name="email"
-						id="email" placeholder="이메일을 입력 하세요." maxlength="320">
-				</div>
-				<div class="form-group">
-					<label for="updateDate">등록일</label> <input type="text"
-						name="updateDate" id="updateDate" placeholder="등록일을 입력 하세요."
-						maxlength="20">
-				</div>
+					<!-- 검색어 -->
+					<input type="text" value="${search.searchWord}" name="searchWord"
+						id="searchWord" placeholder="검색어를 입력하세요.">
+					<!-- pageSize:10,20,30,50,100,200 -->
+					<select name="pageSize" id="pageSize">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="200">200</option>
+					</select>
+					<input type="button" class="btn" value="조회" value="조회" id="doRetrieve" onclick="window.doRetrieve();">
+				</form>
+			</div>
+			<table id="boardTable"
+				class="table table-sm table-hover table-borderless">
+				<thead class="board-thead">
+					<tr>
+						<th class="text-center">회원ID</th>
+						<th class="text-center">닉네임</th>
+						<th class="text-center">회원이름</th>
+						<th class="text-center">등급</th>
+						<th class="text-center">이메일</th>
+						<th class="text-center">등록일</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="vo" items="${memberList}">
+						<tr>
+							<td class="c-txt">${vo.memberId}</td>
+							<td class="c-txt">${vo.nickName}</td>
+							<td class="c-txt">${vo.memberName}</td>
+							<td class="c-txt">${vo.memberGrade}</td>
+							<td class="c-txt">${vo.email}</td>
+							<td class="c-txt">${vo.updateDate}</td>
+						</tr>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${not empty list }">
+							<c:forEach var="vo" items="${list}">
+								<tr>
+									<!-- <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out value="${vo.num}"/></td> -->
+									<td class="text-center  col-sm-2  col-md-1  col-lg-1"></td>
+									<td class="text-left    col-sm-6  col-md-6  col-lg-7"><a
+										href="#"></a></td>
+									<td class="text-center  col-sm-2  col-md-2  col-lg-2"></td>
+									<td class="text-center  col-sm-2  col-md-2  col-lg-1"></td>
+									<td class="text-end     col-sm-0  col-md-1  col-lg-1"></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</tbody>
+			</table>
+			<div class="d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item">
+						  <a class="page-link" href="#" aria-label="Previous">
+						    <span aria-hidden="true">&laquo;</span>
+						  </a>
+					  </li>
+						<li class="page-item">
+						  <a class="page-link" href="#" data-page="1">1</a>
+					  </li>
+						<li class="page-item">
+						  <a class="page-link" href="#" data-page="2">2</a>
+						</li>
+						<li class="page-item">
+						  <a class="page-link" href="#" data-page="3">3</a>
+						</li>
+						<li class="page-item">
+						  <a class="page-link" href="#" data-page="4">4</a>
+						</li>
+						<li class="page-item">
+						  <a class="page-link" href="#" data-page="5">5</a>
+						</li>
+						<li class="page-item">
+						  <a class="page-link" href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<!-- paging : 1. java, 2.javascript -->
+			<div class="d-flex justify-content-center"></div>
 
 
-			</form>
+			<!--// paging --------------------------------------------------------------->
+			<!-- button -->
+			<div class="button-area ">
+				<input type="button" class="btn" value="초기화" id="init">
+				<input type="button" class="btn" value="수정" id="update">
+				<input type="button" class="btn" value="탈퇴" id="deleteOne">
+
+			</div>
+			<!-- button ----------------------------------------------------------------->
+			<!-- 관리 폼 -->
+			<div>
+				<form action="#" name="reg_frm">
+					<div class="form-group">
+						<label for="memberId">회원ID</label>
+						<input type="text" name="memberId" id="memberId" placeholder="회원ID를 입력 하세요."
+							maxlength="320">
+					</div>
+					<div class="form-group">
+						<label for="nickName">닉네임</label>
+						<input type="text" name="nickName" id="nickName" placeholder="닉네임을 입력 하세요."
+							maxlength="20">
+					</div>
+					<div class="form-group">
+						<label for="memberName">회원이름</label>
+						<input type="text" name="memberName" id="memberName" placeholder="회원이름을 입력 하세요."
+							maxlength="320">
+					</div>
+					<div class="form-group">
+						<label for="intLevel">등급</label>
+					  <select name="memberGrade" id="memberGrade">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="recommend">이메일</label>
+						<input type="text" name="email"
+							id="email" placeholder="이메일을 입력 하세요." maxlength="320">
+					</div>
+					<div class="form-group">
+						<label for="updateDate">등록일</label>
+					  <input type="text" name="updateDate" id="updateDate" placeholder="등록일을 입력 하세요."
+							maxlength="20">
+					</div>
+
+
+				</form>
+			</div>
+
+			<!-- 관리 폼 end --------------------------------------------------------------->
+			<fmt:formatNumber value="${totalCnt}" pattern="#,##0" />
 		</div>
-
-		<!-- 관리 폼 end --------------------------------------------------------------->
-		<fmt:formatNumber value="${totalCnt}" pattern="#,##0" />
 	</div>
-
 	<!-- ---------------------------------------------------------------------- -->
 	<!-- 검색구분 -->
 

@@ -6,7 +6,7 @@ import com.pcwk.ehr.VO.PaymentInfoVO;
 
 public interface PaymentInfoDao {
 	// 결제 정보 입력
-	public int InsertInfo(PaymentInfoVO inVO);
+	public int insertInfo(PaymentInfoVO inVO);
 	
 	// 결제 정보 조회
 	public List<PaymentInfoVO> selectPaymentListByEmail(String buyerEmail);

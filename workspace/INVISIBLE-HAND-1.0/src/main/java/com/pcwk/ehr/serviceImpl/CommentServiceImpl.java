@@ -28,8 +28,8 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public int doUpdate(CommentVO commentVO) throws SQLException {
-		return dao.doUpdate(commentVO);
+	public int doUpdate(int commentNumber, String content) throws SQLException {
+		return dao.doUpdate(commentNumber, content);
 	}
 
 	@Override
