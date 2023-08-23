@@ -112,10 +112,14 @@ public class SolutionController {
 	    ChartVO chartInVO = new ChartVO();
 	    chartInVO.setMaincategory((String)requestData.get("mainCategory"));
 	    chartInVO.setSubcategory((String)requestData.get("subCategory"));
-
+	   
 	    solContentsList.addAll(solutionService.returnScoreContents(chartInVO,totalScore));
 	    solContentsList.addAll(solutionService.returnRadioContents(radioArr));
-	    solContentsList.addAll(solutionService.returnTextContents(textArr));
+	    try {
+	    	solContentsList.addAll(solutionService.returnTextContents(textArr,(String)requestData.get("mainCategory")));
+	    }catch(NullPointerException e){
+	    	LOG.debug("비제조업 이므로 패스");
+	    }
 	    solContentsList.addAll(solutionService.returnCheckContents(checkArr));
 	    
 	    // 이후 데이터 처리 작업 수행

@@ -477,7 +477,19 @@ $(document).ready(function() {
 		  }
 		});
 	  
-	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수	    
+	    let isRadioValid = true; // 라디오 버튼 값 유효성 여부 기록하는 변수	 
+	    
+	    $("input[type='radio']").each(function() {
+	        let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
+	        let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
+	        if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
+	          alert("모두 입력해주세요.");
+	          isRadioValid = false;
+	          return false; // each 함수 탈출
+	        }
+	      });
+	    
+	    if (!isRadioValid) return; // 함수 실행 중지
 	    
 	    // input에 text 값 누락시 예외처리
 	    if($("input[type='text']").filter(function(){ return this.value === ""; }).length > 0) {

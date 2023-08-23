@@ -10,18 +10,7 @@
         String totalScore = request.getParameter("totalScore");
         String selectedMainCategory = request.getParameter("selectedMainCategory");
         String selectedSubCategory = request.getParameter("selectedSubCategory");
-        
-        out.println("<br>");
-        out.println("<br>");
-        out.println("<br>");
-        out.println("Radio Array: " + radioArrJson + "<br>");
-        out.println("Text Array: " + textArrJson + "<br>");
-        out.println("Check Array: " + checkArrJson+ "<br>");
-        out.println("Total Score: " + totalScore + "<br>");
-        out.println("Selected Main Category: " + selectedMainCategory + "<br>");
-        out.println("Selected Sub Category: " + selectedSubCategory + "<br>");
-
-    %>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,11 +59,10 @@
 		    </p>
 
 		  </div>
-		  <div class="solution-desc-list">
-		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
+		  <div id = "products" class="solution-desc-list">
+		    <h3 id="product"><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
 		     	귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>입니다.</h3>
-		   	<p id ="sol3_1"> <span>또한 귀사는</span><p id ="sol3_3">
-		   	 undefined
+		   	<p id ="sol3_1"><p id ="sol3_3">
 		    </p>  
 		  </div>
 		  <div>
@@ -174,6 +162,10 @@ $(document).ready(function() {
         $('#sol2_2').text(grade);
     }
 	function updateSolUI3(data) {
+		if (selectedMainCategory == "비제조업"){
+			$('#product').text("");
+			return;
+		}
         var grade = "";
         switch (data[2][1]) {
             case 1:
@@ -192,67 +184,68 @@ $(document).ready(function() {
 	}
 	function updateSolUI4(data) {
 	    var mytext = "";
-	    if (data.length <= 4) {
+	    if (data.length <= 2) {
 	        $('#sol5_2').html(""); // Clear the content
 	    } else {
 	        $('#sol5_2').html("<span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span> 아래는 귀사의 애로요인에 대한 <span>솔루션</span>입니다.");
-	        for (var i = 4; i < data.length; i++) {
-	        	var grade = "";
-	            switch (data[i][1]) {
-		            case 1:
-		                grade = "<인력확보난>";
-		                break;
-		            case 2:
-		                grade = "<인건비 상승>";
-		                break;
-		            case 3:
-		            	grade = "물류비상승 및 운송난";
-		                break;
-		            case 4:
-		                grade = "기술경쟁력 약화";
-		                break;
-		            case 5:
-		                grade = "제품(판매)단가 하락";
-		                break;
-		            case 6:
-		            	grade = "고금리";
-		                break;
-		            case 7:
-		                grade = "설비노후 및 부족";
-		                break;
-		            case 8:
-		                grade = "계절적 비수기";
-		                break;
-		            case 9:
-		            	grade = "환율변동";
-		                break;
-		            case 10:
-		                grade = "내수부진";
-		                break;
-		            case 11:
-		                grade = "수출부진";
-		                break;
-		            case 12:
-		            	grade = "판매대금 회수 지연";
-		                break;
-		            case 13:
-		                grade = "자금조달 곤란";
-		                break;
-		            case 14:
-		                grade = "업체간 과다경쟁";
-		                break;
-		            case 15:
-		            	grade = "원자재 가격 상승";
-		                break;
-		            case 16:
-		                grade = "원자재(원재료) 구득난";
-		                break;
-		            case 17:
-		                grade = "모기업 불공정거래";
-		                break;
+	        for (var i = 0; i < data.length; i++) {
+	        	if(data[i][0] == 3){
+		        	switch (data[i][1]) {
+			            case 1:
+			                grade = "<인력확보난>";
+			                break;
+			            case 2:
+			                grade = "<인건비 상승>";
+			                break;
+			            case 3:
+			            	grade = "물류비상승 및 운송난";
+			                break;
+			            case 4:
+			                grade = "기술경쟁력 약화";
+			                break;
+			            case 5:
+			                grade = "제품(판매)단가 하락";
+			                break;
+			            case 6:
+			            	grade = "고금리";
+			                break;
+			            case 7:
+			                grade = "설비노후 및 부족";
+			                break;
+			            case 8:
+			                grade = "계절적 비수기";
+			                break;
+			            case 9:
+			            	grade = "환율변동";
+			                break;
+			            case 10:
+			                grade = "내수부진";
+			                break;
+			            case 11:
+			                grade = "수출부진";
+			                break;
+			            case 12:
+			            	grade = "판매대금 회수 지연";
+			                break;
+			            case 13:
+			                grade = "자금조달 곤란";
+			                break;
+			            case 14:
+			                grade = "업체간 과다경쟁";
+			                break;
+			            case 15:
+			            	grade = "원자재 가격 상승";
+			                break;
+			            case 16:
+			                grade = "원자재(원재료) 구득난";
+			                break;
+			            case 17:
+			                grade = "모기업 불공정거래";
+			                break;
+		        	}
+		        	mytext += "<br>" + grade + "</br>";
+		            mytext += "<br>" + data[i][2] + "</br>";
 	        	}
-	            mytext += "<br>" + grade + "</br>";
-	            mytext += "<br>" + data[i][2] + "</br>";
 	        }
 	        $('#sol5_1').html(mytext); // Use .html() to interpret HTML tags
 	    }
@@ -277,7 +270,7 @@ $(document).ready(function() {
 	            mainCategory:selectedMainCategory,
 	            subCategory:selectedSubCategory
 	        }),
-	        success: function(data) {	
+	        success: function(data) {
 	        	console.log(data);
 	        	updateSolUI1(data);
 	        	updateSolUI2(data);
