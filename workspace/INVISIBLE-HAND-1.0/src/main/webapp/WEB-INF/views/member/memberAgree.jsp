@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="../r"UTesources/css/login.css">
 <style>
 
 /* -------이용약관-------- */
-
+/* 
 body{
 background-color: #F3F3F3;
 }
@@ -44,7 +44,7 @@ background-color: #F3F3F3;
   color: #ffffff;
   padding: 10px 20px;
   border-radius: 20px;
-}
+} */
 </style>
 <title>이용약관동의 자세히보기</title>
 </head>
