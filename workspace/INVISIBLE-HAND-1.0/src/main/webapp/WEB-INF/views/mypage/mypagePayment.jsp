@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/mypage2.css">
+<link rel="stylesheet" href="../resources/css/post.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <title>마이페이지 입니다</title>
 <style>
@@ -29,34 +29,41 @@
     <input type="hidden" id= "uemail" value="${member.email}">
 	<div class="h60px"></div>
 	<div class="container-1400 min-100vh con-login">
-	 <table>
-	     <thead>
-	       <tr>
-                <td>No</td>
-                <td>결제 ID</td>
-                <td>품목</td>
-                <td>금액</td>
-                <td>결제등록 이메일</td>
-                <td>구매자 이름</td>
-                <td>구매자 전화번호</td> 
-           </tr>
-	     </thead>
-     
-		 <tbody>
-			 <c:forEach items="${list}" var="list" varStatus="status">
-				 <tr>
-					  <td style="color: black;">${status.count}</td>
-					  <td style="color: black;">${list.merchantUid}</td>
-					  <td style="color: black;">${list.name}</td>
-					  <td style="color: black;">${list.amount}</td>
-					  <td style="color: black;">${list.buyerEmail}</td>
-					  <td style="color: black;">${list.buyerName}</td>
-					  <td style="color: black;">${list.buyerTel}</td> 
-				 </tr>
-			 </c:forEach>
-		</tbody>
-		 </table>
+    <div class="wrap-1000 ">
+    
+      <div class="category-selecter">
+        <a class="selecter-list selecter-list10" >${member.memberId}님의 결제정보입니다</a>
+      </div>
+			 <table id="postTable" class="table table-sm table-hover table-borderless">
+		
+			     <thead class="post-thead">
+			       <tr>
+		                <th class="text-c">No</th>
+		                <th class="text-c">결제 ID</th>
+		                <th class="text-c">품목</th>
+		                <th class="text-c">금액</th>
+		                <th class="text-c">결제등록 이메일</th>
+		                <th class="text-c">구매자 이름</th>
+		                <th class="text-c">구매자 전화번호</th> 
+		           </tr>
+			     </thead>
+		     
+				 <tbody>
+					 <c:forEach items="${list}" var="list" varStatus="status">
+						 <tr>
+							  <td class="text-c">${status.count}</td>
+							  <td class="text-c">${list.merchantUid}</td>
+							  <td class="text-c">${list.name}</td>
+							  <td class="text-c">${list.amount}</td>
+							  <td class="text-c">${list.buyerEmail}</td>
+							  <td class="text-c">${list.buyerName}</td>
+							  <td class="text-c">${list.buyerTel}</td> 
+						 </tr>
+					 </c:forEach>
+				</tbody>
+				 </table>
     </div>
+   </div>
 	<!-- **---container End---** -->
 </body>
 <script>
