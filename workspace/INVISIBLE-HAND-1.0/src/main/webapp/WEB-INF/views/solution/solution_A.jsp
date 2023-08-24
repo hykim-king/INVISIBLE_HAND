@@ -258,7 +258,7 @@ $(document).ready(function() {
 			                grade = "  모기업 불공정거래";
 			                break;
 		        	}
-		        	mytext += "<h4 text-align: left><i class='fas fa-circle fa-xs' style='color:#EE8D10'></i>" + grade+ "</h4>" ;
+		        	mytext += "<div class='yellow-circle'><i class='fas fa-circle fa-xs' style='color:#EE8D10'></i>" + grade+ "</div>" ;
 		            mytext += "<br>" + data[i][2] + "</br>";
 	        	}
 	        }
