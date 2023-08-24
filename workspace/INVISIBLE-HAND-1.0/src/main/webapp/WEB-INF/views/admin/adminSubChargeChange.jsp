@@ -215,8 +215,8 @@
           <c:when test="${not empty list }">
             <c:forEach var="vo" items="${list}">
               <tr>
-                <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out
-                    value="${vo.num}" /></td>
+<%--                 <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out
+                    value="${vo.num}" /></td> --%>
                 <td class="text-center  col-sm-2  col-md-1  col-lg-1"></td>
                 <td class="text-left    col-sm-6  col-md-6  col-lg-7"><a
                   href="#"></a></td>
@@ -336,7 +336,7 @@
             async : true,
             dataType : "json",
             data : {
-              memberGradeName : memberGradeName
+            	memberGradeName : memberGradeName
             },
             success : function(data) {
               $("#memberGradeName").val(data.memberGradeName);

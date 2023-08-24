@@ -4,17 +4,30 @@
 
 	<!-- 전체 회원등급정보 취득 -->
 	<select id="subscriptionAll" resultType="AdminVO">
-		SELECT * FROM grade_information
+		SELECT * FROM
+		grade_information
 	</select>
-	
-	 <update id="update" parameterType="AdminVO">
-       UPDATE grade_information          
-       SET 
-           subscriptionPrice    =  #{subscriptionPrice} 
-       WHERE                     
-           memberGradeName = #{memberGradeName}     
 
-</update>
+	<update id="update" parameterType="AdminVO">
+		UPDATE grade_information
+		SET
+		subscriptionPrice = #{subscriptionPrice}
+		WHERE
+		memberGradeName =
+		#{memberGradeName}
 
+	</update>
+
+	<select id="get" parameterType="AdminVO" resultType="AdminVO">
+		SELECT
+		memberGradeName
+		, memberGrade
+		, subscriptionPrice
+
+		FROM
+		grade_information
+		WHERE memberGradeName = #{memberGradeName}
+
+	</select>
 
 </mapper>
