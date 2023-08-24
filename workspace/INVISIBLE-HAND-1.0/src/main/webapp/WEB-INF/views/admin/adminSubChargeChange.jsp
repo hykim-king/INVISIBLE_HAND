@@ -364,6 +364,7 @@
           async : true,
           dataType : "json",
           data : {
+        	  "memberGradeName" : $("#memberGradeName").val(),
             "subscriptionPrice" : $("#subscriptionPrice").val()
           },
           success : function(data) {
