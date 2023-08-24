@@ -421,8 +421,8 @@ $(document).ready(function() {
         textStyle: { position: 'top', fontSize: 13, color: '#fff' },
       },
       series: {
-          1: {lineDashStyle: [4, 4]},
-          2: {lineDashStyle: [4, 4]}
+          1: {lineDashStyle: [4, 4], color: 'red'},
+          2: {lineDashStyle: [4, 4], color: 'yellow'}
         }
     };
 
