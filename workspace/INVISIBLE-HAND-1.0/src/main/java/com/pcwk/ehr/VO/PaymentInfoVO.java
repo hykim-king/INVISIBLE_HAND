@@ -13,6 +13,7 @@ public class PaymentInfoVO {
 	private String buyerEmail; // 소비자 이메일
 	private String buyerName; // 소비자 이름
 	private String buyerTel; // 소비자 전화번호
+	private String buyerDate; // 소비자 전화번호
 	
 	public PaymentInfoVO() {}
 

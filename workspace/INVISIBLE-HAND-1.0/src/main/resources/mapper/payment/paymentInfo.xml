@@ -48,9 +48,9 @@
       , merchant_uid
       , name
       , amount
-      , buyer_email
       , buyer_name
       , buyer_tel
+      , buyer_date
 		FROM payment_information
 		WHERE merchant_uid = #{merchantUid}
 	</select>

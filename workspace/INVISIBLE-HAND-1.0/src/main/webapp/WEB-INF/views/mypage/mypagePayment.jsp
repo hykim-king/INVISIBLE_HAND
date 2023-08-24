@@ -40,11 +40,11 @@
 			       <tr>
 		                <th class="text-c">No</th>
 		                <th class="text-c">결제 ID</th>
+		                <th class="text-c">이름</th>
 		                <th class="text-c">품목</th>
 		                <th class="text-c">금액</th>
-		                <th class="text-c">결제등록 이메일</th>
-		                <th class="text-c">구매자 이름</th>
-		                <th class="text-c">구매자 전화번호</th> 
+		                <th class="text-c">전화번호</th> 
+		                <th class="text-c">구매시간</th>
 		           </tr>
 			     </thead>
 		     
@@ -53,11 +53,12 @@
 						 <tr>
 							  <td class="text-c">${status.count}</td>
 							  <td class="text-c">${list.merchantUid}</td>
+							  <td class="text-c">${list.buyerName}</td>
 							  <td class="text-c">${list.name}</td>
 							  <td class="text-c">${list.amount}</td>
-							  <td class="text-c">${list.buyerEmail}</td>
-							  <td class="text-c">${list.buyerName}</td>
 							  <td class="text-c">${list.buyerTel}</td> 
+							  <td class="text-c">${list.buyerDate}</td>
+							  
 						 </tr>
 					 </c:forEach>
 				</tbody>
