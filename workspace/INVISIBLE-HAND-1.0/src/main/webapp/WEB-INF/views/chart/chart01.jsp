@@ -35,8 +35,26 @@
 		  let year = date.getFullYear();
 		  let month = (date.getMonth() + 1).toString().padStart(2, '0');
 		  return year + '.' + month;
-		}
-	 	 	  
+	 }
+	 function findMinMaxValues(chartdata) {
+	    	let minNumber = Infinity;
+	    	let maxNumber = -Infinity;
+
+	    	for (let i = 1; i < chartdata.length; i++) {
+	    	  for (let j = 1; j < chartdata[i].length; j++) {
+	    	    const value = chartdata[i][j];
+	    	    if (typeof value === 'number') {
+	    	      if (value < minNumber) {
+	    	        minNumber = value;
+	    	      }
+	    	      if (value > maxNumber) {
+	    	        maxNumber = value;
+	    	      }
+	    	    }
+	    	  }
+	    	}
+	    return [minNumber, maxNumber]
+	 } 	  
 	 function submitbutton() {
 	         $("#submitButton").click(function () {
 	             // 선택된 값 가져오기
@@ -47,7 +65,7 @@
 	             loadChartData(selectedMainCategory, selectedSubCategory);
 	         });
 	     }
-	     
+	 
     function loadChartData(selectedMainCategory, selectedSubCategory) {
 
         $.ajax({
@@ -60,6 +78,7 @@
             dataType: 'json',
             success: function(data) {                                                                         
                 let chartData = [];
+                let mixmaxArr = [];
                 chartData.push(["Year","경기전반","고용수준","내수판매","수출","영업이익","자금사정"]);
                 
                 if (selectedMainCategory === '제조업') {
@@ -88,8 +107,8 @@
                   chartData.push(row);
                 }
                 
-                
-                drawChart(chartData);
+                mixmaxArr = findMinMaxValues(chartData)
+                drawChart(chartData, mixmaxArr);
                                 
     
             },  //success
@@ -102,7 +121,7 @@
   
 
     //차트 그리기
-    function drawChart(data) {
+    function drawChart(data, mixmaxArr) {
         const originalData1 = new google.visualization.arrayToDataTable(data);
 
         let chartData1 = originalData1.clone();
@@ -137,8 +156,8 @@
               //title: 'title',
               textStyle: { color: '#fff' },
               viewWindow:{
-                  min: 0,
-                  max: 160
+                  min: mixmaxArr[0]-10,
+                  max: mixmaxArr[1]+10
                 },
               format: '###',
           },

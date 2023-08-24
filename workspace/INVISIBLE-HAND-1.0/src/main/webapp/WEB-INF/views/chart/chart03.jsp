@@ -34,7 +34,26 @@ $(document).ready(function () {
 	      let month = (date.getMonth() + 1).toString().padStart(2, '0');
 	      return year + '.' + month;
 	    }
-	   	     
+	  
+	    function findMinMaxValues(chartdata) {
+	    	let minNumber = Infinity;
+	    	let maxNumber = -Infinity;
+
+	    	for (let i = 1; i < chartdata.length; i++) {
+	    	  for (let j = 1; j < chartdata[i].length; j++) {
+	    	    const value = chartdata[i][j];
+	    	    if (typeof value === 'number') {
+	    	      if (value < minNumber) {
+	    	        minNumber = value;
+	    	      }
+	    	      if (value > maxNumber) {
+	    	        maxNumber = value;
+	    	      }
+	    	    }
+	    	  }
+	    	}
+	    	return [minNumber, maxNumber]
+	    }    
 
 	      
 	      function submitbutton3() {
@@ -62,6 +81,7 @@ $(document).ready(function () {
 	              success: function(data) {            
 	                  //console.log("데이터를 가져옴");
 	                  //console.log(data);
+	                  let minmaxArr = [];
 	                  let chartData3 = [];
 	                  chartData3.push(["Year","총자본순이익률",
 	                    "총자본영업이익률","경영자본영업이익률",
@@ -81,7 +101,8 @@ $(document).ready(function () {
 	                    }                                 
 	                  
 	                  //console.log(chartData3);
-	                  drawChart(chartData3);
+	                  minmaxArr = findMinMaxValues(chartData3);
+	                  drawChart(chartData3, minmaxArr);
 	                                  
 	      
 	              },  //success
@@ -94,7 +115,7 @@ $(document).ready(function () {
 	      } //loadChartData03
 	  
 	      
-	      function drawChart(data) {
+	      function drawChart(data, minmaxArr) {
 	          const originalData3 = new google.visualization.arrayToDataTable(data);
 
 	          let chartData3 = originalData3.clone();
@@ -130,8 +151,8 @@ $(document).ready(function () {
 	                
 	                textStyle: { color: '#fff' },
 	                viewWindow:{
-	                    min: -20,
-	                    max: 30
+	                    min: minmaxArr[0]-5,
+	                    max: minmaxArr[1]+5
 	                  },
 	                format: '##',
 	                baselineColor: '#fff',

@@ -46,7 +46,7 @@
 		<div class="solution-desc">
 		  <div class="solution-desc-list">
 		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    	귀사의 SBHI지수는 업계 평균대비 <span id="sol1_2">undefined</span>입니다.</h3>
+		    	귀사의 SBHI지수는 업계 평균대비 <span id="sol1_2">undefined</span>등급 입니다.</h3>
 		    <p id ="sol1_1">
 		   	undefined
 		    </p>
@@ -61,7 +61,7 @@
 		  </div>
 		  <div id = "products" class="solution-desc-list">
 		    <h3 id="product"><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		     	귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>입니다.</h3>
+		     	귀사의 생산설비 가동률은 전월대비 <span id="sol3_2">undefined</span>했습니다.</h3>
 		   	<p id ="sol3_1"><p id ="sol3_3">
 		    </p>  
 		  </div>
@@ -98,22 +98,22 @@ $(document).ready(function() {
         var grade = "";
         switch (data[0][1]) {
             case 1:
-                grade = "최상위등급";
+                grade = "최정상 ";
                 break;
             case 2:
-                grade = "상위등급";
+                grade = "최우수 ";
                 break;
             case 3:
-                grade = "우수등급";
+                grade = "우수 ";
                 break;
             case 4:
-                grade = "양호등급";
+                grade = "양호 ";
                 break;
             case 5:
-                grade = "주의등급";
+                grade = "주의 ";
                 break;
             case 6:
-                grade = "위험등급";
+                grade = "위험 ";
                 break;
         }
         $('#sol1_1').text(data[0][2]);
@@ -170,7 +170,7 @@ $(document).ready(function() {
                 break;
             case 12:
                 grade = "모든 지표";
-                comments ="가  부정적 입니다!"
+                comments ="가  부정적 입니다."
                 break;
         }
         $('#sol2_1').text(data[1][2]);
@@ -202,63 +202,63 @@ $(document).ready(function() {
 	    if (data.length <= 2) {
 	        $('#sol5_2').html(""); // Clear the content
 	    } else {
-	        $('#sol5_2').html("<span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span> 아래는 귀사의 애로요인에 대한 <span>솔루션</span>입니다.");
+	        $('#sol5_2').html("<span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span> 아래는 귀사 애로요인에 대한 <span>솔루션</span>입니다.");
 	        for (var i = 0; i < data.length; i++) {
 	        	if(data[i][0] == 3){
 		        	switch (data[i][1]) {
 			            case 1:
-			                grade = "<인력확보난>";
+			                grade = "  인력확보난";
 			                break;
 			            case 2:
-			                grade = "<인건비 상승>";
+			                grade = "  인건비 상승";
 			                break;
 			            case 3:
-			            	grade = "물류비상승 및 운송난";
+			            	grade = "  물류비상승 및 운송난";
 			                break;
 			            case 4:
-			                grade = "기술경쟁력 약화";
+			                grade = "  기술경쟁력 약화";
 			                break;
 			            case 5:
-			                grade = "제품(판매)단가 하락";
+			                grade = "  제품(판매)단가 하락";
 			                break;
 			            case 6:
-			            	grade = "고금리";
+			            	grade = "  고금리";
 			                break;
 			            case 7:
-			                grade = "설비노후 및 부족";
+			                grade = "  설비노후 및 부족";
 			                break;
 			            case 8:
-			                grade = "계절적 비수기";
+			                grade = "  계절적 비수기";
 			                break;
 			            case 9:
-			            	grade = "환율변동";
+			            	grade = "  환율변동";
 			                break;
 			            case 10:
-			                grade = "내수부진";
+			                grade = "  내수부진";
 			                break;
 			            case 11:
-			                grade = "수출부진";
+			                grade = "  수출부진";
 			                break;
 			            case 12:
-			            	grade = "판매대금 회수 지연";
+			            	grade = "  판매대금 회수 지연";
 			                break;
 			            case 13:
-			                grade = "자금조달 곤란";
+			                grade = "  자금조달 곤란";
 			                break;
 			            case 14:
-			                grade = "업체간 과다경쟁";
+			                grade = "  업체간 과다경쟁";
 			                break;
 			            case 15:
-			            	grade = "원자재 가격 상승";
+			            	grade = "  원자재 가격 상승";
 			                break;
 			            case 16:
-			                grade = "원자재(원재료) 구득난";
+			                grade = "  원자재(원재료) 구득난";
 			                break;
 			            case 17:
-			                grade = "모기업 불공정거래";
+			                grade = "  모기업 불공정거래";
 			                break;
 		        	}
-		        	mytext += "<br>" + grade + "</br>";
+		        	mytext += "<h4 text-align: left><i class='fas fa-circle fa-xs' style='color:#EE8D10'></i>" + grade+ "</h4>" ;
 		            mytext += "<br>" + data[i][2] + "</br>";
 	        	}
 	        }
@@ -305,9 +305,28 @@ $(document).ready(function() {
        return year + '.' + month;
      }
    
+    function findMinMaxValues(chartdata) {
+    	let minNumber = Infinity;
+    	let maxNumber = -Infinity;
+
+    	for (let i = 1; i < chartdata.length; i++) {
+    	  for (let j = 1; j < chartdata[i].length; j++) {
+    	    const value = chartdata[i][j];
+    	    if (typeof value === 'number') {
+    	      if (value < minNumber) {
+    	        minNumber = value;
+    	      }
+    	      if (value > maxNumber) {
+    	        maxNumber = value;
+    	      }
+    	    }
+    	  }
+    	}
+    	return [minNumber, maxNumber]
+    }
+    
    function loadChartData(selectedMainCategory, selectedSubCategory,totalScore) {
-     
-     
+
      $.ajax({
               url: '/ehr/chart/soultionChart.do',
               type: 'GET',
@@ -318,9 +337,11 @@ $(document).ready(function() {
               dataType: 'json',
               success: function(data) {
             	  let chartData = [];
-            	  chartData.push(["Year",selectedSubCategory+"의 SBHI지수","AI가 예측한 다음달 업계 SBHI지수","AI가 예측한 나의 기업 SBHI"]);
+            	  let row = [];
+            	  let mixmaxArr = [];
+            	  chartData.push(["Year",selectedSubCategory+" SBHI지수","AI가 예측한 다음달 업계평균 SBHI지수","AI가 예측한 나의 기업 SBHI지수"]);
                   for (let i = 0; i < data.length; i++) {
-                      let row = [];
+                	  row = [];
                       let date = new Date(data[i][0]);
                       let formattedDate = formatDate(date); // 날짜를 "YYYY.MM" 형식으로 변환
                       row.push(formattedDate);
@@ -334,22 +355,20 @@ $(document).ready(function() {
                       }    
                       
                       // 'two'값 처리
-					            if (formattedDate === '2023.07') {
-					                row.push(value);
-					            } else if (formattedDate === '2023.08') {
-					            	  row.push(value);
-					            } else {
-					                row.push(null);
-					            }
+					  if (formattedDate === '2023.07') {
+					      row.push(value);
+					  } else if (formattedDate === '2023.08') {
+					      row.push(value);
+					  } else {
+					  	  row.push(null);
+					  }
 					            
-					            // 'three' 열의 나머지 기간 처리
+					  // 'three' 열의 나머지 기간 처리
                       if (formattedDate === '2023.07') {
                           row.push(value);
                       } else if (formattedDate === '2023.08') {
                     	  totalScore = (parseFloat(totalScore) + parseFloat(value)) * 0.5;
                     	  row.push(totalScore);
-
-
                       } else {
                           row.push(null);
                       }
@@ -357,7 +376,7 @@ $(document).ready(function() {
                       chartData.push(row);
                   }
                   console.log(chartData);
-                  drawChart(chartData);
+                  drawChart(chartData, mixmaxArr);
 
               },
               error: function(xhr, status, error) {
@@ -373,7 +392,7 @@ $(document).ready(function() {
        loadChartData(selectedMainCategory, selectedSubCategory, totalScore); 
        });   
   // 차트 생성
-  function drawChart(data) {
+  function drawChart(data, mixmaxArr) {
    
 
     let chartData = new google.visualization.arrayToDataTable(data);
@@ -393,8 +412,8 @@ $(document).ready(function() {
         //title: 
         textStyle: { color: '#fff' },
         viewWindow: {
-          min: 0,
-          max: 200
+          min: mixmaxArr[0]-5,
+          max: mixmaxArr[1]+5
         },
         format: '###'
       },     

@@ -327,14 +327,15 @@ $(document).ready(function() {
       let radioVals = $(this).parents(".radio").find("label").eq(0).text().trim();
       let isChecked = $("input[name='" + $(this).attr("name") + "']:checked").length > 0;
       if(!isChecked && !radioArr.includes(radioVals + " 입력 안함")) {
-        alert("모두 입력해주세요.");
+        alert("월간 경기동향 실적을 모두 입력해주세요.");
+        window.scrollTo({ top: 70, behavior: "smooth" });
         isRadioValid = false;
         return false; // each 함수 탈출
       }
     });
 
     if (!isRadioValid) return; // 함수 실행 중지
-
+    
     if ($("input[type='checkbox']:checked").length === 0) {
 		  alert("기업경영상 애로요인을 1가지 이상 입력해주세요.");
 		  return;
@@ -362,7 +363,7 @@ $(document).ready(function() {
     sbhiScore = (sbhiScore / radioArr.length) * 50;
       
 
-    var errorScore = checkArr.length * -0.3 ;
+    var errorScore = checkArr.length * -0.8 ;
     totalScore = sbhiScore  + errorScore;
 
     

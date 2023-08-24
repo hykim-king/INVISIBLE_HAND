@@ -29,6 +29,25 @@ $(document).ready(function () {
        let mainCategory = "제조업";
        let subCategory  = "-";
        
+	   function findMinMaxValues(chartdata) {
+	    	let minNumber = Infinity;
+	    	let maxNumber = -Infinity;
+
+	    	for (let i = 1; i < chartdata.length; i++) {
+	    	  for (let j = 1; j < chartdata[i].length; j++) {
+	    	    const value = chartdata[i][j];
+	    	    if (typeof value === 'number') {
+	    	      if (value < minNumber) {
+	    	        minNumber = value;
+	    	      }
+	    	      if (value > maxNumber) {
+	    	        maxNumber = value;
+	    	      }
+	    	    }
+	    	  }
+	    	}
+	    	return [minNumber, maxNumber]
+	    }  
        
        function submitbutton4() {
               $("#submitButton4").click(function () {
@@ -55,6 +74,7 @@ $(document).ready(function () {
                success: function(data) {            
                    //console.log("데이터를 가져옴");
                    //console.log(data);
+                   let minmaxArr = [];
                    let chartData4 = [];
                    chartData4.push(["Year","총자산증가율",
                      "유형자산증가율","유동자산증가율",
@@ -75,7 +95,8 @@ $(document).ready(function () {
                      }                                 
                    
                    //console.log(chartData4);
-                   drawChart(chartData4);
+                   minmaxArr = findMinMaxValues(chartData4);
+                   drawChart(chartData4, minmaxArr);
                                    
        
                },  //success
@@ -95,7 +116,7 @@ $(document).ready(function () {
            submitbutton4(); // submitbutton 함수를 호출하여 이벤트 등록
        });
        
-       function drawChart(data) {
+       function drawChart(data, minmaxArr) {
            const originalData4 = new google.visualization.arrayToDataTable(data);
 
            let chartData4 = originalData4.clone();
@@ -130,8 +151,8 @@ $(document).ready(function () {
                  //title: 'title',
                  textStyle: { color: '#fff' },
                  viewWindow:{
-                     min: -5,
-                     max: 40
+                     min: minmaxArr[0]-5,
+                     max: minmaxArr[1]+5
                    },
                  format: '##',
                  baselineColor: '#fff',

@@ -34,7 +34,26 @@ $(document).ready(function () {
 	      let month = (date.getMonth() + 1).toString().padStart(2, '0');
 	      return year + '.' + month;
 	    }
-	     
+	    function findMinMaxValues(chartdata) {
+	    	let minNumber = Infinity;
+	    	let maxNumber = -Infinity;
+
+	    	for (let i = 1; i < chartdata.length; i++) {
+	    	  for (let j = 1; j < chartdata[i].length; j++) {
+	    	    const value = chartdata[i][j];
+	    	    if (typeof value === 'number') {
+	    	      if (value < minNumber) {
+	    	        minNumber = value;
+	    	      }
+	    	      if (value > maxNumber) {
+	    	        maxNumber = value;
+	    	      }
+	    	    }
+	    	  }
+	    	}
+	    	return [minNumber, maxNumber]
+	    }
+	    
 	    function submitbutton2() {
 	           $("#submitButton2").click(function () {
 	               // 선택된 값 가져오기
@@ -58,8 +77,7 @@ $(document).ready(function () {
 	            }, 
 	            dataType: 'json',
 	            success: function(data) {            
-	               
-	               
+					let minmaxArr = [];
 	                let chartData2 = [];
 	                chartData2.push(["Year","5억원초과~20억원이하",
 	                	"20억원초과~50억원이하","50억원초과~80억원이하",
@@ -81,8 +99,8 @@ $(document).ready(function () {
 	                  chartData2.push(row);
 	                  }               	                
 	                
-	                
-	                drawChart(chartData2);
+	                minmaxArr = findMinMaxValues(chartData2);
+	                drawChart(chartData2,minmaxArr);
 	                                
 	            },  //success
 	            error: function(xhr, status, error) {
@@ -96,7 +114,7 @@ $(document).ready(function () {
 	
 
 	    
-	    function drawChart(data) {
+	    function drawChart(data, minmaxArr) {
 	        const originalData2 = new google.visualization.arrayToDataTable(data);
 
 	        let chartData2 = originalData2.clone();
@@ -131,7 +149,7 @@ $(document).ready(function () {
 	              textStyle: { color: '#fff' },
 	              viewWindow:{
 	                  min: 0,
-	                  max: 60
+	                  max: minmaxArr[1]+10
 	                },
 	              format: '##',
 	          },

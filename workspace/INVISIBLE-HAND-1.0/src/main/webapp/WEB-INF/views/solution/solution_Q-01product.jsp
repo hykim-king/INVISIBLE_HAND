@@ -510,6 +510,11 @@ $(document).ready(function() {
 			  return;
 			}
 	    
+	    if ($("input[type='checkbox']:checked").length === 0) {
+			  alert("기업경영상 애로요인을 1가지 이상 입력해주세요.");
+			  return;
+			}
+	    
 	    // 배열에 입력
 	    $("input[type='text']").each(function() {
 			  textArr.push($(this).val());
@@ -551,7 +556,7 @@ $(document).ready(function() {
 	    	operatingScore = operatingScore + myscore ; 
 	    }
     
-	    var errorScore = checkArr.length * -0.3 ;
+	    var errorScore = checkArr.length * -0.8 ;
 	    totalScore = sbhiScore + operatingScore + errorScore;
 	
         $("#radioArr").val(JSON.stringify(radioScoreArr));
