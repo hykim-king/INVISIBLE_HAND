@@ -7,7 +7,7 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <!-- 포트원 결제 -->
-<script type="text/javascript"
+<script type="text/javascript"  
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <!-- jQuery -->
 <script src="../resources/js/jquery-3.7.0.js"></script>
@@ -84,7 +84,7 @@ function paymentReady() {
         	    console.log(data);
           }
 	      });
-
+				location.reload();
 				document.location.href = document.referrer;
 			} else {
 				let msg = data.error_msg;

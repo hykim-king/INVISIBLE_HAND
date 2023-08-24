@@ -3,13 +3,14 @@ package com.pcwk.ehr.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +21,11 @@ import com.pcwk.ehr.VO.CommentVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.PaymentInfoVO;
 import com.pcwk.ehr.VO.PostVO;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.service.MailSendService;
 import com.pcwk.ehr.service.MemberService;
 import com.pcwk.ehr.service.MyPageService;
 import com.pcwk.ehr.service.PaymentInfoService;
-import com.pcwk.ehr.service.PostService;
-import com.pcwk.ehr.cmn.MessageVO;
 
 @Controller
 @RequestMapping(value = "mypage")	//WEB_INF아래 폴더이름을 적는곳.
@@ -127,7 +127,7 @@ public class MypageController {
 	        
 	        if (emailcheck == 0) {
 	                message.setMsgId("10");
-	                message.setMsgContents("사용 가능한 이메일 입니다.");
+	                message.setMsgContents("사용 가능한 이메일 입니다");
 	        } else {
 	                message.setMsgId("20");
 	                message.setMsgContents("이미 사용중인 이메일 입니다");
@@ -215,21 +215,12 @@ public class MypageController {
 	
 	@RequestMapping(value = "/mypagePayment.do",method = RequestMethod.GET)
 	public void mypagePayment(Model model,MemberVO member,
-		@RequestParam(value = "buyerEmail",required = false, defaultValue = "") String buyerEmail) throws SQLException{
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│ mypagePayment()       	   │");
-		LOG.debug("└───────────────────────┘");
+		@RequestParam(value = "buyerEmail", required = false, defaultValue = "") String buyerEmail) throws SQLException{
 		
-		LOG.debug("┌───────────────────────┐");
-		LOG.debug("│ buyerEmail()       	   ::"+ buyerEmail);
-		LOG.debug("└───────────────────────┘");
+		List<PaymentInfoVO> paymentList = payService.getPaymentListByEmail(buyerEmail); // 객체에 정보 담기
+		
+		model.addAttribute("list", paymentList);
 
-		
-		List<PaymentInfoVO> list = null;
-		
-		list = myPageService.paylist(buyerEmail);
-		
-		model.addAttribute("list",list);
 	}
 	
 	@RequestMapping(value = "/mypost.do",method = RequestMethod.GET)

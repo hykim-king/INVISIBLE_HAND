@@ -327,7 +327,7 @@ $("#update").on("click",function(){
         
         if($("#email").val() != $("#uemial").val()){
             if($("#eamilsuccess") != "success"){
-                alert("비밀번호 중복확인을 진행하세요");  
+                alert("인증번호를 확인하세요.");  
                 $("#password").focus();
                 return; 
             }
