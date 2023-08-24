@@ -2,8 +2,8 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<meta charset=F-8">
-<link rel="stylesheet" href="../r"UTesources/css/login.css">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/login.css">
   <!-- *---container Start---* -->
   <div class="drops">
       <div class="drop"></div>
