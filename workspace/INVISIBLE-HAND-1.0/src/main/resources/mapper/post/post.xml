@@ -131,16 +131,8 @@
 </select>
 
 <delete id="doDelete" parameterType="PostVO">
-    
-    BEGIN
-        -- 해당 게시글 댓글 우선 삭제
-        DELETE FROM board_comment
-				WHERE postNumber = #{postNumber}
-				AND EXISTS (SELECT 1 FROM board_comment WHERE postNumber = #{postNumber});
-
-        -- 게시글 삭제
-        DELETE FROM board WHERE postNumber = #{postNumber};
-    END;
+        DELETE FROM board 
+        WHERE postNumber = #{postNumber}
 </delete>
 
 <update id="doUpdate" parameterType="PostVO">

@@ -83,7 +83,7 @@ public class PostController implements PcwkLoger{
 		LOG.debug("│flag : " + flag);
 		String message = "";
 
-		if (-1 == flag) {
+		if (1 == flag) {
 			message = "게시글이 삭제되었습니다.";
 		} else {
 			message = "게시글 삭제를 실패했습니다.";
