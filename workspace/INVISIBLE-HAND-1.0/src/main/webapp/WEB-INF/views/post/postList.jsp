@@ -89,14 +89,22 @@
                 </c:forEach>  
               </select>
             </div>
-           
             <div class="col-auto">
               <input type="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">
             </div>
-            
-            <div class="list-btn">  
+            <div class="list-btn">
               <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
-              <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
+              <c:choose>
+							  <c:when test="${ctgNumValue == 10}">
+							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
+							  </c:when>
+							  <c:when test="${ctgNumValue == '20'}">
+							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
+							  </c:when>
+							  <c:when test="${sessionScope.member.memberId == 'admin' && ctgNumValue == '30'}">
+							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >공지사항 작성</a>
+							  </c:when>
+							</c:choose>
               <c:if test="${sessionScope.member.memberId == 'admin'}">
                 <a href="#" class="btn button btn-b" style="margin-left: 10px;" id="doAdminDel">삭제</a>
               </c:if>
