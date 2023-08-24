@@ -98,11 +98,11 @@
 							  <c:when test="${ctgNumValue == 10}">
 							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
 							  </c:when>
-							  <c:when test="${ctgNumValue == '20'}">
+							  <c:when test="${ctgNumValue == 20}">
 							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
 							  </c:when>
-							  <c:when test="${sessionScope.member.memberId == 'admin' && ctgNumValue == '30'}">
-							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >공지사항 작성</a>
+							  <c:when test="${sessionScope.member.memberId == 'admin' && ctgNumValue == 30}">
+							    <a href="#" class="btn button btn-b" style="margin-left: 30px;" id="doMoveToPostReg" >글쓰기</a>
 							  </c:when>
 							</c:choose>
               <c:if test="${sessionScope.member.memberId == 'admin'}">
