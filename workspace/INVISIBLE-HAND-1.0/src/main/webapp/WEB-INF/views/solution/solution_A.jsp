@@ -52,8 +52,8 @@
 		    </p>
 		  </div>
 		  <div class="solution-desc-list">
-		    <h3><span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>
-		    	귀사는  <span id="sol2_2">undefined</span>부분이 취약합니다.</h3>
+		    <h3 id="sol2_2">
+		    	undefined</h3>
 		    <p id ='sol2_1'>
 		   	 undefined
 		    </p>
@@ -122,46 +122,59 @@ $(document).ready(function() {
 
     function updateSolUI2(data) {
         var grade = "";
+        var comments = "";
         switch (data[1][1]) {
             case 1:
-                grade = "경기 전반의 나쁨";
+                grade = "경기 전반";
+                comments ="적으로 어려움에 빠져 있습니다."
                 break;
             case 2:
                 grade = "생산 수준 감소";
+                comments ="로 어려움에 빠져 있습니다."
                 break;
             case 3:
                 grade = "내수 판매 감소";
+                comments ="로 어려움에 빠져 있습니다."
                 break;
             case 4:
                 grade = "수출 판매 감소";
+                comments ="로 어려움에 빠져 있습니다."
                 break;
             case 5:
                 grade = "영업이익 감소";
+                comments ="로 어려움에 빠져 있습니다."
                 break;
             case 6:
                 grade = "자금사정 악화";
+                comments ="로 어려움에 빠져 있습니다."
                 break;
             case 7:
-                grade = "원자재 조달 곤란";
+                grade = "원자재 조달";
+                comments ="이 곤란하여 어려움에 빠져 있습니다."
                 break;
             case 8:
                 grade = "생산 설비 부족";
+                comments ="으로 어려움에 빠져 있습니다."
                 break;
             case 9:
                 grade = "제품 제고 부족";
+                comments ="으로 어려움에 빠져 있습니다."
                 break;
             case 10:
                 grade = "종사자 수 부족";
+                comments ="으로 어려움에 빠져 있습니다."
                 break;
             case 11:
-                grade = "모든 지표가 긍정적";
+                grade = "모든 지표";
+                comments ="가 긍정적 입니다!"
                 break;
             case 12:
-                grade = "모든 지표가 부정적";
+                grade = "모든 지표";
+                comments ="가  부정적 입니다!"
                 break;
         }
         $('#sol2_1').text(data[1][2]);
-        $('#sol2_2').text(grade);
+        $('#sol2_2').html("<span><i class='fas fa-circle fa-xs' style='color:#00FFF0'></i></span>  귀사는 <span>"+grade+"</span>"+comments);
     }
 	function updateSolUI3(data) {
 		if (selectedMainCategory == "비제조업"){
@@ -182,7 +195,7 @@ $(document).ready(function() {
         }
 		$('#sol3_1').text(data[2][2]);
 		$('#sol3_2').text(grade);
-		$('#sol3_3').text(data[3][2]);
+		$('#sol3_3').html("<span>또한</span>"+data[3][2]);
 	}
 	function updateSolUI4(data) {
 	    var mytext = "";

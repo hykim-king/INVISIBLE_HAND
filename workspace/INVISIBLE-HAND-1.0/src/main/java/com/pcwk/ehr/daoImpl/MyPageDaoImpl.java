@@ -39,7 +39,7 @@ public class MyPageDaoImpl implements MyPageDao {
    		HashMap<String , Object> data = new HashMap<String , Object>();
     	data.put("buyerEmail", buyerEmail);
    		
-    	return sqlSessionTemplate.selectList(NAMESPACEPAY +".getAll",data);
+    	return sqlSessionTemplate.selectList(NAMESPACEPAY +".selectPaymentListByEmail",data);
    	}
     
     @Override
