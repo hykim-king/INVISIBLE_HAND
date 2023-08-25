@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
+import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.AdminService;
 import com.pcwk.ehr.service.PostService;
@@ -28,14 +29,15 @@ import com.pcwk.ehr.service.PostService;
 @Controller
 @RequestMapping(value = "admin") // WEB_INF아래 폴더이름을 적는곳.
 public class AdminController {
-	final Logger lg = LogManager.getLogger(getClass());
+	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
 	AdminService adminService;
 	
 	@Autowired
 	PostService postService;
-
+	
+	
 	@RequestMapping(value = "/admin.do")
 	public String admin() {
 		return "admin/admin";
@@ -70,62 +72,15 @@ public class AdminController {
 
 	    return jsonString;
 	}
-
-	// 회원조회
-	@RequestMapping(value = "/adminSearch.do")
-	public String adminSearch(Model model) {
-
-		lg.debug("┌────────────────┐");
-		lg.debug("│ adminSearch()  │");
-		lg.debug("└────────────────┘");
-
-		List<MemberVO> resultList = adminService.getAllMemberService(); // 회원정보 전부 가져옴. service호출.
-		model.addAttribute("memberList", resultList);
-
-		return "admin/adminSearch";
-	}
-
-	//
-	@RequestMapping(value = "/adminSubChargeChange.do")
-	public String adminSubChargeChange(Model model) {
-		lg.debug("┌─────────────────────────┐");
-		lg.debug("│ adminSubChargeChange()  │");
-		lg.debug("└─────────────────────────┘");
-
-		List<AdminVO> resultList1 = adminService.getAllsubscriptionService(); // 회원정보 전부 가져옴. service호출.
-		model.addAttribute("subscriptionlist", resultList1);
-
-		return "admin/adminSubChargeChange";
-	}
 	
-	//회원정보 표시
-    @RequestMapping(value = "/get.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String getSubscriptionDetails(String memberGradeName) {
-    	lg.debug("┌─────────────────────────────┐");
-    	lg.debug("│   getSubscriptionDetails()  │ memberGradeName: " + memberGradeName);
-    	lg.debug("└─────────────────────────────┘");
-    	
-
-	    AdminVO adminInfo = new AdminVO();
-	    adminInfo.setMemberGradeName(memberGradeName);
-	    try {
-	    	adminInfo = adminService.get(adminInfo);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	    
-	    return new Gson().toJson(adminInfo);
-	}
-
-    
-    // 회원정보 수정
+	
+	  // 회원정보 수정
     @RequestMapping(value = "/adminUpdate.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String updateMember(MemberVO member) throws SQLException {
-    	lg.debug("┌───────────────────────┐");
-        lg.debug("│   updateMember()      │ memberId: " + member.getMemberId());
-        lg.debug("└───────────────────────┘");
+    	LOG.debug("┌───────────────────────┐");
+    	LOG.debug("│   updateMember()      │ memberId: " + member.getMemberId());
+    	LOG.debug("└───────────────────────┘");
 
         int result = adminService.adminUpdate(member);
 
@@ -141,17 +96,160 @@ public class AdminController {
         return new Gson().toJson(message);
     }
     
+	
+    @RequestMapping(value ="/adminSearch.do")
+    public String memberList(MemberVO inVO, Model model) throws SQLException {
+    	int totalCnt = 0;
+    	
+    	
+		// page번호 초기값 1
+		if (null != inVO && inVO.getPageNo() == 0) {
+			inVO.setPageNo(1);
+		}
+	
+		// pageSize 초기값 10
+		if (null != inVO && inVO.getPageSize() == 0) {
+			inVO.setPageSize(10);
+		}
+	
+		// searchWord 초기값: 전체 
+		if (null != inVO && null == inVO.getSearchWord()) {
+			inVO.setSearchWord("");
+		}
+		
+		// searchDiv
+		if (null != inVO && null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv("");
+		}
+		
+		
+		List<MemberVO> list = this.adminService.doRetrieve(inVO);
+		model.addAttribute("list", list);
+		
+		if(null !=list && list.size() >0 ) {
+			totalCnt = list.get(0).getTotalCnt();
+			LOG.debug("totalCnt:" + totalCnt);
+		}
+    	
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("inVO", inVO);
+		
+    	return "admin/adminSearch";
+    }
+	
+	 //회원조회
+//	@RequestMapping(value = "/adminSearch.do")
+//	public String adminSearch(Model model) {
+//
+//		LOG.debug("┌────────────────┐");
+//		LOG.debug("│ adminSearch()  │");
+//		LOG.debug("└────────────────┘");
+//
+//		List<MemberVO> resultList = adminService.getAllMemberService(); // 회원정보 전부 가져옴. service호출.
+//		model.addAttribute("memberList", resultList);
+//
+//		return "admin/adminSearch";
+//	}
     
+    
+	//회원정보 표시
+    @RequestMapping(value = "/get.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String getMemberDetails(String memberId) {
+    	LOG.debug("┌───────────────────────┐");
+    	LOG.debug("│   getMemberDetails()  │ memberId: " + memberId);
+    	LOG.debug("└───────────────────────┘");
+    	
+
+	    MemberVO memberInfo = new MemberVO();
+	    memberInfo.setMemberId(memberId);
+	    try {
+	    	memberInfo = adminService.get(memberInfo);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	    
+	    return new Gson().toJson(memberInfo);
+	}
+    
+    // 회원강제탈퇴
+	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+	@ResponseBody 
+	public String deleteOne(MemberVO member, HttpServletRequest req) throws SQLException{
+		String jsonString = "";
+		LOG.debug("┌──────────────────────────────┐");
+		
+		String memberId = req.getParameter("memberId");
+		
+		LOG.debug("│memberId:"+memberId);
+		LOG.debug("│member:"+member);
+		
+		int flag=this.adminService.deleteOne(member);
+		
+		String message = "";
+		if(1==flag) {
+			message = member.getMemberId()+"가 삭제 되었습니다.";
+		}else {
+			message = member.getMemberId()+" 삭제 실패";
+		}
+		
+		MessageVO messageVO=new MessageVO(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		LOG.debug("│jsonString:"+jsonString);
+		LOG.debug("└──────────────────────────────┘");
+		
+		return jsonString;
+	}
+    
+    
+    
+    
+    
+	//구독정보
+	@RequestMapping(value = "/adminSubChargeChange.do")
+	public String adminSubChargeChange(Model model) {
+		LOG.debug("┌─────────────────────────┐");
+		LOG.debug("│ adminSubChargeChange()  │");
+		LOG.debug("└─────────────────────────┘");
+
+		List<AdminVO> resultList1 = adminService.getAllsubscription(); // 구독한 회원정보 전부 가져옴. service호출.
+		model.addAttribute("subscriptionlist", resultList1);
+
+		return "admin/adminSubChargeChange";
+	}
+	
+	//구독한 회원정보 조회
+    @RequestMapping(value = "/getSubscriptionDetails.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String getSubscriptionDetails(String memberGradeName) {
+    	LOG.debug("┌─────────────────────────────┐");
+    	LOG.debug("│   getSubscriptionDetails()  │ memberGradeName: " + memberGradeName);
+    	LOG.debug("└─────────────────────────────┘");
+    	
+
+	    AdminVO adminInfo = new AdminVO();
+	    adminInfo.setMemberGradeName(memberGradeName);
+	    try {
+	    	adminInfo = adminService.getSubscription(adminInfo);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	    
+	    return new Gson().toJson(adminInfo);
+	}
+
+     
     
     // 구독가격 수정
-    @RequestMapping(value = "/update.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/updateSubscription.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String updateSubscription(AdminVO admin) throws SQLException {
-        lg.debug("┌─────────────────────────────┐");
-        lg.debug("│   updateSubscription()      │ subscriptionPrice: " + admin.getSubscriptionPrice());
-        lg.debug("└─────────────────────────────┘");
+    	LOG.debug("┌─────────────────────────────┐");
+    	LOG.debug("│   updateSubscription()      │ subscriptionPrice: " + admin.getSubscriptionPrice());
+    	LOG.debug("└─────────────────────────────┘");
 
-        int result = adminService.update(admin);
+        int result = adminService.updateSubscription(admin);
 
         MessageVO message = new MessageVO();
         if (result == 1) {
@@ -165,4 +263,7 @@ public class AdminController {
         return new Gson().toJson(message);
     }
 
+    
+
+    
 }

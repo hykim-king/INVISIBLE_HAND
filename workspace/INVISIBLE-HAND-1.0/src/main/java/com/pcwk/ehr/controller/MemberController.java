@@ -284,9 +284,7 @@ public class MemberController {
     }
 
     // 회원강제탈퇴
-	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8"
-			)
+	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
 	@ResponseBody 
 	public String deleteOne(MemberVO member, HttpServletRequest req) throws SQLException{
 		String jsonString = "";

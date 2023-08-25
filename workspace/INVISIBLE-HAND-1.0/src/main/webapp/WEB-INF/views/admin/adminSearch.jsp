@@ -1,36 +1,42 @@
 <%@page import="com.pcwk.ehr.cmn.StringUtil"%>
-<%@page import="com.pcwk.ehr.cmn.DTO"%>
+<%@page import="com.pcwk.ehr.VO.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	DTO dto = (DTO) request.getAttribute("search");
 
-//paging
-int bottomCount = 10;
-int pageSize = 10;
-int pageNo = 1;
-int totalCnt = 0;
-String searchWord = "";
-String searchDiv = "";
+    MemberVO vo = (MemberVO)request.getAttribute("inVO");
+    String isverified =vo.getIsverified();
 
-if (null != dto) {
-	pageSize = dto.getPageSize();
-	pageNo = dto.getPageNo();
-	searchDiv = dto.getSearchDiv();
-	searchWord = dto.getSearchWord();
-}
+	//paging
+	int bottomCount = 10;
+	int pageSize = 10;
+	int pageNo = 1;
+	int totalCnt = 0;
+	String searchWord = "";
+	String searchDiv = "";
 
-if (null != request.getAttribute("totalCnt")) {
-	totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
-}
+	if (null != vo) {
+		pageSize = vo.getPageSize();
+		pageNo = vo.getPageNo();
+		searchDiv = vo.getSearchDiv();
+		searchWord = vo.getSearchWord();
+	}
 
-String cPath = request.getContextPath();
+	if (null != request.getAttribute("totalCnt")) {
+		totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
+	}
+
+
+	String cPath  = request.getContextPath();
+
+	String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? isverified : searchDiv;
+
+
 %>
-
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-
+<c:set var="defaultSearchDiv" value="${defaultSearchDiv}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,69 +138,34 @@ String cPath = request.getContextPath();
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="vo" items="${memberList}">
-						<tr>
-							<td class="c-txt">${vo.memberId}</td>
-							<td class="c-txt">${vo.nickName}</td>
-							<td class="c-txt">${vo.memberName}</td>
-							<td class="c-txt">${vo.memberGrade}</td>
-							<td class="c-txt">${vo.email}</td>
-							<td class="c-txt">${vo.updateDate}</td>
-						</tr>
-					</c:forEach>
-					<c:choose>
-						<c:when test="${not empty list }">
-							<c:forEach var="vo" items="${list}">
-								<tr>
-									<!-- <td class="text-center  col-sm-2  col-md-1  col-lg-1"><c:out value="${vo.num}"/></td> -->
-									<td class="text-center  col-sm-2  col-md-1  col-lg-1"></td>
-									<td class="text-left    col-sm-6  col-md-6  col-lg-7"><a
-										href="#"></a></td>
-									<td class="text-center  col-sm-2  col-md-2  col-lg-2"></td>
-									<td class="text-center  col-sm-2  col-md-2  col-lg-1"></td>
-									<td class="text-end     col-sm-0  col-md-1  col-lg-1"></td>
-								</tr>
-							</c:forEach>
-						</c:when>
-					</c:choose>
+				<c:choose>
+					<c:when test="${not empty list }">
+						<c:forEach var="vo" items="${list}">
+							<tr>
+								<td class="c-txt">${vo.memberId}</td>
+								<td class="c-txt">${vo.nickName}</td>
+								<td class="c-txt">${vo.memberName}</td>
+								<td class="c-txt">${vo.memberGrade}</td>
+								<td class="c-txt">${vo.email}</td>
+								<td class="c-txt">${vo.updateDate}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				    <c:otherwise>
+	                 <tr>
+	                    <td  class="text-c" colspan="99">No data found.</td>
+	                 </tr>
+	                </c:otherwise>
+			     </c:choose>
 				</tbody>
 			</table>
-			<div class="d-flex justify-content-center">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item">
-						  <a class="page-link" href="#" aria-label="Previous">
-						    <span aria-hidden="true">&laquo;</span>
-						  </a>
-					  </li>
-						<li class="page-item">
-						  <a class="page-link" href="#" data-page="1">1</a>
-					  </li>
-						<li class="page-item">
-						  <a class="page-link" href="#" data-page="2">2</a>
-						</li>
-						<li class="page-item">
-						  <a class="page-link" href="#" data-page="3">3</a>
-						</li>
-						<li class="page-item">
-						  <a class="page-link" href="#" data-page="4">4</a>
-						</li>
-						<li class="page-item">
-						  <a class="page-link" href="#" data-page="5">5</a>
-						</li>
-						<li class="page-item">
-						  <a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-			<!-- paging : 1. java, 2.javascript -->
-			<div class="d-flex justify-content-center"></div>
-
-
-			<!--// paging --------------------------------------------------------------->
+			
+       <!-- 페이징 -->
+       <div class="d-flex justify-content-center">
+        <%= StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount,  cPath+"/admin/adminSearch.do", "searchPage") %>
+       </div> 
+       <!--// 페이징 ---------------------------------------------------------------->
+       
 			<!-- button -->
 			<div class="button-area ">
 				<input type="button" class="btn" value="초기화" id="init">
@@ -259,6 +230,32 @@ String cPath = request.getContextPath();
 	<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 	<script src="${CP}/resources/js/util.js"></script>
 	<script>
+	//검색 기능
+	  function searchPage(url, pageNo){
+	    let frm = document.postFrm;
+	    frm.action = url;
+	    frm.pageNo.value = pageNo;
+	    frm.submit();  
+	  }
+	    
+	  function doRetrieveCall(pageNo){
+	    let frm = document.postFrm;
+	    frm.pageNo.value = pageNo;
+	    frm.submit();  
+	  }
+	    
+	  $("#searchWord").on("keypress", function(e){
+	    if (13 == e.which){
+	      e.preventDefault();
+	      doRetrieveCall(1);
+	    }
+	  });
+	  
+	  $("#doRetrieve").on("click", function(){
+	    doRetrieveCall(1);
+	  });
+	</script>
+	<script>
 		(function($) {
 			function openMenu($menu) {
 				$menu.addClass('active');
@@ -302,7 +299,7 @@ String cPath = request.getContextPath();
 
 					$.ajax({
 						type : "POST",
-						url : "${CP}/member/get.do",
+						url : "${CP}/admin/get.do",
 						async : true,
 						dataType : "json",
 						data : {
@@ -422,7 +419,7 @@ String cPath = request.getContextPath();
 
 					$.ajax({
 						type : "GET",
-						url : "${CP}/member/deleteOne.do",
+						url : "${CP}/admin/deleteOne.do",
 						asyn : "true",
 						dataType : "json",
 						data : {
@@ -467,7 +464,7 @@ String cPath = request.getContextPath();
 			$(this).val($(this).val().replace(/[^0-9]/g, ""));
 		});//numberOnly end---------------------------------------------------------
 
-		//paging
+/* 		//paging
 		function do_Retrieve(url, pageNo) {
 			//alert("url:"+url+",pageNo:"+pageNo);
 			//console.log("pageNo:"+pageNo);
@@ -486,7 +483,7 @@ String cPath = request.getContextPath();
 			frm.pageNo.value = 1;
 			frm.submit();
 
-		}
+		} */
 	</script>
 </body>
 </html>

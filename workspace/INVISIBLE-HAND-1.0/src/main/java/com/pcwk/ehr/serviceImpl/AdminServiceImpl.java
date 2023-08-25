@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.VO.AdminVO;
 import com.pcwk.ehr.VO.MemberVO;
+import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.dao.AdminDao;
 import com.pcwk.ehr.service.AdminService;
 
@@ -29,11 +30,27 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	
+
+	// 회원 정보 수정
 	@Override
-	public List<MemberVO> getAllMemberService() {
-		// 여기에 기능을 추가하세요.
-		return adminDao.getAllMemberDao(); // Dao호출
+	public int adminUpdate(MemberVO member) throws SQLException {
+		return adminDao.adminUpdate(member);
 	}
+	
+	
+	//회원 전체 조회(페이징 및 검색 구현)
+	@Override
+	public List<MemberVO> doRetrieve(MemberVO inVO) throws SQLException {
+		
+		return adminDao.doRetrieve(inVO);
+	}
+	
+//	@Override
+//	public List<MemberVO> getAllMemberService() {
+//		// 여기에 기능을 추가하세요.
+//		return adminDao.getAllMemberDao(); // Dao호출
+//	}
 
 	// 조회
 	@Override
@@ -41,11 +58,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.get(member);
 	}
 
-	// 유저 정보 변경
-	@Override
-	public int adminUpdate(MemberVO member) throws SQLException {
-		return adminDao.adminUpdate(member);
-	}
 
 	// 유저 탈퇴
 	@Override
@@ -60,18 +72,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<AdminVO> getAllsubscriptionService() {
-		return adminDao.getAllsubscriptionDao();
+	public List<AdminVO> getAllsubscription() {
+		return adminDao.getAllsubscription();
 	}
 
 	@Override
-	public int update(AdminVO admin) throws SQLException {
-		return adminDao.update(admin);
+	public int updateSubscription(AdminVO admin) throws SQLException {
+		return adminDao.updateSubscription(admin);
 	}
 
 	@Override
-	public AdminVO get(AdminVO admin) throws ClassNotFoundException, SQLException {
-		return adminDao.get(admin);
+	public AdminVO getSubscription(AdminVO admin) throws ClassNotFoundException, SQLException {
+		return adminDao.getSubscription(admin);
 	}
+
+
 
 } // class end

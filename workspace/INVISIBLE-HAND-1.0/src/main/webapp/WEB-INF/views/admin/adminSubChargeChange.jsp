@@ -255,7 +255,7 @@ String cPath = request.getContextPath();
 
           $.ajax({
             type : "POST",
-            url : "${CP}/admin/get.do",
+            url : "${CP}/admin/getSubscriptionDetails.do",
             async : true,
             dataType : "json",
             data : {
@@ -283,7 +283,7 @@ String cPath = request.getContextPath();
     
       $.ajax({
           type : "POST",
-          url : "${CP}/admin/update.do",
+          url : "${CP}/admin/updateSubscription.do",
           async : true,
           dataType : "json",
           data : {

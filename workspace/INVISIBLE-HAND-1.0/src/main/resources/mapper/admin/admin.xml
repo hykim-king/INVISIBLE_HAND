@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pcwk.ehr.admin">
+
+
+	<!-- admin 페이지에서 필요한 sql -->
+	<update id="adminUpdate" parameterType="MemberVO">
+		UPDATE member
+		SET memberId = #{memberId}
+		,nickName = #{nickName}
+		,memberName = #{memberName}
+		,memberGrade = #{memberGrade}
+		,email = #{email}
+		WHERE
+		memberId = #{memberId}
+
+	</update>
+
+
+	<!-- 검색조건 -->
+	<!--10 전체(닉네임(nickName)+등급(memberGrade)+이메일(email))20 닉네임 30 등급 40 이메일 -->
+	<sql id="searchCondition">
+		<if test="searchWord != ''">
+			<choose>
+				<when test="searchDiv == '10'">
+					AND (nickName LIKE '%' || #{searchWord} || '%' OR memberGrade LIKE '%'
+					|| #{searchWord} || '%' OR email LIKE '%' || #{searchWord} || '%')
+				</when>
+				<when test="searchDiv == '20'">
+					AND nickName LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchDiv == '30'">
+					AND memberGrade LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchDiv == '40'">
+					AND email LIKE '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+		</if>
+	</sql>
+
+	<!-- 페이징 -->
+	<select id="doRetrieve" parameterType="DTO" resultType="MemberVO">
+		SELECT A.*,B.*
+		FROM(
+		SELECT TT1.rnum as num,
+		TT1.memberId as memberId,
+		TT1.nickName as nickName,
+		TT1.memberName as memberName,
+		TT1.memberGrade as memberGrade,
+		TT1.email as email,
+		TO_CHAR(TT1.UpdateDate,'YYYY-MM-DD') as UpdateDate,
+		TT1.isverified as isverified
+		FROM(
+		SELECT ROWNUM as rnum, T1.*
+		FROM(
+		SELECT *
+		FROM member
+		<include refid="searchCondition"></include>
+		ORDER BY nickName DESC
+		)T1
+      <![CDATA[     WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1)+#{pageSize}   ]]>
+		)TT1
+      <![CDATA[    WHERE rnum >=#{pageSize} * (#{pageNo}-1)+ 1 ]]>
+		)A
+		CROSS JOIN
+		(
+		SELECT COUNT(memberId) totalCnt
+		FROM Member
+		<include refid="searchCondition"></include>
+		)B
+	</select>
+
+	<select id="get" parameterType="MemberVO" resultType="MemberVO">
+		SELECT
+		memberId
+		, password
+		, membergrade
+		, membername
+		, email
+		, nickname
+		, TO_CHAR(joindate,'yyyy-mm-dd HH24MISS') JoinDate
+		, TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updateDate
+		, isverified
+		, phoneNumber
+		FROM
+		member
+		WHERE memberId = #{memberId}
+	</select>
+	
+
+	<delete id="deleteOne" parameterType="MemberVO">
+		DELETE FROM MEMBER
+		WHERE memberId = #{memberId}
+	</delete>
+
+
+
+
+	<!-- 구독 관련 -->
+
+	<!-- 전체 회원등급정보 취득 -->
+	<select id="getAllsubscription" resultType="AdminVO">
+		SELECT * FROM
+		grade_information
+	</select>
+
+	<update id="updateSubscription" parameterType="AdminVO">
+		UPDATE grade_information
+		SET
+		subscriptionPrice = #{subscriptionPrice}
+		WHERE
+		memberGradeName =
+		#{memberGradeName}
+
+	</update>
+
+	<select id="getSubscription" parameterType="AdminVO" resultType="AdminVO">
+		SELECT
+		memberGradeName
+		, memberGrade
+		, subscriptionPrice
+
+		FROM
+		grade_information
+		WHERE memberGradeName = #{memberGradeName}
+    </select>
+    <!-- 구독 관련 end-->
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
