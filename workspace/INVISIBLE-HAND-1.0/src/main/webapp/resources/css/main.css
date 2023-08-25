@@ -24,7 +24,7 @@
   display: block;
   padding:5px 0;
   border-bottom:1px solid #000;
-	width: 900px;
+	width: 950px;
 }
 
 .main-post-table tbody tr:last-child{
@@ -36,15 +36,15 @@
 	 text-align: center;
 }
 .main-post-table tbody tr td:nth-child(2) {
-	 width: 640px;
+	 width: 480px;
 
 }
 .main-post-table tbody tr td:nth-child(3) {
-	 width: 70px;
+	 width: 110px;
    text-align: center;
 }
 .main-post-table tbody tr td:nth-child(4) {
-	 width: 70px;
+	 width: 190px;
    text-align: center;
 }
 .main-post-table tbody tr td:nth-child(5) {

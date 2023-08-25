@@ -16,6 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <c:redirect url="/hello/hello.do"/>
+    <c:redirect url="/main/main.do"/>
+    
 </body>
-</html>  
+</html> 

@@ -63,11 +63,11 @@
 	      <div>
 		       <table class="main-post-table">
 		          <thead class="main-post-thead">
-		            <tr width="900px">
+		            <tr width="950">
 			            <th width="50px">No.</th>
-			            <th width="640px">제목</th>
-			            <th width="70px">글쓴이</th>
-			            <th width="70px">작성일</th>
+			            <th width="480px">제목</th>
+			            <th width="110px">글쓴이</th>
+			            <th width="190px">작성일</th>
 			            <th width="60px">조회수</th>
 			            <th width="60px">추천수</th>
 		            </tr>
