@@ -76,6 +76,7 @@ public class MypageController {
 	        MessageVO message = new MessageVO();
 	         
 	        int nickcheck = memberService.nickNameCheck(member);
+	        System.out.println("┌─────────────────────────────────" + nickcheck);
 	        
 	        if (nickcheck == 0) {
 	                message.setMsgId("10");
@@ -125,12 +126,12 @@ public class MypageController {
 	         
 	        int emailcheck = memberService.emailCheck(member);
 	        
-	        if (emailcheck == 0) {
-	                message.setMsgId("10");
-	                message.setMsgContents("사용 가능한 이메일 입니다");
+	        if (emailcheck == 1) {
+	        	message.setMsgId("10");
+	        	message.setMsgContents("이메일을 전송하시겠습니가 ?");
 	        } else {
-	                message.setMsgId("20");
-	                message.setMsgContents("이미 사용중인 이메일 입니다");
+	        	message.setMsgId("20");
+	        	message.setMsgContents("이메일을 전송할 수 없습니다.");
 	        }
 	        
 	        jsonString = new Gson().toJson(message);
@@ -157,6 +158,7 @@ public class MypageController {
 		        MessageVO message = new MessageVO();
 		         
 		        int update = memberService.update(member);
+		        LOG.debug("update===============mem" + update);
 		        if (update == 1) {
 		                message.setMsgId("10");
 		                message.setMsgContents("업데이트 완료");
