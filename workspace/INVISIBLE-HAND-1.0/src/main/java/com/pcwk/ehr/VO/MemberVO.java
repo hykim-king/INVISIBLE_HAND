@@ -1,13 +1,5 @@
 package com.pcwk.ehr.VO;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 public class MemberVO{
 	private String memberId; // id
 	private String password; // 비번

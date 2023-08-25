@@ -63,15 +63,6 @@
       AND   password = #{password}
     </select>
     
-   <!-- db에서 아이디를 받을 때 암호화된 비밀번호 호출 -->
-    <select id="getStoredEncryptedPassword" parameterType="MemberVO" resultType="java.lang.String">
-        SELECT password
-        FROM member
-        WHERE memberId = #{memberId}
-    </select>
-   
-
-    
     
     <!-- 비밀번호 변경 --> 
     <update id="find" parameterType="MemberVO">
@@ -82,7 +73,7 @@
     <delete id="delete" parameterType="MemberVO">
       DELETE FROM MEMBER
       WHERE
-      email = #{email} AND Password=#{password}
+      <!-- email = #{email} AND --> Password=#{password}
     </delete>
     
     <!-- 회원 강제 탈퇴 -->
@@ -97,31 +88,29 @@
     
     <!-- 로그인 -->
      <select id="get" parameterType="MemberVO" resultType="MemberVO">
-		   SELECT
-			  memberId
-			  , password
-			  , membergrade
-			  , membername
-			  , email
-			  , nickname
-			  , TO_CHAR(joindate,'yyyy-mm-dd HH24MISS') JoinDate
-			  , TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updateDate
-			  , isverified
-			  , phoneNumber
-			FROM
-			 member
-			WHERE  memberId = #{memberId}
+       SELECT
+        memberId
+        , password
+        , membergrade
+        , membername
+        , email
+        , nickname
+        , TO_CHAR(joindate,'yyyy-mm-dd HH24MISS') JoinDate
+        , TO_CHAR(updatedate,'yyyy-mm-dd HH24MISS') updateDate
+        , isverified
+        , phoneNumber
+      FROM
+       member
+      WHERE  memberId = #{memberId}
  
  </select>
  
  <update id="update" parameterType="MemberVO">
        UPDATE member          
        SET  memberId      =  #{memberId} 
-           ,nickName      =  #{nickName} 
-           ,memberName    =  #{memberName} 
-           ,memberGrade   =  #{memberGrade}     
-           ,email         =  #{email}     
-           ,updateDate    =  #{updateDate}     
+           ,nickName      =  #{nickName}   
+           ,password      =  #{password}
+           ,email         =  #{email}        
 
        WHERE                     
                memberId = #{memberId}     

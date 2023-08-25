@@ -20,46 +20,46 @@
       <div class="drop"></div>
       <div class="drop"></div>
   </div>
-	<!-- *---container Start---* -->
-	<div class="h60px"></div>
-	<div class="container-1400 min-100vh con-login">
-		<div class="my-update-wrap">
-			<div class="box-area">
+  <!-- *---container Start---* -->
+  <div class="h60px"></div>
+  <div class="container-1400 min-100vh con-login">
+    <div class="my-update-wrap">
+      <div class="box-area">
                    
-				<div class="form-h3" style="margin:0; ">
-				<div class="line1px"></div>
-        <div class="line3px"></div>
-					<h3>${member.memberName} 님의 회원정보 변경</h3>
-				<div class="line3px"></div>
+        <div class="form-h3" style="margin:0; ">
         <div class="line1px"></div>
-				</div>								
-				<div class="h30px"></div>
-				<div class="label-margin">
-			        <p class="input-title">아이디</p>			        
+        <div class="line3px"></div>
+          <h3>${member.memberName} 님의 회원정보 변경</h3>
+        <div class="line3px"></div>
+        <div class="line1px"></div>
+        </div>                
+        <div class="h30px"></div>
+        <div class="label-margin">
+              <p class="input-title">아이디</p>              
               <label>
-  			        <input type="text" name="nickname" id="nickname" value="${member.memberId}" class="size border-bottom" required="required">
+                <input type="text" name="nickname" id="nickname" value="${member.memberId}" class="size border-bottom" required="required">
                 <input  type="button"value="변경불가" class="btn btn-white" style="cursor: default;">
               </label>
-			  </div>
-				
-			   <div class="label-margin">
-		        <p class="input-title">닉네임 변경</p>
-		        <input type="hidden" id="unickname" name="unickname" value="${member.nickName}">
-		        <label>
-		            <input type="text" name="nickname" id="nickname"  value="${member.nickName}" class="size border-bottom" required="required">
-		            <input  type="button" id="checkNickname" name="checkNickname"value="중복확인" class="btn btn-white">
-		        </label>
-			   </div>
-				
-				<div class="label-margin">
-					<p class="input-title">비밀번호 변경</p>
-					<label> 
-						<input type="password" name="password" id="password" class="size border-bottom" value="${member.password}">
-						<input type="hidden" id="upassword" name="upassword" value="${member.password}">	
+        </div>
+        
+         <div class="label-margin">
+            <p class="input-title">닉네임 변경</p>
+            <input type="hidden" id="unickname" name="unickname" value="${member.nickName}">
+            <label>
+                <input type="text" name="nickname" id="nickname"  value="${member.nickName}" class="size border-bottom" required="required">
+                <input  type="button" id="checkNickname" name="checkNickname"value="중복확인" class="btn btn-white">
+            </label>
+         </div>
+        
+        <div class="label-margin">
+          <p class="input-title">비밀번호 변경</p>
+          <label> 
+            <input type="password" name="password" id="password" class="size border-bottom" value="${member.password}">
+            <input type="hidden" id="upassword" name="upassword" value="${member.password}">  
             <input type="button" id="checkpass" name="checkpass" value="사용중" class="btn btn-white">
-					</label>
-				</div>
-				
+          </label>
+        </div>
+        
         <div class="label-margin">
             <p class="input-title" >이메일 변경</p>
             <label> 
@@ -68,37 +68,37 @@
                 <input type="button" id="mailsend" name="mailsend" value="인증번호 전송" class="btn btn-white">
             </label>
         </div>
-				
-				<div class="label-margin">
-					<p class="input-title">E-mail 인증번호 확인</p>
-					<label> 
-						<input type="text" class="size numberOnly border-bottom checkmark" name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required>
-						<i class='fas fa-check-circle fa-sm' style="color:#4200FF;"></i>
-						<span id="mail-check-warn"></span>
-	
-					</label>
-				</div>
-				
-				<div class="submit">
-				    <input type="hidden" id="uid" value="${member.memberId}">
-				    <input type="hidden" id="nicksuccess" value="0">
+        
+        <div class="label-margin">
+          <p class="input-title">E-mail 인증번호 확인</p>
+          <label> 
+            <input type="text" class="size numberOnly border-bottom checkmark" name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required>
+            <i class='fas fa-check-circle fa-sm' style="color:#4200FF;"></i>
+            <span id="mail-check-warn"></span>
+  
+          </label>
+        </div>
+        
+        <div class="submit">
+            <input type="hidden" id="uid" value="${member.memberId}">
+            <input type="hidden" id="nicksuccess" value="0">
                     <input type="hidden" id="passsuccess" value="0">
                     <input type="hidden" id="emailsuccess" value="0">
-			        <input id="update" type="button" value="수정 완료" class="btn w70">
-			        <input id="reset" type="reset" value="취소" class="btn w70"
-			        onclick="${CP}/mypage/mypage.do" style="margin-top: 15px;">
-			    </div>
-								
-			</div>
-		</div><!-- **---wrap End---** -->
-	</div>
-	<!-- **---container End---** -->
+              <input id="update" type="button" value="수정 완료" class="btn w70">
+              <input id="reset" type="reset" value="취소" class="btn w70"
+              onclick="${CP}/mypage/mypage.do" style="margin-top: 15px;">
+          </div>
+                
+      </div>
+    </div><!-- **---wrap End---** -->
+  </div>
+  <!-- **---container End---** -->
 </body>
 <script>
-	$("#checkNickname").on("click",function(){
-	    console.log("checkNick ready");
-	    
-	    if(""==$("#nickname").val() || 0==$("#nickname").val().length){
+  $("#checkNickname").on("click",function(){
+      console.log("checkNick ready");
+      
+      if(""==$("#nickname").val() || 0==$("#nickname").val().length){
             alert("닉네임을 입력하세요");  
             $("#nickname").focus();
             return;
@@ -109,7 +109,7 @@
             return;
             
         }else{
-        	$.ajax({
+          $.ajax({
                 type: "POST",
                 url:"${CP}/mypage/nickcheck.do",
                 dataType:"html",
@@ -135,7 +135,7 @@
                 }
             }); // --ajax
         } 
-	}); //checkNick end
+  }); //checkNick end
 </script>
 
 <script>
@@ -153,19 +153,19 @@
             return;
             
         }else{
-        	alert("사용가능한 비밀번호 입니다.");
-        	 $('#passsuccess').attr('value',"success");
+          alert("사용가능한 비밀번호 입니다.");
+           $('#passsuccess').attr('value',"success");
         }
         
         /* else{
         
-        	$.ajax({
+          $.ajax({
                 type: "POST",
                 url:"${CP}/mypage/passwordcheck.do",
                 dataType:"html",
                 data: {
-                	memberId:  $("#uid").val(),
-                	password: $("#password").val(), 
+                  memberId:  $("#uid").val(),
+                  password: $("#password").val(), 
                 },
                 success:function(data) {
                  let parsedJSON = JSON.parse(data);
@@ -203,8 +203,8 @@
             return;
             
         }else{
-        	
-        	$.ajax({
+          
+          $.ajax({
                 type: "POST",
                 url:"${CP}/mypage/emailcheck.do",
                 dataType:"html",
@@ -215,13 +215,13 @@
                  let parsedJSON = JSON.parse(data);
                    
                      if("10" == parsedJSON.msgId){
-                    	 
-                    	if(!confirm(parsedJSON.msgContents+". 이메일인증을 진행하시겠습니까?")){
-                   		    alert("취소 되었습니다.");
-                   		    return;
-                    	}else{
-                   		    mailsend2(); 
-                    	}
+                       
+                      if(!confirm(parsedJSON.msgContents+". 이메일인증을 진행하시겠습니까?")){
+                          alert("취소 되었습니다.");
+                          return;
+                      }else{
+                          mailsend2(); 
+                      }
                         
                     } 
                                           
@@ -285,10 +285,10 @@ $("#update").on("click",function(){
         
         if($("#nickname").val() == $("#unickname").val()){
             if($("#password").val() == $("#upassword").val()){
-            	if($("#password").val() == $("#upassword").val()){
+              if($("#password").val() == $("#upassword").val()){
                      alert("변경사항이 없습니다");  
                      return; 
-            	}
+              }
             }
         }
         if(""==$("#nickname").val() || 0==$("#nickname").val().length){
@@ -299,9 +299,9 @@ $("#update").on("click",function(){
         
         if($("#nickname").val() != $("#unickname").val()){
             if($("#nicksuccess").val() != "success"){
-            	alert("닉네임 중복확인을 진행하세요");  
+              alert("닉네임 중복확인을 진행하세요");  
                 $("#nickname").focus();
-                return;	
+                return; 
             }
         }
         
@@ -325,16 +325,16 @@ $("#update").on("click",function(){
             return;
         }
         
-        if($("#email").val() != $("#uemial").val()){
+       /*  if($("#email").val() != $("#uemial").val()){
             if($("#eamilsuccess") != "success"){
                 alert("인증번호를 확인하세요.");  
                 $("#password").focus();
                 return; 
             }
-        }
+        } */
        
         else{
-        	$.ajax({
+          $.ajax({
                 type: "POST",
                 url:"${CP}/mypage/updatemember.do",
                 dataType:"html",
