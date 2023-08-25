@@ -63,6 +63,13 @@
       AND   password = #{password}
     </select>
     
+       <!-- db에서 아이디를 받을 때 암호화된 비밀번호 호출 -->
+    <select id="getStoredEncryptedPassword" parameterType="MemberVO" resultType="java.lang.String">
+        SELECT password
+        FROM member
+        WHERE memberId = #{memberId}
+    </select>
+   
     
     <!-- 비밀번호 변경 --> 
     <update id="find" parameterType="MemberVO">
