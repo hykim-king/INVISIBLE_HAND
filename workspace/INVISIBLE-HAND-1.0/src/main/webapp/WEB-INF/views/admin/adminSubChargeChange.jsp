@@ -1,9 +1,36 @@
+<%@page import="com.pcwk.ehr.cmn.StringUtil"%>
+<%@page import="com.pcwk.ehr.cmn.DTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+  DTO dto = (DTO) request.getAttribute("search");
+
+//paging
+int bottomCount = 10;
+int pageSize = 10;
+int pageNo = 1;
+int totalCnt = 0;
+String searchWord = "";
+String searchDiv = "";
+
+if (null != dto) {
+  pageSize = dto.getPageSize();
+  pageNo = dto.getPageNo();
+  searchDiv = dto.getSearchDiv();
+  searchWord = dto.getSearchWord();
+}
+
+if (null != request.getAttribute("totalCnt")) {
+  totalCnt = Integer.parseInt(request.getAttribute("totalCnt").toString());
+}
+
+String cPath = request.getContextPath();
+%>
 
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,109 +49,117 @@
   display: flex;
 }
 
-.admin-post {
+.admin-member {
   margin: 80px;
 }
 
 .cate {
-	width: 300px;
-	position: relative;
-	border-style: solid;
-	border-width: 1px 1px 0 1px;
-	border-color: #000;
+  width: 300px;
+  position: relative;
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
+  border-color: #000;
 }
 
 .cate:last-child {
-	border-bottom: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 
 .cate .menu {
-	display: block;
-	position: relative;
-	width: 100%;
-	background: gray;
-	height: 80px;
+  display: block;
+  position: relative;
+  width: 100%;
+  background: gray;
+  height: 80px;
 }
 
 .cate .menu .menulink {
-	display: block;
-	color: #fff;
-	text-decoration: none;
-	width: 70%;
-	padding-left: 15px;
-	line-height: 80px;
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  width: 70%;
+  padding-left: 15px;
+  line-height: 80px;
 }
 
 .cate .menu .subopen {
-	position: absolute;
-	width: 8px;
-	height: 8px;
-	right: 15px;
-	padding: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	border-right: 1px solid #fff;
-	border-bottom: 1px solid #fff;
-	transform: rotate(45deg);
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  right: 15px;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  transform: rotate(45deg);
 }
 
 .cate ul {
-	display: none;
+  display: none;
 }
 
 .cate.active ul {
-	display: block;
+  display: block;
 }
 
 .cate ul li {
-	padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .cate ul li:first-child {
-	padding-top: 20px;
+  padding-top: 20px;
 }
 
 .cate ul li:last-child {
-	padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .admin-contents {
-	background-color: pink;
-	width: 50%
+  background-color: pink;
+  width: 50%
 }
 
 .admin-con {
-	display: flex;
+  display: flex;
+}
+
+.search-form>div {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#searchDiv {
+  text-align: center;
 }
 
 #pagetop {
-	clear: both;
-	padding-top: 40px;
-	padding-right: 10px;
+  clear: both;
+  padding-top: 40px;
+  padding-right: 10px;
 }
 
 #pagetop a {
-	color: #fff;
-	font-size: 20px;
-	text-decoration: none;
-	text-align: center;
-	display: block;
-	float: right;
-	margin-bottom: 50px;
-	background: #222;
-	color: #999;
-	width: 60px;
-	line-height: 60px;
-	border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  float: right;
+  margin-bottom: 50px;
+  background: #222;
+  color: #999;
+  width: 60px;
+  line-height: 60px;
+  border-radius: 50%;
 }
 </style>
 <title>보이지 않는 손 레이아웃</title>
 </head>
 <body>
-	<!-- *---container Start---* -->
-	<!-- accordion 메뉴 -->
-	<div class="h60px"></div>
+  <!-- accordion 메뉴 -->
+  <div class="h60px"></div>
   <div class="c">
     <div class="accordion">
       <div class="cate">
@@ -133,14 +168,12 @@
           <a href="javascript:void(0);" class="subopen"></a>
         </span>
         <ul>
-          <li>
-            <a href="${CP}/admin/adminSearch.do">회원조회</a>
-          </li>
+          <li><a href="${CP}/admin/adminSearch.do">회원조회</a></li>
         </ul>
       </div>
       <div class="cate">
         <span class="menu">
-          <a href="#" class="menulink">게시판관리</a>
+          <a href="${CP}/admin/admin.do" class="menulink">게시판관리</a>
           <a href="javascript:void(0);" class="subopen"></a>
         </span>
         <ul>
@@ -161,11 +194,11 @@
         </ul>
       </div>
     </div>
-  </div>
 
-	<!-- accordion 메뉴 end -->
-  <div class="container">
-    <h1>구독관리</h1>
+    <!-- accordion 메뉴 end -->
+  <div class="container admin-member">
+    <h1 style="margin: 30px;">구독관리</h1>
+    
     <%-- sessionScope.user:${sessionScope.user } --%>
     <div class="button-area">
       <!-- 검색  -->
@@ -179,20 +212,20 @@
           <option value="">회원 등급</option>
           <option value="">구독 가격</option>
         </select>
-        <!-- 검색어 -->
-        <input type="text" value="${search.searchWord}" name="searchWord"
-          id="searchWord" placeholder="검색어를 입력하세요.">
-        <!-- pageSize:10,20,30,50,100,200 -->
-        <select name="pageSize" id="pageSize">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select> <input type="button" class="btn" value="조회" value="조회"
-          id="doRetrieve" onclick="window.doRetrieve();">
-      </form>
-    </div>
+          <!-- 검색어 -->
+          <input type="text" value="${search.searchWord}" name="searchWord"
+            id="searchWord" placeholder="검색어를 입력하세요.">
+          <!-- pageSize:10,20,30,50,100,200 -->
+          <select name="pageSize" id="pageSize">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <input type="button" class="btn" value="조회" value="조회" id="doRetrieve" onclick="window.doRetrieve();">
+        </form>
+      </div>
 
     <table id="boardTable"
       class="table table-sm table-hover table-borderless">
@@ -395,6 +428,27 @@
         $("#memberGrade").val(initValue);
         $("#subscriptionPrice").val(initValue);
       });
+    
+    //paging
+    function do_Retrieve(url, pageNo) {
+      //alert("url:"+url+",pageNo:"+pageNo);
+      //console.log("pageNo:"+pageNo);
+
+      let frm = document.user_frm;
+      frm.pageNo.value = pageNo;
+      frm.submit();
+
+    }
+
+    //첫 페이지 조회
+    function doRetrieve() {
+
+      let frm = document.user_frm;
+      //frm.action  ="/ehr/user/doRetrieve.do";
+      frm.pageNo.value = 1;
+      frm.submit();
+
+    }
 
     </script>
 </body>

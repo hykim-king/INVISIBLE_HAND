@@ -596,7 +596,5 @@ String cPath = request.getContextPath();
 
 		}
 	</script>
-
-	</script>
 </body>
 </html>

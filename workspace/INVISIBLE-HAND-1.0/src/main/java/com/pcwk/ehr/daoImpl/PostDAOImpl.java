@@ -40,8 +40,6 @@ public class PostDAOImpl implements PostDao, PcwkLoger {
 		LOG.debug("│inVO                          │"+inVO);
 		LOG.debug("│statement                     │"+NAMESPACE+DOT+"doDelete");
 		LOG.debug("└──────────────────────────────┘");
-		int result = sqlSessionTemplate.delete(NAMESPACE+DOT+"doDelete", inVO);
-		LOG.debug("postDaoimpl doDelete result : " + result); // null?
 		
 		return sqlSessionTemplate.delete(NAMESPACE+DOT+"doDelete", inVO);
 	}

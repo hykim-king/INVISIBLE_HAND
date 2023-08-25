@@ -267,12 +267,10 @@ $(".btn-noUpdt").on("click", function() {
             alert('댓글 작성자만 수정할 수 있습니다.');
         }
 
-        // Hide the update form and restore the original content display
         contentParagraph.css('display', 'block');
         contentText.find('textarea[name="newContent"]').css('display', 'none');
         updateForm.addClass('hidden');
 
-        // Hide the confirm button and show the delete and update buttons
         confirmButton.hide(); // 숨김 처리
         commentBox.find('.btn-delet, .btn-updt').show(); // 나타내기
     });
@@ -557,7 +555,7 @@ $(".btn-noUpdt").on("click", function() {
                         // 성공, 실패
                         // 성공->board_list.jsp로 이동
                         let parsedJson = JSON.parse(data);
-                        if ("-1" == parsedJson.msgId) {
+                        if ("1" == parsedJson.msgId) {
                             alert(parsedJson.msgContents);
                             moveToListView();
                         } else {
