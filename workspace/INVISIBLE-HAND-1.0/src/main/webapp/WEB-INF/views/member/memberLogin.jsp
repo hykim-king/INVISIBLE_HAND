@@ -151,7 +151,7 @@ $(document).ready(function() {
           }
           if ("30" == data.msgId) {
             alert(data.msgContents);
-	          window.location.href = document.referrer; //로그인 성공 시 이전에 머물던 페이지로 돌아가기
+	          window.location.href = "/ehr/main/main.do"
           }
         },
         error: function(data) {
