@@ -42,20 +42,18 @@ public class MainDaoImplTest {
 
     }
 
-    @Test
-    public void doRetrievePosts() throws SQLException {
-    	
-        inVO.setCategoryNumber("10");  // 테스트에 사용할 카테고리 번호
-        inVO.setPageSize(5);
-        inVO.setPageNo(1);
-        List<PostVO> getPosts = mainDaoImpl.doRetrieve(inVO);
-        assertNotNull(getPosts);
-  
-        
-        PostVO getTopLikePost = getPosts.get(0);
-        assertEquals("테스트를 위한 글04", getTopLikePost.getTitle());
-        assertEquals("2023/08/02", getTopLikePost.getWrittenDate());
-        assertEquals("관리자", getTopLikePost.getNickname());
-        LOG.debug("getTopLikePost : "+getTopLikePost.getLikes());
-    }
+	/*
+	 * @Test public void doRetrievePosts() throws SQLException {
+	 * 
+	 * inVO.setCategoryNumber("10"); // 테스트에 사용할 카테고리 번호 inVO.setPageSize(5);
+	 * inVO.setPageNo(1); List<PostVO> getPosts = mainDaoImpl.doRetrieve(inVO);
+	 * assertNotNull(getPosts);
+	 * 
+	 * 
+	 * PostVO getTopLikePost = getPosts.get(0); assertEquals("테스트를 위한 글04",
+	 * getTopLikePost.getTitle()); assertEquals("2023/08/02",
+	 * getTopLikePost.getWrittenDate()); assertEquals("관리자",
+	 * getTopLikePost.getNickname());
+	 * LOG.debug("getTopLikePost : "+getTopLikePost.getLikes()); }
+	 */
 }

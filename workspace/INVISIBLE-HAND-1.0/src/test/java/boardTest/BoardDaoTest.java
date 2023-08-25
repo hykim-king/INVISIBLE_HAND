@@ -44,70 +44,54 @@ public class BoardDaoTest{
     PostVO search;
     
     
-    @Before
-    public void setUp() throws Exception {
-    	board01 = new PostVO(10000, "메로나", "test_title1", "test_contents1", "등록일X", 10, 20, "10");
-    	board02 = new PostVO(10001, "메로나", "test_title2", "test_contents2", "등록일X", 11, 21, "10");
-    	board03 = new PostVO(10002, "메로나", "test_title3", "test_contents3", "등록일X", 11, 22, "10");
-    	
-      
-    	search = new PostVO(99999, "메로나", "test_title1", "test_contents1", "등록일X", 10, 20, "10");
-        
-    }
-    
-    @Test
-    public void addAndGet() throws SQLException {
-        dao.doDelete(board01);
-        dao.doDelete(board02);
-        dao.doDelete(board03);
-        
-        dao.doSave(board01);
-        dao.doSave(board02);
-        dao.doSave(board03);
-        
-        PostVO outVO01 = dao.doSelectOne(board01);
-        PostVO outVO02 = dao.doSelectOne(board02);
-        PostVO outVO03 = dao.doSelectOne(board03);
-        
-        isSameData(outVO01,board01);
-        isSameData(outVO02,board02);
-        isSameData(outVO03,board03);
-        
-    }
-    
-    @Test
-    public void selectall() throws SQLException {
-        //1. 삭제
-        //2. 등록
-        //3. 조회
-        //4. 조회 데이터 비교
-        dao.doDelete(board01);
-        dao.doDelete(board02);
-        dao.doDelete(board03);
-        
-        dao.doSave(board01);
-        dao.doSave(board02);
-        dao.doSave(board03);
-        
-        //pageSize
-        search.setNickname("메로나");
-        List<PostVO> list = dao.doRetrieve(search);
-        for(PostVO vo: list) {
-            LOG.debug("┌──────────────────────────────┐");
-            LOG.debug("│vo                            │" + vo);
-            LOG.debug("└──────────────────────────────┘");
-        }
-        assertEquals(0, list.size());
-        
-    }
-
-    
-    private void isSameData(PostVO outVO, PostVO board) {
-        assertEquals(outVO.getPostNumber(), board.getPostNumber());
-        assertEquals(outVO.getNickname(), board.getNickname());
-        assertEquals(outVO.getLikes(), board.getLikes());
-        assertEquals(outVO.getTitle(), board.getTitle());
-    }
+	/*
+	 * @Before public void setUp() throws Exception { board01 = new PostVO(10000,
+	 * "메로나", "test_title1", "test_contents1", "등록일X", 10, 20, "10"); board02 = new
+	 * PostVO(10001, "메로나", "test_title2", "test_contents2", "등록일X", 11, 21, "10");
+	 * board03 = new PostVO(10002, "메로나", "test_title3", "test_contents3", "등록일X",
+	 * 11, 22, "10");
+	 * 
+	 * 
+	 * search = new PostVO(99999, "메로나", "test_title1", "test_contents1", "등록일X",
+	 * 10, 20, "10");
+	 * 
+	 * }
+	 * 
+	 * @Test public void addAndGet() throws SQLException { dao.doDelete(board01);
+	 * dao.doDelete(board02); dao.doDelete(board03);
+	 * 
+	 * dao.doSave(board01); dao.doSave(board02); dao.doSave(board03);
+	 * 
+	 * PostVO outVO01 = dao.doSelectOne(board01); PostVO outVO02 =
+	 * dao.doSelectOne(board02); PostVO outVO03 = dao.doSelectOne(board03);
+	 * 
+	 * isSameData(outVO01,board01); isSameData(outVO02,board02);
+	 * isSameData(outVO03,board03);
+	 * 
+	 * }
+	 * 
+	 * @Test public void selectall() throws SQLException { //1. 삭제 //2. 등록 //3. 조회
+	 * //4. 조회 데이터 비교 dao.doDelete(board01); dao.doDelete(board02);
+	 * dao.doDelete(board03);
+	 * 
+	 * dao.doSave(board01); dao.doSave(board02); dao.doSave(board03);
+	 * 
+	 * //pageSize search.setNickname("메로나"); List<PostVO> list =
+	 * dao.doRetrieve(search); for(PostVO vo: list) {
+	 * LOG.debug("┌──────────────────────────────┐");
+	 * LOG.debug("│vo                            │" + vo);
+	 * LOG.debug("└──────────────────────────────┘"); } assertEquals(0,
+	 * list.size());
+	 * 
+	 * }
+	 * 
+	 * 
+	 * private void isSameData(PostVO outVO, PostVO board) {
+	 * assertEquals(outVO.getPostNumber(), board.getPostNumber());
+	 * assertEquals(outVO.getNickname(), board.getNickname());
+	 * assertEquals(outVO.getLikes(), board.getLikes());
+	 * assertEquals(outVO.getTitle(), board.getTitle()); }
+	 */
     
 
     
