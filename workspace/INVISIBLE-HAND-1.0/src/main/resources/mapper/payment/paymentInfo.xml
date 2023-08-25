@@ -15,7 +15,6 @@
 		  , buyer_email
 		  , buyer_name
 		  , buyer_tel
-		  , buyer_date
 		) VALUES (
 			#{paymentinfoseq}
 		  , #{merchantUid}
@@ -24,7 +23,6 @@
 		  , #{buyerEmail}
 		  , #{buyerName}
 		  , #{buyerTel}
-		  , #{buyerDate}
 		)
 
 	</insert>
@@ -44,7 +42,7 @@
     WHERE buyer_email = #{buyerEmail}
   </select>
   
-  <!-- 구독 조회 -->
+  <!-- 구독 조회(구 업데이트에 사용) -->
 	<select id="selectPaymentByMerchantUid" parameterType="PaymentInfoVO" resultType="PaymentInfoVO">
 		SELECT 
 	    paymentinfoseq

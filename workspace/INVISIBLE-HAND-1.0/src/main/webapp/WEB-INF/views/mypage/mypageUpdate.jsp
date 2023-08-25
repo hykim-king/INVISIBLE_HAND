@@ -157,7 +157,7 @@
         	 $('#passsuccess').attr('value',"success");
         }
         
-        /* else{
+        else{
         
         	$.ajax({
                 type: "POST",
@@ -184,7 +184,7 @@
                     console.log("error:" + data);
                 }
             }); // --ajax
-        }  */
+        }
     }); //checkpass end
 </script>
 
