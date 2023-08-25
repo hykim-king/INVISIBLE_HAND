@@ -1,6 +1,8 @@
 package com.pcwk.ehr.VO;
 
-public class MemberVO{
+import com.pcwk.ehr.cmn.DTO;
+
+public class MemberVO extends DTO{
 	private String memberId; // id
 	private String password; // 비번
 	private int memberGrade; // 회원 등급

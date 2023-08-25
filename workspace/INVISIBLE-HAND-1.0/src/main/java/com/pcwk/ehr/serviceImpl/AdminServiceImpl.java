@@ -43,8 +43,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 유저 정보 변경
 	@Override
-	public int update(MemberVO member) throws SQLException {
-		return adminDao.update(member);
+	public int adminUpdate(MemberVO member) throws SQLException {
+		return adminDao.adminUpdate(member);
 	}
 
 	// 유저 탈퇴

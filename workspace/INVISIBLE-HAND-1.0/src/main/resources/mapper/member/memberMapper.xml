@@ -115,7 +115,7 @@
            ,email         =  #{email}        
 
        WHERE                     
-               memberId = #{memberId}     
+            memberId = #{memberId}     
 
 </update>
   
@@ -144,4 +144,72 @@
     email = #{email}
   </update>
     
+   <!-- admin 페이지에서 필요한 sql -->
+   <update id="adminUpdate" parameterType="MemberVO"> 
+       UPDATE member          
+       SET  memberId      =  #{memberId} 
+           ,nickName      =  #{nickName}   
+           ,memberName    =  #{memberName}
+           ,memberGrade   =  #{memberGrade}
+           ,email         =  #{email}
+       WHERE                     
+            memberId = #{memberId}
+   
+   </update> 
+ 
+ 
+ 
+   <!-- 검색조건 -->
+  <!--10 전체(닉네임(nickName)+등급(memberGrade)+이메일(email))20 닉네임  30 등급 40 이메일 -->
+  <sql id="searchCondition">
+    <if test="searchWord != ''">
+        <choose>
+            <when test="searchDiv == '10'">
+                AND (nickName LIKE '%' || #{searchWord} || '%' OR memberGrade LIKE '%' || #{searchWord} || '%' OR email LIKE '%' || #{searchWord} || '%')
+            </when>
+            <when test="searchDiv == '20'">
+                AND nickName LIKE '%' || #{searchWord} || '%'
+            </when>
+            <when test="searchDiv == '30'">
+                AND memberGrade LIKE '%' || #{searchWord} || '%'
+            </when>
+            <when test="searchDiv == '40'">
+                AND email LIKE '%' || #{searchWord} || '%'
+            </when>
+        </choose>
+    </if>
+</sql>
+ 
+ <!-- 페이징 -->
+ <select id="doRetrieve" parameterType="DTO" resultType="MemberVO">
+  SELECT A.*,B.*
+  FROM(
+    SELECT TT1.rnum as num,
+            TT1.memberId    as memberId,
+            TT1.nickName    as nickName,
+            TT1.memberName  as memberName,
+            TT1.memberGrade as memberGrade,
+            TT1.email       as email,
+            TO_CHAR(TT1.UpdateDate,'YYYY-MM-DD') as UpdateDate
+    FROM(
+      SELECT ROWNUM as rnum, T1.*
+      FROM(
+        SELECT *
+        FROM member
+        <include refid="searchCondition"></include>
+        ORDER BY nickName DESC
+        )T1
+      <![CDATA[     WHERE ROWNUM <= #{pageSize} * (#{pageNo}-1)+#{pageSize}   ]]>
+      )TT1
+      <![CDATA[    WHERE rnum >=#{pageSize} * (#{pageNo}-1)+ 1 ]]>
+  )A
+  CROSS JOIN
+  (
+  SELECT COUNT(memberId) totalCnt
+  FROM Member
+  <include refid="searchCondition"></include>
+  )B
+</select>
+
+
 </mapper>

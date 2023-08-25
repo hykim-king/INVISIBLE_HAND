@@ -17,7 +17,7 @@ public interface AdminDao {
 	MemberVO get(MemberVO member) throws ClassNotFoundException, SQLException;
 
 	// 회원정보 수정
-	int update(MemberVO member) throws SQLException;
+	int adminUpdate(MemberVO member) throws SQLException;
 
 	// 회원탈퇴
 	int deleteOne(MemberVO member) throws SQLException;

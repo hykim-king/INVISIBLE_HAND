@@ -58,9 +58,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public int update(MemberVO member) throws SQLException {
+	public int adminUpdate(MemberVO member) throws SQLException {
 		int flag = 0;
-		String statement = this.NAMESPACEMEMBER + DOT + "update";
+		String statement = this.NAMESPACEMEMBER + DOT + "adminUpdate";
 		LOG.debug("1. statement-" + statement);
 		LOG.debug("2. param=" + member);
 
@@ -101,7 +101,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int update(AdminVO admin) throws SQLException {
 		int flag = 0;
-		String statement = this.NAMESPACESUBSCRIPTION + DOT + "update";
+		String statement = this.NAMESPACESUBSCRIPTION + DOT + "adminUpdate";
 		LOG.debug("1. statement-" + statement);
 		LOG.debug("2. param=" + admin);
 
@@ -128,5 +128,7 @@ public class AdminDaoImpl implements AdminDao {
 
 			return outVO;
 	}
+
+
 
 } // class end

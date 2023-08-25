@@ -19,7 +19,7 @@ public interface AdminService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int update(MemberVO member) throws SQLException;
+	public int adminUpdate(MemberVO member) throws SQLException;
 	
 	/**
 	 * 회원 정보 삭제

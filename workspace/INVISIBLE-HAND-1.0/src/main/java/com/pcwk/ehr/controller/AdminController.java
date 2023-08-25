@@ -118,6 +118,31 @@ public class AdminController {
 	    return new Gson().toJson(adminInfo);
 	}
 
+    
+    // 회원정보 수정
+    @RequestMapping(value = "/adminUpdate.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String updateMember(MemberVO member) throws SQLException {
+    	lg.debug("┌───────────────────────┐");
+        lg.debug("│   updateMember()      │ memberId: " + member.getMemberId());
+        lg.debug("└───────────────────────┘");
+
+        int result = adminService.adminUpdate(member);
+
+        MessageVO message = new MessageVO();
+        if (result == 1) {
+            message.setMsgId("1");
+            message.setMsgContents("회원 정보가 업데이트되었습니다.");
+        } else {
+            message.setMsgId("0");
+            message.setMsgContents("회원 정보 업데이트에 실패했습니다.");
+        }
+
+        return new Gson().toJson(message);
+    }
+    
+    
+    
     // 구독가격 수정
     @RequestMapping(value = "/update.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
