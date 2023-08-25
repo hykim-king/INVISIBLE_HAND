@@ -11,8 +11,6 @@ public class HandController {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	
-	
-	
 	@RequestMapping(value = "/hand-board-list.do")
 	public String boardList() {
 		LOG.debug("┌───────────────────────┐");
