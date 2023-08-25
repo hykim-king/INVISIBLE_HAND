@@ -34,6 +34,8 @@ public interface MemberDao {
 	 */
 	// 비번 체크
 	public int passCheck(MemberVO member) throws SQLException;
+	//암호화된 비번 호출
+	public String getStoredEncryptedPassword(String memberId);
 	
 	// ---------------------- 결제시 사용 메소드 ----------------------
 	// 이메일 찾기
