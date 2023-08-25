@@ -85,8 +85,6 @@ public class MemberServiceImpl implements MemberService {
 	// 회원 가입
 	@Override
 	public int add(MemberVO member) throws ClassNotFoundException, SQLException {
-		String encryptedPassword = passwordEncoder.encode(member.getPassword());
-		member.setPassword(encryptedPassword);
 
 		return memberDao.add(member);
 	}
@@ -106,12 +104,16 @@ public class MemberServiceImpl implements MemberService {
 	// 유저 정보 변경
 	@Override
 	public int update(MemberVO member) throws SQLException {
+		
+		
+		
 		return memberDao.update(member);
 	}
 
 	// 유저 탈퇴
 	@Override
 	public int deleteOne(MemberVO member) throws SQLException {
+	
 		return memberDao.deleteOne(member);
 	}
 
@@ -126,12 +128,11 @@ public class MemberServiceImpl implements MemberService {
 		int status = this.memberDao.loginIdCheck(member);
 
 			
-			if (status == 1) {
-				// 저장된 암호화된 비밀번호 조회
-				String storedEncryptedPassword = getStoredEncryptedPassword(member.getMemberId()); 
+			if(1==status) {
+				
+	            status = memberDao.passCheck(member);
 				// 저장된 암호화된 비번과 입력한 비번 암호화하여 비교
-				if (passwordEncoder.matches(member.getPassword(), storedEncryptedPassword)) {
-
+				if (1==status){
 					checkStatus = 30; // 로그인 성공
 					LOG.debug(checkStatus);
 				} else {
@@ -150,11 +151,6 @@ public class MemberServiceImpl implements MemberService {
 		return checkStatus;
 	}
 
-	// 암호화된 비밀번호 조회
-	private String getStoredEncryptedPassword(String memberId) {
-		String storedEncryptedPassword = memberDao.getStoredEncryptedPassword(memberId); // 데이터베이스에서 저장된 암호화된 비밀번호 조회
-		return storedEncryptedPassword;
-	}
 
 	// ---------------------- 결제시 사용 메소드 ----------------------
 	// 이메일 찾기

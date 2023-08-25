@@ -117,11 +117,6 @@ public class MemberDaoImpl implements MemberDao {
 		return cnt;
 	}
 	
-	//암호화된 비번 호출
-	public String getStoredEncryptedPassword(String memberId) {
-		
-		return sqlSessionTemplate.selectOne(NAMESPACE+DOT+"getStoredEncryptedPassword",memberId);
-	}
 	
 	// 회원 가입
 	@Override
