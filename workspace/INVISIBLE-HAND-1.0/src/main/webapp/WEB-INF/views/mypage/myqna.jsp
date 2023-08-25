@@ -48,7 +48,7 @@
 		             <c:forEach items="${list}" var="list" varStatus="status">
 		                 <tr>
 		                    <td class="text-c" >${status.count}</td>
-		                    <td class="text-l" ><a href="/ehr/post/doSelectOne.do?categoryNumber=${list.categoryNumber}&postNumber=${list.postNumber}">${list.title}[${list.likes}]</a></td>
+		                    <td class="text-l" ><a href="/ehr/post/doSelectOne.do?categoryNumber=${list.categoryNumber}&postNumber=${list.postNumber}">${list.title}</a></td>
 		                    <td class="text-c" >${list.nickname}</td>
 		                    <td class="text-c" >${list.writtenDate}</td>
 		                    <td class="text-c" >${list.views}</td> 

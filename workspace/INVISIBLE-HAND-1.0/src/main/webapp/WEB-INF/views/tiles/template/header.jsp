@@ -112,7 +112,7 @@
               <c:if test="${sessionScope.member.memberId == 'admin'}">
                 <p><a href="../admin/admin.do">관리자페이지</a></p>
               </c:if>
-              <p>고객지원 문의사항</p> 
+            
             </c:when>
             <c:otherwise>
               <p style="display: none;"></p>
@@ -156,7 +156,7 @@ function paymentCheckIf() {
       data: {
         email : email
       }, success: function(data) {
-        if (data > 1) {
+        if (data >= 1) {
           location.href = "../solution/solution_Q.do";
         } else {
           alert("유료 결제 페이지입니다. 구독 후 이용해주세요.");
