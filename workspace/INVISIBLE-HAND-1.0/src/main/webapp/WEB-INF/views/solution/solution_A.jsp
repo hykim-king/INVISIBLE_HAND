@@ -285,14 +285,14 @@ $(document).ready(function() {
 	            subCategory:selectedSubCategory
 	        }),
 	        success: function(data) {
-	        	console.log(data);
+	        
 	        	updateSolUI1(data);
 	        	updateSolUI2(data);
 	        	updateSolUI3(data);
 	        	updateSolUI4(data);
 	        },
 	        error: function(data) {
-	            console.log("에러");
+	            console.error("에러");
 	        }
 	    }); // ajax 종료
 	}
@@ -375,7 +375,7 @@ $(document).ready(function() {
                       
                       chartData.push(row);
                   }
-                  console.log(chartData);
+                 
                   drawChart(chartData, mixmaxArr);
 
               },
