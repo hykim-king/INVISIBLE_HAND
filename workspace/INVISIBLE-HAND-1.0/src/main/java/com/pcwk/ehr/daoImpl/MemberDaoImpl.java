@@ -182,18 +182,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int deleteOne(MemberVO member) throws SQLException {
-		int flag = 0;
-		//---------------------------------------
-		String statement  = this.NAMESPACE+DOT+"deleteOne";
-		LOG.debug("----------------------------");
-		LOG.debug("1. statement-"+statement);
-		LOG.debug("----------------------------");
-		LOG.debug("2. param=\n"+member.toString());
-		flag = this.sqlSessionTemplate.delete(statement, member);
-		LOG.debug("3. flag="+flag);
-
-		//----------------------------------------	
-		return flag;
+		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteOne", member);
 	}
 
 	// ---------------------- 결제시 사용 메소드 ----------------------

@@ -173,11 +173,6 @@
                 },
                 success:function(data) {
                  let parsedJSON = JSON.parse(data);
-                   
-                     if("10" == parsedJSON.msgId){
-                        alert(parsedJSON.msgContents);
-                    } 
-                                          
                     if("20" == parsedJSON.msgId){
                         alert(parsedJSON.msgContents);
                         return;
@@ -333,7 +328,7 @@ $("#update").on("click",function(){
         else{
         	$.ajax({
                 type: "POST",
-                url:"${CP}/mypage/updatemember.do",
+                url:"${CP}/member/update.do",
                 dataType:"html",
                 data: {
                  memberId: $("#uid").val(),
@@ -344,12 +339,12 @@ $("#update").on("click",function(){
                 success:function(data) {
                  let parsedJSON = JSON.parse(data);
                    
-                     if("10" == parsedJSON.msgId){
+                     if("1" == parsedJSON.msgId){
                            alert(parsedJSON.msgContents);
                            window.location.href="${CP}/member/logout.do";
                     } 
                                           
-                    if("20" == parsedJSON.msgId){
+                    if("0" == parsedJSON.msgId){
                         alert(parsedJSON.msgContents);
                         return;
                     }

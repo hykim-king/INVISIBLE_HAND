@@ -108,6 +108,7 @@
  <update id="update" parameterType="MemberVO">
        UPDATE member          
        SET  nickName      =  #{nickName}
+           , password     =  #{password}
            ,email         =  #{email}     
            ,updateDate    =  #{updateDate}     
 

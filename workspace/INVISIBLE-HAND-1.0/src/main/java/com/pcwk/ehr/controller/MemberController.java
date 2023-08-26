@@ -21,8 +21,11 @@ import org.springframework.web.util.CookieGenerator;
 import com.google.gson.Gson;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
+import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.service.CommentService;
 import com.pcwk.ehr.service.MailSendService;
 import com.pcwk.ehr.service.MemberService;
+import com.pcwk.ehr.service.PostService;
 
 @Controller("membercontroller")
 @RequestMapping(value = "member") // WEB_INF아래 폴더이름을 적는곳.
@@ -32,6 +35,12 @@ public class MemberController {
 
 	@Autowired
 	MailSendService mailService;
+	
+	@Autowired
+	CommentService commentService;
+	
+	@Autowired
+	PostService postService;
 
 	private final MemberService memberService;
 
@@ -290,27 +299,21 @@ public class MemberController {
 	@ResponseBody 
 	public String deleteOne(MemberVO member, HttpServletRequest req) throws SQLException{
 		String jsonString = "";
-		LOG.debug("┌──────────────────────────────┐");
 		
 		String memberId = req.getParameter("memberId");
 		
-		LOG.debug("│memberId:"+memberId);
-		LOG.debug("│member:"+member);
+        LOG.debug("│memberId:"+memberId);
+        LOG.debug("│member:"+member);
 		
-		int flag=this.memberService.deleteOne(member);
-		
+		int flag = memberService.deleteOne(member);
+		LOG.debug("flag-1-1------------" + flag);
 		String message = "";
 		if(1==flag) {
-			message = member.getMemberId()+"가 삭제 되었습니다.";
+			message = "탈퇴되었습니다.";
 		}else {
-			message = member.getMemberId()+" 삭제 실패";
+			message = "탈퇴 실패";
 		}
-		
-		MessageVO messageVO=new MessageVO(String.valueOf(flag),message);
-		
-		jsonString = new Gson().toJson(messageVO);
-		LOG.debug("│jsonString:"+jsonString);
-		LOG.debug("└──────────────────────────────┘");
+		jsonString = StringUtil.validMessageToJson(Integer.toString(flag), message);
 		
 		return jsonString;
 	}
