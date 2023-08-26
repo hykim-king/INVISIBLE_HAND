@@ -31,7 +31,7 @@
 
 	String cPath  = request.getContextPath();
 
-	/* String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? isverified : searchDiv; */
+	String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? isverified : searchDiv; 
 
 
 %>
@@ -102,7 +102,7 @@
 
 
 <!--  검색기능 구현  -->
-      <div class="talbe-search">
+      <div class="table-search">
 				<form action="${CP}/admin/adminSearch.do" method="get" name="userfrm">
 					<input type="hidden" name="pageNo" id="pageNo">
 					<div class="post-nav">
@@ -118,7 +118,7 @@
 					  </select>
 					</div>
 					<div class="col-auto">
-					 <input tpye="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
+					 <input tpye="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
 					<!-- 검색구분 -->
 					</div>
 					<div class="list-btn">
@@ -147,13 +147,13 @@
 	           <c:choose>
                <c:when test="${not empty list }">
 		            <c:forEach var="vo" items="${list}">
-		              <tr>
-		                <td class="c-txt">${vo.memberId}</td>
-		                <td class="c-txt">${vo.nickName}</td>
-		                <td class="c-txt">${vo.memberName}</td>
-		                <td class="c-txt">${vo.memberGrade}</td>
-		                <td class="c-txt">${vo.email}</td>
-		                <td class="c-txt">${vo.updateDate}</td>
+		              <tr class="cell">
+		                <td class="c-txt"><c:out value="${vo.memberId}"/></td>
+		                <td class="c-txt"><c:out value="${vo.nickName}"/></td>
+		                <td class="c-txt"><c:out value="${vo.memberName}"/></td>
+		                <td class="c-txt"><c:out value="${vo.memberGrade}"/></td>
+		                <td class="c-txt"><c:out value="${vo.email}"/></td>
+		                <td class="c-txt"><c:out value="${vo.updateDate}"/></td>
 		              </tr>
 		            </c:forEach>
 		           </c:when>
@@ -437,8 +437,8 @@
 						},
 						success : function(data) {
 							console.log("success data:" + data);
-							let parsedJson = JSON.parse(data);
-							if ("1" == parsedJson.msgId) {
+							let parsedJson = data;
+							if ('1' == parsedJson.msgId) {
 								alert(parsedJson.msgContents);
 								$("#memberId").val('');
 								$("#nickName").val('');
@@ -447,7 +447,8 @@
 								$("#email").val('');
 								$("#updateDate").val('');
 							} else {
-								alert(parsedJson.msgContents);
+								alert("탈퇴시켰습니다.");
+								location.reload();
 							}
 						},
 						error : function(data) {
