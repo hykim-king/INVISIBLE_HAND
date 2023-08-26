@@ -21,8 +21,11 @@ import org.springframework.web.util.CookieGenerator;
 import com.google.gson.Gson;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
+import com.pcwk.ehr.cmn.StringUtil;
+import com.pcwk.ehr.service.CommentService;
 import com.pcwk.ehr.service.MailSendService;
 import com.pcwk.ehr.service.MemberService;
+import com.pcwk.ehr.service.PostService;
 
 @Controller("membercontroller")
 @RequestMapping(value = "member") // WEB_INF아래 폴더이름을 적는곳.
@@ -32,6 +35,12 @@ public class MemberController {
 
 	@Autowired
 	MailSendService mailService;
+	
+	@Autowired
+	CommentService commentService;
+	
+	@Autowired
+	PostService postService;
 
 	private final MemberService memberService;
 
@@ -171,6 +180,7 @@ public class MemberController {
 				// session설정
 				httpSession.setAttribute("member", memberInfo);
 				httpSession.setAttribute("memberId", memberInfo.getMemberId());
+				httpSession.setAttribute("nickname", memberInfo.getNickName());
 				httpSession.setAttribute("email", memberInfo.getEmail());
 
 				LOG.debug("999member" + member);
@@ -284,31 +294,28 @@ public class MemberController {
     }
 
     // 회원강제탈퇴
-	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET
+					, produces = "application/json;charset=UTF-8" )
 	@ResponseBody 
-	public String deleteOne(MemberVO member, HttpServletRequest req) throws SQLException{
+	public String deleteOne(String member, HttpServletRequest req) throws SQLException{
 		String jsonString = "";
-		LOG.debug("┌──────────────────────────────┐");
 		
-		String memberId = req.getParameter("memberId");
+		HttpSession session = req.getSession();
+		String memberId = (String) session.getAttribute("memberId");
+		String nickname = (String) session.getAttribute("nickname");
 		
-		LOG.debug("│memberId:"+memberId);
-		LOG.debug("│member:"+member);
-		
-		int flag=this.memberService.deleteOne(member);
+		postService.deleteByMemberId(nickname);
+		commentService.deleteByNickname(nickname);
+        
+		int flag = memberService.deleteOne(memberId);
 		
 		String message = "";
 		if(1==flag) {
-			message = member.getMemberId()+"가 삭제 되었습니다.";
+			message = "탈퇴되었습니다.";
 		}else {
-			message = member.getMemberId()+" 삭제 실패";
+			message = "탈퇴 실패";
 		}
-		
-		MessageVO messageVO=new MessageVO(String.valueOf(flag),message);
-		
-		jsonString = new Gson().toJson(messageVO);
-		LOG.debug("│jsonString:"+jsonString);
-		LOG.debug("└──────────────────────────────┘");
+		jsonString = StringUtil.validMessageToJson(Integer.toString(flag), message);
 		
 		return jsonString;
 	}
