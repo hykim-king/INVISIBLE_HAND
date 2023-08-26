@@ -3,8 +3,6 @@ package com.pcwk.ehr.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.pcwk.ehr.VO.PostVO;
 
 
@@ -25,6 +23,8 @@ public interface PostService {
 	 * @throws SQLException
 	 */
 	int doDelete(PostVO inVO)throws SQLException;
+	
+	public int deleteByMemberId(String nickname);
 	
 	// admin용 게시글 일괄 삭제
 	public int deleteAll(List<Integer> delPostNums) throws SQLException;

@@ -36,6 +36,11 @@ public class CommentServiceImpl implements CommentService{
 	public int doDelete(int commentNumber) throws SQLException {
 		return dao.doDelete(commentNumber);
 	}
+	
+	@Override
+	public int deleteByNickname(String nickname) {
+		return dao.deleteByNickname(nickname);
+	}
 
 	@Override
 	public int doUpdateLikes(int commentNumber, String likes) throws SQLException {

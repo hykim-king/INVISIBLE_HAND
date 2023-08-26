@@ -39,6 +39,7 @@
 					      <th>로그인된 유저의 이메일</th>
 					      <th>로그인된 유저의 이름</th>
 					      <th>로그인된 유저의 번호</th>
+					      <th>구매한 시간</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -53,6 +54,7 @@
 					          <td>${list.buyerEmail}</td>
 					          <td>${list.buyerName}</td>
 					          <td>${list.buyerTel}</td>
+					          <td>${list.buyerDate}</td>
 					        </tr>
 					      </c:if>
 					    </c:forEach>

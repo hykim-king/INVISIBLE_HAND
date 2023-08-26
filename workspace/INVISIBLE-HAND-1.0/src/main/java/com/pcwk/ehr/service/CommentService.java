@@ -22,6 +22,8 @@ public interface CommentService {
 	//댓글 삭제
 	int doDelete(int commentNumber) throws SQLException;
 	
+	public int deleteByNickname(String nickname);
+	
 	//댓글 좋아요
 	int doUpdateLikes(int commentNumber, String likes) throws SQLException;
 

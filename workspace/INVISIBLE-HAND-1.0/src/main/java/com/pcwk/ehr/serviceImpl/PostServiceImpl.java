@@ -84,4 +84,9 @@ public class PostServiceImpl implements PostService, PcwkLoger {
 	    return count;
 	}
 
+	@Override
+	public int deleteByMemberId(String nickname) {
+		return dao.deleteByMemberId(nickname);
+	}
+
 }

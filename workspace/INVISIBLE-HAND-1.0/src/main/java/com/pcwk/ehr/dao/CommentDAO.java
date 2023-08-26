@@ -21,6 +21,8 @@ public interface CommentDAO {
 
 	//댓글 삭제
 	public int doDelete(int commentNumber) throws SQLException;
+
+	public int deleteByNickname(String nickname);
 	
 	//댓글 좋아요
 	public int doUpdateLikes(int commentNumber, String likes) throws SQLException;
