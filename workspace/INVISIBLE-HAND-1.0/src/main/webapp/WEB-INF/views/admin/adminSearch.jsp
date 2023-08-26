@@ -118,7 +118,7 @@
 					  </select>
 					</div>
 					<div class="col-auto">
-					 <input tpye="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">        
+					 <input tpye="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
 					<!-- 검색구분 -->
 					</div>
 					<div class="list-btn">
@@ -168,7 +168,7 @@
         </table>	             
 	          
        <!-- 페이징 -->
-       <div class="d-flex justify-content-center" id="no-css">
+       <div class="d-flex justify-content-center">
         <%= StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount,  cPath+"/admin/adminSearch.do", "searchPage") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
