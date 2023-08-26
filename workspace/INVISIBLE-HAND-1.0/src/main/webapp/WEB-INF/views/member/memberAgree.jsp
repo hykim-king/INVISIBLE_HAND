@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,50 +8,49 @@
 <style>
 
 /* -------이용약관-------- */
-
 #agree-con {
-  width: 100vw;
-  height: 100%
+	width: 100vw;
+	height: 100%
 }
 
 #agree-con p {
-  text-align: center;
+	text-align: center;
 }
 
 .agree {
-  width: 50%;
-  height: 35vh;
-  margin: 10px auto;
-  overflow: scroll;
-  background-color: #222;
-  border-radius: 20px;
-  padding: 30px;
-  border: 1px solid #979797;
+	width: 50%;
+	height: 35vh;
+	margin: 10px auto;
+	overflow: scroll;
+	background-color: #222;
+	border-radius: 20px;
+	padding: 30px;
+	border: 1px solid #979797;
 }
 
 #agree-con .back-btn {
-  text-align: center;
-  margin: 30px 0;
+	text-align: center;
+	margin: 30px 0;
 }
 
 #agree-con a {
-  font-weight: 600;
-  text-decoration: none;
-  background-color: #6B53FF;
-  color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 20px;
+	font-weight: 600;
+	text-decoration: none;
+	background-color: #6B53FF;
+	color: #ffffff;
+	padding: 10px 20px;
+	border-radius: 20px;
 }
 </style>
 <title>이용약관동의 자세히보기</title>
 </head>
 <body>
-  <div class="h60px" style="height: 60px;"></div>
-  <div id="agree-con">
-    <p>이용약관</p>
+	<div class="h60px" style="height: 60px;"></div>
+	<div id="agree-con">
+		<p>이용약관</p>
 
-    <div class="agree">
-      <pre>
+		<div class="agree">
+			<pre>
     제 1 장 총칙
 
 제 1 조 (목적)
@@ -198,10 +197,10 @@
 (시행일) 본 약관은 2018년 8월 1일부터 시행됩니다. 개정된 약관의 적용일자 이전 이용자 또는 회원은 개정된 이용약관의 적용을 받습니다.
                 
     </pre>
-    </div>
-    <p>개인정보 수집/이용 동의</p>
-    <div class="agree">
-      <pre>
+		</div>
+		<p>개인정보 수집/이용 동의</p>
+		<div class="agree">
+			<pre>
     1. 개인정보의 수집항목 및 수집방법 
 통계청 나라통계사이트에서는 기본적인 회원 서비스 제공을 위한 필수정보로 실명인증정보와 가입정보로 구분하여 다음의 정보를 수집하고 있습니다. 필수정보를 입력해주셔야 회원 서비스 이용이 가능합니다.
 
@@ -249,13 +248,12 @@
       · 개인정보 보유 및 이용 기간 : 행정자치부에서는 이미 보유하고 있는 개인정보이기 때문에 별도로 저장하지 않음
                 
     </pre>
-    </div>
+		</div>
 
-<div class="back-btn">
-    <a  href="javascript:window.history.back();">돌아가기</a>
-
-</div>
-
-  </div>
+		<div class="back-btn">
+			<a href="#" onclick="parent.close();" id="back">돌아가기</a>
+		</div>
+ 
+	</div>
 </body>
 </html>

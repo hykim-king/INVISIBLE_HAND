@@ -150,30 +150,6 @@ public class MypageController {
 		return "mypage/mypageDelete";
 	}
 
-	@RequestMapping(value = "/mypageDelete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String DeleteOne(MemberVO member) throws SQLException {
-		System.out.println("┌────────────────────────────────────────────────────────┐");
-		System.out.println("│ delete()                                            │");
-		System.out.println("└────────────────────────────────────────────────────────┘");
-
-		String jsonString = "";
-		MessageVO message = new MessageVO();
-
-		int delete = memberService.deleteOne(member);
-
-		if (delete == 1) {
-			message.setMsgId("10");
-			message.setMsgContents("회원 삭제 완료.");
-		} else {
-			message.setMsgId("20");
-			message.setMsgContents("회원 삭제 실패했습니다.");
-		}
-
-		jsonString = new Gson().toJson(message);
-		return jsonString;
-	}
-
 	@RequestMapping(value = "/mypagePayedit.do")
 	public String mypagePayedit() {
 		LOG.debug("┌───────────────────────┐");
