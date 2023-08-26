@@ -307,8 +307,11 @@ public class MemberController {
 		postService.deleteByMemberId(nickname);
 		commentService.deleteByNickname(nickname);
         
-		int flag = memberService.deleteOne(memberId);
+		LOG.debug("│memberId:"+memberId);
+        LOG.debug("│member:"+member);
 		
+		int flag = memberService.deleteOne(memberId);
+		LOG.debug("flag-1-1------------" + flag);
 		String message = "";
 		if(1==flag) {
 			message = "탈퇴되었습니다.";
