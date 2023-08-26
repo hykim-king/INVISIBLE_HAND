@@ -109,7 +109,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 유저 탈퇴
 	@Override
-	public int deleteOne(MemberVO member) throws SQLException {
+	public int deleteOne(String member) throws SQLException {
 		return memberDao.deleteOne(member);
 	}
 

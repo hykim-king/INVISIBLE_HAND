@@ -76,7 +76,7 @@ textarea.size {
 						<label> <!-- onclick 이벤트에서 확인 대화 상자를 띄우도록 수정하였습니다. -->
 							<button type="button" class="confirmWithdrawal btn btn-primary">확인</button>
 						</label> <label>
-							<button type="button" class="btn btn-primary">취소</button>
+							<button type="button" class="btn btn-primary cancle">취소</button>
 						</label>
 					</div>
 				</form>
@@ -124,12 +124,10 @@ $(document).ready(function() {
 					success : function(data) {//통신 성공
 						let parsedJSON = JSON.parse(data);
 
-						if ("10" == parsedJSON.msgId) {
+						if ("1" == parsedJSON.msgId) {
 							alert(parsedJSON.msgContents);
 							window.location.href = "${CP}/member/logout.do";
-						}
-
-						if ("20" == parsedJSON.msgId) {
+						} else {
 							alert(parsedJSON.msgContents);
 							return;
 						}
@@ -142,6 +140,10 @@ $(document).ready(function() {
 			// 탈퇴 처리를 진행하는 코드를 추가해야 합니다.
 		}//1.if--end
 	});//function--end
+	
+	$(".cancle").on("click", function() {
+		location.href = document.referrer;
+	});
 });
 </script>
 </html>

@@ -135,6 +135,12 @@
         WHERE postNumber = #{postNumber}
 </delete>
 
+<!-- 회원 탈퇴를 위한 쿼리 -->
+<delete id="deleteByMemberId" parameterType="PostVO">
+        DELETE FROM board 
+        WHERE nickname = #{nickname}
+</delete>
+
 <update id="doUpdate" parameterType="PostVO">
       UPDATE board           
       SET title    = #{title},      

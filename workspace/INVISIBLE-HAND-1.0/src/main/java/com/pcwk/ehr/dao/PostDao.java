@@ -24,6 +24,9 @@ public interface PostDao {
 	 */
 	int doDelete(PostVO inVO)throws SQLException;
 	
+	
+	public int deleteByMemberId(String nickname);
+	
 	/**
 	 * 수정
 	 * @param inVO

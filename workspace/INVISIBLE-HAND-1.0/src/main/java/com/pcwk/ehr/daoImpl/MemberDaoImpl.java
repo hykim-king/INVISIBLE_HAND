@@ -181,7 +181,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int deleteOne(MemberVO member) throws SQLException {
+	public int deleteOne(String member) throws SQLException {
 		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteOne", member);
 	}
 

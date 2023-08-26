@@ -76,6 +76,11 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 		
 		return sqlSessionTemplate.delete(NAMESPACE+DOT+"doDelete", commentNumber);
 	}
+	
+	@Override
+	public int deleteByNickname(String nickname) {
+		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteByNickname", nickname);
+	}
 
 
 	@Override

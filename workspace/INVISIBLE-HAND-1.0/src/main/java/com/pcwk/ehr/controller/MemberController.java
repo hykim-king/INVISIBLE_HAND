@@ -180,6 +180,7 @@ public class MemberController {
 				// session설정
 				httpSession.setAttribute("member", memberInfo);
 				httpSession.setAttribute("memberId", memberInfo.getMemberId());
+				httpSession.setAttribute("nickName", memberInfo.getNickName());
 				httpSession.setAttribute("email", memberInfo.getEmail());
 
 				LOG.debug("999member" + member);
@@ -297,15 +298,16 @@ public class MemberController {
 			,produces = "application/json;charset=UTF-8"
 			)
 	@ResponseBody 
-	public String deleteOne(MemberVO member, HttpServletRequest req) throws SQLException{
+	public String deleteOne(String member, HttpServletRequest req) throws SQLException{
 		String jsonString = "";
 		
-		String memberId = req.getParameter("memberId");
+		HttpSession session = req.getSession();
+		String memberId = (String) session.getAttribute("memberId");
 		
         LOG.debug("│memberId:"+memberId);
         LOG.debug("│member:"+member);
 		
-		int flag = memberService.deleteOne(member);
+		int flag = memberService.deleteOne(memberId);
 		LOG.debug("flag-1-1------------" + flag);
 		String message = "";
 		if(1==flag) {

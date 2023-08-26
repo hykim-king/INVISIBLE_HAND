@@ -54,7 +54,7 @@ public interface MemberDao {
 	int update(MemberVO member) throws SQLException;
 
 	// 회원탈퇴
-	int deleteOne(MemberVO member) throws SQLException;
+	int deleteOne(String member) throws SQLException;
 
 	// 회원가입
 	int add(MemberVO member) throws ClassNotFoundException, SQLException;
