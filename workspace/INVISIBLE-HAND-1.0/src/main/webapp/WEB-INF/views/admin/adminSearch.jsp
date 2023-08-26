@@ -18,10 +18,10 @@
 	String searchDiv = "";
 
 	if (null != vo) {
-		pageSize = vo.getPageSize();
-		pageNo = vo.getPageNo();
-		searchDiv = vo.getSearchDiv();
-		searchWord = vo.getSearchWord();
+			pageSize   = vo.getPageSize();
+			pageNo     = vo.getPageNo();
+			searchDiv  = vo.getSearchDiv();
+			searchWord = vo.getSearchWord();
 	}
 
 	if (null != request.getAttribute("totalCnt")) {
@@ -31,7 +31,7 @@
 
 	String cPath  = request.getContextPath();
 
-	String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? isverified : searchDiv;
+	/* String defaultSearchDiv = (searchDiv == null || searchDiv.isEmpty()) ? isverified : searchDiv; */
 
 
 %>
@@ -41,16 +41,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- JavaScript Bundle with Popper -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="../resources/css/hand-board.css">
 <link rel="stylesheet" href="../resources/css/list.css">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/admin.css">
+<link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 회원조회</title>
 </head>
 <body>
@@ -101,67 +99,76 @@
 			<div class="button-area">
 				<!-- 검색  -->
 
-				<form action="#" name="user_frm">
+
+
+<!--  검색기능 구현  -->
+      <div class="talbe-search">
+				<form action="${CP}/admin/adminSearch.do" method="get" name="userfrm">
 					<input type="hidden" name="pageNo" id="pageNo">
+					<div class="post-nav">
+					 <div class="col-auto">
+					 
+					 <select class="form-select" name="searchDiv" id="serachDiv">
+					    <c:forEach var="vo" items="${searchList}">
+					          <option 
+                      <c:if test="${vo.codeDetail == inVO.searchDiv }">selected</c:if> value="<c:out value='${vo.codeDetail}'/>"> 
+					            <c:out value='${vo.codeDetailName}'/> 
+					       </option>
+					    </c:forEach>
+					  </select>
+					</div>
+					<div class="col-auto">
+					 <input tpye="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control">        
 					<!-- 검색구분 -->
-					<select name="searchDiv" id="searchDiv">
-						<option value="">전체</option>
-						<option value="">닉네임</option>
-						<option value="">등급</option>
-						<option value="">이메일</option>
-					</select>
-					<!-- 검색어 -->
-					<input type="text" value="${search.searchWord}" name="searchWord"
-						id="searchWord" placeholder="검색어를 입력하세요.">
-					<!-- pageSize:10,20,30,50,100,200 -->
-					<select name="pageSize" id="pageSize">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-						<option value="200">200</option>
-					</select>
-					<input type="button" class="btn" value="조회" value="조회" id="doRetrieve" onclick="window.doRetrieve();">
-				</form>
-			</div>
-			<table id="boardTable"
-				class="table table-sm table-hover table-borderless">
-				<thead class="board-thead">
-					<tr>
-						<th class="text-center">회원ID</th>
-						<th class="text-center">닉네임</th>
-						<th class="text-center">회원이름</th>
-						<th class="text-center">등급</th>
-						<th class="text-center">이메일</th>
-						<th class="text-center">등록일</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:choose>
-					<c:when test="${not empty list }">
-						<c:forEach var="vo" items="${list}">
-							<tr>
-								<td class="c-txt">${vo.memberId}</td>
-								<td class="c-txt">${vo.nickName}</td>
-								<td class="c-txt">${vo.memberName}</td>
-								<td class="c-txt">${vo.memberGrade}</td>
-								<td class="c-txt">${vo.email}</td>
-								<td class="c-txt">${vo.updateDate}</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-				    <c:otherwise>
-	                 <tr>
-	                    <td  class="text-c" colspan="99">No data found.</td>
-	                 </tr>
-	                </c:otherwise>
-			     </c:choose>
-				</tbody>
-			</table>
-			
+					</div>
+					<div class="list-btn">
+					 <a href="#" id="doRetrieve"><i class='fas fa-search fa-sm' style='color:#FFA000;'></i></a>
+           </div>
+					</div>
+					</form>
+					</div>
+					<!-- form end---- -->
+					
+					<!-- Table start -->
+					
+					<table id="postTable" class="table table-sm table-hover table-borderless">
+		        <thead class="post-thead">
+		          <tr>
+		            <th class="text-center">회원ID</th>
+		            <th class="text-center">닉네임</th>
+		            <th class="text-center">회원이름</th>
+		            <th class="text-center">등급</th>
+		            <th class="text-center">이메일</th>
+		            <th class="text-center">등록일</th>
+		          </tr>
+            </thead>
+	          <tbody>
+	           <%-- 조회 데이터가 있는 경우--%>
+	           <c:choose>
+               <c:when test="${not empty list }">
+		            <c:forEach var="vo" items="${list}">
+		              <tr>
+		                <td class="c-txt">${vo.memberId}</td>
+		                <td class="c-txt">${vo.nickName}</td>
+		                <td class="c-txt">${vo.memberName}</td>
+		                <td class="c-txt">${vo.memberGrade}</td>
+		                <td class="c-txt">${vo.email}</td>
+		                <td class="c-txt">${vo.updateDate}</td>
+		              </tr>
+		            </c:forEach>
+		           </c:when>
+	            <%-- 조회 데이터가 없는 경우--%>
+               <c:otherwise>
+                   <tr>
+                      <td  class="text-c" colspan="99">No data found.</td>
+                   </tr>
+               </c:otherwise>
+             </c:choose>
+           </tbody>
+        </table>	             
+	          
        <!-- 페이징 -->
-       <div class="d-flex justify-content-center">
+       <div class="d-flex justify-content-center" id="no-css">
         <%= StringUtil.renderPaging(totalCnt, pageNo, pageSize, bottomCount,  cPath+"/admin/adminSearch.do", "searchPage") %>
        </div> 
        <!--// 페이징 ---------------------------------------------------------------->
@@ -217,7 +224,7 @@
 			</div>
 
 			<!-- 관리 폼 end --------------------------------------------------------------->
-			<fmt:formatNumber value="${totalCnt}" pattern="#,##0" />
+			<%-- <fmt:formatNumber value="${totalCnt}" pattern="#,##0" /> --%>
 		</div>
 	</div>
 	<!-- ---------------------------------------------------------------------- -->
@@ -229,17 +236,18 @@
 
 	<script src="${CP}/resources/js/jquery-3.7.0.js"></script>
 	<script src="${CP}/resources/js/util.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 	<script>
 	//검색 기능
 	  function searchPage(url, pageNo){
-	    let frm = document.postFrm;
+	    let frm = document.userfrm;
 	    frm.action = url;
 	    frm.pageNo.value = pageNo;
 	    frm.submit();  
 	  }
 	    
 	  function doRetrieveCall(pageNo){
-	    let frm = document.postFrm;
+	    let frm = document.userfrm;
 	    frm.pageNo.value = pageNo;
 	    frm.submit();  
 	  }
@@ -254,6 +262,8 @@
 	  $("#doRetrieve").on("click", function(){
 	    doRetrieveCall(1);
 	  });
+	  
+
 	</script>
 	<script>
 		(function($) {
@@ -293,7 +303,7 @@
 		//class : .클래스 이름
 		$(document).on(
 				"click",
-				"#boardTable tbody tr",
+				"#postTable tbody tr",
 				function(e) {
 					let memberId = $(this).find(".c-txt:eq(0)").text();
 
@@ -368,7 +378,7 @@
 					let parsedJson = data;
 					if ("1" == parsedJson.msgId) {
 						alert(parsedJson.msgContents);
-						doRetrieve();
+						searchPage();
 						location.reload();
 					} else {
 						alert(parsedJson.msgContents);
@@ -447,15 +457,6 @@
 
 				});//deleteOne button ----------------------------------------------------
 
-		//검색어를 입력하고 Enter 사용시 서버로 전달
-		$("#searchWord").on("keypress", function(e) {
-			console.log('searchWord keypress');
-			console.log(e.type + ":" + e.which);
-			if (13 == e.which) {//Enter keyCode
-				e.preventDefault();//event 버블링 방지
-				doRetrieve();
-			}
-		});
 
 		//숫자만 입력되도록 처리
 		$(".numberOnly").on("keyup", function(e) {
@@ -464,26 +465,7 @@
 			$(this).val($(this).val().replace(/[^0-9]/g, ""));
 		});//numberOnly end---------------------------------------------------------
 
-/* 		//paging
-		function do_Retrieve(url, pageNo) {
-			//alert("url:"+url+",pageNo:"+pageNo);
-			//console.log("pageNo:"+pageNo);
 
-			let frm = document.user_frm;
-			frm.pageNo.value = pageNo;
-			frm.submit();
-
-		}
-
-		//첫 페이지 조회
-		function doRetrieve() {
-
-			let frm = document.user_frm;
-			//frm.action  ="/ehr/user/doRetrieve.do";
-			frm.pageNo.value = 1;
-			frm.submit();
-
-		} */
 	</script>
 </body>
 </html>

@@ -12,17 +12,19 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.VO.AdminVO;
+import com.pcwk.ehr.VO.CmnCodeVO;
 import com.pcwk.ehr.VO.MemberVO;
 import com.pcwk.ehr.VO.MessageVO;
-import com.pcwk.ehr.VO.PostVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.service.AdminService;
+import com.pcwk.ehr.service.CmnCodeService;
 import com.pcwk.ehr.service.PostService;
 
 
@@ -36,6 +38,9 @@ public class AdminController {
 	
 	@Autowired
 	PostService postService;
+	
+	@Autowired
+	CmnCodeService cmnCodeService;
 	
 	
 	@RequestMapping(value = "/admin.do")
@@ -96,60 +101,73 @@ public class AdminController {
         return new Gson().toJson(message);
     }
     
-	
-    @RequestMapping(value ="/adminSearch.do")
-    public String memberList(MemberVO inVO, Model model) throws SQLException {
-    	int totalCnt = 0;
+    @RequestMapping(value = "/adminSearch.do")
+    public String memberList(MemberVO inVO, Model model,HttpServletRequest request) throws SQLException {
+      
     	
-    	
-		// page번호 초기값 1
+        
+    	// page번호 초기값 1
 		if (null != inVO && inVO.getPageNo() == 0) {
 			inVO.setPageNo(1);
 		}
-	
+        
+        
 		// pageSize 초기값 10
 		if (null != inVO && inVO.getPageSize() == 0) {
 			inVO.setPageSize(10);
 		}
-	
+        
+        
 		// searchWord 초기값: 전체 
-		if (null != inVO && null == inVO.getSearchWord()) {
-			inVO.setSearchWord("");
-		}
-		
-		// searchDiv
+ 		if (null != inVO && null == inVO.getSearchWord()) {
+ 			inVO.setSearchWord("");
+ 		}
+        
+        
+		//searchDiv
 		if (null != inVO && null == inVO.getSearchDiv()) {
 			inVO.setSearchDiv("");
 		}
-		
-		
-		List<MemberVO> list = this.adminService.doRetrieve(inVO);
-		model.addAttribute("list", list);
-		
-		if(null !=list && list.size() >0 ) {
+        
+        
+        // 코드조회: 검색코드
+        CmnCodeVO cmnCodeVO = new CmnCodeVO();
+        cmnCodeVO.setMasterCode("MEMBERSERACH");
+        List<CmnCodeVO> searchList = cmnCodeService.doSearch(cmnCodeVO);
+        model.addAttribute("searchList", searchList);
+        
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   searchList:         │"+searchList);
+	 	LOG.debug("└───────────────────────┘");
+        
+        List<MemberVO> list = adminService.doRetrieve(inVO);
+        model.addAttribute("list", list);
+        
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   list:               │"+list);
+	 	LOG.debug("└───────────────────────┘");
+        
+        
+        int totalCnt = 0;
+        if(null !=list && list.size() >0 ) {
 			totalCnt = list.get(0).getTotalCnt();
 			LOG.debug("totalCnt:" + totalCnt);
 		}
-    	
-		model.addAttribute("totalCnt", totalCnt);
+
+    	model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("inVO", inVO);
 		
-    	return "admin/adminSearch";
+		LOG.debug("┌───────────────────────┐");
+	    LOG.debug("│   inVO:               │"+inVO);
+	 	LOG.debug("└───────────────────────┘");
+
+
+        return "admin/adminSearch";
     }
-	
-	 //회원조회
-//	@RequestMapping(value = "/adminSearch.do")
-//	public String adminSearch(Model model) {
-//
-//		LOG.debug("┌────────────────┐");
-//		LOG.debug("│ adminSearch()  │");
-//		LOG.debug("└────────────────┘");
-//
-//		List<MemberVO> resultList = adminService.getAllMemberService(); // 회원정보 전부 가져옴. service호출.
-//		model.addAttribute("memberList", resultList);
-//
-//		return "admin/adminSearch";
-//	}
+    
+    
+    
+
     
     
 	//회원정보 표시

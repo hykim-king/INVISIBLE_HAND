@@ -110,7 +110,7 @@
               <p>${sessionScope.member.nickName}님 환영합니다!</p> 
               <p><a href="/ehr/mypage/mypage.do">마이페이지</a></p> 
               <c:if test="${sessionScope.member.memberId == 'admin'}">
-                <p><a href="../admin/admin.do">관리자페이지</a></p>
+                <p><a href="../admin/adminSearch.do">관리자페이지</a></p>
               </c:if>
             
             </c:when>
