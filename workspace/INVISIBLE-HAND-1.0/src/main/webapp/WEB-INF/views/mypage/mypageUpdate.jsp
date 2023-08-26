@@ -54,7 +54,7 @@
         <div class="label-margin">
           <p class="input-title">비밀번호 변경</p>
           <label> 
-            <input type="password" name="password" id="password" class="size border-bottom" value="${member.password}">
+            <input type="password" name="password" id="password" class="size border-bottom">
             <input type="hidden" id="upassword" name="upassword" value="${member.password}">  
             <input type="button" id="checkpass" name="checkpass" value="사용중" class="btn btn-white">
           </label>
@@ -120,8 +120,8 @@
                  let parsedJSON = JSON.parse(data);
                    
                      if("10" == parsedJSON.msgId){
-                           alert(parsedJSON.msgContents);
-                           $('#nicksuccess').attr('value',"success");
+                         alert(parsedJSON.msgContents);
+                         $('#nicksuccess').attr('value',"success");
                     } 
                                           
                     if("20" == parsedJSON.msgId){
@@ -140,26 +140,30 @@
 
 <script>
     $("#checkpass").on("click",function(){
-        console.log("pw_mailsend ready");
         
         if(""==$("#password").val() || 0==$("#password").val().length){
             alert("비밀번호를 입력하세요");  
             $("#password").focus();
             return;
         }
+        
+        if ($("#password").val().length < 8 || $("#password").val().length > 12) {
+          alert("비밀번호는 8이상 12자 이하로 설정해주세요.");
+          return;
+        }
+        
         if($("#password").val() == $("#upassword").val()){
             alert("현재 사용중인 비밀번호입니다."); 
             $("#password").focus();
             return;
             
-        }else{
+        } else {
           alert("사용가능한 비밀번호 입니다.");
            $('#passsuccess').attr('value',"success");
-        }
+
+        } 
         
-        /* else{
-        
-          $.ajax({
+        $.ajax({
                 type: "POST",
                 url:"${CP}/mypage/passwordcheck.do",
                 dataType:"html",
@@ -184,7 +188,6 @@
                     console.log("error:" + data);
                 }
             }); // --ajax
-        }  */
     }); //checkpass end
 </script>
 
@@ -196,13 +199,7 @@
             alert("이메일을 입력하세요");  
             $("#email").focus();
             return;
-        }
-        if($("#email").val() == $("#uemial").val()){
-            alert("현재 사용중인 이메일입니다."); 
-            $("#email").focus();
-            return;
-            
-        }else{
+        } else{
           
           $.ajax({
                 type: "POST",
@@ -216,7 +213,7 @@
                    
                      if("10" == parsedJSON.msgId){
                        
-                      if(!confirm(parsedJSON.msgContents+". 이메일인증을 진행하시겠습니까?")){
+                      if(!confirm("이메일인증을 진행하시겠습니까?")){
                           alert("취소 되었습니다.");
                           return;
                       }else{
@@ -325,13 +322,13 @@ $("#update").on("click",function(){
             return;
         }
         
-       /*  if($("#email").val() != $("#uemial").val()){
+        if($("#email").val() != $("#uemial").val()){
             if($("#eamilsuccess") != "success"){
                 alert("인증번호를 확인하세요.");  
                 $("#password").focus();
                 return; 
             }
-        } */
+        }
        
         else{
           $.ajax({
