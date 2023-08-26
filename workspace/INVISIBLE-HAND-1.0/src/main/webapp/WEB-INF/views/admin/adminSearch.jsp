@@ -50,6 +50,18 @@
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 회원조회</title>
+<style>
+#searchWord {
+  color: white;
+  width:200px;
+  height:35px;
+  font-size:15px;
+}
+
+#doRetrieve {
+  margin-right: 10px;
+}
+</style>  
 </head>
 <body>
 
@@ -118,7 +130,7 @@
 					  </select>
 					</div>
 					<div class="col-auto">
-					 <input tpye="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
+					 <input type="text" name="serachWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
 					<!-- 검색구분 -->
 					</div>
 					<div class="list-btn">
