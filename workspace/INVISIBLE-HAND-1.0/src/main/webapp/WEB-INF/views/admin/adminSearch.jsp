@@ -50,6 +50,7 @@
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 회원조회</title>
+
 </head>
 <body>
 
@@ -119,6 +120,7 @@
 					</div>
 					<div class="col-auto">
 					 <input tpye="text" name="searchWord" id="searchWord" value="<c:out value='${inVO.searchWord }'/>" placeholder="검색어를 입력 하세요" class="form-control" style="color:#FFFFFF;">        
+
 					<!-- 검색구분 -->
 					</div>
 					<div class="list-btn">
@@ -187,17 +189,17 @@
 					<div class="form-group">
 						<label for="memberId">회원ID</label>
 						<input type="text" name="memberId" id="memberId" placeholder="회원ID를 입력 하세요."
-							maxlength="320" readonly>
+							maxlength="320" readonly style="font-weight: bold; color: black;"">
 					</div>
 					<div class="form-group">
 						<label for="nickName">닉네임</label>
 						<input type="text" name="nickName" id="nickName" placeholder="닉네임을 입력 하세요."
-							maxlength="20">
+							maxlength="20" style="color: black;">
 					</div>
 					<div class="form-group">
 						<label for="memberName">회원이름</label>
 						<input type="text" name="memberName" id="memberName" placeholder="회원이름을 입력 하세요."
-							maxlength="320">
+							maxlength="320" style="color: black;">
 					</div>
 					<div class="form-group">
 						<label for="memberGrade">등급</label>
@@ -211,12 +213,12 @@
 					<div class="form-group">
 						<label for="email">이메일</label>
 						<input type="text" name="email"
-							id="email" placeholder="이메일을 입력 하세요." maxlength="320">
+							id="email" placeholder="이메일을 입력 하세요." maxlength="320" style="color: black;">
 					</div>
 					<div class="form-group">
 						<label for="updateDate">등록일</label>
 					  <input type="text" name="updateDate" id="updateDate" placeholder="등록일을 입력 하세요."
-							maxlength="20">
+							maxlength="20" style="color: black;">
 					</div>
 
 
