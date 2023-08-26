@@ -180,7 +180,7 @@ public class MemberController {
 				// session설정
 				httpSession.setAttribute("member", memberInfo);
 				httpSession.setAttribute("memberId", memberInfo.getMemberId());
-				httpSession.setAttribute("nickName", memberInfo.getNickName());
+				httpSession.setAttribute("nickname", memberInfo.getNickName());
 				httpSession.setAttribute("email", memberInfo.getEmail());
 
 				LOG.debug("999member" + member);
@@ -295,16 +295,19 @@ public class MemberController {
 
     // 회원강제탈퇴
 	@RequestMapping(value = "/deleteOne.do", method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8"
-			)
+					, produces = "application/json;charset=UTF-8" )
 	@ResponseBody 
 	public String deleteOne(String member, HttpServletRequest req) throws SQLException{
 		String jsonString = "";
 		
 		HttpSession session = req.getSession();
 		String memberId = (String) session.getAttribute("memberId");
+		String nickname = (String) session.getAttribute("nickname");
 		
-        LOG.debug("│memberId:"+memberId);
+		postService.deleteByMemberId(nickname);
+		commentService.deleteByNickname(nickname);
+        
+		LOG.debug("│memberId:"+memberId);
         LOG.debug("│member:"+member);
 		
 		int flag = memberService.deleteOne(memberId);

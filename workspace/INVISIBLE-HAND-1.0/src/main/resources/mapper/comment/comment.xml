@@ -108,7 +108,7 @@
   </delete>
   
   <!-- 회원 삭제를 위한 쿼리 -->
-  <delete id="deleteByNickname" parameterType="int">
+  <delete id="deleteByNickname" parameterType="String">
       DELETE FROM board_comment 
       WHERE nickname = #{nickname}     
   </delete>

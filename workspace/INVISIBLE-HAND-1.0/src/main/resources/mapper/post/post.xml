@@ -136,7 +136,7 @@
 </delete>
 
 <!-- 회원 탈퇴를 위한 쿼리 -->
-<delete id="deleteByMemberId" parameterType="PostVO">
+<delete id="deleteByMemberId" parameterType="String">
         DELETE FROM board 
         WHERE nickname = #{nickname}
 </delete>

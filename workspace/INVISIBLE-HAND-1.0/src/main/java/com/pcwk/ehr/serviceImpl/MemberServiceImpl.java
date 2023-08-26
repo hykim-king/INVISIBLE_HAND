@@ -109,8 +109,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 유저 탈퇴
 	@Override
-	public int deleteOne(String member) throws SQLException {
-		return memberDao.deleteOne(member);
+	public int deleteOne(String memberId) throws SQLException {
+		return memberDao.deleteOne(memberId);
 	}
 
 	// 로그인

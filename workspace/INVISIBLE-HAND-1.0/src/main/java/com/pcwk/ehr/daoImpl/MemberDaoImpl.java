@@ -181,8 +181,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int deleteOne(String member) throws SQLException {
-		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteOne", member);
+	public int deleteOne(String memberId) throws SQLException {
+		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteOne", memberId);
 	}
 
 	// ---------------------- 결제시 사용 메소드 ----------------------

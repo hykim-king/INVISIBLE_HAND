@@ -79,6 +79,8 @@ public class CommentDAOImpl implements CommentDAO, PcwkLoger {
 	
 	@Override
 	public int deleteByNickname(String nickname) {
+		int flag = sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteByNickname", nickname);
+		LOG.debug("commentDaoimpl flag : "+ flag);
 		return sqlSessionTemplate.delete(NAMESPACE+DOT+"deleteByNickname", nickname);
 	}
 

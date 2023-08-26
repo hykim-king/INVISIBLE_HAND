@@ -71,7 +71,7 @@ public interface MemberService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int deleteOne(String member) throws SQLException;
+	public int deleteOne(String memberId) throws SQLException;
 	
 	/**
 	 * 신규 회원 등록
