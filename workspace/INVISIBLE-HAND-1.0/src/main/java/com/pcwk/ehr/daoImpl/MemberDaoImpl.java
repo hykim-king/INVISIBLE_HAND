@@ -118,6 +118,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	
+
+
 	// 회원 가입
 	@Override
 	public int add(final MemberVO member) throws SQLException {
@@ -137,6 +139,9 @@ public class MemberDaoImpl implements MemberDao {
 		return flag;
 	}
 
+
+	
+	
 
 	@Override
 	public int getCount(MemberVO member) throws SQLException {
@@ -196,8 +201,6 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSessionTemplate.update(this.NAMESPACE + DOT + "updateByMemberGrade", inVO);
 	}
 	// ---------------------- 결제시 사용 메소드 ----------------------
-
-
 
 
 } // class end

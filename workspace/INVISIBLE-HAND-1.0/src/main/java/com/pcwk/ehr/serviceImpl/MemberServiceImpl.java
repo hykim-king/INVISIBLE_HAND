@@ -20,75 +20,80 @@ import com.pcwk.ehr.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
 	final Logger LOG = LogManager.getLogger(getClass());
-
+	
 	@Resource(name = "dummyMailSender")
-	// @Resource(name = "mailSenderImpl")
+	//@Resource(name = "mailSenderImpl")
 	private MailSender mailSender; // mail
-
+	
 	@Autowired
 	MemberDao memberDao;
-
+	
+	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-
+	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-
 	public MemberServiceImpl() {
-
+		
 	}
 
-	// 아이디 중복체크
+
+	//아이디 중복체크
 	@Override
 	public int idCheck(MemberVO member) throws Exception {
 		int result = memberDao.idCheck(member);
 		return result;
 	}
 
-	// 닉네임 중복체크
+	//닉네임 중복체크
 	@Override
 	public int nickNameCheck(MemberVO member) throws Exception {
 		int result = memberDao.nickNameCheck(member);
 		return result;
 	}
-
-	// 이메일 중복체크
+	
+	//이메일 중복체크
 	@Override
 	public int emailCheck(MemberVO member) throws SQLException {
 
 		return memberDao.emailCheck(member);
 	}
+	
 
-	// 로그인시 아이디 체크
+	
+	//로그인시 아이디 체크
 	@Override
 	public int loginIdCheck(MemberVO member) throws SQLException {
 
 		return memberDao.loginIdCheck(member);
 	}
-
-	// 로그인시 비밀번호
+	
+	//로그인시 비밀번호
 	@Override
 	public int passCheck(MemberVO member) throws SQLException {
 
 		return memberDao.passCheck(member);
 	}
-
+    
+    
 	// 이메일 전송
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-
+	
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
-
+	
+	
+	
 	// 회원 가입
 	@Override
 	public int add(MemberVO member) throws ClassNotFoundException, SQLException {
-
 		return memberDao.add(member);
 	}
-
+	
 	// 조회수
 	@Override
 	public int getCount(MemberVO member) throws SQLException {
@@ -100,21 +105,17 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO get(MemberVO member) throws ClassNotFoundException, SQLException {
 		return memberDao.get(member);
 	}
-
+	
 	// 유저 정보 변경
 	@Override
 	public int update(MemberVO member) throws SQLException {
-		
-		
-		
 		return memberDao.update(member);
 	}
-
+	
 	// 유저 탈퇴
 	@Override
-	public int deleteOne(String member) throws SQLException {
-	
-		return memberDao.deleteOne(member);
+	public int deleteOne(String memberId) throws SQLException {
+		return memberDao.deleteOne(memberId);
 	}
 
 	// 로그인
@@ -122,25 +123,23 @@ public class MemberServiceImpl implements MemberService {
 	public int login(MemberVO member) throws SQLException {
 		// 1. 아이디 Check
 		// 2. 비번 Check
-
+		
 		int checkStatus = 0; // 10(id 없음), 20(비번오류), 30(성공)
-
+		
 		int status = this.memberDao.loginIdCheck(member);
+		
+		if(1==status) {
+			status = memberDao.passCheck(member);
 
-			
 			if(1==status) {
-				
-	            status = memberDao.passCheck(member);
-				// 저장된 암호화된 비번과 입력한 비번 암호화하여 비교
-				if (1==status){
-					checkStatus = 30; // 로그인 성공
-					LOG.debug(checkStatus);
-				} else {
-					checkStatus = 20; // 비번 오류, id 있음
-					LOG.debug(checkStatus);
-				}
+				checkStatus = 30; // 로그인 성공
+				LOG.debug(checkStatus);
+			}else {
+				checkStatus = 20; // 비번 오류, id 있음
+				LOG.debug(checkStatus);
+			}
 			
-		} else {
+		}else {
 			checkStatus = 10; // id 없음
 			LOG.debug(checkStatus);
 		}
@@ -150,8 +149,7 @@ public class MemberServiceImpl implements MemberService {
 		LOG.debug("==================");
 		return checkStatus;
 	}
-
-
+	
 	// ---------------------- 결제시 사용 메소드 ----------------------
 	// 이메일 찾기
 	@Override
@@ -166,4 +164,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 	// ---------------------- 결제시 사용 메소드 ----------------------
 
+
+	
 } // class end
