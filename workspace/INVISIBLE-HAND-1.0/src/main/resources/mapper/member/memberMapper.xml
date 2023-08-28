@@ -4,7 +4,6 @@
         
 <!-- 화원가입  -->
 <mapper namespace="mapper.member.memberMapper">
-
     <!-- parameterType 은 풀 패키지 명을 명시해야함. 하지만 config.xml 에서 설정 추가-->
     <insert id="add" parameterType="MemberVO">
         INSERT INTO MEMBER (
@@ -63,20 +62,18 @@
       WHERE memberId = #{memberId}
       AND   password = #{password}
     </select>
-   
+    
     
     <!-- 비밀번호 변경 --> 
     <update id="find" parameterType="MemberVO">
-      UPDATE 
-      MEMBER SET PASSWORD = #{password} 
-      WHERE EMAIL = #{email} 
+      UPDATE MEMBER SET PASSWORD = #{password} WHERE EMAIL = #{email} 
     </update>
 
     <!-- 회원탈퇴 -->     
     <delete id="delete" parameterType="MemberVO">
       DELETE FROM MEMBER
       WHERE
-      Password=#{password}
+      email = #{email} AND Password=#{password}
     </delete>
     
     <!-- 회원 강제 탈퇴 -->
@@ -110,13 +107,12 @@
  
  <update id="update" parameterType="MemberVO">
        UPDATE member          
-       SET  memberId      =  #{memberId} 
-           ,nickName      =  #{nickName}   
-           ,password      =  #{password}
-           ,email         =  #{email}        
+       SET  nickName      =  #{nickName}
+           ,email         =  #{email}     
+           ,updateDate    =  #{updateDate}     
 
        WHERE                     
-            memberId = #{memberId}     
+               memberId = #{memberId}     
 
 </update>
   
@@ -145,11 +141,4 @@
     email = #{email}
   </update>
     
-
- 
- 
- 
-
-
-
 </mapper>
