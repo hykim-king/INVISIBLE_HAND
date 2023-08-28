@@ -65,11 +65,11 @@
 		          <thead class="main-post-thead">
 		            <tr width="900px">
 			            <th width="50px">No.</th>
-			            <th width="640px">제목</th>
+			            <th width="580px">제목</th>
 			            <th width="70px">글쓴이</th>
-			            <th width="70px">작성일</th>
-			            <th width="60px">조회수</th>
-			            <th width="60px">추천수</th>
+			            <th width="100px">작성일</th>
+			            <th width="50px">조회</th>
+			            <th width="50px">추천</th>
 		            </tr>
 		          </thead>
 		          <tbody id="tableBody" class="main-post-tbody">
@@ -141,7 +141,7 @@
 	    </div>
 	    
 	    <div class="figure-area">
-	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="300" height="350">  
+	     <img src="../resources/image/advertise.png" alt="이미지 설명" width="270" height="auto">  
 	    </div>
 		</div>
 
