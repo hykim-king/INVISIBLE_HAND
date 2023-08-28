@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html>
 <html>
@@ -9,88 +9,97 @@
 <link rel="icon" href="image/favicon-32x32.png">
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/login.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+<link rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 <title>마이페이지 입니다</title>
 
 </head>
 <body>
   <div class="drops">
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
+    <div class="drop"></div>
+    <div class="drop"></div>
+    <div class="drop"></div>
+    <div class="drop"></div>
   </div>
   <!-- *---container Start---* -->
   <div class="h60px"></div>
   <div class="container-1400 min-100vh con-login">
     <div class="my-update-wrap">
       <div class="box-area">
-                   
-        <div class="form-h3" style="margin:0; ">
-        <div class="line1px"></div>
-        <div class="line3px"></div>
-          <h3>${member.memberName} 님의 회원정보 변경</h3>
-        <div class="line3px"></div>
-        <div class="line1px"></div>
-        </div>                
+
+        <div class="form-h3" style="margin: 0;">
+          <div class="line1px"></div>
+          <div class="line3px"></div>
+          <h3>${member.memberName}님의 회원정보 변경</h3>
+          <div class="line3px"></div>
+          <div class="line1px"></div>
+        </div>
         <div class="h30px"></div>
         <div class="label-margin">
-              <p class="input-title">아이디</p>              
-              <label>
-                <input type="text" name="nickname" id="nickname" value="${member.memberId}" class="size border-bottom" required="required">
-                <input  type="button"value="변경불가" class="btn btn-white" style="cursor: default;">
-              </label>
+          <p class="input-title">아이디</p>
+          <label> <input type="text" name="nickname" id="nickname"
+            value="${member.memberId}" class="size border-bottom"
+            required="required"> <input type="button" value="변경불가"
+            class="btn btn-white" style="cursor: default;">
+          </label>
         </div>
-        
-         <div class="label-margin">
-            <p class="input-title">닉네임 변경</p>
-            <input type="hidden" id="unickname" name="unickname" value="${member.nickName}">
-            <label>
-                <input type="text" name="nickname" id="nickname"  value="${member.nickName}" class="size border-bottom" required="required">
-                <input  type="button" id="checkNickname" name="checkNickname"value="중복확인" class="btn btn-white">
-            </label>
-         </div>
-        
+
+        <div class="label-margin">
+          <p class="input-title">닉네임 변경</p>
+          <input type="hidden" id="unickname" name="unickname"
+            value="${member.nickName}"> <label> <input
+            type="text" name="nickname" id="nickname"
+            value="${member.nickName}" class="size border-bottom"
+            required="required"> <input type="button"
+            id="checkNickname" name="checkNickname" value="중복확인"
+            class="btn btn-white">
+          </label>
+        </div>
+
         <div class="label-margin">
           <p class="input-title">비밀번호 변경</p>
-          <label> 
-            <input type="password" name="password" id="password" class="size border-bottom">
-            <input type="hidden" id="upassword" name="upassword" value="${member.password}">  
-            <input type="button" id="checkpass" name="checkpass" value="사용중" class="btn btn-white">
+          <label> <input type="password" name="password"
+            id="password" class="size border-bottom"> <input
+            type="hidden" id="upassword" name="upassword"
+            value="${member.password}"> <input type="button"
+            id="checkpass" name="checkpass" value="사용중" class="btn btn-white">
           </label>
         </div>
-        
+
         <div class="label-margin">
-            <p class="input-title" >이메일 변경</p>
-            <label> 
-                <input type="text"  id="email" name="email" value="${member.email}" class="size border-bottom" required="required">
-                <input type="hidden" id="uemial" name="uemial" value="${member.email}">
-                <input type="button" id="mailsend" name="mailsend" value="인증번호 전송" class="btn btn-white">
-            </label>
+          <p class="input-title">이메일 변경</p>
+          <label> <input type="text" id="email" name="email"
+            value="${member.email}" class="size border-bottom"
+            required="required"> <input type="hidden" id="uemial"
+            name="uemial" value="${member.email}"> <input
+            type="button" id="mailsend" name="mailsend" value="인증번호 전송"
+            class="btn btn-white">
+          </label>
         </div>
-        
+
         <div class="label-margin">
           <p class="input-title">E-mail 인증번호 확인</p>
-          <label> 
-            <input type="text" class="size numberOnly border-bottom checkmark" name="checkInput" id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6" required>
-            <i class='fas fa-check-circle fa-sm' style="color:#4200FF;"></i>
-            <span id="mail-check-warn"></span>
-  
+          <label> <input type="text"
+            class="size numberOnly border-bottom checkmark" name="checkInput"
+            id="checkInput" placeholder="인증번호 6자리를 입력해주세요" maxlength="6"
+            required> <i class='fas fa-check-circle fa-sm'
+            style="color: #4200FF;"></i> <span id="mail-check-warn"></span>
+
           </label>
         </div>
-        
+
         <div class="submit">
-            <input type="hidden" id="uid" value="${member.memberId}">
-            <input type="hidden" id="nicksuccess" value="0">
-                    <input type="hidden" id="passsuccess" value="0">
-                    <input type="hidden" id="emailsuccess" value="0">
-              <input id="update" type="button" value="수정 완료" class="btn w70">
-              <input id="reset" type="reset" value="취소" class="btn w70"
-              onclick="${CP}/mypage/mypage.do" style="margin-top: 15px;">
-          </div>
-                
+          <input type="hidden" id="uid" value="${member.memberId}">
+          <input type="hidden" id="nicksuccess" value="0">
+          <input type="hidden" id="passsuccess" value="0">
+          <input type="hidden" id="emailsuccess" value="0">
+          <input id="update" type="button" value="수정 완료" class="btn w70">
+          <input id="reset" type="reset" value="취소" class="btn w70 cancle" style="margin-top: 15px;">
+        </div>
+
       </div>
-    </div><!-- **---wrap End---** -->
+    </div>
+    <!-- **---wrap End---** -->
   </div>
   <!-- **---container End---** -->
 </body>
@@ -173,11 +182,6 @@
                 },
                 success:function(data) {
                  let parsedJSON = JSON.parse(data);
-                   
-                     if("10" == parsedJSON.msgId){
-                        alert(parsedJSON.msgContents);
-                    } 
-                                          
                     if("20" == parsedJSON.msgId){
                         alert(parsedJSON.msgContents);
                         return;
@@ -333,7 +337,7 @@ $("#update").on("click",function(){
         else{
           $.ajax({
                 type: "POST",
-                url:"${CP}/mypage/updatemember.do",
+                url:"${CP}/member/update.do",
                 dataType:"html",
                 data: {
                  memberId: $("#uid").val(),
@@ -344,12 +348,12 @@ $("#update").on("click",function(){
                 success:function(data) {
                  let parsedJSON = JSON.parse(data);
                    
-                     if("10" == parsedJSON.msgId){
+                     if("1" == parsedJSON.msgId){
                            alert(parsedJSON.msgContents);
                            window.location.href="${CP}/member/logout.do";
                     } 
                                           
-                    if("20" == parsedJSON.msgId){
+                    if("0" == parsedJSON.msgId){
                         alert(parsedJSON.msgContents);
                         return;
                     }
@@ -362,5 +366,10 @@ $("#update").on("click",function(){
         }
         
     }); //update--end
+</script>
+<script>
+$(".cancle").on("click", function() {
+    location.href = document.referrer;
+  });
 </script>
 </html>
