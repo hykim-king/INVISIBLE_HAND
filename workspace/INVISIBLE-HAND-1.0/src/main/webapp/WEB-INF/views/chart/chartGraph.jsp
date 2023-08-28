@@ -14,7 +14,7 @@
   <!-- *---container Start---* -->
 
   <div class="h60px"></div>
-  <div class="container-1200 con-main">
+  <div class="container-1200 con-main min-100vh">
     <div class="wrap-1000">
       <!-- *---차트 카테고리---* -->
       <div class="category_wrap">
@@ -106,6 +106,8 @@
      </div>
  </c:when>
    <c:otherwise>
+   
+   
             <div class="chart-wrapper" style="opacity: 0.5; filter: blur(5px);" onclick='doLogin()'>
               <jsp:include page="/WEB-INF/views/chart/chart01.jsp"/>
             </div>
