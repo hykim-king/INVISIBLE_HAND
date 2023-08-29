@@ -50,7 +50,12 @@
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="stylesheet" href="../resources/css/post.css">
 <title>보이지 않는 회원조회</title>
-
+<style>
+#searchWord {
+  width: 200px;
+  height: 35px;
+}
+</style>
 </head>
 <body>
 

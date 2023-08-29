@@ -73,13 +73,7 @@
 
 				<tbody>
 					<c:if test="${empty list}">
-						<td class="text-c"></td>
-						<td class="text-c"></td>
-						<td class="text-c"></td>
-						<td class="text-c">구독 정보가 없습니다.</td>
-						<td class="text-c"></td>
-						<td class="text-c"></td>
-						<td class="text-c"></td>
+						 <td  class="text-c" colspan="99">No data found.</td>
 					</c:if>
 					<c:if test="${not empty list}">
 						<c:forEach items="${list}" var="list" varStatus="status">
